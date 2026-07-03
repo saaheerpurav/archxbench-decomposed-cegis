@@ -1,0 +1,25 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 2,
+  "best_passes": 0,
+  "total_tests": 1,
+  "solved": false,
+  "decomp_modules": [
+    "conv1d_window",
+    "conv1d_kernel_mac",
+    "conv1d_normalize",
+    "conv1d_valid"
+  ],
+  "ref_passes": 0,
+  "ref_total": 1,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "conv1d",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 271.0,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv1d_window.v",
+  "sub_modules": {
+    "conv1d_window": "Builds the 5-sample causal window from the current input and four registered history taps.",
+    "conv1d_tap_mult": "Applies the fixed FIR coefficients [2, 8, 12, 8, 2] to the flattened sample window.",
+    "conv1d_mac": "Sums the five widened tap products into the fixed-point MAC result.",
+    "conv1d_normalize": "Right-shifts the MAC result by GAIN_W and returns the extended-width filtered output."
+  }
+}

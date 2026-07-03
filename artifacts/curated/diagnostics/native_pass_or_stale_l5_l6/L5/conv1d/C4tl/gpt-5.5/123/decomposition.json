@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv1d_window.v",
+  "sub_modules": {
+    "conv1d_window": "Combinational mapping from current input and stored delay samples to the five causal FIR taps.",
+    "conv1d_kernel_mac": "Combinational fixed 5-tap multiply-accumulate using kernel weights 2, 8, 12, 8, 2.",
+    "conv1d_normalize": "Combinational right-shift normalization from accumulator width to DATA_W+GAIN_W output width.",
+    "conv1d_valid": "Combinational zero-latency valid signal passthrough."
+  }
+}

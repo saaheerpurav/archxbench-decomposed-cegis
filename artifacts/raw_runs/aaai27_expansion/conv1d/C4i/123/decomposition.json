@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv1d_window.v",
+  "sub_modules": {
+    "conv1d_window": "Combinational tap-window mapper that combines the current input sample with the four delayed samples.",
+    "conv1d_mac5": "Combinational fixed 5-tap multiply-accumulate block using kernel weights [2, 8, 12, 8, 2].",
+    "conv1d_normalize": "Combinational normalization block that right-shifts the MAC result by GAIN_W.",
+    "conv1d_valid_gate": "Combinational valid path that forwards valid_in to valid_out with zero latency."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv1d_window.v",
+  "sub_modules": {
+    "conv1d_window": "Purely combinational tap-window mapper that exposes current input and four delayed samples as FIR operands.",
+    "conv1d_mac": "Purely combinational fixed 5-tap multiply-accumulate block using coefficients [2, 8, 12, 8, 2].",
+    "conv1d_normalize": "Purely combinational normalization block that right-shifts the MAC result by GAIN_W to produce the extended output sample."
+  }
+}

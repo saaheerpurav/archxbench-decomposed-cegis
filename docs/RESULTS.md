@@ -19,6 +19,8 @@ All rows use GPT-5.5 or Codex GPT-5.5 as recorded in `result.json`.
 | `fft_16pt_iterative` | L4 | C4tl | `42,123,456,789,1024` | 5/5 solved, all `33/33` | official self-checking testbench | robust L4 solve |
 | `ifft_16pt_iterative` | L4 | C4tl | `42,123,456,789,1024` | 5/5 solved, all `33/33` | official self-checking testbench | robust L4 solve |
 | `harris_corner_detection` | L5 | C4i | `42,123,456` | 3/3 solved, all `16384/16384` | external golden JSON | solved, not exclusive |
+| `conv1d` | L5 | C4i | `42,123,456` | 3/3 solved, all `16/16` | external golden JSON | clean L5 golden solve |
+| `aes_encryption` | L6 | C4i | `42,123,456` | 3/3 solved, all `8/8` | external golden JSON | clean L6 golden solve |
 
 ## Golden-Verified Secondary Rows
 
@@ -26,10 +28,8 @@ These rows are clean but not central claims yet.
 
 | Design | Level | Method | Seed | Result | Why secondary |
 |---|---:|---|---:|---|---|
-| `conv1d` | L5 | C4i | `42` | `16/16` golden | one seed only |
 | `conv1d` | L5 | C4tl | `42` | `16/16` golden | one seed only |
 | `harris_corner_detection` | L5 | C2g | `42` | `16384/16384` golden | baseline context |
-| `aes_encryption` | L6 | C4i | `42` | `8/8` golden | one seed only |
 
 Artifacts live under `artifacts/curated/golden_verified_secondary/`.
 
@@ -41,5 +41,6 @@ Known diagnostic categories:
 
 - native-pass but golden-fail rows, such as old L5/L6 seed-42 rows
 - imported rows with no golden fields
+- `conv1d` C4tl seeds `123,456`, which failed reference-decomposition validation
 - failed debug rows for DCT, FIR-family designs, `conv_3d`, and `quantized_matmul`
 - `systolic_gemm` rows without reliable golden evidence
