@@ -37,12 +37,21 @@ Use these files for programmatic lookup:
 
 - `artifacts/inventories/artifact_index.csv`
 - `artifacts/inventories/artifact_index.json`
+- `artifacts/inventories/run_matrix_l3_l6.csv`
 
-Regenerate them with:
+Regenerate the artifact index with:
 
 ```powershell
 python scripts\build_artifact_index.py
 ```
+
+Regenerate the L3-L6 run matrix with:
+
+```powershell
+python scripts\build_run_matrix.py
+```
+
+The run matrix is the easiest way to inspect which GPT-5.5 `C1`, `C2g`, `C4i`, and `C4tl` runs exist for every official L3-L6 design. It reports strict clean solves, not paper claims.
 
 ## Claim Rule
 

@@ -12,12 +12,14 @@ Required local tools:
 
 ```powershell
 python scripts\build_artifact_index.py
+python scripts\build_run_matrix.py
 ```
 
 ## Inspect Results
 
 ```powershell
 Import-Csv artifacts\inventories\artifact_index.csv
+Import-Csv artifacts\inventories\run_matrix_l3_l6.csv
 ```
 
 ## Backfill Golden Scores

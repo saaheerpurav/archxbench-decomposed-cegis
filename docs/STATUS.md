@@ -70,9 +70,13 @@ Current inventory:
 
 - `artifacts/inventories/artifact_index.csv`
 - `artifacts/inventories/artifact_index.json`
+- `artifacts/inventories/run_matrix_l3_l6.csv`
 
 Regenerate the inventory with:
 
 ```powershell
 python scripts\build_artifact_index.py
+python scripts\build_run_matrix.py
 ```
+
+Use `run_matrix_l3_l6.csv` to answer run-coverage questions. It covers every official L3-L6 design and the GPT-5.5 `C1`, `C2g`, `C4i`, and `C4tl` conditions.
