@@ -19,7 +19,7 @@
   },
   "localization_history": [],
   "design": "fp_adder_pipeline",
-  "model": "codex-gpt-5.5",
+  "model": "gpt-5.5",
   "seed": 123,
   "wall_seconds": 483.6,
   "total_input_tokens": 0,

@@ -19,7 +19,7 @@
   },
   "localization_history": [],
   "design": "conv1d",
-  "model": "codex-gpt-5.5",
+  "model": "gpt-5.5",
   "seed": 42,
   "wall_seconds": 283.3,
   "total_input_tokens": 0,

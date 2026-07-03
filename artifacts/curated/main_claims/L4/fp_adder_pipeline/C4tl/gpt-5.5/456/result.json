@@ -75,7 +75,7 @@
     }
   ],
   "design": "fp_adder_pipeline",
-  "model": "codex-gpt-5.5",
+  "model": "gpt-5.5",
   "seed": 456,
   "wall_seconds": 300.5,
   "total_input_tokens": 0,

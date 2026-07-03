@@ -1,5 +1,5 @@
 {
-  "fp_adder_pipeline__C4tl__codex-gpt-5.5__42": {
+  "fp_adder_pipeline__C4tl__gpt-5.5__42": {
     "condition": "C4tl",
     "llm_calls": 7,
     "best_passes": 23,
@@ -24,13 +24,13 @@
     },
     "localization_history": [],
     "design": "fp_adder_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 42,
     "wall_seconds": 315.8,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fft_16pt_iterative__C4tl__codex-gpt-5.5__42": {
+  "fft_16pt_iterative__C4tl__gpt-5.5__42": {
     "condition": "C4tl",
     "llm_calls": 5,
     "best_passes": 33,
@@ -51,13 +51,13 @@
     },
     "localization_history": [],
     "design": "fft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 42,
     "wall_seconds": 238.7,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "ifft_16pt_iterative__C4tl__codex-gpt-5.5__42": {
+  "ifft_16pt_iterative__C4tl__gpt-5.5__42": {
     "condition": "C4tl",
     "llm_calls": 7,
     "best_passes": 33,
@@ -80,7 +80,7 @@
     },
     "localization_history": [],
     "design": "ifft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 42,
     "wall_seconds": 440.5,
     "total_input_tokens": 0,

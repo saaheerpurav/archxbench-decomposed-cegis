@@ -1,5 +1,5 @@
 {
-  "fp_mult_pipeline__C4tl__codex-gpt-5.5__123": {
+  "fp_mult_pipeline__C4tl__gpt-5.5__123": {
     "condition": "C4tl",
     "llm_calls": 6,
     "best_passes": 31,
@@ -22,13 +22,13 @@
     },
     "localization_history": [],
     "design": "fp_mult_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 123,
     "wall_seconds": 693.5,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fp_mult_pipeline__C4tl__codex-gpt-5.5__456": {
+  "fp_mult_pipeline__C4tl__gpt-5.5__456": {
     "condition": "C4tl",
     "llm_calls": 9,
     "best_passes": 31,
@@ -116,13 +116,13 @@
       }
     ],
     "design": "fp_mult_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 456,
     "wall_seconds": 666.1,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fp_mult_pipeline__C4tl__codex-gpt-5.5__789": {
+  "fp_mult_pipeline__C4tl__gpt-5.5__789": {
     "condition": "C4tl",
     "llm_calls": 7,
     "best_passes": 31,
@@ -199,13 +199,13 @@
       }
     ],
     "design": "fp_mult_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 789,
     "wall_seconds": 324.5,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fp_mult_pipeline__C4tl__codex-gpt-5.5__1024": {
+  "fp_mult_pipeline__C4tl__gpt-5.5__1024": {
     "condition": "C4tl",
     "llm_calls": 6,
     "best_passes": 31,
@@ -228,13 +228,13 @@
     },
     "localization_history": [],
     "design": "fp_mult_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 1024,
     "wall_seconds": 261.7,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fp_adder_pipeline__C4tl__codex-gpt-5.5__123": {
+  "fp_adder_pipeline__C4tl__gpt-5.5__123": {
     "condition": "C4tl",
     "llm_calls": 6,
     "best_passes": 23,
@@ -255,13 +255,13 @@
     },
     "localization_history": [],
     "design": "fp_adder_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 123,
     "wall_seconds": 483.6,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fp_adder_pipeline__C4tl__codex-gpt-5.5__456": {
+  "fp_adder_pipeline__C4tl__gpt-5.5__456": {
     "condition": "C4tl",
     "llm_calls": 7,
     "best_passes": 23,
@@ -338,13 +338,13 @@
       }
     ],
     "design": "fp_adder_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 456,
     "wall_seconds": 300.5,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fp_adder_pipeline__C4tl__codex-gpt-5.5__789": {
+  "fp_adder_pipeline__C4tl__gpt-5.5__789": {
     "condition": "C4tl",
     "llm_calls": 8,
     "best_passes": 23,
@@ -367,13 +367,13 @@
     },
     "localization_history": [],
     "design": "fp_adder_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 789,
     "wall_seconds": 547.6,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fp_adder_pipeline__C4tl__codex-gpt-5.5__1024": {
+  "fp_adder_pipeline__C4tl__gpt-5.5__1024": {
     "condition": "C4tl",
     "llm_calls": 7,
     "best_passes": 23,
@@ -450,13 +450,13 @@
       }
     ],
     "design": "fp_adder_pipeline",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 1024,
     "wall_seconds": 325.7,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fft_16pt_iterative__C4tl__codex-gpt-5.5__123": {
+  "fft_16pt_iterative__C4tl__gpt-5.5__123": {
     "condition": "C4tl",
     "llm_calls": 6,
     "best_passes": 33,
@@ -477,13 +477,13 @@
     },
     "localization_history": [],
     "design": "fft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 123,
     "wall_seconds": 384.7,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fft_16pt_iterative__C4tl__codex-gpt-5.5__456": {
+  "fft_16pt_iterative__C4tl__gpt-5.5__456": {
     "condition": "C4tl",
     "llm_calls": 5,
     "best_passes": 33,
@@ -504,13 +504,13 @@
     },
     "localization_history": [],
     "design": "fft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 456,
     "wall_seconds": 242.5,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fft_16pt_iterative__C4tl__codex-gpt-5.5__789": {
+  "fft_16pt_iterative__C4tl__gpt-5.5__789": {
     "condition": "C4tl",
     "llm_calls": 7,
     "best_passes": 33,
@@ -576,13 +576,13 @@
       }
     ],
     "design": "fft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 789,
     "wall_seconds": 341.1,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "fft_16pt_iterative__C4tl__codex-gpt-5.5__1024": {
+  "fft_16pt_iterative__C4tl__gpt-5.5__1024": {
     "condition": "C4tl",
     "llm_calls": 7,
     "best_passes": 33,
@@ -659,13 +659,13 @@
       }
     ],
     "design": "fft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 1024,
     "wall_seconds": 316.2,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "ifft_16pt_iterative__C4tl__codex-gpt-5.5__123": {
+  "ifft_16pt_iterative__C4tl__gpt-5.5__123": {
     "condition": "C4tl",
     "llm_calls": 5,
     "best_passes": 33,
@@ -686,13 +686,13 @@
     },
     "localization_history": [],
     "design": "ifft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 123,
     "wall_seconds": 223.0,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "ifft_16pt_iterative__C4tl__codex-gpt-5.5__456": {
+  "ifft_16pt_iterative__C4tl__gpt-5.5__456": {
     "condition": "C4tl",
     "llm_calls": 6,
     "best_passes": 33,
@@ -715,13 +715,13 @@
     },
     "localization_history": [],
     "design": "ifft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 456,
     "wall_seconds": 287.9,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "ifft_16pt_iterative__C4tl__codex-gpt-5.5__789": {
+  "ifft_16pt_iterative__C4tl__gpt-5.5__789": {
     "condition": "C4tl",
     "llm_calls": 5,
     "best_passes": 33,
@@ -742,13 +742,13 @@
     },
     "localization_history": [],
     "design": "ifft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 789,
     "wall_seconds": 229.9,
     "total_input_tokens": 0,
     "total_output_tokens": 0
   },
-  "ifft_16pt_iterative__C4tl__codex-gpt-5.5__1024": {
+  "ifft_16pt_iterative__C4tl__gpt-5.5__1024": {
     "condition": "C4tl",
     "llm_calls": 8,
     "best_passes": 33,
@@ -858,7 +858,7 @@
       }
     ],
     "design": "ifft_16pt_iterative",
-    "model": "codex-gpt-5.5",
+    "model": "gpt-5.5",
     "seed": 1024,
     "wall_seconds": 476.1,
     "total_input_tokens": 0,

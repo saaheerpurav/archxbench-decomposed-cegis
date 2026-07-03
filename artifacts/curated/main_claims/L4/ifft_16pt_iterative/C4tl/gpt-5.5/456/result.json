@@ -21,7 +21,7 @@
   },
   "localization_history": [],
   "design": "ifft_16pt_iterative",
-  "model": "codex-gpt-5.5",
+  "model": "gpt-5.5",
   "seed": 456,
   "wall_seconds": 287.9,
   "total_input_tokens": 0,

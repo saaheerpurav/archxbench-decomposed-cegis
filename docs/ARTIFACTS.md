@@ -29,7 +29,17 @@ artifacts/
 
 ## Metrics
 
-`artifacts/metrics/` contains aggregate JSON metrics from broad sweeps.
+`artifacts/metrics/` contains aggregate JSON metrics from broad sweeps. The dedicated C2g metric files are:
+
+- `metrics_c2g_gpt55.json`
+- `metrics_c2g_gpt4o.json`
+- `metrics_c2g_o4mini.json`
+
+Older level-specific C2g metric files are preserved for auditability.
+
+## Model Label Normalization
+
+All GPT-5.5-family runs are normalized to `gpt-5.5` in repo-local artifacts and inventories. The repo-local artifacts are the canonical evidence, regardless of which collaborator or machine generated the run.
 
 ## Inventory
 

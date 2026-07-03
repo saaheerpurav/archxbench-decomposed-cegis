@@ -108,7 +108,7 @@
     }
   ],
   "design": "ifft_16pt_iterative",
-  "model": "codex-gpt-5.5",
+  "model": "gpt-5.5",
   "seed": 1024,
   "wall_seconds": 476.1,
   "total_input_tokens": 0,

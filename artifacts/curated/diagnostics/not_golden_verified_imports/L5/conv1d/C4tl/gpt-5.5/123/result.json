@@ -64,7 +64,7 @@
     }
   ],
   "design": "conv1d",
-  "model": "codex-gpt-5.5",
+  "model": "gpt-5.5",
   "seed": 123,
   "wall_seconds": 357.1,
   "total_input_tokens": 0,
