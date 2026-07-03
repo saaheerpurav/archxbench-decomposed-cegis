@@ -23,17 +23,22 @@ Use [../artifacts/inventories/run_matrix_l3_l6.csv](../artifacts/inventories/run
 
 C2g is the strongest monolithic baseline. Do these before adding more C4i/C4tl runs.
 
-Run GPT-5.5 C2g seeds needed to make L5/L6 baselines less sparse:
+Completed GPT-5.5 C2g baseline rows:
+
+| Design | Status |
+|---|---|
+| `conv1d` | complete, seeds `42,123,456`, clean `3/3`, golden `16/16` |
+| `harris_corner_detection` | complete, seeds `42,123,456`, clean `3/3`, golden `16384/16384` |
+| `aes_encryption` | complete, seeds `42,123,456`, clean `3/3`, golden `8/8` |
+| `conv2d` | complete, seeds `42,123,456`, clean `3/3`, golden `4096/4096` |
+| `fft_streaming_64pt` | complete, seeds `42,123,456`, clean `1/3`; seed `42` golden `128/128`, seeds `123,456` produced `0/0` golden |
+| `unsharp_mask` | complete, seeds `42,123,456`, clean `0/3`; best seeds `42,456` are `65535/65536` |
+
+Remaining GPT-5.5 C2g rows:
 
 | Design | Seeds / action |
 |---|---|
-| `conv1d` | run seeds `123,456` if current rows remain non-clean or missing |
-| `harris_corner_detection` | run seeds `123,456` |
-| `aes_encryption` | run seeds `123,456` |
-| `fft_streaming_64pt` | run seeds `123,456` |
 | `aes_decryption` | rerun seeds `42,123,456` only after confirming the prior charmap failure is fixed |
-| `conv2d` | run seeds `42,123,456` |
-| `unsharp_mask` | run seeds `42,123,456` |
 | `dct_idct_8pt_pipelined` | run seeds `123,456` after one diagnostic check of seed `42` failure |
 | `conv_3d` | run seeds `123,456` only if seed `42` failure is understood |
 | `quantized_matmul` | run seeds `123,456` only if seed `42` failure is understood |

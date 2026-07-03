@@ -1,0 +1,32 @@
+
+======================================================================
+EXPERIMENT COMPLETE
+======================================================================
+Cells: 8, Solved: 6/8, Cost: $0.00
+  aes_encryption__C2g__gpt-5.5__123: SOLVED (8/8) [136.1s]
+  aes_encryption__C2g__gpt-5.5__456: SOLVED (8/8) [120.7s]
+  conv1d__C2g__gpt-5.5__123: SOLVED (16/16) [50.9s]
+  conv1d__C2g__gpt-5.5__456: SOLVED (16/16) [60.0s]
+  fft_streaming_64pt__C2g__gpt-5.5__123: FAILED (0/0) [2099.8s]
+  fft_streaming_64pt__C2g__gpt-5.5__456: FAILED (0/0) [1485.3s]
+  harris_corner_detection__C2g__gpt-5.5__123: SOLVED (16384/16384) [280.9s]
+  harris_corner_detection__C2g__gpt-5.5__456: SOLVED (16384/16384) [104.9s]
+
+======================================================================
+EXPERIMENT COMPLETE
+======================================================================
+Cells: 14, Solved: 9/14, Cost: $0.00
+  aes_encryption__C2g__gpt-5.5__123: SOLVED (8/8) [136.1s]
+  aes_encryption__C2g__gpt-5.5__456: SOLVED (8/8) [120.7s]
+  conv1d__C2g__gpt-5.5__123: SOLVED (16/16) [50.9s]
+  conv1d__C2g__gpt-5.5__456: SOLVED (16/16) [60.0s]
+  conv2d__C2g__gpt-5.5__123: SOLVED (4096/4096) [361.4s]
+  conv2d__C2g__gpt-5.5__42: SOLVED (4096/4096) [349.2s]
+  conv2d__C2g__gpt-5.5__456: SOLVED (4096/4096) [426.5s]
+  fft_streaming_64pt__C2g__gpt-5.5__123: FAILED (0/0) [2099.8s]
+  fft_streaming_64pt__C2g__gpt-5.5__456: FAILED (0/0) [1485.3s]
+  harris_corner_detection__C2g__gpt-5.5__123: SOLVED (16384/16384) [280.9s]
+  harris_corner_detection__C2g__gpt-5.5__456: SOLVED (16384/16384) [104.9s]
+  unsharp_mask__C2g__gpt-5.5__123: FAILED (63736/65536) [1888.2s]
+  unsharp_mask__C2g__gpt-5.5__42: FAILED (65535/65536) [1821.4s]
+  unsharp_mask__C2g__gpt-5.5__456: FAILED (65535/65536) [2204.4s]

@@ -1,0 +1,202 @@
+2026-07-03 23:45:07,705 __main__ INFO Total: 8 cells (8 to run, 0 already done)
+2026-07-03 23:45:07,724 __main__ INFO === Cell: conv1d / C2g / gpt-5.5 / seed=123 ===
+2026-07-03 23:45:07,724 __main__ INFO === Cell: conv1d / C2g / gpt-5.5 / seed=456 ===
+2026-07-03 23:45:58,613 __main__ INFO C2g conv1d GOLDEN VERIFIED round 1 (16/16)
+2026-07-03 23:45:58,625 __main__ INFO Progress: 1/8 cells (12%) — conv1d__C2g__gpt-5.5__123: SOLVED (16/16) — $0.00 (total: $0.00)
+2026-07-03 23:45:58,653 __main__ INFO === Cell: harris_corner_detection / C2g / gpt-5.5 / seed=123 ===
+2026-07-03 23:46:07,669 __main__ INFO C2g conv1d GOLDEN VERIFIED round 1 (16/16)
+2026-07-03 23:46:07,693 __main__ INFO Progress: 2/8 cells (25%) — conv1d__C2g__gpt-5.5__456: SOLVED (16/16) — $0.00 (total: $0.00)
+2026-07-03 23:46:07,693 __main__ INFO === Cell: harris_corner_detection / C2g / gpt-5.5 / seed=456 ===
+2026-07-03 23:47:41,955 __main__ INFO C2g harris_corner round 1: golden 0/1
+2026-07-03 23:47:52,574 __main__ INFO C2g harris_corner GOLDEN VERIFIED round 1 (16384/16384)
+2026-07-03 23:47:52,607 __main__ INFO Progress: 3/8 cells (38%) — harris_corner_detection__C2g__gpt-5.5__456: SOLVED (16384/16384) — $0.00 (total: $0.00)
+2026-07-03 23:47:52,662 __main__ INFO === Cell: aes_encryption / C2g / gpt-5.5 / seed=123 ===
+2026-07-03 23:48:58,343 __main__ INFO C2g harris_corner round 2: golden 0/1
+2026-07-03 23:50:08,768 __main__ INFO C2g aes128_pipeline GOLDEN VERIFIED round 1 (8/8)
+2026-07-03 23:50:08,791 __main__ INFO Progress: 4/8 cells (50%) — aes_encryption__C2g__gpt-5.5__123: SOLVED (8/8) — $0.00 (total: $0.00)
+2026-07-03 23:50:08,792 __main__ INFO === Cell: aes_encryption / C2g / gpt-5.5 / seed=456 ===
+2026-07-03 23:50:39,515 __main__ INFO C2g harris_corner GOLDEN VERIFIED round 3 (16384/16384)
+2026-07-03 23:50:39,528 __main__ INFO Progress: 5/8 cells (62%) — harris_corner_detection__C2g__gpt-5.5__123: SOLVED (16384/16384) — $0.00 (total: $0.00)
+2026-07-03 23:50:39,555 __main__ INFO === Cell: fft_streaming_64pt / C2g / gpt-5.5 / seed=123 ===
+2026-07-03 23:51:47,185 __main__ INFO C2g fft64_streaming round 1: golden 0/1
+2026-07-03 23:52:09,517 __main__ INFO C2g aes128_pipeline GOLDEN VERIFIED round 1 (8/8)
+2026-07-03 23:52:09,542 __main__ INFO Progress: 6/8 cells (75%) — aes_encryption__C2g__gpt-5.5__456: SOLVED (8/8) — $0.00 (total: $0.00)
+2026-07-03 23:52:09,543 __main__ INFO === Cell: fft_streaming_64pt / C2g / gpt-5.5 / seed=456 ===
+2026-07-03 23:53:17,791 __main__ INFO C2g fft64_streaming round 1: golden 0/1
+2026-07-03 23:53:19,786 __main__ INFO C2g fft64_streaming round 2: golden 0/1
+2026-07-03 23:54:13,059 __main__ INFO C2g fft64_streaming round 2: golden 0/1
+2026-07-03 23:54:47,620 __main__ INFO C2g fft64_streaming round 3: golden 0/1
+2026-07-03 23:54:49,745 __main__ INFO C2g fft64_streaming round 3: golden 0/1
+2026-07-03 23:55:51,917 __main__ INFO C2g fft64_streaming round 4: golden 0/1
+2026-07-03 23:56:18,369 __main__ INFO C2g fft64_streaming round 4: golden 0/1
+2026-07-03 23:56:53,199 __main__ INFO C2g fft64_streaming round 5: golden 0/1
+2026-07-03 23:57:25,810 __main__ INFO C2g fft64_streaming round 5: golden 0/1
+2026-07-03 23:57:45,245 __main__ INFO C2g fft64_streaming round 6: golden 0/1
+2026-07-03 23:58:47,623 __main__ INFO C2g fft64_streaming round 6: golden 0/1
+2026-07-03 23:58:49,684 __main__ INFO C2g fft64_streaming round 7: golden 0/1
+2026-07-03 23:59:22,696 __main__ INFO C2g fft64_streaming round 8: golden 0/128
+2026-07-04 00:00:21,555 __main__ INFO C2g fft64_streaming round 7: golden 0/1
+2026-07-04 00:00:43,792 __main__ INFO C2g fft64_streaming round 10: golden 0/1
+2026-07-04 00:01:33,413 __main__ INFO C2g fft64_streaming round 11: golden 0/128
+2026-07-04 00:02:00,471 __main__ INFO C2g fft64_streaming round 8: golden 0/1
+2026-07-04 00:02:39,304 __main__ INFO C2g fft64_streaming round 12: golden 0/1
+2026-07-04 00:03:25,506 __main__ INFO C2g fft64_streaming round 9: golden 0/1
+2026-07-04 00:03:35,625 __main__ INFO C2g fft64_streaming round 13: golden 0/1
+2026-07-04 00:04:16,119 __main__ INFO C2g fft64_streaming round 14: golden 0/128
+2026-07-04 00:04:21,308 __main__ INFO C2g fft64_streaming round 10: golden 0/1
+2026-07-04 00:04:54,185 __main__ INFO C2g fft64_streaming round 11: golden 0/1
+2026-07-04 00:05:35,411 __main__ INFO C2g fft64_streaming round 15: golden 0/1
+2026-07-04 00:05:46,956 __main__ INFO C2g fft64_streaming round 12: golden 0/1
+2026-07-04 00:06:29,644 __main__ INFO C2g fft64_streaming round 16: golden 0/128
+2026-07-04 00:06:48,117 __main__ INFO C2g fft64_streaming round 13: golden 0/128
+2026-07-04 00:07:25,045 __main__ INFO C2g fft64_streaming round 17: golden 0/128
+2026-07-04 00:08:14,752 __main__ INFO C2g fft64_streaming round 14: golden 0/1
+2026-07-04 00:08:59,226 __main__ INFO C2g fft64_streaming round 19: golden 0/128
+2026-07-04 00:09:42,106 __main__ INFO C2g fft64_streaming round 15: golden 0/1
+2026-07-04 00:09:49,069 __main__ INFO C2g fft64_streaming round 20: golden 0/1
+2026-07-04 00:10:29,715 __main__ INFO C2g fft64_streaming round 21: golden 0/128
+2026-07-04 00:10:37,468 __main__ INFO C2g fft64_streaming round 16: golden 0/128
+2026-07-04 00:12:07,882 __main__ INFO C2g fft64_streaming round 23: golden 0/128
+2026-07-04 00:12:40,465 __main__ INFO C2g fft64_streaming round 17: golden 0/128
+2026-07-04 00:12:41,316 __main__ INFO C2g fft64_streaming round 24: golden 0/128
+2026-07-04 00:13:40,634 __main__ INFO C2g fft64_streaming round 18: golden 0/1
+2026-07-04 00:14:56,997 __main__ INFO C2g fft64_streaming round 27: golden 0/128
+2026-07-04 00:14:59,401 __main__ INFO C2g fft64_streaming round 19: golden 0/1
+2026-07-04 00:15:44,817 __main__ INFO C2g fft64_streaming round 28: golden 0/1
+2026-07-04 00:15:55,317 __main__ INFO C2g fft64_streaming round 20: golden 0/1
+2026-07-04 00:16:08,685 __main__ INFO C2g fft64_streaming round 29: golden 0/128
+2026-07-04 00:16:50,936 __main__ INFO C2g fft64_streaming round 21: golden 0/1
+2026-07-04 00:16:54,826 __main__ INFO C2g fft64_streaming round 30: golden 0/128
+2026-07-04 00:16:54,834 __main__ INFO Progress: 7/8 cells (88%) — fft_streaming_64pt__C2g__gpt-5.5__456: FAILED (0/0) — $0.00 (total: $0.00)
+2026-07-04 00:17:47,875 __main__ INFO C2g fft64_streaming round 22: golden 0/128
+2026-07-04 00:19:04,571 __main__ INFO C2g fft64_streaming round 23: golden 0/1
+2026-07-04 00:21:16,043 __main__ INFO C2g fft64_streaming round 25: golden 0/1
+2026-07-04 00:22:14,832 __main__ INFO C2g fft64_streaming round 26: golden 0/1
+2026-07-04 00:22:47,852 __main__ INFO C2g fft64_streaming round 27: golden 0/128
+2026-07-04 00:24:03,572 __main__ INFO C2g fft64_streaming round 28: golden 0/1
+2026-07-04 00:24:42,682 __main__ INFO C2g fft64_streaming round 29: golden 0/1
+2026-07-04 00:25:39,322 __main__ INFO C2g fft64_streaming round 30: golden 0/128
+2026-07-04 00:25:39,339 __main__ INFO Progress: 8/8 cells (100%) — fft_streaming_64pt__C2g__gpt-5.5__123: FAILED (0/0) — $0.00 (total: $0.00)
+2026-07-04 00:25:39,682 __main__ INFO Total: 6 cells (6 to run, 0 already done)
+2026-07-04 00:25:39,732 __main__ INFO === Cell: conv2d / C2g / gpt-5.5 / seed=123 ===
+2026-07-04 00:25:39,732 __main__ INFO === Cell: conv2d / C2g / gpt-5.5 / seed=42 ===
+2026-07-04 00:26:25,691 __main__ INFO C2g conv2d round 1: golden 1998/4096
+2026-07-04 00:26:48,221 __main__ INFO C2g conv2d round 1: golden 2104/4096
+2026-07-04 00:27:10,536 __main__ INFO C2g conv2d round 2: golden 2873/4096
+2026-07-04 00:27:49,151 __main__ INFO C2g conv2d round 2: golden 2910/4096
+2026-07-04 00:28:35,043 __main__ INFO C2g conv2d round 3: golden 3652/4096
+2026-07-04 00:28:53,533 __main__ INFO C2g conv2d round 4: golden 2908/4096
+2026-07-04 00:29:37,298 __main__ INFO C2g conv2d round 5: golden 3858/4096
+2026-07-04 00:29:40,454 __main__ INFO C2g conv2d round 4: golden 3718/4096
+2026-07-04 00:30:41,063 __main__ INFO C2g conv2d round 5: golden 3892/4096
+2026-07-04 00:30:45,545 __main__ INFO C2g conv2d round 6: golden 4062/4096
+2026-07-04 00:31:28,964 __main__ INFO C2g conv2d GOLDEN VERIFIED round 7 (4096/4096)
+2026-07-04 00:31:28,983 __main__ INFO Progress: 1/6 cells (17%) — conv2d__C2g__gpt-5.5__42: SOLVED (4096/4096) — $0.00 (total: $0.00)
+2026-07-04 00:31:28,984 __main__ INFO === Cell: conv2d / C2g / gpt-5.5 / seed=456 ===
+2026-07-04 00:31:41,115 __main__ INFO C2g conv2d GOLDEN VERIFIED round 6 (4096/4096)
+2026-07-04 00:31:41,134 __main__ INFO Progress: 2/6 cells (33%) — conv2d__C2g__gpt-5.5__123: SOLVED (4096/4096) — $0.00 (total: $0.00)
+2026-07-04 00:31:41,167 __main__ INFO === Cell: unsharp_mask / C2g / gpt-5.5 / seed=42 ===
+2026-07-04 00:32:30,383 __main__ INFO C2g unsharp_mask round 1: golden 62098/65536
+2026-07-04 00:32:37,232 __main__ INFO C2g conv2d round 1: golden 2104/4096
+2026-07-04 00:33:39,799 __main__ INFO C2g conv2d round 2: golden 0/4096
+2026-07-04 00:33:56,900 __main__ INFO C2g unsharp_mask round 2: golden 62552/65536
+2026-07-04 00:34:19,101 __main__ INFO C2g conv2d round 3: golden 2838/4096
+2026-07-04 00:34:45,710 __main__ INFO C2g unsharp_mask round 3: golden 63411/65536
+2026-07-04 00:35:02,666 __main__ INFO C2g conv2d round 4: golden 2840/4096
+2026-07-04 00:35:55,344 __main__ INFO C2g conv2d round 5: golden 2839/4096
+2026-07-04 00:36:11,214 __main__ INFO C2g unsharp_mask round 4: golden 61658/65536
+2026-07-04 00:36:53,556 __main__ INFO C2g unsharp_mask round 5: golden 63675/65536
+2026-07-04 00:36:56,970 __main__ INFO C2g conv2d round 6: golden 3654/4096
+2026-07-04 00:38:02,226 __main__ INFO C2g conv2d round 7: golden 3892/4096
+2026-07-04 00:38:02,394 __main__ INFO C2g unsharp_mask round 6: golden 63412/65536
+2026-07-04 00:38:35,499 __main__ INFO C2g conv2d GOLDEN VERIFIED round 8 (4096/4096)
+2026-07-04 00:38:35,523 __main__ INFO Progress: 3/6 cells (50%) — conv2d__C2g__gpt-5.5__456: SOLVED (4096/4096) — $0.00 (total: $0.00)
+2026-07-04 00:38:35,523 __main__ INFO === Cell: unsharp_mask / C2g / gpt-5.5 / seed=123 ===
+2026-07-04 00:39:14,959 __main__ INFO C2g unsharp_mask round 7: golden 63675/65536
+2026-07-04 00:39:19,917 __main__ INFO C2g unsharp_mask round 1: golden 62358/65536
+2026-07-04 00:40:05,674 __main__ INFO C2g unsharp_mask round 8: golden 63922/65536
+2026-07-04 00:40:09,025 __main__ INFO C2g unsharp_mask round 2: golden 60936/65536
+2026-07-04 00:41:11,813 __main__ INFO C2g unsharp_mask round 3: golden 61951/65536
+2026-07-04 00:41:13,997 __main__ INFO C2g unsharp_mask round 9: golden 63922/65536
+2026-07-04 00:42:01,137 __main__ INFO C2g unsharp_mask round 10: golden 63922/65536
+2026-07-04 00:42:14,288 __main__ INFO C2g unsharp_mask round 4: golden 63154/65536
+2026-07-04 00:43:09,257 __main__ INFO C2g unsharp_mask round 11: golden 63922/65536
+2026-07-04 00:43:17,731 __main__ INFO C2g unsharp_mask round 5: golden 63533/65536
+2026-07-04 00:44:00,215 __main__ INFO C2g unsharp_mask round 12: golden 63922/65536
+2026-07-04 00:44:25,336 __main__ INFO C2g unsharp_mask round 6: golden 63736/65536
+2026-07-04 00:45:17,477 __main__ INFO C2g unsharp_mask round 7: golden 63412/65536
+2026-07-04 00:45:20,004 __main__ INFO C2g unsharp_mask round 13: golden 64204/65536
+2026-07-04 00:46:11,068 __main__ INFO C2g unsharp_mask round 14: golden 63534/65536
+2026-07-04 00:46:37,477 __main__ INFO C2g unsharp_mask round 8: golden 63157/65536
+2026-07-04 00:47:21,661 __main__ INFO C2g unsharp_mask round 15: golden 63534/65536
+2026-07-04 00:47:45,100 __main__ INFO C2g unsharp_mask round 9: golden 63412/65536
+2026-07-04 00:48:31,491 __main__ INFO C2g unsharp_mask round 16: golden 63534/65536
+2026-07-04 00:48:36,613 __main__ INFO C2g unsharp_mask round 10: golden 915/65536
+2026-07-04 00:49:27,955 __main__ INFO C2g unsharp_mask round 11: golden 63412/65536
+2026-07-04 00:49:38,260 __main__ INFO C2g unsharp_mask round 17: golden 63922/65536
+2026-07-04 00:50:25,603 __main__ INFO C2g unsharp_mask round 18: golden 63922/65536
+2026-07-04 00:50:33,039 __main__ INFO C2g unsharp_mask round 12: golden 63454/65536
+2026-07-04 00:51:30,170 __main__ INFO C2g unsharp_mask round 19: golden 63026/65536
+2026-07-04 00:51:39,088 __main__ INFO C2g unsharp_mask round 13: golden 1170/65536
+2026-07-04 00:52:32,348 __main__ INFO C2g unsharp_mask round 20: golden 63922/65536
+2026-07-04 00:52:47,537 __main__ INFO C2g unsharp_mask round 14: golden 63412/65536
+2026-07-04 00:53:19,226 __main__ INFO C2g unsharp_mask round 21: golden 65535/65536
+2026-07-04 00:53:38,041 __main__ INFO C2g unsharp_mask round 15: golden 62765/65536
+2026-07-04 00:54:02,098 __main__ INFO C2g unsharp_mask round 22: golden 65535/65536
+2026-07-04 00:54:38,253 __main__ INFO C2g unsharp_mask round 16: golden 63412/65536
+2026-07-04 00:54:50,697 __main__ INFO C2g unsharp_mask round 23: golden 63357/65536
+2026-07-04 00:55:40,804 __main__ INFO C2g unsharp_mask round 24: golden 63357/65536
+2026-07-04 00:56:49,186 __main__ INFO C2g unsharp_mask round 25: golden 65535/65536
+2026-07-04 00:57:02,931 __main__ INFO C2g unsharp_mask round 18: golden 63412/65536
+2026-07-04 00:57:49,065 __main__ INFO C2g unsharp_mask round 26: golden 65535/65536
+2026-07-04 00:58:07,175 __main__ INFO C2g unsharp_mask round 19: golden 63157/65536
+2026-07-04 00:58:55,940 __main__ INFO C2g unsharp_mask round 27: golden 65535/65536
+2026-07-04 00:59:18,317 __main__ INFO C2g unsharp_mask round 20: golden 61800/65536
+2026-07-04 00:59:44,820 __main__ INFO C2g unsharp_mask round 28: golden 63922/65536
+2026-07-04 01:00:43,283 __main__ INFO C2g unsharp_mask round 21: golden 1264/65536
+2026-07-04 01:00:50,287 __main__ INFO C2g unsharp_mask round 29: golden 65535/65536
+2026-07-04 01:02:02,556 __main__ INFO Progress: 4/6 cells (67%) — unsharp_mask__C2g__gpt-5.5__42: FAILED (65535/65536) — $0.00 (total: $0.00)
+2026-07-04 01:02:02,574 __main__ INFO === Cell: unsharp_mask / C2g / gpt-5.5 / seed=456 ===
+2026-07-04 01:02:14,756 __main__ INFO C2g unsharp_mask round 22: golden 1368/65536
+2026-07-04 01:02:51,568 __main__ INFO C2g unsharp_mask round 1: golden 61845/65536
+2026-07-04 01:03:03,636 __main__ INFO C2g unsharp_mask round 23: golden 63412/65536
+2026-07-04 01:03:52,715 __main__ INFO C2g unsharp_mask round 24: golden 63533/65536
+2026-07-04 01:04:07,709 __main__ INFO C2g unsharp_mask round 2: golden 63482/65536
+2026-07-04 01:05:09,689 __main__ INFO C2g unsharp_mask round 25: golden 63412/65536
+2026-07-04 01:05:41,265 __main__ INFO C2g unsharp_mask round 3: golden 63483/65536
+2026-07-04 01:05:58,379 __main__ INFO C2g unsharp_mask round 26: golden 63736/65536
+2026-07-04 01:06:46,922 __main__ INFO C2g unsharp_mask round 4: golden 62689/65536
+2026-07-04 01:06:49,208 __main__ INFO C2g unsharp_mask round 27: golden 63454/65536
+2026-07-04 01:07:56,706 __main__ INFO C2g unsharp_mask round 28: golden 63201/65536
+2026-07-04 01:08:15,948 __main__ INFO C2g unsharp_mask round 5: golden 63483/65536
+2026-07-04 01:09:15,437 __main__ INFO C2g unsharp_mask round 29: golden 62765/65536
+2026-07-04 01:10:03,653 __main__ INFO C2g unsharp_mask round 30: golden 62765/65536
+2026-07-04 01:10:03,679 __main__ INFO Progress: 5/6 cells (83%) — unsharp_mask__C2g__gpt-5.5__123: FAILED (63736/65536) — $0.00 (total: $0.00)
+2026-07-04 01:10:09,052 __main__ INFO C2g unsharp_mask round 6: golden 63848/65536
+2026-07-04 01:11:22,711 __main__ INFO C2g unsharp_mask round 7: golden 63157/65536
+2026-07-04 01:12:36,694 __main__ INFO C2g unsharp_mask round 8: golden 63667/65536
+2026-07-04 01:13:44,701 __main__ INFO C2g unsharp_mask round 9: golden 63922/65536
+2026-07-04 01:15:31,028 __main__ INFO C2g unsharp_mask round 10: golden 62256/65536
+2026-07-04 01:16:47,662 __main__ INFO C2g unsharp_mask round 11: golden 63922/65536
+2026-07-04 01:17:53,354 __main__ INFO C2g unsharp_mask round 12: golden 63921/65536
+2026-07-04 01:19:45,690 __main__ INFO C2g unsharp_mask round 13: golden 63922/65536
+2026-07-04 01:20:39,100 __main__ INFO C2g unsharp_mask round 14: golden 65535/65536
+2026-07-04 01:21:37,142 __main__ INFO C2g unsharp_mask round 15: golden 63357/65536
+2026-07-04 01:22:47,611 __main__ INFO C2g unsharp_mask round 16: golden 64879/65536
+2026-07-04 01:25:42,630 __main__ INFO C2g unsharp_mask round 17: golden 64879/65536
+2026-07-04 01:26:28,608 __main__ INFO C2g unsharp_mask round 18: golden 64204/65536
+2026-07-04 01:27:20,570 __main__ INFO C2g unsharp_mask round 19: golden 63534/65536
+2026-07-04 01:28:32,191 __main__ INFO C2g unsharp_mask round 20: golden 64879/65536
+2026-07-04 01:29:42,243 __main__ INFO C2g unsharp_mask round 21: golden 64880/65536
+2026-07-04 01:30:49,170 __main__ INFO C2g unsharp_mask round 22: golden 63821/65536
+2026-07-04 01:31:58,192 __main__ INFO C2g unsharp_mask round 23: golden 64879/65536
+2026-07-04 01:32:57,832 __main__ INFO C2g unsharp_mask round 24: golden 63921/65536
+2026-07-04 01:33:51,573 __main__ INFO C2g unsharp_mask round 25: golden 64879/65536
+2026-07-04 01:34:39,301 __main__ INFO C2g unsharp_mask round 26: golden 64879/65536
+2026-07-04 01:35:47,712 __main__ INFO C2g unsharp_mask round 27: golden 63921/65536
+2026-07-04 01:36:37,083 __main__ INFO C2g unsharp_mask round 28: golden 63921/65536
+2026-07-04 01:37:56,242 __main__ INFO C2g unsharp_mask round 29: golden 64879/65536
+2026-07-04 01:38:46,934 __main__ INFO C2g unsharp_mask round 30: golden 64879/65536
+2026-07-04 01:38:46,952 __main__ INFO Progress: 6/6 cells (100%) — unsharp_mask__C2g__gpt-5.5__456: FAILED (65535/65536) — $0.00 (total: $0.00)
+C:\Users\saahe\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\scripts\x08uild_artifact_index.py': [Errno 22] Invalid argument
+C:\Users\saahe\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\scripts\x08uild_run_matrix.py': [Errno 22] Invalid argument
