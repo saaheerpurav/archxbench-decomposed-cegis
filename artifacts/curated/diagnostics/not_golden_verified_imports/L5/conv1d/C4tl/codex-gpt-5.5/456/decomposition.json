@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv1d_shift_window.v",
+  "sub_modules": {
+    "conv1d_shift_window": "Combinational shift-register window update that appends the newest serial sample.",
+    "conv1d_coeff_rom": "Combinational coefficient source for supported odd kernel sizes, including the 5-tap Gaussian benchmark kernel.",
+    "conv1d_mac": "Combinational multiply-accumulate over the current stencil window and coefficient vector.",
+    "conv1d_output_scale": "Combinational fixed-point output scaler that divides the accumulated sum by 16 through truncating right shift."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_mult_unpack.v",
+  "sub_modules": {
+    "fp_mult_unpack": "Combinational IEEE-754 input unpacking, operand classification, sign generation, and significand construction.",
+    "fp_mult_mul_exp": "Combinational 24x24 significand multiplication and biased exponent sum calculation with subnormal effective exponent handling.",
+    "fp_mult_normalize": "Combinational product normalization, exponent adjustment, and guard/round/sticky extraction.",
+    "fp_mult_round_rne": "Combinational round-to-nearest-even significand rounding with exponent carry adjustment.",
+    "fp_mult_pack_special": "Combinational IEEE-754 special-case priority handling, overflow/underflow handling, and final result packing."
+  }
+}

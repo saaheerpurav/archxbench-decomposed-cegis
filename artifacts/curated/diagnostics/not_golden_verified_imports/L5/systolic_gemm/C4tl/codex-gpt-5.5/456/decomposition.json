@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/pe.v",
+  "sub_modules": {
+    "pe": "Combinational processing element that forwards north and west operands and produces the signed 32x32 multiplication product for top-level accumulation.",
+    "input_router": "Combinational boundary input router for the four west A inputs and four north B inputs.",
+    "done_logic": "Combinational completion flag generator based on the top-level cycle counter."
+  }
+}

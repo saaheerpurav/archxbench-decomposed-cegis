@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/pe_compute.v",
+  "sub_modules": {
+    "pe_compute": "Combinational processing-element datapath that forwards west/north operands and computes the next accumulated result.",
+    "signed_mult32x32": "Combinational signed 32-bit by 32-bit multiplier producing a 64-bit product.",
+    "pe_accumulate_next": "Combinational 64-bit accumulator next-value adder.",
+    "cycle_done_logic": "Combinational completion flag generator for the 9-cycle systolic computation window.",
+    "pe": "Standalone reference processing element with the requested PE signature for compatibility."
+  }
+}

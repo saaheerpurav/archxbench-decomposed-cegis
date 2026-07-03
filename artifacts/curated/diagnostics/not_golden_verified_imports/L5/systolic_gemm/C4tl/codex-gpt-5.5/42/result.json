@@ -1,0 +1,25 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 4,
+  "best_passes": 32,
+  "total_tests": 32,
+  "solved": true,
+  "reference_oracle_valid": true,
+  "decomp_modules": [
+    "signed_mult32",
+    "accumulate64",
+    "pe_cell"
+  ],
+  "module_repair_rounds": {
+    "signed_mult32": 0,
+    "accumulate64": 0,
+    "pe_cell": 0
+  },
+  "localization_history": [],
+  "design": "systolic_gemm",
+  "model": "codex-gpt-5.5",
+  "seed": 42,
+  "wall_seconds": 213.8,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,843 @@
+{
+  "ifft_16pt_iterative__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "solved": false,
+    "llm_calls": 26,
+    "error": "final compile failed",
+    "decomp_modules": [
+      "ifft16_bitrev_index",
+      "ifft16_stage_addr_gen",
+      "ifft16_twiddle_rom",
+      "ifft16_butterfly",
+      "ifft16_output_scaler"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "ifft_16pt_iterative",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 802.3,
+    "total_input_tokens": 183611,
+    "total_output_tokens": 58674
+  },
+  "fft_16pt_iterative__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "solved": false,
+    "llm_calls": 29,
+    "error": "final compile failed",
+    "decomp_modules": [
+      "fft16_index_gen",
+      "fft16_twiddle_rom",
+      "fft16_butterfly",
+      "fft16_output_scale"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fft_16pt_iterative",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 1328.1,
+    "total_input_tokens": 383291,
+    "total_output_tokens": 89443
+  },
+  "fp_adder_pipeline__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 6,
+    "best_passes": 23,
+    "total_tests": 23,
+    "solved": true,
+    "decomp_modules": [
+      "fp_unpack",
+      "fp_special",
+      "fp_align",
+      "fp_addsub",
+      "fp_normalize_round_pack"
+    ],
+    "module_solve_rounds": {
+      "fp_unpack": 1,
+      "fp_special": 1,
+      "fp_align": 1,
+      "fp_addsub": 1,
+      "fp_normalize_round_pack": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fp_adder_pipeline",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 330.9,
+    "total_input_tokens": 15160,
+    "total_output_tokens": 23713
+  },
+  "ifft_16pt_iterative__C4tl__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "ifft_16pt_iterative",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 99.9,
+    "total_input_tokens": 4548,
+    "total_output_tokens": 7739
+  },
+  "fp_mult_pipeline__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 5,
+    "best_passes": 31,
+    "total_tests": 31,
+    "solved": true,
+    "decomp_modules": [
+      "fp_mult_unpack",
+      "fp_mult_mul_exp",
+      "fp_mult_norm_round",
+      "fp_mult_pack_special"
+    ],
+    "module_solve_rounds": {
+      "fp_mult_unpack": 1,
+      "fp_mult_mul_exp": 1,
+      "fp_mult_norm_round": 1,
+      "fp_mult_pack_special": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fp_mult_pipeline",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 234.1,
+    "total_input_tokens": 12148,
+    "total_output_tokens": 16855
+  },
+  "band_pass_fir__C4i__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "band_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 87.9,
+    "total_input_tokens": 28963,
+    "total_output_tokens": 7095
+  },
+  "fft_16pt_iterative__C4tl__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "fft_16pt_iterative",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 134.9,
+    "total_input_tokens": 4627,
+    "total_output_tokens": 9955
+  },
+  "fp_mult_pipeline__C4tl__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "fp_mult_pipeline",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 136.0,
+    "total_input_tokens": 2867,
+    "total_output_tokens": 10136
+  },
+  "high_pass_fir__C4i__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "high_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 85.0,
+    "total_input_tokens": 28829,
+    "total_output_tokens": 6635
+  },
+  "low_pass_fir__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "solved": false,
+    "llm_calls": 25,
+    "error": "final compile failed",
+    "decomp_modules": [
+      "fir_tap_shift_next",
+      "fir_sym_preadd",
+      "fir_coeff_rom_101",
+      "fir_product_bank",
+      "fir_accumulator_tree",
+      "fir_output_scale"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "low_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 1013.8,
+    "total_input_tokens": 161142,
+    "total_output_tokens": 44325
+  },
+  "band_pass_fir__C4tl__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "band_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 86.1,
+    "total_input_tokens": 28963,
+    "total_output_tokens": 6925
+  },
+  "high_pass_fir__C4tl__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "high_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 89.9,
+    "total_input_tokens": 28829,
+    "total_output_tokens": 6506
+  },
+  "low_pass_fir__C4tl__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "low_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 115.1,
+    "total_input_tokens": 29048,
+    "total_output_tokens": 8535
+  },
+  "fp_adder_pipeline__C4tl__gpt-5.5__42": {
+    "error": "Icarus Verilog (iverilog/vvp) not found on PATH. Install the OSS CAD Suite or set iverilog_path/vvp_path.",
+    "design": "fp_adder_pipeline",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 133.3,
+    "total_input_tokens": 2964,
+    "total_output_tokens": 9924
+  },
+  "fp_multiplier__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 5,
+    "best_passes": 10,
+    "total_tests": 10,
+    "solved": true,
+    "decomp_modules": [
+      "fp_multiplier_unpack",
+      "fp_multiplier_special_cases",
+      "fp_multiplier_significand_product",
+      "fp_multiplier_normalize_round_pack"
+    ],
+    "module_solve_rounds": {
+      "fp_multiplier_unpack": 1,
+      "fp_multiplier_special_cases": 1,
+      "fp_multiplier_significand_product": 1,
+      "fp_multiplier_normalize_round_pack": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fp_multiplier",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 270.9,
+    "total_input_tokens": 12850,
+    "total_output_tokens": 17420
+  },
+  "aes_decryption__C4i__gpt-5.5__42": {
+    "error": "Decomposition failed after 3 attempts: Could not find top module. Wrap it in <file name=\"X.v\" type=\"top\">...</file>",
+    "design": "aes_decryption",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 423.3,
+    "total_input_tokens": 5133,
+    "total_output_tokens": 36000
+  },
+  "harris_corner_detection__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 7,
+    "best_passes": 16384,
+    "total_tests": 16384,
+    "solved": true,
+    "decomp_modules": [
+      "harris_sobel3x3",
+      "harris_gradient_products",
+      "harris_gaussian3x3",
+      "harris_response",
+      "harris_threshold"
+    ],
+    "module_solve_rounds": {
+      "harris_sobel3x3": 2,
+      "harris_gradient_products": 1,
+      "harris_gaussian3x3": 1,
+      "harris_response": 1,
+      "harris_threshold": 1
+    },
+    "golden_correct": 16384,
+    "golden_total": 16384,
+    "design": "harris_corner_detection",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 437.2,
+    "total_input_tokens": 16574,
+    "total_output_tokens": 26810
+  },
+  "dct_idct_8pt_pipelined__C4i__gpt-5.5__42": {
+    "error": "Decomposition failed after 3 attempts: Could not find top module. Wrap it in <file name=\"X.v\" type=\"top\">...</file>",
+    "design": "dct_idct_8pt_pipelined",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 478.3,
+    "total_input_tokens": 7746,
+    "total_output_tokens": 36000
+  },
+  "harris_corner_detection__c2g__gpt-5.5__42": {
+    "error": "Unknown condition: c2g",
+    "design": "harris_corner_detection",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 0.0,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "newton_raphson_sqrt__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 5,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "sqrt_nr_initial_guess",
+      "sqrt_nr_divide",
+      "sqrt_nr_update",
+      "sqrt_nr_convergence"
+    ],
+    "module_solve_rounds": {
+      "sqrt_nr_initial_guess": 1,
+      "sqrt_nr_divide": 1,
+      "sqrt_nr_update": 1,
+      "sqrt_nr_convergence": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "newton_raphson_sqrt",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 215.3,
+    "total_input_tokens": 10620,
+    "total_output_tokens": 11438
+  },
+  "harris_corner_detection__C2g__gpt-5.5__42": {
+    "condition": "C2g",
+    "llm_calls": 6,
+    "best_passes": 16384,
+    "total_tests": 16384,
+    "solved": true,
+    "golden_correct": 16384,
+    "golden_total": 16384,
+    "design": "harris_corner_detection",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 848.2,
+    "total_input_tokens": 11355,
+    "total_output_tokens": 46866
+  },
+  "gauss_siedel__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 4,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "gs_reciprocal_q",
+      "gs_iteration_step_2x2",
+      "gs_solution_selector"
+    ],
+    "module_solve_rounds": {
+      "gs_reciprocal_q": 1,
+      "gs_iteration_step_2x2": 1,
+      "gs_solution_selector": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "gauss_siedel",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 317.2,
+    "total_input_tokens": 13934,
+    "total_output_tokens": 20116
+  },
+  "fp_adder__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 6,
+    "best_passes": 36,
+    "total_tests": 36,
+    "solved": true,
+    "decomp_modules": [
+      "fp_unpack",
+      "fp_special_cases",
+      "fp_align_add_norm",
+      "fp_round_pack"
+    ],
+    "module_solve_rounds": {
+      "fp_unpack": 1,
+      "fp_special_cases": 1,
+      "fp_align_add_norm": 2,
+      "fp_round_pack": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fp_adder",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 551.8,
+    "total_input_tokens": 26222,
+    "total_output_tokens": 32873
+  },
+  "fp_multiplier__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 5,
+    "best_passes": 10,
+    "total_tests": 10,
+    "solved": true,
+    "decomp_modules": [
+      "fp_unpack_classify",
+      "fp_special_cases",
+      "fp_significand_multiply",
+      "fp_normalize_round_pack"
+    ],
+    "module_solve_rounds": {
+      "fp_unpack_classify": 1,
+      "fp_special_cases": 1,
+      "fp_significand_multiply": 1,
+      "fp_normalize_round_pack": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fp_multiplier",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 254.5,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "fp_multiplier__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 5,
+    "best_passes": 10,
+    "total_tests": 10,
+    "solved": true,
+    "decomp_modules": [
+      "fp_unpack",
+      "fp_special_cases",
+      "fp_multiply_core",
+      "fp_normalize_round"
+    ],
+    "module_solve_rounds": {
+      "fp_unpack": 1,
+      "fp_special_cases": 1,
+      "fp_multiply_core": 1,
+      "fp_normalize_round": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fp_multiplier",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 403.7,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "gauss_siedel__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 19,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "gs_reciprocal",
+      "gs_fixed_mul",
+      "gs_iteration_step",
+      "gs_direct_2x2",
+      "gs_solution_selector"
+    ],
+    "module_solve_rounds": {
+      "gs_direct_2x2": 2,
+      "gs_solution_selector": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "gauss_siedel",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 945.7,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "gauss_siedel__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 20,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "gs2x2_reciprocal",
+      "gs2x2_fixed_mul",
+      "gs2x2_iteration_step",
+      "gs2x2_exact_solver",
+      "gs2x2_result_select"
+    ],
+    "module_solve_rounds": {
+      "gs2x2_exact_solver": 3,
+      "gs2x2_result_select": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "gauss_siedel",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 880.3,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "fp_adder__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 4,
+    "best_passes": 36,
+    "total_tests": 36,
+    "solved": true,
+    "decomp_modules": [
+      "fp_unpack",
+      "fp_special_cases",
+      "fp_add_core"
+    ],
+    "module_solve_rounds": {
+      "fp_unpack": 1,
+      "fp_special_cases": 1,
+      "fp_add_core": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fp_adder",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 269.8,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "fp_adder__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 6,
+    "best_passes": 36,
+    "total_tests": 36,
+    "solved": true,
+    "decomp_modules": [
+      "fp_unpack",
+      "fp_special_cases",
+      "fp_align",
+      "fp_addsub",
+      "fp_normalize_round"
+    ],
+    "module_solve_rounds": {
+      "fp_unpack": 1,
+      "fp_special_cases": 1,
+      "fp_align": 1,
+      "fp_addsub": 1,
+      "fp_normalize_round": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "fp_adder",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 361.4,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "newton_raphson_sqrt__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 5,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "sqrt_nr_special_case",
+      "sqrt_nr_initial_guess",
+      "sqrt_nr_iteration_step",
+      "sqrt_nr_convergence"
+    ],
+    "module_solve_rounds": {
+      "sqrt_nr_special_case": 1,
+      "sqrt_nr_initial_guess": 1,
+      "sqrt_nr_iteration_step": 1,
+      "sqrt_nr_convergence": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "newton_raphson_sqrt",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 230.4,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "newton_raphson_sqrt__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 5,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "sqrt_nr_initial_guess",
+      "sqrt_nr_divide",
+      "sqrt_nr_iteration",
+      "sqrt_nr_convergence"
+    ],
+    "module_solve_rounds": {
+      "sqrt_nr_initial_guess": 1,
+      "sqrt_nr_divide": 1,
+      "sqrt_nr_iteration": 1,
+      "sqrt_nr_convergence": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "newton_raphson_sqrt",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 203.4,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "harris_corner_detection__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 10,
+    "best_passes": 16384,
+    "total_tests": 16384,
+    "solved": true,
+    "decomp_modules": [
+      "harris_sobel3x3",
+      "harris_gradient_products",
+      "harris_gaussian3x3",
+      "harris_response",
+      "harris_threshold"
+    ],
+    "module_solve_rounds": {
+      "harris_gradient_products": 1,
+      "harris_gaussian3x3": 1,
+      "harris_response": 1,
+      "harris_threshold": 1
+    },
+    "golden_correct": 16384,
+    "golden_total": 16384,
+    "design": "harris_corner_detection",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 566.9,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "harris_corner_detection__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 15,
+    "best_passes": 16384,
+    "total_tests": 16384,
+    "solved": true,
+    "decomp_modules": [
+      "harris_sobel3x3",
+      "harris_gradient_products",
+      "harris_gaussian3x3",
+      "harris_response_calc",
+      "harris_threshold"
+    ],
+    "module_solve_rounds": {
+      "harris_gaussian3x3": 2,
+      "harris_response_calc": 1,
+      "harris_threshold": 1
+    },
+    "golden_correct": 16384,
+    "golden_total": 16384,
+    "design": "harris_corner_detection",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 685.7,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "gradient_descent__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 22,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "gd_poly_derivative",
+      "gd_poly_step",
+      "gd_poly_update"
+    ],
+    "module_solve_rounds": {
+      "gd_poly_update": 3
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "gradient_descent",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 2603.5,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "gradient_descent__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 4,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "gd_poly_derivative",
+      "gd_poly_step",
+      "gd_poly_update"
+    ],
+    "module_solve_rounds": {
+      "gd_poly_derivative": 1,
+      "gd_poly_step": 1,
+      "gd_poly_update": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "gradient_descent",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 291.6,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "gradient_descent__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 5,
+    "best_passes": 50,
+    "total_tests": 50,
+    "solved": true,
+    "decomp_modules": [
+      "gd_derivative",
+      "gd_step",
+      "gd_update",
+      "gd_iter_done"
+    ],
+    "module_solve_rounds": {
+      "gd_derivative": 1,
+      "gd_step": 1,
+      "gd_update": 1,
+      "gd_iter_done": 1
+    },
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "gradient_descent",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 361.7,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "newton_raphson_polynomial__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 29,
+    "best_passes": 17,
+    "total_tests": 100,
+    "solved": false,
+    "decomp_modules": [
+      "nr_poly_eval_fixed",
+      "nr_derivative_eval_fixed",
+      "nr_fixed_div_step",
+      "nr_root_verify_fixed"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "newton_raphson_polynomial",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 1934.9,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "newton_raphson_polynomial__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 26,
+    "best_passes": 17,
+    "total_tests": 100,
+    "solved": false,
+    "decomp_modules": [
+      "nr_poly_eval_fixed",
+      "nr_deriv_eval_fixed",
+      "nr_fixed_div",
+      "nr_newton_update",
+      "nr_root_verify"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "newton_raphson_polynomial",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 1411.8,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "newton_raphson_polynomial__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 29,
+    "best_passes": 89,
+    "total_tests": 100,
+    "solved": false,
+    "decomp_modules": [
+      "nr_poly_deriv_eval",
+      "nr_newton_update",
+      "nr_convergence_check",
+      "nr_root_verify"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "newton_raphson_polynomial",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 1479.9,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "newton_raphson_polynomial__C4m__gpt-5.5__456": {
+    "condition": "C4m",
+    "llm_calls": 30,
+    "best_passes": 86,
+    "total_tests": 100,
+    "solved": false,
+    "decomp_modules": [
+      "nr_poly_eval",
+      "nr_derivative_eval",
+      "nr_update_step",
+      "nr_convergence_check",
+      "nr_root_verify"
+    ],
+    "ref_passes": 9,
+    "ref_total": 100,
+    "golden_correct": 0,
+    "golden_total": 0,
+    "module_solve_rounds": {},
+    "ledger": "- **Fixed-point format:** Testbench uses `WIDTH=16`, `FRAC=8`; numeric DUT ports are signed fixed-point with scale `real = fixed / 2^FRAC`.\n\n- **Signedness contract:** `x_init`, coefficients, and `root` are `signed [WIDTH-1:0]`; arithmetic must preserve signed semantics throughout.\n\n- **Polynomial:** Implement `p(x)=coeff0 + coeff1*x + coeff2*x^2 + coeff3*x^3`.\n\n- **Derivative:** Implement `p'(x)=coeff1 + 2*coeff2*x + 3*coeff3*x^2`.\n\n- **Fixed-point multiply:** Polynomial and derivative products require extended signed intermediates and signed rescale after multiplication, typically arithmetic `>>> FRAC`.\n\n- **Shift behavior:** Revision note requires `<<` instead of `<<<` for left shifts. Right shifts used for signed downscaling must preserve sign.\n\n- **Intermediate precision:** Multiplication, division numerator, polynomial accumulation, derivative accumulation, and Newton update arithmetic need extended signed width before final clamp.\n\n- **Newton update:** `nr_update_step` computes `x_next = x - p(x)/p'(x)` in fixed-point. Division must account for scale, typically `(p << FRAC) / derivative`, using signed extended operands.\n\n- **Update saturation:** `nr_update_step` output must saturate/clamp to signed `WIDTH` range before feeding the iteration state.\n\n- **Active repair target:** Current score is `96/100`; localization still points to `nr_update_step`.\n\n- **Reference-swap evidence:** Swapping `nr_convergence_check`, `nr_derivative_eval`, `nr_poly_eval`, or `nr_root_verify` to reference leaves score unchanged at `96/100`. Swapping `nr_update_step` to reference drops score to `9/100`; the reference update is incompatible/worse under this harness and should not be copied directly.\n\n- **Current root counterexamples:** Remaining root failures are `0.294549` and `0.552496`, both above `EPSILON=0.03125`.\n\n- **Current residual counterexamples:** Remaining residual failures are `|f(x)| = 0.625000` and `1.000000`, both above `EPSILON=0.03125`.\n\n- **Regression status:** Score is now `96/100`; failures are narrow and still tied to update-step numerical behavior or trajectory mismatch, not broad polynomial/derivative/verify/FSM failure.\n\n- **Zero derivative:** `nr_convergence_check` must detect zero or unusably small derivative and prevent divide-by-zero.\n\n- **Convergence:** Iteration completes when `|x_next - x|` is within tolerance or when `MAX_ITER` is reached.\n\n- **Verification:** `nr_root_verify` must evaluate residual `p(root)` and assert `valid=1` only when `|p(root)|` is within tolerance. Converged update magnitude alone is insufficient.\n\n- **Top-level FSM:** Required flow is effectively `IDLE -> CALC -> VERIFY -> DONE`.\n\n- **Start behavior:** In `IDLE`, `start` latches `x_init` and coefficients. Inputs are stable only at start/latch time.\n\n- **Ready behavior:** `ready` remains low during `IDLE/CALC/VERIFY` and asserts only in `DONE`.\n\n- **Done behavior:** Spec says the design remains in `DONE` until reset; `ready`, final `root`, and `valid` should hold.\n\n- **Reset behavior:** Reset clears state, iteration counter, `ready`, `valid`, and output/root registers deterministically.\n\n- **Latency:** Sequential top-level latency is variable up to `MAX_ITER` plus verification/FSM overhead. Combinational submodules have no independent valid/ready unless wrapped.\n\n- **Testbench expectation:** Testbench waits for `ready`, then compares signed fixed-point `root` against behavioral real Newton result converted to fixed-point.\n\n- **Root accuracy threshold:** Root comparison uses `EPSILON=8`, equivalent to `8/256 = 0.03125`.\n\n- **Residual expectation:** Testbench also evaluates `p(root)` in real arithmetic; `valid` should align with residual tolerance, not just iteration count.\n\n- **Multiple roots:** Newton-Raphson is local; result should match the behavioral solver from the same `x_init`.\n\n- **Coefficient range risk:** Tests include negative coefficients, fractional coefficients such as `0.5` and `0.2`, zero cubic terms, and larger values such as `10`, `-15`.\n\n- **Likely remaining failure modes:** signed fixed-point division scaling or rounding in `nr_update_step`, sign extension before division, update clamp edge cases, derivative edge handling inside update math, or off-by-one/update-result mismatch against the behavioral Newton trajectory.",
+    "design": "newton_raphson_polynomial",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 1639.5,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "dct_idct_8pt_pipelined__C4tl__gpt-5.5__42": {
+    "condition": "C4tl",
+    "llm_calls": 29,
+    "best_passes": 0,
+    "total_tests": 0,
+    "solved": false,
+    "decomp_modules": [
+      "dct1d_8_coeff_rom",
+      "dct1d_8_mac",
+      "dct1d_8_round_shift",
+      "dct1d_8_saturate"
+    ],
+    "ref_passes": 0,
+    "ref_total": 1,
+    "golden_correct": 0,
+    "golden_total": 0,
+    "module_solve_rounds": {},
+    "design": "dct_idct_8pt_pipelined",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 2336.3,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  }
+}

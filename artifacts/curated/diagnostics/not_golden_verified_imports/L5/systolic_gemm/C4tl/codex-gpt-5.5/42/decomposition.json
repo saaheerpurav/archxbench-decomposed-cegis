@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/signed_mult32.v",
+  "sub_modules": {
+    "signed_mult32": "Pure combinational signed 32-bit by 32-bit multiplier producing a 64-bit product.",
+    "accumulate64": "Pure combinational 64-bit signed accumulator adder for partial sums.",
+    "pe_cell": "Pure combinational processing element datapath that forwards west and north operands and computes the next accumulated result."
+  }
+}

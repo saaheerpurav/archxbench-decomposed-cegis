@@ -1,0 +1,116 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 8,
+  "best_passes": 16,
+  "total_tests": 16,
+  "solved": true,
+  "reference_oracle_valid": true,
+  "decomp_modules": [
+    "conv1d_shift_window",
+    "conv1d_coeff_rom",
+    "conv1d_mac",
+    "conv1d_output_scale"
+  ],
+  "module_repair_rounds": {
+    "conv1d_shift_window": 0,
+    "conv1d_coeff_rom": 1,
+    "conv1d_mac": 1,
+    "conv1d_output_scale": 0
+  },
+  "localization_history": [
+    {
+      "round": 1,
+      "full_passes": 0,
+      "full_total": 16,
+      "focus_module": "conv1d_coeff_rom",
+      "isolated_scores": [
+        {
+          "module": "conv1d_shift_window",
+          "passes": 16,
+          "total": 16,
+          "rate": 1.0,
+          "kind": "pass",
+          "compile_error": "",
+          "stdout_excerpt": "No specific failure lines found in output."
+        },
+        {
+          "module": "conv1d_coeff_rom",
+          "passes": 0,
+          "total": 16,
+          "rate": 0.0,
+          "kind": "semantic",
+          "compile_error": "",
+          "stdout_excerpt": "[FAIL] idx=0 Expected: 16 Got: 8\n[FAIL] idx=1 Expected: 86 Got: 43\n[FAIL] idx=2 Expected: 211 Got: 105\n[FAIL] idx=3 Expected: 336 Got: 168\n[FAIL] idx=4 Expected: 422 Got: 211\n[FAIL] idx=5 Expected: 473 Got: 236\n[FAIL] idx=6 Expected: 490 Got: 245\n[FAIL] idx=7 Expected: 473 Got: 236\n[FAIL] idx=8 Expected: 422 Got: 211\n[FAIL] idx=9 Expected: 346 Got: 173\n[FAIL] idx=10 Expected: 256 Got: 128\n[FAIL] idx=11 Expected: 165 Got: 82\n[FAIL] idx=12 Expected: 89 Got: 44\n[FAIL] idx=13 Expected: 39 Got: 19\n[FAIL] idx=14 Expected: 21 Got: 10"
+        },
+        {
+          "module": "conv1d_mac",
+          "passes": 1,
+          "total": 16,
+          "rate": 0.0625,
+          "kind": "semantic",
+          "compile_error": "",
+          "stdout_excerpt": "[FAIL] idx=1 Expected: 86 Got: 4054\n[FAIL] idx=2 Expected: 211 Got: 4002\n[FAIL] idx=3 Expected: 336 Got: 3909\n[FAIL] idx=4 Expected: 422 Got: 3878\n[FAIL] idx=5 Expected: 473 Got: 3851\n[FAIL] idx=6 Expected: 490 Got: 3841\n[FAIL] idx=7 Expected: 473 Got: 3851\n[FAIL] idx=8 Expected: 422 Got: 3878\n[FAIL] idx=9 Expected: 346 Got: 3919\n[FAIL] idx=10 Expected: 256 Got: 3968\n[FAIL] idx=11 Expected: 165 Got: 4016\n[FAIL] idx=12 Expected: 89 Got: 4057\n[FAIL] idx=13 Expected: 39 Got: 4085\n[FAIL] idx=14 Expected: 21 Got: 4094\n[FAIL] idx=15 Expected: 39 Got: 4085"
+        },
+        {
+          "module": "conv1d_output_scale",
+          "passes": 16,
+          "total": 16,
+          "rate": 1.0,
+          "kind": "pass",
+          "compile_error": "",
+          "stdout_excerpt": "No specific failure lines found in output."
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "full_passes": 1,
+      "full_total": 16,
+      "focus_module": "conv1d_mac",
+      "isolated_scores": [
+        {
+          "module": "conv1d_shift_window",
+          "passes": 16,
+          "total": 16,
+          "rate": 1.0,
+          "kind": "pass",
+          "compile_error": "",
+          "stdout_excerpt": "No specific failure lines found in output."
+        },
+        {
+          "module": "conv1d_coeff_rom",
+          "passes": 16,
+          "total": 16,
+          "rate": 1.0,
+          "kind": "pass",
+          "compile_error": "",
+          "stdout_excerpt": "No specific failure lines found in output."
+        },
+        {
+          "module": "conv1d_mac",
+          "passes": 1,
+          "total": 16,
+          "rate": 0.0625,
+          "kind": "semantic",
+          "compile_error": "",
+          "stdout_excerpt": "[FAIL] idx=1 Expected: 86 Got: 4054\n[FAIL] idx=2 Expected: 211 Got: 4002\n[FAIL] idx=3 Expected: 336 Got: 3909\n[FAIL] idx=4 Expected: 422 Got: 3878\n[FAIL] idx=5 Expected: 473 Got: 3851\n[FAIL] idx=6 Expected: 490 Got: 3841\n[FAIL] idx=7 Expected: 473 Got: 3851\n[FAIL] idx=8 Expected: 422 Got: 3878\n[FAIL] idx=9 Expected: 346 Got: 3919\n[FAIL] idx=10 Expected: 256 Got: 3968\n[FAIL] idx=11 Expected: 165 Got: 4016\n[FAIL] idx=12 Expected: 89 Got: 4057\n[FAIL] idx=13 Expected: 39 Got: 4085\n[FAIL] idx=14 Expected: 21 Got: 4094\n[FAIL] idx=15 Expected: 39 Got: 4085"
+        },
+        {
+          "module": "conv1d_output_scale",
+          "passes": 16,
+          "total": 16,
+          "rate": 1.0,
+          "kind": "pass",
+          "compile_error": "",
+          "stdout_excerpt": "No specific failure lines found in output."
+        }
+      ]
+    }
+  ],
+  "design": "conv1d",
+  "model": "codex-gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 445.9,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,29 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 7,
+  "best_passes": 32,
+  "total_tests": 32,
+  "solved": true,
+  "reference_oracle_valid": true,
+  "decomp_modules": [
+    "pe_compute",
+    "signed_mult32x32",
+    "pe_accumulate_next",
+    "cycle_done_logic",
+    "pe"
+  ],
+  "module_repair_rounds": {
+    "pe_compute": 0,
+    "signed_mult32x32": 0,
+    "pe_accumulate_next": 0,
+    "cycle_done_logic": 0,
+    "pe": 0
+  },
+  "localization_history": [],
+  "design": "systolic_gemm",
+  "model": "codex-gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 449.6,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

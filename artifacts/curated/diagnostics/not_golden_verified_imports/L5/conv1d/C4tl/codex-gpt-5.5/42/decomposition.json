@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv1d_coeff_rom.v",
+  "sub_modules": {
+    "conv1d_coeff_rom": "Combinational coefficient generator for supported 3, 5, and 7 tap kernels; default 5-tap kernel is [2,8,12,8,2].",
+    "conv1d_tap_select": "Combinational tap window adapter that maps current input and stored shift-register samples into active convolution taps, zeroing unused taps.",
+    "conv1d_mac": "Combinational multiply-accumulate datapath for up to seven unsigned sample taps and unsigned fixed coefficients.",
+    "conv1d_scaler": "Combinational fixed-point output scaler that divides the accumulated sum by 16 using truncation."
+  }
+}

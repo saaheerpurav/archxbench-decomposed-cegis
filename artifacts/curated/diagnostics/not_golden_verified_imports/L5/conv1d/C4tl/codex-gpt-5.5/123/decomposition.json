@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv1d_window_next.v",
+  "sub_modules": {
+    "conv1d_window_next": "Combinational shift-register window update that appends the newest sample and drops the oldest sample.",
+    "conv1d_coeff_rom": "Combinational coefficient source for supported fixed kernels, including the 5-tap benchmark kernel [2,8,12,8,2].",
+    "conv1d_mac": "Combinational multiply-accumulate over the flattened stencil window and coefficient vector.",
+    "conv1d_scale": "Combinational fixed-point normalization by right shift and truncation to the output width."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 4,
+  "best_passes": 32,
+  "total_tests": 32,
+  "solved": true,
+  "reference_oracle_valid": true,
+  "decomp_modules": [
+    "pe",
+    "input_router",
+    "done_logic"
+  ],
+  "module_repair_rounds": {
+    "pe": 0,
+    "input_router": 0,
+    "done_logic": 0
+  },
+  "localization_history": [],
+  "design": "systolic_gemm",
+  "model": "codex-gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 195.3,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

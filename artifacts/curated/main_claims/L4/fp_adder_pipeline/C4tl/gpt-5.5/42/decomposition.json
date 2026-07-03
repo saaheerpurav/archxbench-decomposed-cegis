@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/fp_unpack.v",
+  "sub_modules": {
+    "fp_unpack": "Unpacks IEEE-754 operands, applies subtraction sign inversion to operand B, builds extended significands, and detects zero/inf/NaN classes.",
+    "fp_special_cases": "Handles NaN propagation, infinity propagation, invalid infinity cancellation, and signed zero canonicalization.",
+    "fp_align": "Compares operand magnitudes, selects the larger significand, aligns the smaller significand with sticky-bit preservation, and forwards signs.",
+    "fp_addsub": "Adds or subtracts aligned significands according to effective signs and produces an unsigned magnitude with result sign.",
+    "fp_normalize": "Normalizes the post-add/sub magnitude, adjusts exponent, detects exact zero, and prepares guard/round/sticky bits.",
+    "fp_round_pack": "Applies round-to-nearest-even, detects overflow/underflow, and packs the IEEE-754 single-precision result."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 6,
+  "best_passes": 17,
+  "total_tests": 17,
+  "solved": true,
+  "reference_oracle_valid": true,
+  "decomp_modules": [
+    "conv1d_coeff_rom",
+    "conv1d_tap_select",
+    "conv1d_mac",
+    "conv1d_scaler"
+  ],
+  "module_repair_rounds": {
+    "conv1d_coeff_rom": 0,
+    "conv1d_tap_select": 0,
+    "conv1d_mac": 0,
+    "conv1d_scaler": 0
+  },
+  "localization_history": [],
+  "design": "conv1d",
+  "model": "codex-gpt-5.5",
+  "seed": 42,
+  "wall_seconds": 283.3,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,72 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 7,
+  "best_passes": 16,
+  "total_tests": 16,
+  "solved": true,
+  "reference_oracle_valid": true,
+  "decomp_modules": [
+    "conv1d_window_next",
+    "conv1d_coeff_rom",
+    "conv1d_mac",
+    "conv1d_scale"
+  ],
+  "module_repair_rounds": {
+    "conv1d_window_next": 0,
+    "conv1d_coeff_rom": 0,
+    "conv1d_mac": 1,
+    "conv1d_scale": 0
+  },
+  "localization_history": [
+    {
+      "round": 1,
+      "full_passes": 0,
+      "full_total": 16,
+      "focus_module": "conv1d_mac",
+      "isolated_scores": [
+        {
+          "module": "conv1d_window_next",
+          "passes": 16,
+          "total": 16,
+          "rate": 1.0,
+          "kind": "pass",
+          "compile_error": "",
+          "stdout_excerpt": "No specific failure lines found in output."
+        },
+        {
+          "module": "conv1d_coeff_rom",
+          "passes": 16,
+          "total": 16,
+          "rate": 1.0,
+          "kind": "pass",
+          "compile_error": "",
+          "stdout_excerpt": "No specific failure lines found in output."
+        },
+        {
+          "module": "conv1d_mac",
+          "passes": 0,
+          "total": 16,
+          "rate": 0.0,
+          "kind": "semantic",
+          "compile_error": "",
+          "stdout_excerpt": "[FAIL] idx=0 Expected: 16 Got: 0\n[FAIL] idx=1 Expected: 86 Got: 0\n[FAIL] idx=2 Expected: 211 Got: 0\n[FAIL] idx=3 Expected: 336 Got: 0\n[FAIL] idx=4 Expected: 422 Got: 256\n[FAIL] idx=5 Expected: 473 Got: 354\n[FAIL] idx=6 Expected: 490 Got: 436\n[FAIL] idx=7 Expected: 473 Got: 490\n[FAIL] idx=8 Expected: 422 Got: 510\n[FAIL] idx=9 Expected: 346 Got: 490\n[FAIL] idx=10 Expected: 256 Got: 436\n[FAIL] idx=11 Expected: 165 Got: 354\n[FAIL] idx=12 Expected: 89 Got: 256\n[FAIL] idx=13 Expected: 39 Got: 158\n[FAIL] idx=14 Expected: 21 Got: 76"
+        },
+        {
+          "module": "conv1d_scale",
+          "passes": 16,
+          "total": 16,
+          "rate": 1.0,
+          "kind": "pass",
+          "compile_error": "",
+          "stdout_excerpt": "No specific failure lines found in output."
+        }
+      ]
+    }
+  ],
+  "design": "conv1d",
+  "model": "codex-gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 357.1,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}
