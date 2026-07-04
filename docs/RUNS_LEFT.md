@@ -27,6 +27,7 @@ Completed GPT-5.5 C2g baseline rows:
 
 | Design | Status |
 |---|---|
+| `aes_decryption` | complete after UTF-8/ASCII-normalization fix, C2g seeds `42,123,456` clean `3/3`, golden `8/8` |
 | `conv1d` | complete, seeds `42,123,456`, clean `3/3`, golden `16/16` |
 | `harris_corner_detection` | complete, seeds `42,123,456`, clean `3/3`, golden `16384/16384` |
 | `aes_encryption` | complete, seeds `42,123,456`, clean `3/3`, golden `8/8` |
@@ -38,7 +39,6 @@ Remaining GPT-5.5 C2g rows:
 
 | Design | Seeds / action |
 |---|---|
-| `aes_decryption` | rerun seeds `42,123,456` only after confirming the prior charmap failure is fixed |
 | `dct_idct_8pt_pipelined` | run seeds `123,456` after one diagnostic check of seed `42` failure |
 | `conv_3d` | run seeds `123,456` only if seed `42` failure is understood |
 | `quantized_matmul` | run seeds `123,456` only if seed `42` failure is understood |
@@ -62,6 +62,7 @@ Already complete on C4i seeds `42,123,456`:
 - `conv1d`
 - `harris_corner_detection`
 - `aes_encryption`
+- `aes_decryption`
 
 Hold until benchmark/spec-contract caveat is resolved:
 
@@ -97,7 +98,6 @@ Do not promote C4tl rows unless they are strict-clean under the correct verifier
 
 | Design | Reason |
 |---|---|
-| `aes_decryption` | Windows-only Python `charmap`/`cp1252` encoding bug when writing generated text containing Unicode hyphen `\u2010`; fix UTF-8/ASCII normalization before rerunning or counting these rows |
 | `multich_conv2d` | benchmark loader/testbench issue; currently excluded |
 | `systolic_gemm` | no reliable golden evidence in repo; decide checker first |
 | FIR-family designs | benchmark/spec-contract caveat unresolved |
@@ -126,7 +126,7 @@ Do not run these just to fill a table. They need a method or checker decision fi
 | Design | Current status |
 |---|---|
 | `aes_encryption` C4tl | seed `42` fails golden; C4i is already clean on `42,123,456` |
-| `aes_decryption` | current C4i/C4tl rows are not golden-clean |
+| `aes_decryption` | C2g and C4i are clean on seeds `42,123,456`; C4tl is clean only on seed `42`, with seeds `123,456` failing reference-decomposition validation |
 | `fft_streaming_64pt` | C2g seed `42` is golden-clean; C4i/C4tl seed `42` fail golden |
 | `conv1d` C4tl | seed `42` is clean, but seeds `123,456` failed reference-decomposition validation |
 | `conv2d` | current C4i/C4tl rows fail or partially match golden |

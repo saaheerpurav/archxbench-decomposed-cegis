@@ -1,0 +1,31 @@
+{
+  "condition": "C4i",
+  "llm_calls": 7,
+  "best_passes": 8,
+  "total_tests": 8,
+  "solved": true,
+  "decomp_modules": [
+    "aes128_decrypt_core",
+    "aes128_key_expand",
+    "aes128_inv_sub_bytes",
+    "aes128_inv_shift_rows",
+    "aes128_add_round_key",
+    "aes128_inv_mix_columns"
+  ],
+  "module_solve_rounds": {
+    "aes128_decrypt_core": 1,
+    "aes128_key_expand": 1,
+    "aes128_inv_sub_bytes": 1,
+    "aes128_inv_shift_rows": 1,
+    "aes128_add_round_key": 1,
+    "aes128_inv_mix_columns": 1
+  },
+  "golden_correct": 8,
+  "golden_total": 8,
+  "design": "aes_decryption",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 834.2,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

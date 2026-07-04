@@ -1,0 +1,20 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 0,
+  "best_passes": 0,
+  "total_tests": 0,
+  "solved": false,
+  "decomp_modules": [],
+  "ref_passes": 0,
+  "ref_total": 0,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "aes_decryption",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 365.4,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

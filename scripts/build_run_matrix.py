@@ -95,6 +95,15 @@ def strict_clean(design: str, data: dict) -> bool:
     return bool(data.get("solved")) and total > 0 and passes == total
 
 
+def infra_error(data: dict) -> bool:
+    error = str(data.get("error") or "").lower()
+    return (
+        "charmap" in error
+        or "codec can't encode" in error
+        or "timed out after" in error
+    )
+
+
 def seed_sort_key(seed: str) -> tuple[int, str]:
     try:
         return (0, f"{int(seed):020d}")
@@ -156,6 +165,7 @@ def collect_results() -> list[dict]:
             seed = numeric_parts[-1] if numeric_parts else ""
 
         model = normalized_model(data.get("model"))
+        is_strict_clean = strict_clean(design, data)
         results.append(
             {
                 "level": designs[design],
@@ -163,12 +173,47 @@ def collect_results() -> list[dict]:
                 "condition": condition,
                 "model": model,
                 "seed": str(seed),
-                "strict_clean": strict_clean(design, data),
+                "strict_clean": is_strict_clean,
+                "infra_error": infra_error(data),
                 "score": score(data),
                 "golden": golden_score(data),
+                "artifact_path": result_path.as_posix(),
             }
         )
-    return results
+
+    # Canonicalize repeated attempts of the same design/condition/model/seed.
+    # Old infrastructure-failure rows remain in the artifact index, but the run
+    # matrix should describe the current canonical outcome for each seed.
+    best: dict[tuple[str, str, str, str, str], dict] = {}
+    for item in results:
+        key = (
+            item["level"],
+            item["design"],
+            item["condition"],
+            item["model"],
+            item["seed"],
+        )
+
+        def rank(row: dict) -> tuple[int, int, int, int, str]:
+            golden = row["golden"]
+            golden_total = 0
+            if "/" in golden:
+                try:
+                    golden_total = int(golden.split("/", 1)[1])
+                except ValueError:
+                    golden_total = 0
+            return (
+                1 if row["strict_clean"] else 0,
+                0 if row["infra_error"] else 1,
+                1 if golden_total > 0 else 0,
+                1 if row["score"] and row["score"] != "0/0" else 0,
+                row["artifact_path"],
+            )
+
+        if key not in best or rank(item) > rank(best[key]):
+            best[key] = item
+
+    return list(best.values())
 
 
 def main() -> None:

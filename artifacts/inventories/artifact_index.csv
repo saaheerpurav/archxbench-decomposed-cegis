@@ -82,6 +82,15 @@ artifacts/raw_runs/aaai27_expansion/conv1d/C4i/123/result.json,raw_runs,aaai27_e
 artifacts/raw_runs/aaai27_expansion/conv1d/C4i/456/result.json,raw_runs,aaai27_expansion,mixed,conv1d,C4i,gpt-5.5,456,True,16/16,16/16,4,159.8,True,4
 artifacts/raw_runs/aaai27_expansion/conv1d/C4tl/123/result.json,raw_runs,aaai27_expansion,mixed,conv1d,C4tl,gpt-5.5,123,False,0/1,,2,271.0,True,5
 artifacts/raw_runs/aaai27_expansion/conv1d/C4tl/456/result.json,raw_runs,aaai27_expansion,mixed,conv1d,C4tl,gpt-5.5,456,False,0/1,,3,214.9,True,5
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C2g/123/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C2g,gpt-5.5,123,True,8/8,8/8,4,721.7,False,0
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C2g/42/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C2g,gpt-5.5,42,True,8/8,8/8,2,188.8,False,0
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C2g/456/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C2g,gpt-5.5,456,True,8/8,8/8,2,226.6,False,0
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C4i/123/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C4i,gpt-5.5,123,True,8/8,8/8,7,747.3,True,7
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C4i/42/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C4i,gpt-5.5,42,True,8/8,8/8,4,515.2,True,4
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C4i/456/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C4i,gpt-5.5,456,True,8/8,8/8,7,834.2,True,7
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C4tl/123/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C4tl,gpt-5.5,123,False,0/0,,0,262.7,False,0
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C4tl/42/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C4tl,gpt-5.5,42,True,8/8,8/8,7,979.3,True,7
+artifacts/raw_runs/aes_decryption_encoding_fix_20260704/aes_decryption/C4tl/456/result.json,raw_runs,aes_decryption_encoding_fix_20260704,mixed,aes_decryption,C4tl,gpt-5.5,456,False,0/0,,0,365.4,False,0
 artifacts/raw_runs/bandpass_debug/band_pass_fir/C4i/42/result.json,raw_runs,bandpass_debug,mixed,band_pass_fir,C4i,gpt-5.5,42,False,,,28,1244.1,True,4
 artifacts/raw_runs/bandpass_debug/band_pass_fir/C4tl/42/result.json,raw_runs,bandpass_debug,mixed,band_pass_fir,C4tl,gpt-5.5,42,False,3/1001,,29,2009.2,True,5
 artifacts/raw_runs/baseline_and_method_sweeps/C1/gpt-4o/aes128_single_round/123/result.json,raw_runs,baseline_and_method_sweeps,mixed,aes128_single_round,C1,gpt-4o,123,False,0/0,,5,173.9,False,0

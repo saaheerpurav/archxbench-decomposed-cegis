@@ -58,6 +58,25 @@ from cegis.tdes.types import Candidate, TestLevel, TestVector
 logger = logging.getLogger(__name__)
 suppress_windows_error_dialogs()
 
+_DASH_TRANSLATION = str.maketrans({
+    "\u2010": "-",
+    "\u2011": "-",
+    "\u2012": "-",
+    "\u2013": "-",
+    "\u2014": "-",
+    "\u2212": "-",
+})
+
+
+def _verilog_text(text: str) -> str:
+    """Normalize generated Verilog/testbench text before filesystem writes.
+
+    Windows defaults to cp1252 for text writes, which cannot encode some LLM
+    Unicode punctuation. Icarus also does not need those characters in source
+    files, so normalize common punctuation to ASCII before simulation.
+    """
+    return (text or "").translate(_DASH_TRANSLATION)
+
 _ARCHX_ROOT = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "..", "benchmarks", "archxbench",
@@ -205,7 +224,7 @@ def _run_golden_comparison(data_dir: str, sim_workdir: str) -> Tuple[int, int, s
     import json as _json
 
     def _load(path: str):
-        with open(path) as fh:
+        with open(path, encoding="utf-8") as fh:
             return _json.load(fh)
 
     def _flatten(value):
@@ -329,11 +348,11 @@ def _golden_verify_final(modules: dict, testbench: str, data_dir: Optional[str],
             if f.endswith(".mem"):
                 _shutil.copy2(os.path.join(data_dir, f), os.path.join(gtmp, f))
         for name, src in modules.items():
-            with open(os.path.join(gtmp, f"{name}.v"), "w") as f:
-                f.write(src)
+            with open(os.path.join(gtmp, f"{name}.v"), "w", encoding="utf-8") as f:
+                f.write(_verilog_text(src))
         tb_file = os.path.join(gtmp, "tb.v")
-        with open(tb_file, "w") as f:
-            f.write(testbench)
+        with open(tb_file, "w", encoding="utf-8") as f:
+            f.write(_verilog_text(testbench))
         srcs = [os.path.join(gtmp, fn) for fn in os.listdir(gtmp) if fn.endswith(".v")]
         iverilog = find_tool(["iverilog"]) or "iverilog"
         vvp = find_tool(["vvp"]) or "vvp"
@@ -366,10 +385,10 @@ def _simulate_golden(modules: dict, testbench: str, data_dir: str,
             if f.endswith(".mem"):
                 _shutil.copy2(os.path.join(data_dir, f), os.path.join(gtmp, f))
         for name, src in modules.items():
-            with open(os.path.join(gtmp, f"{name}.v"), "w") as fh:
-                fh.write(src)
-        with open(os.path.join(gtmp, "tb.v"), "w") as fh:
-            fh.write(testbench)
+            with open(os.path.join(gtmp, f"{name}.v"), "w", encoding="utf-8") as fh:
+                fh.write(_verilog_text(src))
+        with open(os.path.join(gtmp, "tb.v"), "w", encoding="utf-8") as fh:
+            fh.write(_verilog_text(testbench))
         srcs = [os.path.join(gtmp, fn) for fn in os.listdir(gtmp) if fn.endswith(".v")]
         iverilog = find_tool(["iverilog"]) or "iverilog"
         vvp = find_tool(["vvp"]) or "vvp"
@@ -391,7 +410,7 @@ def _cell_key(design, condition, model, seed):
 
 def _load_metrics(path):
     if os.path.exists(path):
-        with open(path) as f:
+        with open(path, encoding="utf-8") as f:
             return json.load(f)
     return {}
 
@@ -400,7 +419,7 @@ def _save_metrics(path, metrics):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     existing = _load_metrics(path)
     existing.update(metrics)
-    with open(path, "w") as f:
+    with open(path, "w", encoding="utf-8") as f:
         json.dump(existing, f, indent=2)
 
 
@@ -417,14 +436,14 @@ def _save_cell(cell_dir, result):
         os.makedirs(src_dir, exist_ok=True)
         for name, src in sources.items():
             with open(os.path.join(src_dir, f"{name}.v"), "w", encoding="utf-8") as f:
-                f.write(src)
+                f.write(_verilog_text(src))
 
     if decomp_desc:
-        with open(os.path.join(cell_dir, "decomposition.json"), "w") as f:
+        with open(os.path.join(cell_dir, "decomposition.json"), "w", encoding="utf-8") as f:
             json.dump({"top_source_file": "verilog/" + (result.get("decomp_modules", ["top"])[0] if result.get("decomp_modules") else "top") + ".v",
                        "sub_modules": decomp_desc}, f, indent=2)
 
-    with open(os.path.join(cell_dir, "result.json"), "w") as f:
+    with open(os.path.join(cell_dir, "result.json"), "w", encoding="utf-8") as f:
         json.dump(result, f, indent=2)
 
 
@@ -1384,11 +1403,11 @@ def run_C4tl(
                             shutil.copytree(src, os.path.join(gtmp, sub_d))
                     os.makedirs(os.path.join(gtmp, "outputs"), exist_ok=True)
                     for name, src in full_modules.items():
-                        with open(os.path.join(gtmp, f"{name}.v"), "w") as f:
-                            f.write(src)
+                        with open(os.path.join(gtmp, f"{name}.v"), "w", encoding="utf-8") as f:
+                            f.write(_verilog_text(src))
                     tb_file = os.path.join(gtmp, "tb.v")
-                    with open(tb_file, "w") as f:
-                        f.write(testbench)
+                    with open(tb_file, "w", encoding="utf-8") as f:
+                        f.write(_verilog_text(testbench))
                     srcs = [os.path.join(gtmp, f) for f in os.listdir(gtmp) if f.endswith(".v")]
                     iverilog = find_tool(["iverilog"]) or "iverilog"
                     vvp = find_tool(["vvp"]) or "vvp"
@@ -2372,7 +2391,7 @@ def main():
             "..", "..", "..", "..", ".anthropic_key",
         )
         if os.path.exists(key_file):
-            with open(key_file) as f:
+            with open(key_file, encoding="utf-8") as f:
                 anthropic_key = f.read().strip()
 
     # Load OpenAI key (optional — only needed for gpt-* / o*-series models)
@@ -2383,7 +2402,7 @@ def main():
             "..", "..", "..", "..", ".openai_key",
         )
         if os.path.exists(oai_file):
-            with open(oai_file) as f:
+            with open(oai_file, encoding="utf-8") as f:
                 openai_key = f.read().strip()
 
     if not anthropic_key and not openai_key and not os.environ.get("USE_CODEX_CLI"):

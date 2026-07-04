@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/aes128_input_gate.v",
+  "sub_modules": {
+    "aes128_input_gate": "Combinational launch qualifier for start, valid_in, and decryption mode.",
+    "aes128_key_expand": "Combinational AES-128 forward key expansion producing all 11 round keys for reverse decryption use.",
+    "aes128_decrypt_core": "Combinational AES-128 block decrypt datapath implementing inverse rounds, inverse S-box, inverse shift rows, add round key, and inverse mix columns."
+  }
+}
