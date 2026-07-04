@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fft_sign_extend.v",
+  "sub_modules": {
+    "fft_sign_extend": "Combinational sign extension from input sample width to internal FFT datapath width.",
+    "fft_complex_mult": "Combinational fixed-point complex multiplier for twiddle multiplication.",
+    "fft_butterfly": "Combinational radix-2 butterfly add/subtract primitive.",
+    "fft_twiddle_rom": "Combinational twiddle factor lookup interface for FFT stages.",
+    "fft_radix2_stage": "Combinational FFT pipeline stage wrapper using twiddle multiplication."
+  }
+}

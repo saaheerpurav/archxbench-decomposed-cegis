@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_matrix.v",
+  "sub_modules": {
+    "qgemm_quantize_matrix": "Combinational FP32 matrix quantizer that converts packed floating-point inputs into zero-point-centered quantized integer values.",
+    "qgemm_int_matmul": "Combinational integer GEMM datapath that computes VLEN by VLEN INT32 accumulators from centered quantized matrices.",
+    "qgemm_dequantize_matrix": "Combinational dequantizer that applies Q15 scale_A and scale_B to INT32 accumulators and emits packed FP32 outputs."
+  }
+}

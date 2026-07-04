@@ -1,0 +1,23 @@
+{
+  "condition": "C4i",
+  "llm_calls": 26,
+  "best_passes": 63482,
+  "total_tests": 65536,
+  "solved": false,
+  "decomp_modules": [
+    "gaussian3x3_blur",
+    "high_frequency_subtract",
+    "gain_scale",
+    "sharpen_reconstruct",
+    "saturate_pixel"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 63482,
+  "golden_total": 65536,
+  "design": "unsharp_mask",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 996.1,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

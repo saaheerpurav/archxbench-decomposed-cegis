@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fft_sample_extend.v",
+  "sub_modules": {
+    "fft_sample_extend": "Combinational sign extension from input sample width to FFT output width.",
+    "fft_twiddle_rom": "Combinational 64-entry Q2.14 twiddle factor ROM for radix-2 FFT operations.",
+    "fft_complex_mult": "Combinational fixed-point complex multiplier with twiddle fractional scaling.",
+    "fft_radix2_butterfly": "Combinational radix-2 butterfly add/subtract block for complex samples.",
+    "fft_bit_reverse": "Combinational address bit-reversal helper for 64-point FFT ordering."
+  }
+}

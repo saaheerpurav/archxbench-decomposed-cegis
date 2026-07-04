@@ -1,0 +1,22 @@
+{
+  "condition": "C4i",
+  "llm_calls": 29,
+  "best_passes": 0,
+  "total_tests": 0,
+  "solved": false,
+  "decomp_modules": [
+    "conv3d_window_shift",
+    "conv3d_window_valid",
+    "conv3d_mac",
+    "conv3d_output_cast"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "conv_3d",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 1330.4,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_matrix.v",
+  "sub_modules": {
+    "qgemm_quantize_matrix": "Combinational FP32-to-quantized integer converter for a flattened matrix using Q15 scale and zero-point, with unsigned quantized clamping.",
+    "qgemm_int_matmul": "Combinational quantized integer GEMM core that subtracts zero-points and accumulates dot products into INT32 results.",
+    "qgemm_dequantize_matrix": "Combinational dequantization block that converts INT32 accumulators back to FP32 using the product of Q15 input scales."
+  }
+}

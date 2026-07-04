@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/aes128_key_expand.v",
+  "sub_modules": {
+    "aes128_key_expand": "Combinational AES-128 round-key expansion for one round using RotWord, SubWord, and Rcon.",
+    "aes128_round": "Combinational standard AES round: SubBytes, ShiftRows, MixColumns, and AddRoundKey.",
+    "aes128_final_round": "Combinational final AES round: SubBytes, ShiftRows, and AddRoundKey without MixColumns.",
+    "aes128_subbytes_shiftrows": "Combinational byte substitution and AES row rotation transform.",
+    "aes128_sbox": "Combinational AES S-box lookup table."
+  }
+}

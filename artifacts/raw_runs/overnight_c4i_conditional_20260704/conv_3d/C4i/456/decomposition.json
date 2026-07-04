@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv3d_stream_index.v",
+  "sub_modules": {
+    "conv3d_stream_index": "Combinational mapper from flattened stream index to x/y/z coordinates and input range status.",
+    "conv3d_window_extract": "Combinational 3D sliding-window extractor from the flattened volume history buffer.",
+    "conv3d_mac": "Combinational multiply-accumulate array over the flattened 3D stencil and kernel coefficients.",
+    "conv3d_output_cast": "Combinational output-width cast from the wide MAC sum to the required voxel output width."
+  }
+}

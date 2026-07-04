@@ -1,0 +1,25 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 3,
+  "best_passes": 1112,
+  "total_tests": 65536,
+  "solved": false,
+  "decomp_modules": [
+    "gaussian_blur_3x3",
+    "pointwise_subtract",
+    "pointwise_gain",
+    "pointwise_reconstruct"
+  ],
+  "ref_passes": 1112,
+  "ref_total": 65536,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "unsharp_mask",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 246.0,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

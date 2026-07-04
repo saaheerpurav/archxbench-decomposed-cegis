@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/unsharp_window3x3.v",
+  "sub_modules": {
+    "unsharp_window3x3": "Passes the current 3x3 zero-padded neighborhood into the stencil datapath.",
+    "gaussian3x3_blur": "Computes a fixed 3x3 Gaussian blur with coefficients 1 2 1 / 2 4 2 / 1 2 1 and normalization by 16.",
+    "unsharp_subtract": "Computes the signed high-frequency residual as original minus blurred pixel.",
+    "unsharp_gain_scale": "Multiplies the signed residual by the runtime gain factor.",
+    "unsharp_reconstruct": "Adds the scaled residual back to the original pixel.",
+    "unsharp_saturate": "Clamps the reconstructed signed value to the output pixel range."
+  }
+}

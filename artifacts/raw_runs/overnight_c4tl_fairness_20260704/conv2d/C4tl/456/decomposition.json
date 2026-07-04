@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/conv2d_kernel_mac.v",
+  "sub_modules": {
+    "conv2d_kernel_mac": "Combinational wrapper for the convolution dot-product datapath.",
+    "conv2d_window_select": "Combinational 3x3 Gaussian kernel weighted-sum datapath.",
+    "conv2d_output_clip": "Combinational output-width saturation and clipping stage.",
+    "conv2d_line_address": "Combinational raster index to row and column decoder.",
+    "conv2d_valid_control": "Combinational valid policy helper for the streaming output path."
+  }
+}

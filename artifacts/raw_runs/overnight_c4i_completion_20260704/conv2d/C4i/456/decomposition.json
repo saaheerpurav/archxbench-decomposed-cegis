@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/conv2d_position.v",
+  "sub_modules": {
+    "conv2d_position": "Computes raster stream row and column counter updates.",
+    "conv2d_window_pack": "Packs the 3x3 stencil registers into a flattened vector for the datapath.",
+    "conv2d_coeffs": "Provides the flattened 3x3 Gaussian kernel coefficients.",
+    "conv2d_mac": "Combinational matrix-vector dot-product multiply-accumulate unit.",
+    "conv2d_saturate": "Clamps the accumulator result to the output pixel width."
+  }
+}

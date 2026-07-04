@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/dct8_coeff_matrix.v",
+  "sub_modules": {
+    "dct8_coeff_matrix": "Combinational fixed-point DCT/IDCT coefficient ROM with transpose selection for inverse mode.",
+    "dct8_dot_product": "Combinational eight-input signed multiply-accumulate datapath.",
+    "dct8_round_shift": "Combinational fixed-point rounding and Q14 scaling stage.",
+    "dct8_saturate": "Combinational signed output-width saturation stage."
+  }
+}

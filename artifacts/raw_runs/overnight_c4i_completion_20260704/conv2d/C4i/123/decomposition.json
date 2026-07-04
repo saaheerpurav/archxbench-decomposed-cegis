@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/conv2d_addr_gen.v",
+  "sub_modules": {
+    "conv2d_addr_gen": "Combinational column address increment and end-of-line detection for the raster stream.",
+    "conv2d_window_valid": "Combinational valid generation once enough rows and columns have filled the stencil window.",
+    "conv2d_kernel_coeff": "Combinational coefficient lookup for the default 3x3 Gaussian kernel, with identity fallback for other odd kernel sizes.",
+    "conv2d_dot_product": "Combinational matrix-vector dot product over the flattened stencil window and kernel coefficients.",
+    "conv2d_round_clip": "Combinational output-width truncation stage for the accumulated convolution result."
+  }
+}

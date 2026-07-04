@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/conv3d_coord.v",
+  "sub_modules": {
+    "conv3d_coord": "Converts the linear input stream index into depth, row, and column coordinates.",
+    "conv3d_window_valid": "Detects when the current coordinate has a complete valid-padding 3D convolution window.",
+    "conv3d_window_gen": "Forms the K1 by K2 by K3 sliding 3D window from the buffered flattened volume and current input voxel.",
+    "conv3d_mac": "Computes the unsigned parallel multiply-accumulate sum for all window voxels and kernel coefficients.",
+    "conv3d_output_clip": "Truncates the wide accumulator to the top-level output width."
+  }
+}

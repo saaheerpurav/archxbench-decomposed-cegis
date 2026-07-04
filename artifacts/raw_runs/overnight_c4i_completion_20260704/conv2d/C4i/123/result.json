@@ -1,0 +1,23 @@
+{
+  "condition": "C4i",
+  "llm_calls": 26,
+  "best_passes": 4094,
+  "total_tests": 4096,
+  "solved": false,
+  "decomp_modules": [
+    "conv2d_addr_gen",
+    "conv2d_window_valid",
+    "conv2d_kernel_coeff",
+    "conv2d_dot_product",
+    "conv2d_round_clip"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 4094,
+  "golden_total": 4096,
+  "design": "conv2d",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 1409.5,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

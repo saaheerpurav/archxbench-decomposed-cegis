@@ -1,0 +1,27 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 10,
+  "best_passes": 8,
+  "total_tests": 8,
+  "solved": true,
+  "decomp_modules": [
+    "aes_sbox",
+    "aes_key_expand_round",
+    "aes_encrypt_round",
+    "aes_encrypt_final_round",
+    "aes_subbytes",
+    "aes_shiftrows",
+    "aes_mixcolumns"
+  ],
+  "ref_passes": 8,
+  "ref_total": 8,
+  "golden_correct": 8,
+  "golden_total": 8,
+  "module_solve_rounds": {},
+  "design": "aes_encryption",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 953.9,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

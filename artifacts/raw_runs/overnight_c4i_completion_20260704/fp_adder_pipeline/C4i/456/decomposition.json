@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_add_unpack.v",
+  "sub_modules": {
+    "fp_add_unpack": "Unpacks IEEE-754 operands into sign, effective exponent, extended significand, and special-case flags.",
+    "fp_add_align": "Selects the larger magnitude operand, aligns the smaller significand using sticky-bit right shift, and forwards operand signs.",
+    "fp_add_execute": "Performs signed significand addition or subtraction and produces an unnormalized magnitude.",
+    "fp_add_normalize": "Normalizes the raw significand result and adjusts the exponent while preserving guard, round, and sticky bits.",
+    "fp_add_round_pack": "Applies round-to-nearest-even, handles NaN/INF/zero edge cases, detects overflow and underflow, and packs the IEEE-754 result."
+  }
+}

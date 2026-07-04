@@ -97,6 +97,7 @@ Do not promote C4tl rows unless they are strict-clean under the correct verifier
 
 | Design | Reason |
 |---|---|
+| `aes_decryption` | Windows-only Python `charmap`/`cp1252` encoding bug when writing generated text containing Unicode hyphen `\u2010`; fix UTF-8/ASCII normalization before rerunning or counting these rows |
 | `multich_conv2d` | benchmark loader/testbench issue; currently excluded |
 | `systolic_gemm` | no reliable golden evidence in repo; decide checker first |
 | FIR-family designs | benchmark/spec-contract caveat unresolved |

@@ -1,0 +1,19 @@
+
+======================================================================
+EXPERIMENT COMPLETE
+======================================================================
+Cells: 14, Solved: 4/14, Cost: $0.00
+  conv2d__C4i__gpt-5.5__123: FAILED (4094/4096) [1409.5s]
+  conv2d__C4i__gpt-5.5__456: FAILED (4094/4096) [990.1s]
+  fft_16pt_iterative__C4i__gpt-5.5__123: FAILED (0/1) [1284.1s]
+  fft_16pt_iterative__C4i__gpt-5.5__456: FAILED (0/1) [1298.0s]
+  fft_streaming_64pt__C4i__gpt-5.5__123: FAILED (0/128) [1156.0s]
+  fft_streaming_64pt__C4i__gpt-5.5__456: FAILED (0/1) [1149.5s]
+  fp_adder_pipeline__C4i__gpt-5.5__123: SOLVED (23/23) [332.4s]
+  fp_adder_pipeline__C4i__gpt-5.5__456: SOLVED (23/23) [320.7s]
+  fp_mult_pipeline__C4i__gpt-5.5__123: SOLVED (31/31) [293.3s]
+  fp_mult_pipeline__C4i__gpt-5.5__456: SOLVED (31/31) [325.0s]
+  ifft_16pt_iterative__C4i__gpt-5.5__123: FAILED (0/1) [1322.3s]
+  ifft_16pt_iterative__C4i__gpt-5.5__456: FAILED (14/33) [1400.7s]
+  unsharp_mask__C4i__gpt-5.5__123: FAILED (63057/65536) [1520.0s]
+  unsharp_mask__C4i__gpt-5.5__456: FAILED (63482/65536) [996.1s]

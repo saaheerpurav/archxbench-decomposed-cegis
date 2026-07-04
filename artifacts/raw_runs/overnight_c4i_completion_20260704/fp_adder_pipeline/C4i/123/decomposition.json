@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_add_unpack.v",
+  "sub_modules": {
+    "fp_add_unpack": "Unpacks IEEE-754 operands and detects zero, infinity, and NaN cases.",
+    "fp_add_align": "Aligns significands to the larger exponent and preserves sticky information.",
+    "fp_add_significand": "Applies add/subtract sign control and performs significand addition or magnitude subtraction.",
+    "fp_add_normalize": "Normalizes the intermediate significand and updates exponent and overflow state.",
+    "fp_add_round_pack": "Rounds to nearest even, handles special cases, and packs the IEEE-754 result."
+  }
+}

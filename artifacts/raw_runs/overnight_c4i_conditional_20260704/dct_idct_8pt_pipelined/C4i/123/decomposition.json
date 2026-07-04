@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/dct_input_vector.v",
+  "sub_modules": {
+    "dct_input_vector": "Combinational block that exposes the stored 8-sample input vector to the transform datapath.",
+    "dct_coeff_row_rom": "Combinational fixed-point Q14 coefficient ROM for DCT rows and IDCT transpose rows.",
+    "dct_mac8": "Combinational 8-input signed multiply-accumulate engine for matrix-vector products.",
+    "dct_round_saturate": "Combinational fixed-point rounding, scaling, and signed output saturation block."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "condition": "C4i",
+  "llm_calls": 29,
+  "best_passes": 0,
+  "total_tests": 1,
+  "solved": false,
+  "decomp_modules": [
+    "dct8_coeff_matrix",
+    "dct8_dot_product",
+    "dct8_round_shift",
+    "dct8_saturate"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "dct_idct_8pt_pipelined",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 1549.8,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

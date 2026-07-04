@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fft16_bit_reverse.v",
+  "sub_modules": {
+    "fft16_bit_reverse": "Combinational bit-reversal mapper used while loading DIT input order.",
+    "fft16_stage_index": "Combinational radix-2 stage, butterfly-pair, and twiddle-index generator.",
+    "fft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient lookup table for N=16.",
+    "fft16_butterfly": "Combinational fixed-point radix-2 complex butterfly supporting FFT and IFFT twiddle signs."
+  }
+}

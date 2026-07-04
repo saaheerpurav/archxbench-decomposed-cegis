@@ -1,0 +1,9 @@
+{
+  "error": "'charmap' codec can't encode character '\\u2010' in position 1427: character maps to <undefined>",
+  "design": "aes_decryption",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 188.5,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

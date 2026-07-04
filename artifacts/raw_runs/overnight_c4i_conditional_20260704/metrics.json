@@ -1,0 +1,151 @@
+{
+  "aes_decryption__C4i__gpt-5.5__123": {
+    "error": "'charmap' codec can't encode character '\\u2010' in position 1427: character maps to <undefined>",
+    "design": "aes_decryption",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 495.6,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "aes_decryption__C4i__gpt-5.5__456": {
+    "error": "Command '['C:\\\\Users\\\\saahe\\\\AppData\\\\Roaming\\\\npm\\\\codex.CMD', 'exec', '--ephemeral', '--ignore-rules', '-c', 'model=gpt-5.5', '-c', 'model_reasoning_effort=low', '-o', 'C:\\\\Users\\\\saahe\\\\AppData\\\\Local\\\\Temp\\\\tmpd4uks1g8.txt', '-']' timed out after 300 seconds",
+    "design": "aes_decryption",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 504.7,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "dct_idct_8pt_pipelined__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 29,
+    "best_passes": 0,
+    "total_tests": 1,
+    "solved": false,
+    "decomp_modules": [
+      "dct8_coeff_matrix",
+      "dct8_dot_product",
+      "dct8_round_shift",
+      "dct8_saturate"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "dct_idct_8pt_pipelined",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 1549.8,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "dct_idct_8pt_pipelined__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 29,
+    "best_passes": 0,
+    "total_tests": 1,
+    "solved": false,
+    "decomp_modules": [
+      "dct_input_vector",
+      "dct_coeff_row_rom",
+      "dct_mac8",
+      "dct_round_saturate"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "dct_idct_8pt_pipelined",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 1569.0,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "conv_3d__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 29,
+    "best_passes": 0,
+    "total_tests": 0,
+    "solved": false,
+    "decomp_modules": [
+      "conv3d_window_shift",
+      "conv3d_window_valid",
+      "conv3d_mac",
+      "conv3d_output_cast"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "conv_3d",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 1330.4,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "conv_3d__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 29,
+    "best_passes": 0,
+    "total_tests": 0,
+    "solved": false,
+    "decomp_modules": [
+      "conv3d_stream_index",
+      "conv3d_window_extract",
+      "conv3d_mac",
+      "conv3d_output_cast"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "conv_3d",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 2006.2,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 28,
+    "best_passes": 0,
+    "total_tests": 0,
+    "solved": false,
+    "decomp_modules": [
+      "qgemm_quantize_matrix",
+      "qgemm_int_matmul",
+      "qgemm_dequantize_matrix"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 1545.7,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 29,
+    "best_passes": 0,
+    "total_tests": 0,
+    "solved": false,
+    "decomp_modules": [
+      "qgemm_quantize_a",
+      "qgemm_quantize_b",
+      "qgemm_int_matmul",
+      "qgemm_dequantize"
+    ],
+    "module_solve_rounds": {},
+    "golden_correct": 0,
+    "golden_total": 0,
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 1982.8,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  }
+}

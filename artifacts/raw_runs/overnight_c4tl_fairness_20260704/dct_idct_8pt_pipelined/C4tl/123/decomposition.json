@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/dct1d_8_coeff_rom.v",
+  "sub_modules": {
+    "dct1d_8_coeff_rom": "Combinational Q14 coefficient ROM for forward DCT rows and inverse DCT transpose rows.",
+    "dct1d_8_mac": "Combinational 8-lane signed multiply-accumulate datapath.",
+    "dct1d_8_round_sat": "Combinational fixed-point rounding, scaling, and signed output saturation."
+  }
+}

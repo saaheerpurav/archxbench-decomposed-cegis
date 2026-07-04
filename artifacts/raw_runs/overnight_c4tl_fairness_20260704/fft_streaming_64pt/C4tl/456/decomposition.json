@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fft64_twiddle_rom.v",
+  "sub_modules": {
+    "fft64_twiddle_rom": "Combinational twiddle-factor lookup table for 64-point FFT complex rotations.",
+    "fft64_complex_mult": "Combinational signed fixed-point complex multiplier used for twiddle rotation.",
+    "fft64_butterfly": "Combinational radix-2 butterfly add/subtract datapath.",
+    "fft64_bit_reverse": "Combinational address bit-reversal helper for FFT ordering."
+  }
+}

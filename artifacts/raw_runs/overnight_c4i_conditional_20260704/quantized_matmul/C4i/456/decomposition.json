@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_a.v",
+  "sub_modules": {
+    "qgemm_quantize_a": "Combinational FP32-to-quantized conversion for matrix A using Q15 scale and zero-point.",
+    "qgemm_quantize_b": "Combinational FP32-to-quantized conversion for matrix B using Q15 scale and zero-point.",
+    "qgemm_int_matmul": "Combinational integer GEMM over quantized matrices with zero-point subtraction and INT32 accumulation.",
+    "qgemm_dequantize": "Combinational INT32 accumulator dequantization to FP32 using the product of Q15 scales."
+  }
+}

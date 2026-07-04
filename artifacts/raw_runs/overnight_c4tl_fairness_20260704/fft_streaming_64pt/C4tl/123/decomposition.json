@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fft64_sign_extend.v",
+  "sub_modules": {
+    "fft64_sign_extend": "Combinational complex input sign extension from input width to output width.",
+    "fft64_output_order": "Combinational output ordering and control forwarding stage.",
+    "fft64_done_flag": "Combinational done pulse generation from valid and last output controls."
+  }
+}

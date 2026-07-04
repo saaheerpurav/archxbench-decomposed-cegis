@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv3d_coords.v",
+  "sub_modules": {
+    "conv3d_coords": "Combinational decoder from flattened stream index to depth, row, and column coordinates.",
+    "conv3d_window_valid": "Combinational valid-padding boundary detector for complete 3D convolution windows.",
+    "conv3d_mac": "Combinational multiply-accumulate array over the flattened 3D stencil window and flattened kernel.",
+    "conv3d_output_select": "Combinational output gate that emits zero until a complete convolution window is available."
+  }
+}

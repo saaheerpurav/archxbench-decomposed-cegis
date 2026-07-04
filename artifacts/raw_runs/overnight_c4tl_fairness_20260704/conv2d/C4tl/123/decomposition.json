@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv2d_coeff_rom.v",
+  "sub_modules": {
+    "conv2d_coeff_rom": "Combinational default coefficient generator for the flattened convolution kernel.",
+    "conv2d_window_pad": "Combinational window padding mask used for early top and left border cycles.",
+    "conv2d_dot_product": "Combinational matrix-vector multiply-accumulate datapath over the flattened stencil window.",
+    "conv2d_output_cast": "Combinational cast from internal accumulator width to the required output pixel width."
+  }
+}

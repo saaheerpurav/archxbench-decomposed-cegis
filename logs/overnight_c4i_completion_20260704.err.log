@@ -1,0 +1,283 @@
+2026-07-04 01:48:15,617 __main__ INFO Total: 14 cells (14 to run, 0 already done)
+2026-07-04 01:48:15,635 __main__ INFO === Cell: fft_16pt_iterative / C4i / gpt-5.5 / seed=123 ===
+2026-07-04 01:48:15,635 __main__ INFO === Cell: fft_16pt_iterative / C4i / gpt-5.5 / seed=456 ===
+2026-07-04 01:48:15,637 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 01:48:15,637 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 01:50:03,706 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fft16_addr_gen', 'fft16_bit_reverse', 'fft16_twiddle_rom', 'fft16_butterfly'], skels=['fft16_addr_gen', 'fft16_bit_reverse', 'fft16_twiddle_rom', 'fft16_butterfly']
+2026-07-04 01:50:04,052 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 4 sub-modules (['fft16_addr_gen', 'fft16_bit_reverse', 'fft16_twiddle_rom', 'fft16_butterfly'])
+2026-07-04 01:50:15,551 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fft16_bit_reverse', 'fft16_stage_index', 'fft16_twiddle_rom', 'fft16_butterfly'], skels=['fft16_bit_reverse_skeleton', 'fft16_stage_index_skeleton', 'fft16_twiddle_rom_skeleton', 'fft16_butterfly_skeleton']
+2026-07-04 01:50:15,750 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 4 sub-modules (['fft16_bit_reverse', 'fft16_stage_index', 'fft16_twiddle_rom', 'fft16_butterfly'])
+2026-07-04 01:50:31,704 __main__ INFO C4i fft16_addr_gen round 1: TB PASS but golden 0/1
+2026-07-04 01:50:52,359 __main__ INFO C4i fft16_bit_reverse round 1: TB PASS but golden 0/1
+2026-07-04 01:51:27,896 __main__ INFO C4i fft16_addr_gen round 2: TB PASS but golden 0/1
+2026-07-04 01:51:40,007 __main__ INFO C4i fft16_bit_reverse round 2: TB PASS but golden 0/1
+2026-07-04 01:52:00,839 __main__ INFO C4i fft16_bit_reverse round 3: TB PASS but golden 0/1
+2026-07-04 01:52:31,967 __main__ INFO C4i fft16_addr_gen round 4: TB PASS but golden 0/1
+2026-07-04 01:52:36,457 __main__ INFO C4i fft16_bit_reverse round 4: TB PASS but golden 0/1
+2026-07-04 01:53:00,880 __main__ INFO C4i fft16_bit_reverse round 5: TB PASS but golden 0/1
+2026-07-04 01:53:47,348 __main__ INFO C4i fft16_bit_reverse round 6: TB PASS but golden 0/1
+2026-07-04 01:54:03,018 __main__ INFO C4i fft16_addr_gen round 6: TB PASS but golden 0/1
+2026-07-04 01:54:51,966 __main__ INFO C4i fft16_stage_index round 1: TB PASS but golden 0/1
+2026-07-04 01:55:16,727 __main__ INFO C4i fft16_stage_index round 2: TB PASS but golden 0/1
+2026-07-04 01:55:32,594 __main__ INFO C4i fft16_bit_reverse round 1: TB PASS but golden 0/1
+2026-07-04 01:55:52,997 __main__ INFO C4i fft16_stage_index round 3: TB PASS but golden 0/1
+2026-07-04 01:56:18,989 __main__ INFO C4i fft16_bit_reverse round 2: TB PASS but golden 0/1
+2026-07-04 01:56:38,602 __main__ INFO C4i fft16_stage_index round 4: TB PASS but golden 0/1
+2026-07-04 01:56:43,155 __main__ INFO C4i fft16_bit_reverse round 3: TB PASS but golden 0/1
+2026-07-04 01:57:08,226 __main__ INFO C4i fft16_bit_reverse round 4: TB PASS but golden 0/1
+2026-07-04 01:57:32,285 __main__ INFO C4i fft16_bit_reverse round 5: TB PASS but golden 0/1
+2026-07-04 01:58:05,310 __main__ INFO C4i fft16_bit_reverse round 6: TB PASS but golden 0/1
+2026-07-04 01:58:42,801 __main__ INFO C4i fft16_stage_index round 5: TB PASS but golden 0/1
+2026-07-04 01:59:09,052 __main__ INFO C4i fft16_twiddle_rom round 1: TB PASS but golden 0/1
+2026-07-04 01:59:19,175 __main__ INFO C4i fft16_stage_index round 6: TB PASS but golden 0/1
+2026-07-04 01:59:41,867 __main__ INFO C4i fft16_twiddle_rom round 2: TB PASS but golden 0/1
+2026-07-04 02:00:27,977 __main__ INFO C4i fft16_twiddle_rom round 1: TB PASS but golden 0/1
+2026-07-04 02:00:37,998 __main__ INFO C4i fft16_twiddle_rom round 3: TB PASS but golden 0/1
+2026-07-04 02:01:23,958 __main__ INFO C4i fft16_twiddle_rom round 2: TB PASS but golden 0/1
+2026-07-04 02:01:29,086 __main__ INFO C4i fft16_twiddle_rom round 4: TB PASS but golden 0/1
+2026-07-04 02:02:04,471 __main__ INFO C4i fft16_twiddle_rom round 5: TB PASS but golden 0/1
+2026-07-04 02:02:16,580 __main__ INFO C4i fft16_twiddle_rom round 3: TB PASS but golden 0/1
+2026-07-04 02:02:52,323 __main__ INFO C4i fft16_twiddle_rom round 4: TB PASS but golden 0/1
+2026-07-04 02:03:36,953 __main__ INFO C4i fft16_twiddle_rom round 6: TB PASS but golden 0/1
+2026-07-04 02:03:43,873 __main__ INFO C4i fft16_twiddle_rom round 5: TB PASS but golden 0/1
+2026-07-04 02:04:33,529 __main__ INFO C4i fft16_twiddle_rom round 6: TB PASS but golden 0/1
+2026-07-04 02:05:32,496 __main__ INFO C4i fft16_butterfly round 1: TB PASS but golden 0/1
+2026-07-04 02:05:47,187 __main__ INFO C4i fft16_butterfly round 1: TB PASS but golden 0/1
+2026-07-04 02:06:27,881 __main__ INFO C4i fft16_butterfly round 2: TB PASS but golden 0/1
+2026-07-04 02:07:01,365 __main__ INFO C4i fft16_butterfly round 3: TB PASS but golden 0/1
+2026-07-04 02:07:43,791 __main__ INFO C4i fft16_butterfly round 4: TB PASS but golden 0/1
+2026-07-04 02:07:44,255 __main__ INFO C4i fft16_butterfly round 4: TB PASS but golden 0/1
+2026-07-04 02:08:20,078 __main__ INFO C4i fft16_butterfly round 5: TB PASS but golden 0/1
+2026-07-04 02:08:23,388 __main__ INFO C4i fft16_butterfly round 5: TB PASS but golden 0/1
+2026-07-04 02:09:01,508 __main__ INFO C4i fft16_butterfly round 6: TB PASS but golden 0/1
+2026-07-04 02:09:13,500 __main__ INFO C4i fft16_butterfly round 6: TB PASS but golden 0/1
+2026-07-04 02:09:39,764 __main__ INFO Progress: 1/14 cells (7%) — fft_16pt_iterative__C4i__gpt-5.5__123: FAILED (0/1) — $0.00 (total: $0.00)
+2026-07-04 02:09:39,766 __main__ INFO === Cell: fp_adder_pipeline / C4i / gpt-5.5 / seed=123 ===
+2026-07-04 02:09:39,766 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 02:09:53,700 __main__ INFO Progress: 2/14 cells (14%) — fft_16pt_iterative__C4i__gpt-5.5__456: FAILED (0/1) — $0.00 (total: $0.00)
+2026-07-04 02:09:53,700 __main__ INFO === Cell: fp_adder_pipeline / C4i / gpt-5.5 / seed=456 ===
+2026-07-04 02:09:53,700 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 02:11:59,881 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fp_add_unpack', 'fp_add_align', 'fp_add_execute', 'fp_add_normalize', 'fp_add_round_pack'], skels=['fp_add_unpack', 'fp_add_align', 'fp_add_execute', 'fp_add_normalize', 'fp_add_round_pack']
+2026-07-04 02:12:00,059 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['fp_add_unpack', 'fp_add_align', 'fp_add_execute', 'fp_add_normalize', 'fp_add_round_pack'])
+2026-07-04 02:12:07,689 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fp_add_unpack', 'fp_add_align', 'fp_add_significand', 'fp_add_normalize', 'fp_add_round_pack'], skels=['fp_add_unpack_skeleton', 'fp_add_align_skeleton', 'fp_add_significand_skeleton', 'fp_add_normalize_skeleton', 'fp_add_round_pack_skeleton']
+2026-07-04 02:12:07,851 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['fp_add_unpack', 'fp_add_align', 'fp_add_significand', 'fp_add_normalize', 'fp_add_round_pack'])
+2026-07-04 02:12:37,269 __main__ INFO C4i fp_add_unpack solved at round 1 (23/23)
+2026-07-04 02:12:50,375 __main__ INFO C4i fp_add_unpack solved at round 1 (23/23)
+2026-07-04 02:13:08,575 __main__ INFO C4i fp_add_align solved at round 1 (23/23)
+2026-07-04 02:13:22,624 __main__ INFO C4i fp_add_align solved at round 1 (23/23)
+2026-07-04 02:13:40,664 __main__ INFO C4i fp_add_significand solved at round 1 (23/23)
+2026-07-04 02:13:49,408 __main__ INFO C4i fp_add_execute solved at round 1 (23/23)
+2026-07-04 02:14:21,809 __main__ INFO C4i fp_add_normalize solved at round 1 (23/23)
+2026-07-04 02:14:37,812 __main__ INFO C4i fp_add_normalize solved at round 1 (23/23)
+2026-07-04 02:15:12,033 __main__ INFO C4i fp_add_round_pack solved at round 1 (23/23)
+2026-07-04 02:15:12,139 __main__ INFO Progress: 3/14 cells (21%) — fp_adder_pipeline__C4i__gpt-5.5__123: SOLVED (23/23) — $0.00 (total: $0.00)
+2026-07-04 02:15:12,148 __main__ INFO === Cell: fp_mult_pipeline / C4i / gpt-5.5 / seed=123 ===
+2026-07-04 02:15:12,148 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 02:15:14,283 __main__ INFO C4i fp_add_round_pack solved at round 1 (23/23)
+2026-07-04 02:15:14,397 __main__ INFO Progress: 4/14 cells (29%) — fp_adder_pipeline__C4i__gpt-5.5__456: SOLVED (23/23) — $0.00 (total: $0.00)
+2026-07-04 02:15:14,397 __main__ INFO === Cell: fp_mult_pipeline / C4i / gpt-5.5 / seed=456 ===
+2026-07-04 02:15:14,397 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 02:16:57,777 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fp_mult_unpack', 'fp_mult_multiply', 'fp_mult_normalize', 'fp_mult_round', 'fp_mult_pack'], skels=['fp_mult_unpack', 'fp_mult_multiply', 'fp_mult_normalize', 'fp_mult_round', 'fp_mult_pack']
+2026-07-04 02:16:57,951 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['fp_mult_unpack', 'fp_mult_multiply', 'fp_mult_normalize', 'fp_mult_round', 'fp_mult_pack'])
+2026-07-04 02:17:13,551 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fp_mult_unpack', 'fp_mult_exp_product', 'fp_mult_normalize', 'fp_mult_round', 'fp_mult_pack'], skels=['fp_mult_unpack', 'fp_mult_exp_product', 'fp_mult_normalize', 'fp_mult_round', 'fp_mult_pack']
+2026-07-04 02:17:13,732 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['fp_mult_unpack', 'fp_mult_exp_product', 'fp_mult_normalize', 'fp_mult_round', 'fp_mult_pack'])
+2026-07-04 02:17:42,906 __main__ INFO C4i fp_mult_unpack solved at round 1 (31/31)
+2026-07-04 02:17:44,771 __main__ INFO C4i fp_mult_unpack solved at round 1 (31/31)
+2026-07-04 02:18:09,961 __main__ INFO C4i fp_mult_multiply solved at round 1 (31/31)
+2026-07-04 02:18:25,441 __main__ INFO C4i fp_mult_exp_product solved at round 1 (31/31)
+2026-07-04 02:18:34,405 __main__ INFO C4i fp_mult_normalize solved at round 1 (31/31)
+2026-07-04 02:19:09,377 __main__ INFO C4i fp_mult_normalize solved at round 1 (31/31)
+2026-07-04 02:19:20,664 __main__ INFO C4i fp_mult_round solved at round 1 (31/31)
+2026-07-04 02:19:53,335 __main__ INFO C4i fp_mult_round solved at round 1 (31/31)
+2026-07-04 02:20:05,373 __main__ INFO C4i fp_mult_pack solved at round 1 (31/31)
+2026-07-04 02:20:05,472 __main__ INFO Progress: 5/14 cells (36%) — fp_mult_pipeline__C4i__gpt-5.5__123: SOLVED (31/31) — $0.00 (total: $0.00)
+2026-07-04 02:20:05,482 __main__ INFO === Cell: ifft_16pt_iterative / C4i / gpt-5.5 / seed=123 ===
+2026-07-04 02:20:05,482 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 02:20:39,290 __main__ INFO C4i fp_mult_pack solved at round 1 (31/31)
+2026-07-04 02:20:39,408 __main__ INFO Progress: 6/14 cells (43%) — fp_mult_pipeline__C4i__gpt-5.5__456: SOLVED (31/31) — $0.00 (total: $0.00)
+2026-07-04 02:20:39,408 __main__ INFO === Cell: ifft_16pt_iterative / C4i / gpt-5.5 / seed=456 ===
+2026-07-04 02:20:39,408 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 02:21:58,367 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['ifft16_bit_reverse', 'fft16_index_gen', 'ifft16_twiddle_rom', 'ifft16_butterfly', 'ifft16_output_scale'], skels=['ifft16_bit_reverse', 'fft16_index_gen', 'ifft16_twiddle_rom', 'ifft16_butterfly', 'ifft16_output_scale']
+2026-07-04 02:21:58,531 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['ifft16_bit_reverse', 'fft16_index_gen', 'ifft16_twiddle_rom', 'ifft16_butterfly', 'ifft16_output_scale'])
+2026-07-04 02:22:13,978 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['ifft16_bit_reverse_index', 'ifft16_twiddle_rom', 'ifft16_butterfly', 'ifft16_output_scale'], skels=['ifft16_bit_reverse_index', 'ifft16_twiddle_rom', 'ifft16_butterfly', 'ifft16_output_scale']
+2026-07-04 02:22:14,189 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 4 sub-modules (['ifft16_bit_reverse_index', 'ifft16_twiddle_rom', 'ifft16_butterfly', 'ifft16_output_scale'])
+2026-07-04 02:22:19,999 __main__ INFO C4i ifft16_bit_reverse round 1: TB PASS but golden 0/1
+2026-07-04 02:22:45,858 __main__ INFO C4i ifft16_bit_reverse round 2: TB PASS but golden 0/1
+2026-07-04 02:23:09,414 __main__ INFO C4i ifft16_bit_reverse round 3: TB PASS but golden 0/1
+2026-07-04 02:23:33,178 __main__ INFO C4i ifft16_bit_reverse round 4: TB PASS but golden 0/1
+2026-07-04 02:24:28,205 __main__ INFO C4i fft16_index_gen round 1: TB PASS but golden 0/1
+2026-07-04 02:25:34,005 __main__ INFO C4i fft16_index_gen round 3: TB PASS but golden 0/1
+2026-07-04 02:26:21,146 __main__ INFO C4i fft16_index_gen round 4: TB PASS but golden 0/1
+2026-07-04 02:27:24,167 __main__ INFO C4i ifft16_twiddle_rom round 1: TB PASS but golden 0/1
+2026-07-04 02:27:59,660 __main__ INFO C4i ifft16_twiddle_rom round 2: TB PASS but golden 0/1
+2026-07-04 02:28:35,171 __main__ INFO C4i ifft16_twiddle_rom round 3: TB PASS but golden 0/1
+2026-07-04 02:29:00,650 __main__ INFO C4i ifft16_twiddle_rom round 4: TB PASS but golden 0/1
+2026-07-04 02:35:08,091 __main__ WARNING C4i ifft16_twiddle_rom rnd 3: Command '['C:\\Users\\saahe\\AppData\\Roaming\\npm\\codex.CMD', 'exec', '--ephemeral', '--ignore-rules', '-c', 'model=gpt-5.5', '-c', 'model_reasoning_effort=low', '-o', 'C:\\Users\\saahe\\AppData\\Local\\Temp\\tmpmcliqbt1.txt', '-']' timed out after 300 seconds
+2026-07-04 02:35:59,507 __main__ INFO C4i ifft16_butterfly round 1: TB PASS but golden 0/1
+2026-07-04 02:36:45,037 __main__ INFO C4i ifft16_butterfly round 2: TB PASS but golden 0/1
+2026-07-04 02:37:32,169 __main__ INFO C4i ifft16_butterfly round 3: TB PASS but golden 0/1
+2026-07-04 02:38:28,761 __main__ INFO C4i ifft16_butterfly round 4: TB PASS but golden 0/1
+2026-07-04 02:39:45,708 __main__ INFO C4i ifft16_output_scale round 1: TB PASS but golden 0/1
+2026-07-04 02:40:20,271 __main__ INFO C4i ifft16_output_scale round 2: TB PASS but golden 0/1
+2026-07-04 02:41:33,331 __main__ INFO C4i ifft16_output_scale round 4: TB PASS but golden 0/1
+2026-07-04 02:42:07,839 __main__ INFO Progress: 7/14 cells (50%) — ifft_16pt_iterative__C4i__gpt-5.5__123: FAILED (0/1) — $0.00 (total: $0.00)
+2026-07-04 02:42:07,840 __main__ INFO === Cell: conv2d / C4i / gpt-5.5 / seed=123 ===
+2026-07-04 02:42:07,840 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 02:43:51,115 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['conv2d_coeff_rom', 'conv2d_window_pack', 'conv2d_dot_product', 'conv2d_saturate', 'conv2d_valid_gen'], skels=['conv2d_coeff_rom', 'conv2d_window_pack', 'conv2d_dot_product', 'conv2d_saturate', 'conv2d_valid_gen']
+2026-07-04 02:43:51,296 cegis.tdes.fpga.autonomous.decomposer WARNING Compilation failed: C:\Users\saahe\AppData\Local\Temp\tdes_fpga_7if555_l\conv2d.v:41: assert: expr_synth.cc:106: failed assertion expr_width() >= rsig->vector_width()
+2026-07-04 02:43:51,296 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 2/3 (model=gpt-5.5)
+2026-07-04 02:44:00,136 __main__ INFO Progress: 8/14 cells (57%) — ifft_16pt_iterative__C4i__gpt-5.5__456: FAILED (14/33) — $0.00 (total: $0.00)
+2026-07-04 02:44:00,136 __main__ INFO === Cell: conv2d / C4i / gpt-5.5 / seed=456 ===
+2026-07-04 02:44:00,136 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 02:45:15,000 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['conv2d_addr_gen', 'conv2d_window_valid', 'conv2d_kernel_coeff', 'conv2d_dot_product', 'conv2d_round_clip'], skels=['conv2d_addr_gen', 'conv2d_window_valid', 'conv2d_kernel_coeff', 'conv2d_dot_product', 'conv2d_round_clip']
+2026-07-04 02:45:15,195 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['conv2d_addr_gen', 'conv2d_window_valid', 'conv2d_kernel_coeff', 'conv2d_dot_product', 'conv2d_round_clip'])
+2026-07-04 02:45:15,997 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['conv2d_position', 'conv2d_window_pack', 'conv2d_coeffs', 'conv2d_mac', 'conv2d_saturate'], skels=['conv2d_position', 'conv2d_window_pack', 'conv2d_coeffs', 'conv2d_mac', 'conv2d_saturate']
+2026-07-04 02:45:16,192 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['conv2d_position', 'conv2d_window_pack', 'conv2d_coeffs', 'conv2d_mac', 'conv2d_saturate'])
+2026-07-04 02:45:42,028 __main__ INFO C4i conv2d_position round 1: TB PASS but golden 2938/4096
+2026-07-04 02:45:57,425 __main__ INFO C4i conv2d_addr_gen round 1: TB PASS but golden 2104/4096
+2026-07-04 02:46:09,933 __main__ INFO C4i conv2d_position round 2: TB PASS but golden 2938/4096
+2026-07-04 02:46:46,747 __main__ INFO C4i conv2d_addr_gen round 2: TB PASS but golden 2104/4096
+2026-07-04 02:46:49,186 __main__ INFO C4i conv2d_position round 3: TB PASS but golden 2938/4096
+2026-07-04 02:47:16,732 __main__ INFO C4i conv2d_addr_gen round 3: TB PASS but golden 2104/4096
+2026-07-04 02:47:33,804 __main__ INFO C4i conv2d_position round 4: TB PASS but golden 2938/4096
+2026-07-04 02:47:57,983 __main__ INFO C4i conv2d_addr_gen round 4: TB PASS but golden 2104/4096
+2026-07-04 02:48:47,773 __main__ INFO C4i conv2d_window_pack round 1: TB PASS but golden 2938/4096
+2026-07-04 02:48:52,029 __main__ INFO C4i conv2d_window_valid round 1: TB PASS but golden 2104/4096
+2026-07-04 02:49:15,048 __main__ INFO C4i conv2d_window_valid round 2: TB PASS but golden 2938/4096
+2026-07-04 02:49:27,132 __main__ INFO C4i conv2d_window_pack round 2: TB PASS but golden 2938/4096
+2026-07-04 02:49:53,923 __main__ INFO C4i conv2d_window_pack round 3: TB PASS but golden 2938/4096
+2026-07-04 02:50:05,443 __main__ INFO C4i conv2d_window_valid round 3: TB PASS but golden 2905/4096
+2026-07-04 02:50:27,188 __main__ INFO C4i conv2d_window_pack round 4: TB PASS but golden 2938/4096
+2026-07-04 02:50:37,692 __main__ INFO C4i conv2d_window_valid round 4: TB PASS but golden 2938/4096
+2026-07-04 02:51:42,790 __main__ INFO C4i conv2d_kernel_coeff round 1: TB PASS but golden 2938/4096
+2026-07-04 02:51:55,002 __main__ INFO C4i conv2d_coeffs round 1: TB PASS but golden 0/1
+2026-07-04 02:52:21,010 __main__ INFO C4i conv2d_coeffs round 2: TB PASS but golden 2938/4096
+2026-07-04 02:52:31,739 __main__ INFO C4i conv2d_kernel_coeff round 2: TB PASS but golden 2950/4096
+2026-07-04 02:53:12,886 __main__ INFO C4i conv2d_coeffs round 3: TB PASS but golden 3838/4096
+2026-07-04 02:53:20,871 __main__ INFO C4i conv2d_kernel_coeff round 3: TB PASS but golden 2938/4096
+2026-07-04 02:53:57,154 __main__ INFO C4i conv2d_coeffs round 4: TB PASS but golden 2938/4096
+2026-07-04 02:55:46,311 __main__ INFO C4i conv2d_mac round 1: TB PASS but golden 2938/4096
+2026-07-04 02:56:34,106 __main__ INFO C4i conv2d_mac round 2: TB PASS but golden 4094/4096
+2026-07-04 02:57:25,630 __main__ INFO C4i conv2d_mac round 3: TB PASS but golden 4094/4096
+2026-07-04 02:57:54,695 __main__ INFO C4i conv2d_mac round 4: TB PASS but golden 4094/4096
+2026-07-04 02:58:45,378 __main__ INFO C4i conv2d_saturate round 1: TB PASS but golden 4094/4096
+2026-07-04 02:59:20,816 __main__ INFO C4i conv2d_saturate round 2: TB PASS but golden 4094/4096
+2026-07-04 02:59:23,968 __main__ WARNING C4i conv2d_kernel_coeff rnd 2: Command '['C:\\Users\\saahe\\AppData\\Roaming\\npm\\codex.CMD', 'exec', '--ephemeral', '--ignore-rules', '-c', 'model=gpt-5.5', '-c', 'model_reasoning_effort=low', '-o', 'C:\\Users\\saahe\\AppData\\Local\\Temp\\tmpjc5h4pjg.txt', '-']' timed out after 300 seconds
+2026-07-04 02:59:24,537 __main__ INFO C4i conv2d_kernel_coeff round 4: TB PASS but golden 2938/4096
+2026-07-04 02:59:39,490 __main__ INFO C4i conv2d_saturate round 3: TB PASS but golden 4094/4096
+2026-07-04 03:00:07,224 __main__ INFO C4i conv2d_saturate round 4: TB PASS but golden 4094/4096
+2026-07-04 03:00:26,746 __main__ INFO C4i conv2d_dot_product round 1: TB PASS but golden 3838/4096
+2026-07-04 03:00:30,295 __main__ INFO Progress: 9/14 cells (64%) — conv2d__C4i__gpt-5.5__456: FAILED (4094/4096) — $0.00 (total: $0.00)
+2026-07-04 03:00:30,295 __main__ INFO === Cell: unsharp_mask / C4i / gpt-5.5 / seed=123 ===
+2026-07-04 03:00:30,295 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 03:01:06,772 __main__ INFO C4i conv2d_dot_product round 2: TB PASS but golden 2938/4096
+2026-07-04 03:01:45,436 __main__ INFO C4i conv2d_dot_product round 3: TB PASS but golden 4094/4096
+2026-07-04 03:01:46,389 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['gaussian3x3_blur', 'unsharp_difference', 'unsharp_gain_scale', 'unsharp_reconstruct'], skels=['gaussian3x3_blur', 'unsharp_difference', 'unsharp_gain_scale', 'unsharp_reconstruct']
+2026-07-04 03:01:46,561 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 4 sub-modules (['gaussian3x3_blur', 'unsharp_difference', 'unsharp_gain_scale', 'unsharp_reconstruct'])
+2026-07-04 03:02:10,425 __main__ INFO C4i conv2d_dot_product round 4: TB PASS but golden 4094/4096
+2026-07-04 03:02:38,622 __main__ INFO C4i gaussian3x3_blur round 1: TB PASS but golden 63057/65536
+2026-07-04 03:03:21,207 __main__ INFO C4i gaussian3x3_blur round 2: TB PASS but golden 63057/65536
+2026-07-04 03:03:25,283 __main__ INFO C4i conv2d_round_clip round 1: TB PASS but golden 4094/4096
+2026-07-04 03:03:52,813 __main__ INFO C4i conv2d_round_clip round 2: TB PASS but golden 4094/4096
+2026-07-04 03:04:18,058 __main__ INFO C4i gaussian3x3_blur round 3: TB PASS but golden 63057/65536
+2026-07-04 03:04:33,205 __main__ INFO C4i conv2d_round_clip round 3: TB PASS but golden 4094/4096
+2026-07-04 03:04:56,475 __main__ INFO C4i gaussian3x3_blur round 4: TB PASS but golden 63057/65536
+2026-07-04 03:05:12,368 __main__ INFO C4i conv2d_round_clip round 4: TB PASS but golden 4094/4096
+2026-07-04 03:05:31,056 __main__ INFO C4i gaussian3x3_blur round 5: TB PASS but golden 63057/65536
+2026-07-04 03:05:37,332 __main__ INFO Progress: 10/14 cells (71%) — conv2d__C4i__gpt-5.5__123: FAILED (4094/4096) — $0.00 (total: $0.00)
+2026-07-04 03:05:37,332 __main__ INFO === Cell: unsharp_mask / C4i / gpt-5.5 / seed=456 ===
+2026-07-04 03:05:37,332 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 03:06:22,711 __main__ INFO C4i gaussian3x3_blur round 6: TB PASS but golden 63057/65536
+2026-07-04 03:07:20,787 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['gaussian3x3_blur', 'high_frequency_subtract', 'gain_scale', 'sharpen_reconstruct', 'saturate_pixel'], skels=['gaussian3x3_blur', 'high_frequency_subtract', 'gain_scale', 'sharpen_reconstruct', 'saturate_pixel']
+2026-07-04 03:07:20,947 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['gaussian3x3_blur', 'high_frequency_subtract', 'gain_scale', 'sharpen_reconstruct', 'saturate_pixel'])
+2026-07-04 03:07:41,548 __main__ INFO C4i unsharp_difference round 1: TB PASS but golden 63057/65536
+2026-07-04 03:08:15,011 __main__ INFO C4i gaussian3x3_blur round 1: TB PASS but golden 63482/65536
+2026-07-04 03:08:29,062 __main__ INFO C4i unsharp_difference round 2: TB PASS but golden 61366/65536
+2026-07-04 03:08:54,853 __main__ INFO C4i gaussian3x3_blur round 2: TB PASS but golden 63482/65536
+2026-07-04 03:09:16,190 __main__ INFO C4i unsharp_difference round 3: TB PASS but golden 63057/65536
+2026-07-04 03:09:34,476 __main__ INFO C4i gaussian3x3_blur round 3: TB PASS but golden 63482/65536
+2026-07-04 03:09:52,298 __main__ INFO C4i unsharp_difference round 4: TB PASS but golden 63057/65536
+2026-07-04 03:10:26,581 __main__ INFO C4i gaussian3x3_blur round 4: TB PASS but golden 63482/65536
+2026-07-04 03:11:36,948 __main__ INFO C4i high_frequency_subtract round 1: TB PASS but golden 63482/65536
+2026-07-04 03:11:47,860 __main__ INFO C4i unsharp_difference round 5: TB PASS but golden 63057/65536
+2026-07-04 03:12:12,085 __main__ INFO C4i high_frequency_subtract round 2: TB PASS but golden 63482/65536
+2026-07-04 03:12:42,649 __main__ INFO C4i high_frequency_subtract round 3: TB PASS but golden 783/65536
+2026-07-04 03:13:20,422 __main__ INFO C4i high_frequency_subtract round 4: TB PASS but golden 63482/65536
+2026-07-04 03:13:23,044 __main__ INFO C4i unsharp_difference round 6: TB PASS but golden 63057/65536
+2026-07-04 03:14:11,189 __main__ INFO C4i gain_scale round 1: TB PASS but golden 63482/65536
+2026-07-04 03:15:03,316 __main__ INFO C4i gain_scale round 2: TB PASS but golden 61994/65536
+2026-07-04 03:15:09,568 __main__ INFO C4i unsharp_gain_scale round 1: TB PASS but golden 63057/65536
+2026-07-04 03:15:30,489 __main__ INFO C4i gain_scale round 3: TB PASS but golden 63482/65536
+2026-07-04 03:15:55,983 __main__ INFO C4i unsharp_gain_scale round 2: TB PASS but golden 63057/65536
+2026-07-04 03:16:05,549 __main__ INFO C4i gain_scale round 4: TB PASS but golden 62046/65536
+2026-07-04 03:16:32,589 __main__ INFO C4i unsharp_gain_scale round 3: TB PASS but golden 63057/65536
+2026-07-04 03:17:10,075 __main__ INFO C4i sharpen_reconstruct round 1: TB PASS but golden 63482/65536
+2026-07-04 03:17:19,830 __main__ INFO C4i unsharp_gain_scale round 4: TB PASS but golden 63057/65536
+2026-07-04 03:17:44,817 __main__ INFO C4i sharpen_reconstruct round 2: TB PASS but golden 63482/65536
+2026-07-04 03:17:53,371 __main__ INFO C4i unsharp_gain_scale round 5: TB PASS but golden 63057/65536
+2026-07-04 03:18:21,848 __main__ INFO C4i unsharp_gain_scale round 6: TB PASS but golden 63057/65536
+2026-07-04 03:18:21,914 __main__ INFO C4i sharpen_reconstruct round 3: TB PASS but golden 63482/65536
+2026-07-04 03:18:50,847 __main__ INFO C4i sharpen_reconstruct round 4: TB PASS but golden 63482/65536
+2026-07-04 03:19:42,346 __main__ INFO C4i unsharp_reconstruct round 1: TB PASS but golden 63057/65536
+2026-07-04 03:19:57,322 __main__ INFO C4i saturate_pixel round 1: TB PASS but golden 63482/65536
+2026-07-04 03:20:10,480 __main__ INFO C4i unsharp_reconstruct round 2: TB PASS but golden 61995/65536
+2026-07-04 03:20:43,363 __main__ INFO C4i saturate_pixel round 2: TB PASS but golden 63482/65536
+2026-07-04 03:20:46,607 __main__ INFO C4i unsharp_reconstruct round 3: TB PASS but golden 61366/65536
+2026-07-04 03:21:06,685 __main__ INFO C4i saturate_pixel round 3: TB PASS but golden 63482/65536
+2026-07-04 03:21:37,969 __main__ INFO C4i saturate_pixel round 4: TB PASS but golden 63482/65536
+2026-07-04 03:22:13,416 __main__ INFO Progress: 11/14 cells (79%) — unsharp_mask__C4i__gpt-5.5__456: FAILED (63482/65536) — $0.00 (total: $0.00)
+2026-07-04 03:22:13,416 __main__ INFO === Cell: fft_streaming_64pt / C4i / gpt-5.5 / seed=123 ===
+2026-07-04 03:22:13,416 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 03:22:19,508 __main__ INFO C4i unsharp_reconstruct round 4: TB PASS but golden 63057/65536
+2026-07-04 03:23:47,495 __main__ INFO C4i unsharp_reconstruct round 5: TB PASS but golden 63057/65536
+2026-07-04 03:24:37,307 __main__ INFO C4i unsharp_reconstruct round 6: TB PASS but golden 63057/65536
+2026-07-04 03:25:00,366 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fft_sample_extend', 'fft_twiddle_rom', 'fft_complex_mult', 'fft_radix2_butterfly', 'fft_bit_reverse'], skels=['fft_sample_extend', 'fft_twiddle_rom', 'fft_complex_mult', 'fft_radix2_butterfly', 'fft_bit_reverse']
+2026-07-04 03:25:00,537 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['fft_sample_extend', 'fft_twiddle_rom', 'fft_complex_mult', 'fft_radix2_butterfly', 'fft_bit_reverse'])
+2026-07-04 03:25:24,971 __main__ INFO C4i fft_sample_extend round 1: TB PASS but golden 0/128
+2026-07-04 03:25:50,285 __main__ INFO Progress: 12/14 cells (86%) — unsharp_mask__C4i__gpt-5.5__123: FAILED (63057/65536) — $0.00 (total: $0.00)
+2026-07-04 03:25:50,298 __main__ INFO === Cell: fft_streaming_64pt / C4i / gpt-5.5 / seed=456 ===
+2026-07-04 03:25:50,298 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 03:25:54,691 __main__ INFO C4i fft_sample_extend round 2: TB PASS but golden 0/128
+2026-07-04 03:26:32,448 __main__ INFO C4i fft_sample_extend round 3: TB PASS but golden 0/128
+2026-07-04 03:27:12,735 __main__ INFO C4i fft_sample_extend round 4: TB PASS but golden 0/128
+2026-07-04 03:27:13,058 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fft_sign_extend', 'fft_complex_mult', 'fft_butterfly', 'fft_twiddle_rom', 'fft_radix2_stage'], skels=['fft_sign_extend', 'fft_complex_mult', 'fft_butterfly', 'fft_twiddle_rom', 'fft_radix2_stage']
+2026-07-04 03:27:13,280 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['fft_sign_extend', 'fft_complex_mult', 'fft_butterfly', 'fft_twiddle_rom', 'fft_radix2_stage'])
+2026-07-04 03:27:43,835 __main__ INFO C4i fft_sign_extend round 1: TB PASS but golden 0/1
+2026-07-04 03:28:04,983 __main__ INFO C4i fft_sign_extend round 2: TB PASS but golden 0/1
+2026-07-04 03:28:36,797 __main__ INFO C4i fft_sign_extend round 3: TB PASS but golden 0/1
+2026-07-04 03:28:48,335 __main__ INFO C4i fft_twiddle_rom round 1: TB PASS but golden 0/128
+2026-07-04 03:29:26,883 __main__ INFO C4i fft_sign_extend round 4: TB PASS but golden 0/1
+2026-07-04 03:30:35,736 __main__ INFO C4i fft_complex_mult round 1: TB PASS but golden 0/1
+2026-07-04 03:30:58,999 __main__ INFO C4i fft_twiddle_rom round 3: TB PASS but golden 0/128
+2026-07-04 03:31:26,117 __main__ INFO C4i fft_complex_mult round 2: TB PASS but golden 0/1
+2026-07-04 03:32:00,479 __main__ INFO C4i fft_complex_mult round 3: TB PASS but golden 0/1
+2026-07-04 03:32:16,046 __main__ INFO C4i fft_twiddle_rom round 4: TB PASS but golden 0/128
+2026-07-04 03:32:33,935 __main__ INFO C4i fft_complex_mult round 4: TB PASS but golden 0/1
+2026-07-04 03:33:54,807 __main__ INFO C4i fft_complex_mult round 1: TB PASS but golden 0/128
+2026-07-04 03:34:01,751 __main__ INFO C4i fft_butterfly round 1: TB PASS but golden 0/1
+2026-07-04 03:34:43,173 __main__ INFO C4i fft_complex_mult round 2: TB PASS but golden 0/128
+2026-07-04 03:34:47,003 __main__ INFO C4i fft_butterfly round 2: TB PASS but golden 0/1
+2026-07-04 03:35:07,400 __main__ INFO C4i fft_butterfly round 3: TB PASS but golden 0/1
+2026-07-04 03:35:28,024 __main__ INFO C4i fft_complex_mult round 3: TB PASS but golden 0/128
+2026-07-04 03:35:29,742 __main__ INFO C4i fft_butterfly round 4: TB PASS but golden 0/1
+2026-07-04 03:36:03,228 __main__ INFO C4i fft_complex_mult round 4: TB PASS but golden 0/128
+2026-07-04 03:37:03,717 __main__ INFO C4i fft_twiddle_rom round 1: TB PASS but golden 0/1
+2026-07-04 03:37:04,760 __main__ INFO C4i fft_radix2_butterfly round 1: TB PASS but golden 0/128
+2026-07-04 03:37:38,374 __main__ INFO C4i fft_radix2_butterfly round 2: TB PASS but golden 0/128
+2026-07-04 03:38:16,603 __main__ INFO C4i fft_twiddle_rom round 2: TB PASS but golden 0/1
+2026-07-04 03:38:24,907 __main__ INFO C4i fft_radix2_butterfly round 3: TB PASS but golden 0/128
+2026-07-04 03:39:06,546 __main__ INFO C4i fft_radix2_butterfly round 4: TB PASS but golden 0/128
+2026-07-04 03:39:24,092 __main__ INFO C4i fft_twiddle_rom round 3: TB PASS but golden 0/1
+2026-07-04 03:40:10,148 __main__ INFO C4i fft_bit_reverse round 1: TB PASS but golden 0/128
+2026-07-04 03:40:27,687 __main__ INFO C4i fft_twiddle_rom round 4: TB PASS but golden 0/1
+2026-07-04 03:40:33,636 __main__ INFO C4i fft_bit_reverse round 2: TB PASS but golden 0/128
+2026-07-04 03:40:54,830 __main__ INFO C4i fft_bit_reverse round 3: TB PASS but golden 0/128
+2026-07-04 03:41:08,939 __main__ INFO C4i fft_bit_reverse round 4: TB PASS but golden 0/128
+2026-07-04 03:41:29,469 __main__ INFO Progress: 13/14 cells (93%) — fft_streaming_64pt__C4i__gpt-5.5__123: FAILED (0/128) — $0.00 (total: $0.00)
+2026-07-04 03:42:37,864 __main__ INFO C4i fft_radix2_stage round 1: TB PASS but golden 0/1
+2026-07-04 03:43:11,696 __main__ INFO C4i fft_radix2_stage round 2: TB PASS but golden 0/1
+2026-07-04 03:43:45,279 __main__ INFO C4i fft_radix2_stage round 3: TB PASS but golden 0/1
+2026-07-04 03:44:19,494 __main__ INFO C4i fft_radix2_stage round 4: TB PASS but golden 0/1
+2026-07-04 03:44:59,830 __main__ INFO Progress: 14/14 cells (100%) — fft_streaming_64pt__C4i__gpt-5.5__456: FAILED (0/1) — $0.00 (total: $0.00)
+C:\Users\saahe\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\scripts\x08uild_artifact_index.py': [Errno 22] Invalid argument
+C:\Users\saahe\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\scripts\x08uild_run_matrix.py': [Errno 22] Invalid argument

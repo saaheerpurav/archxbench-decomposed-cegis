@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/harris_sobel_3x3.v",
+  "sub_modules": {
+    "harris_sobel_3x3": "Combinational Sobel 3x3 gradient computation for Ix and Iy.",
+    "harris_gradient_products": "Combinational gradient product generation for Ix squared, Iy squared, and IxIy.",
+    "harris_gaussian_approx": "Combinational fixed-width smoothing placeholder preserving product streams for composition.",
+    "harris_response_calc": "Combinational Harris determinant, trace, fixed-point k term, and saturated response calculation.",
+    "harris_threshold": "Combinational response thresholding with border suppression."
+  }
+}

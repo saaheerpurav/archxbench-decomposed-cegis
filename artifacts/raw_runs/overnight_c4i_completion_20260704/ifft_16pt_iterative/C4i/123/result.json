@@ -1,0 +1,23 @@
+{
+  "condition": "C4i",
+  "llm_calls": 26,
+  "best_passes": 0,
+  "total_tests": 1,
+  "solved": false,
+  "decomp_modules": [
+    "ifft16_bit_reverse",
+    "fft16_index_gen",
+    "ifft16_twiddle_rom",
+    "ifft16_butterfly",
+    "ifft16_output_scale"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 1,
+  "design": "ifft_16pt_iterative",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 1322.3,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

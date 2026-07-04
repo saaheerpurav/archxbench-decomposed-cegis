@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv3d_window_shift.v",
+  "sub_modules": {
+    "conv3d_window_shift": "Combinational streaming shift stage that forms the flattened 3D stencil window from the previous window and incoming voxel.",
+    "conv3d_window_valid": "Combinational coordinate and boundary-valid logic for valid-padding stride-1 3D convolution output qualification and done detection.",
+    "conv3d_mac": "Combinational parallel multiply-accumulate array over the flattened K1 by K2 by K3 voxel window and kernel coefficients.",
+    "conv3d_output_cast": "Combinational output-width cast stage that maps the MAC accumulator to the required voxel output width."
+  }
+}
