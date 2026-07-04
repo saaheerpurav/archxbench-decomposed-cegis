@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv3d_window_select.v",
+  "sub_modules": {
+    "conv3d_window_select": "Combinational 3D stencil window extractor from the streamed volume history.",
+    "conv3d_coord_valid": "Combinational valid-region detector for stride-1 valid-padding convolution coordinates.",
+    "conv3d_mac": "Combinational multiply-accumulate block for the flattened 3D convolution window and kernel."
+  }
+}

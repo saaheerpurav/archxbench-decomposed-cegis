@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/nr_poly_eval.v",
+  "sub_modules": {
+    "nr_poly_eval": "Combinational fixed-point cubic polynomial evaluator using Horner form.",
+    "nr_derivative_eval": "Combinational fixed-point derivative evaluator for a1 + 2*a2*x + 3*a3*x^2.",
+    "nr_fixed_div": "Combinational fixed-point divider used for the Newton update p(x)/p'(x).",
+    "nr_convergence_check": "Combinational absolute-value tolerance check for iteration convergence.",
+    "nr_root_verify": "Combinational verification block checking whether |p(root)| is within tolerance."
+  }
+}

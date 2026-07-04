@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_fp32_quant.v",
+  "sub_modules": {
+    "qgemm_fp32_quant": "Combinational FP32 to unsigned quantized integer conversion using Q15 scale and zero-point with rounding and saturation.",
+    "qgemm_int_matmul": "Combinational integer GEMM engine that subtracts zero-points and accumulates INT32 dot products.",
+    "qgemm_dequant": "Combinational dequantization stage that converts INT32 accumulators back to FP32 using the product of Q15 scales."
+  }
+}

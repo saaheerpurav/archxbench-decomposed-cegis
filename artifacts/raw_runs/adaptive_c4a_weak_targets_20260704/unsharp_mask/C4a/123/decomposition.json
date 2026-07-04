@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/gaussian3x3_blur.v",
+  "sub_modules": {
+    "gaussian3x3_blur": "Combinational 3x3 Gaussian stencil using fixed 1-2-1 / 2-4-2 / 1-2-1 coefficients and divide-by-16 normalization.",
+    "unsharp_subtract": "Combinational pointwise high-frequency extraction: original minus blurred pixel.",
+    "unsharp_gain_scale": "Combinational pointwise signed scaling of the high-frequency component by the runtime gain.",
+    "unsharp_reconstruct": "Combinational pointwise reconstruction: original plus scaled high-frequency component.",
+    "pixel_saturate": "Combinational output clamp to the configured unsigned pixel range."
+  }
+}

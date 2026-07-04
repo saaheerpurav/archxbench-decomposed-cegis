@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/conv3d_coord_calc.v",
+  "sub_modules": {
+    "conv3d_coord_calc": "Converts the linear streaming voxel index into depth, row, and column coordinates.",
+    "conv3d_window_valid": "Computes whether the current stream position has a complete valid 3D convolution window.",
+    "conv3d_mac": "Performs the combinational multiply-accumulate over the flattened 3D stencil window and flattened kernel.",
+    "conv3d_line_buffer_model": "Combinational line-buffer abstraction module for decomposition and independent replacement.",
+    "conv3d_frame_buffer_model": "Combinational frame/depth-buffer abstraction module for decomposition and independent replacement."
+  }
+}

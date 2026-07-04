@@ -1,0 +1,76 @@
+2026-07-04 18:44:31,335 __main__ INFO Total: 15 cells (15 to run, 0 already done)
+2026-07-04 18:44:31,335 __main__ INFO === Cell: unsharp_mask / C4a / gpt-5.5 / seed=42 ===
+2026-07-04 18:44:31,351 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 18:44:31,335 __main__ INFO === Cell: unsharp_mask / C4a / gpt-5.5 / seed=123 ===
+2026-07-04 18:44:31,351 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 18:46:13,575 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['gaussian3x3', 'high_freq_sub', 'gain_scale', 'reconstruct_sat'], skels=['gaussian3x3', 'high_freq_sub', 'gain_scale', 'reconstruct_sat']
+2026-07-04 18:46:13,685 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 4 sub-modules (['gaussian3x3', 'high_freq_sub', 'gain_scale', 'reconstruct_sat'])
+2026-07-04 18:46:17,592 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['gaussian3x3_blur', 'unsharp_subtract', 'unsharp_gain_scale', 'unsharp_reconstruct', 'pixel_saturate'], skels=['gaussian3x3_blur', 'unsharp_subtract', 'unsharp_gain_scale', 'unsharp_reconstruct', 'pixel_saturate']
+2026-07-04 18:46:17,709 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['gaussian3x3_blur', 'unsharp_subtract', 'unsharp_gain_scale', 'unsharp_reconstruct', 'pixel_saturate'])
+2026-07-04 19:31:06,375 __main__ INFO Progress: 1/15 cells (7%) — unsharp_mask__C4a__gpt-5.5__42: FAILED (63780/65536) — $0.00 (total: $0.00)
+2026-07-04 19:31:06,384 __main__ INFO === Cell: unsharp_mask / C4a / gpt-5.5 / seed=456 ===
+2026-07-04 19:31:06,384 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 19:32:52,262 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['gaussian3x3_blur', 'unsharp_difference', 'unsharp_gain', 'unsharp_reconstruct'], skels=['gaussian3x3_blur', 'unsharp_difference', 'unsharp_gain', 'unsharp_reconstruct']
+2026-07-04 19:32:52,387 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 4 sub-modules (['gaussian3x3_blur', 'unsharp_difference', 'unsharp_gain', 'unsharp_reconstruct'])
+2026-07-04 19:34:52,036 __main__ INFO Progress: 2/15 cells (13%) — unsharp_mask__C4a__gpt-5.5__123: FAILED (63056/65536) — $0.00 (total: $0.00)
+2026-07-04 19:34:52,063 __main__ INFO === Cell: fft_streaming_64pt / C4a / gpt-5.5 / seed=42 ===
+2026-07-04 19:34:52,065 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 19:37:18,334 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fft64_sign_extend', 'fft64_twiddle_rom', 'fft64_complex_mult', 'fft64_radix2_butterfly', 'fft64_stage_select'], skels=['fft64_sign_extend', 'fft64_twiddle_rom', 'fft64_complex_mult', 'fft64_radix2_butterfly', 'fft64_stage_select']
+2026-07-04 19:37:18,515 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['fft64_sign_extend', 'fft64_twiddle_rom', 'fft64_complex_mult', 'fft64_radix2_butterfly', 'fft64_stage_select'])
+2026-07-04 20:15:35,909 __main__ INFO Progress: 3/15 cells (20%) — unsharp_mask__C4a__gpt-5.5__456: FAILED (63780/65536) — $0.00 (total: $0.00)
+2026-07-04 20:15:35,909 __main__ INFO === Cell: fft_streaming_64pt / C4a / gpt-5.5 / seed=123 ===
+2026-07-04 20:15:35,909 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 20:17:35,152 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fft_sign_extend', 'fft_counter_next', 'fft_twiddle_select', 'fft_stage_unit', 'fft_complex_addsub', 'fft_output_select'], skels=['fft_sign_extend', 'fft_counter_next', 'fft_twiddle_select', 'fft_stage_unit', 'fft_complex_addsub', 'fft_output_select']
+2026-07-04 20:17:35,275 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 6 sub-modules (['fft_sign_extend', 'fft_counter_next', 'fft_twiddle_select', 'fft_stage_unit', 'fft_complex_addsub', 'fft_output_select'])
+2026-07-04 20:24:26,326 __main__ INFO Progress: 4/15 cells (27%) — fft_streaming_64pt__C4a__gpt-5.5__42: FAILED (0/1) — $0.00 (total: $0.00)
+2026-07-04 20:24:26,326 __main__ INFO === Cell: fft_streaming_64pt / C4a / gpt-5.5 / seed=456 ===
+2026-07-04 20:24:26,326 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 20:26:14,785 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['fft_sign_extend', 'fft_radix2_butterfly', 'fft_twiddle_rom', 'fft_complex_mult', 'fft_stage_select'], skels=['fft_sign_extend', 'fft_radix2_butterfly', 'fft_twiddle_rom', 'fft_complex_mult', 'fft_stage_select']
+2026-07-04 20:26:14,909 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['fft_sign_extend', 'fft_radix2_butterfly', 'fft_twiddle_rom', 'fft_complex_mult', 'fft_stage_select'])
+2026-07-04 20:48:21,809 __main__ INFO Progress: 5/15 cells (33%) — fft_streaming_64pt__C4a__gpt-5.5__123: FAILED (0/1) — $0.00 (total: $0.00)
+2026-07-04 20:48:21,825 __main__ INFO === Cell: conv_3d / C4a / gpt-5.5 / seed=42 ===
+2026-07-04 20:48:21,825 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 20:49:53,709 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['conv3d_coord_calc', 'conv3d_window_valid', 'conv3d_mac', 'conv3d_line_buffer_model', 'conv3d_frame_buffer_model'], skels=['conv3d_coord_calc', 'conv3d_window_valid', 'conv3d_mac', 'conv3d_line_buffer_model', 'conv3d_frame_buffer_model']
+2026-07-04 20:50:15,501 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['conv3d_coord_calc', 'conv3d_window_valid', 'conv3d_mac', 'conv3d_line_buffer_model', 'conv3d_frame_buffer_model'])
+2026-07-04 20:53:44,835 __main__ INFO Progress: 6/15 cells (40%) — fft_streaming_64pt__C4a__gpt-5.5__456: FAILED (0/1) — $0.00 (total: $0.00)
+2026-07-04 20:53:44,835 __main__ INFO === Cell: conv_3d / C4a / gpt-5.5 / seed=123 ===
+2026-07-04 20:53:44,835 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 20:55:10,641 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['conv3d_coord', 'conv3d_window_valid', 'conv3d_mac', 'conv3d_output_cast'], skels=['conv3d_coord', 'conv3d_window_valid', 'conv3d_mac', 'conv3d_output_cast']
+2026-07-04 20:55:34,385 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 4 sub-modules (['conv3d_coord', 'conv3d_window_valid', 'conv3d_mac', 'conv3d_output_cast'])
+2026-07-04 21:37:57,604 __main__ INFO Progress: 7/15 cells (47%) — conv_3d__C4a__gpt-5.5__42: FAILED (0/0) — $0.00 (total: $0.00)
+2026-07-04 21:37:57,606 __main__ INFO === Cell: conv_3d / C4a / gpt-5.5 / seed=456 ===
+2026-07-04 21:37:57,606 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 21:39:05,605 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['conv3d_window_select', 'conv3d_coord_valid', 'conv3d_mac'], skels=['conv3d_window_select', 'conv3d_coord_valid', 'conv3d_mac']
+2026-07-04 21:39:05,867 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 3 sub-modules (['conv3d_window_select', 'conv3d_coord_valid', 'conv3d_mac'])
+2026-07-04 21:45:07,094 __main__ INFO Progress: 8/15 cells (53%) — conv_3d__C4a__gpt-5.5__123: FAILED (0/0) — $0.00 (total: $0.00)
+2026-07-04 21:45:07,095 __main__ INFO === Cell: quantized_matmul / C4a / gpt-5.5 / seed=42 ===
+2026-07-04 21:45:07,096 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 21:52:19,891 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['qgemm_quantize_tile', 'qgemm_int_gemm', 'qgemm_dequantize_tile'], skels=['qgemm_quantize_tile', 'qgemm_int_gemm', 'qgemm_dequantize_tile']
+2026-07-04 21:52:20,025 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 3 sub-modules (['qgemm_quantize_tile', 'qgemm_int_gemm', 'qgemm_dequantize_tile'])
+2026-07-04 22:19:44,891 __main__ INFO Progress: 9/15 cells (60%) — conv_3d__C4a__gpt-5.5__456: FAILED (0/0) — $0.00 (total: $0.00)
+2026-07-04 22:19:44,891 __main__ INFO === Cell: quantized_matmul / C4a / gpt-5.5 / seed=123 ===
+2026-07-04 22:19:44,891 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 22:21:41,895 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['qgemm_quantizer', 'qgemm_int_matmul', 'qgemm_dequantizer'], skels=['qgemm_quantizer', 'qgemm_int_matmul', 'qgemm_dequantizer']
+2026-07-04 22:21:42,009 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 3 sub-modules (['qgemm_quantizer', 'qgemm_int_matmul', 'qgemm_dequantizer'])
+2026-07-04 22:25:59,574 __main__ INFO Progress: 10/15 cells (67%) — quantized_matmul__C4a__gpt-5.5__42: FAILED (0/0) — $0.00 (total: $0.00)
+2026-07-04 22:25:59,574 __main__ INFO === Cell: quantized_matmul / C4a / gpt-5.5 / seed=456 ===
+2026-07-04 22:25:59,574 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 22:27:44,014 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['qgemm_fp32_quant', 'qgemm_int_matmul', 'qgemm_dequant'], skels=['qgemm_fp32_quant', 'qgemm_int_matmul', 'qgemm_dequant']
+2026-07-04 22:27:45,135 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 3 sub-modules (['qgemm_fp32_quant', 'qgemm_int_matmul', 'qgemm_dequant'])
+2026-07-04 22:54:26,230 __main__ INFO Progress: 11/15 cells (73%) — quantized_matmul__C4a__gpt-5.5__123: FAILED (0/0) — $0.00 (total: $0.00)
+2026-07-04 22:54:26,232 __main__ INFO === Cell: newton_raphson_polynomial / C4a / gpt-5.5 / seed=42 ===
+2026-07-04 22:54:26,232 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 22:56:20,421 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['nr_poly_eval_fixed', 'nr_derivative_eval_fixed', 'nr_newton_update_fixed', 'nr_convergence_check', 'nr_root_verify'], skels=['nr_poly_eval_fixed', 'nr_derivative_eval_fixed', 'nr_newton_update_fixed', 'nr_convergence_check', 'nr_root_verify']
+2026-07-04 22:56:20,596 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['nr_poly_eval_fixed', 'nr_derivative_eval_fixed', 'nr_newton_update_fixed', 'nr_convergence_check', 'nr_root_verify'])
+2026-07-04 22:59:45,117 __main__ INFO Progress: 12/15 cells (80%) — quantized_matmul__C4a__gpt-5.5__456: FAILED (?/?) — $0.00 (total: $0.00)
+2026-07-04 22:59:45,121 __main__ INFO === Cell: newton_raphson_polynomial / C4a / gpt-5.5 / seed=123 ===
+2026-07-04 22:59:45,121 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 23:01:44,967 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['nr_poly_eval', 'nr_derivative_eval', 'nr_fixed_div', 'nr_convergence_check', 'nr_root_verify'], skels=['nr_poly_eval', 'nr_derivative_eval', 'nr_fixed_div', 'nr_convergence_check', 'nr_root_verify']
+2026-07-04 23:01:45,094 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['nr_poly_eval', 'nr_derivative_eval', 'nr_fixed_div', 'nr_convergence_check', 'nr_root_verify'])
+2026-07-04 23:33:12,459 __main__ INFO Progress: 13/15 cells (87%) — newton_raphson_polynomial__C4a__gpt-5.5__42: FAILED (90/100) — $0.00 (total: $0.00)
+2026-07-04 23:33:12,459 __main__ INFO === Cell: newton_raphson_polynomial / C4a / gpt-5.5 / seed=456 ===
+2026-07-04 23:33:12,459 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition attempt 1/3 (model=gpt-5.5)
+2026-07-04 23:33:47,991 __main__ INFO Progress: 14/15 cells (93%) — newton_raphson_polynomial__C4a__gpt-5.5__123: FAILED (96/100) — $0.00 (total: $0.00)
+2026-07-04 23:34:45,509 cegis.tdes.fpga.autonomous.decomposer INFO Parsed: top=True, refs=['nr_poly_eval_fixed', 'nr_derivative_eval_fixed', 'nr_fixed_divider', 'nr_newton_update', 'nr_root_verify'], skels=['nr_poly_eval_fixed', 'nr_derivative_eval_fixed', 'nr_fixed_divider', 'nr_newton_update', 'nr_root_verify']
+2026-07-04 23:34:45,659 cegis.tdes.fpga.autonomous.decomposer INFO Decomposition OK: 5 sub-modules (['nr_poly_eval_fixed', 'nr_derivative_eval_fixed', 'nr_fixed_divider', 'nr_newton_update', 'nr_root_verify'])
+2026-07-05 00:13:21,682 __main__ INFO Progress: 15/15 cells (100%) — newton_raphson_polynomial__C4a__gpt-5.5__456: FAILED (96/100) — $0.00 (total: $0.00)

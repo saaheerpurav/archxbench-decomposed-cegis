@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/fft_sign_extend.v",
+  "sub_modules": {
+    "fft_sign_extend": "Combinational sign extension from input precision to internal FFT datapath width.",
+    "fft_counter_next": "Combinational frame counter next-state and last-sample detection logic.",
+    "fft_twiddle_select": "Combinational twiddle-factor selector for each FFT stage.",
+    "fft_stage_unit": "Combinational complex multiply stage used as the radix pipeline arithmetic unit.",
+    "fft_complex_addsub": "Combinational complex add/subtract helper for butterfly datapaths.",
+    "fft_output_select": "Combinational output mux for selecting between direct and alternate complex paths."
+  }
+}

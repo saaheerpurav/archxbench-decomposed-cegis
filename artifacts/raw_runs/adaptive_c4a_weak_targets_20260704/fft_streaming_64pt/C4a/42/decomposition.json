@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fft64_sign_extend.v",
+  "sub_modules": {
+    "fft64_sign_extend": "Combinational signed extension from input precision to internal/output precision.",
+    "fft64_twiddle_rom": "Combinational fixed-point twiddle-factor lookup table for 64-point FFT rotations.",
+    "fft64_complex_mult": "Combinational fixed-point complex multiplier using Q1.15 twiddle factors.",
+    "fft64_radix2_butterfly": "Combinational radix-2 butterfly producing complex sum and difference terms.",
+    "fft64_stage_select": "Combinational selector that chooses the upper or lower butterfly path for each pipeline stage."
+  }
+}

@@ -2,7 +2,7 @@
 
 This is the only run queue. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`.
 
-Last audited: 2026-07-04 after the AES decryption UTF-8 rerun.
+Last audited: 2026-07-04 after the C4a weak-target sweep.
 
 ## Required For Current Claims
 
@@ -46,6 +46,23 @@ These are real results, but not enough to present as robust method wins.
 | L6 | `conv_3d` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
 | L6 | `quantized_matmul` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
 
+### Latest Targeted Research Attempt
+
+`C4a` was run on all five weak targets with `gpt-5.5`, seeds `42,123,456`, under
+`artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`.
+
+Result: 0/15 solves.
+
+| Design | C4a result |
+|---|---|
+| `unsharp_mask` | failed all three seeds; best `63780/65536` |
+| `fft_streaming_64pt` | failed all three seeds; all `0/1` |
+| `conv_3d` | failed all three seeds; all `0/0` |
+| `quantized_matmul` | failed all three seeds; two `0/0`, one final compile failure |
+| `newton_raphson_polynomial` | failed all three seeds; best `96/100`, no golden denominator |
+
+Conclusion: C4a is negative evidence. Do not promote it as a method improvement.
+
 ### Excluded Or Hold
 
 Do not blind-run these until the checker/spec issue is resolved.
@@ -71,7 +88,7 @@ The only useful next runs are targeted research attempts, not table filling:
 |---|---|
 | 1 | Decide whether to exclude or repair the FIR-family benchmark contract. |
 | 2 | Decide whether `systolic_gemm` has a valid golden checker; otherwise keep it excluded. |
-| 3 | If expanding coverage, try a new method or targeted repair on `unsharp_mask`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul`, and `newton_raphson_polynomial`. Re-running the same methods is not justified by the current evidence. |
+| 3 | If expanding coverage, design a genuinely new method or benchmark-specific repair for `unsharp_mask`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul`, and `newton_raphson_polynomial`. C4a was tried and failed, so re-running it is not justified by current evidence. |
 | 4 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
 
 ## Execution Rules
@@ -82,5 +99,4 @@ The only useful next runs are targeted research attempts, not table filling:
   - run `python scripts\build_artifact_index.py`
   - run `python scripts\build_run_matrix.py`
   - update this file
-  - commit and push
-
+  - do not push unless explicitly requested

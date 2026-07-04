@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fft_sign_extend.v",
+  "sub_modules": {
+    "fft_sign_extend": "Combinational sign extension from input precision to internal output precision.",
+    "fft_radix2_butterfly": "Combinational radix-2 butterfly add/subtract primitive for complex samples.",
+    "fft_twiddle_rom": "Combinational twiddle factor lookup interface for per-stage complex rotation.",
+    "fft_complex_mult": "Combinational fixed-point complex multiplier used for twiddle rotation.",
+    "fft_stage_select": "Combinational per-stage selector that chooses butterfly sum or rotated difference path."
+  }
+}

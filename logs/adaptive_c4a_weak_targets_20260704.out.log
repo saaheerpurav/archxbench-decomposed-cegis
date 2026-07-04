@@ -1,0 +1,20 @@
+
+======================================================================
+EXPERIMENT COMPLETE
+======================================================================
+Cells: 15, Solved: 0/15, Cost: $0.00
+  conv_3d__C4a__gpt-5.5__123: FAILED (0/0) [3082.2s]
+  conv_3d__C4a__gpt-5.5__42: FAILED (0/0) [2975.8s]
+  conv_3d__C4a__gpt-5.5__456: FAILED (0/0) [2507.3s]
+  fft_streaming_64pt__C4a__gpt-5.5__123: FAILED (0/1) [1965.9s]
+  fft_streaming_64pt__C4a__gpt-5.5__42: FAILED (0/1) [2974.2s]
+  fft_streaming_64pt__C4a__gpt-5.5__456: FAILED (0/1) [1758.5s]
+  newton_raphson_polynomial__C4a__gpt-5.5__123: FAILED (96/100) [2042.9s]
+  newton_raphson_polynomial__C4a__gpt-5.5__42: FAILED (90/100) [2326.2s]
+  newton_raphson_polynomial__C4a__gpt-5.5__456: FAILED (96/100) [2409.2s]
+  quantized_matmul__C4a__gpt-5.5__123: FAILED (0/0) [2081.3s]
+  quantized_matmul__C4a__gpt-5.5__42: FAILED (0/0) [2452.4s]
+  quantized_matmul__C4a__gpt-5.5__456: FAILED (?/?) [2025.5s]
+  unsharp_mask__C4a__gpt-5.5__123: FAILED (63056/65536) [3020.7s]
+  unsharp_mask__C4a__gpt-5.5__42: FAILED (63780/65536) [2795.0s]
+  unsharp_mask__C4a__gpt-5.5__456: FAILED (63780/65536) [2669.5s]

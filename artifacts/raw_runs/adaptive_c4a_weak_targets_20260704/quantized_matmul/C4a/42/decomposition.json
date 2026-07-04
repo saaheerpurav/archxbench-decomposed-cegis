@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_tile.v",
+  "sub_modules": {
+    "qgemm_quantize_tile": "Combinational FP32-to-centered-integer quantization for a flattened tile using Q15 scale.",
+    "qgemm_int_gemm": "Combinational integer matrix multiply over centered quantized A and B tiles with INT32 saturated outputs.",
+    "qgemm_dequantize_tile": "Combinational INT32 accumulator dequantization to FP32 using the product of Q15 scales."
+  }
+}

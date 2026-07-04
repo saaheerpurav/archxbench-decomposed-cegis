@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/nr_poly_eval_fixed.v",
+  "sub_modules": {
+    "nr_poly_eval_fixed": "Combinational fixed-point cubic polynomial evaluator using Horner's method.",
+    "nr_derivative_eval_fixed": "Combinational fixed-point derivative evaluator for a1 + 2*a2*x + 3*a3*x^2.",
+    "nr_newton_update_fixed": "Combinational Newton-Raphson update block with fixed-point division and zero-derivative detection.",
+    "nr_convergence_check": "Combinational absolute-difference convergence checker.",
+    "nr_root_verify": "Combinational verification block that checks whether |p(root)| is within tolerance."
+  }
+}

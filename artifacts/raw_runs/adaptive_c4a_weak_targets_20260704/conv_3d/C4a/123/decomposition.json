@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv3d_coord.v",
+  "sub_modules": {
+    "conv3d_coord": "Computes depth, row, and column coordinates from the flattened input stream index.",
+    "conv3d_window_valid": "Detects when the current stream position has a complete valid-padding 3D convolution window.",
+    "conv3d_mac": "Combinational multiply-accumulate array for the flattened K1 by K2 by K3 voxel window and kernel.",
+    "conv3d_output_cast": "Truncates the wide MAC result to the top-level output width."
+  }
+}

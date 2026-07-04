@@ -48,3 +48,20 @@ Known diagnostic categories:
 - `conv1d` C4tl seeds `123,456`, which failed reference-decomposition validation
 - failed debug rows for DCT, FIR-family designs, `conv_3d`, and `quantized_matmul`
 - `systolic_gemm` rows without reliable golden evidence
+
+### C4a Weak-Target Sweep
+
+`C4a` was run as a targeted research attempt on the remaining weak targets with
+`gpt-5.5`, seeds `42,123,456`.
+
+Artifacts: `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`
+
+| Design | Result |
+|---|---|
+| `unsharp_mask` | 0/3 solved; best `63780/65536` |
+| `fft_streaming_64pt` | 0/3 solved; all `0/1` |
+| `conv_3d` | 0/3 solved; all `0/0` |
+| `quantized_matmul` | 0/3 solved; two `0/0`, one final compile failure |
+| `newton_raphson_polynomial` | 0/3 solved; best `96/100`, no golden denominator |
+
+Conclusion: this is negative evidence. C4a should not be framed as a paper method improvement.
