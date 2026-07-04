@@ -21,6 +21,7 @@ All rows use GPT-5.5 or Codex GPT-5.5 as recorded in `result.json`.
 | `harris_corner_detection` | L5 | C4i | `42,123,456` | 3/3 solved, all `16384/16384` | external golden JSON | solved, not exclusive |
 | `conv1d` | L5 | C4i | `42,123,456` | 3/3 solved, all `16/16` | external golden JSON | clean L5 golden solve |
 | `aes_encryption` | L6 | C4i | `42,123,456` | 3/3 solved, all `8/8` | external golden JSON | clean L6 golden solve |
+| `aes_decryption` | L6 | C4i | `42,123,456` | 3/3 solved, all `8/8` | external golden JSON | clean L6 golden solve |
 
 ## Golden-Verified Secondary Rows
 
@@ -30,8 +31,11 @@ These rows are clean but not central claims yet.
 |---|---:|---|---:|---|---|
 | `conv1d` | L5 | C4tl | `42` | `16/16` golden | one seed only |
 | `harris_corner_detection` | L5 | C2g | `42` | `16384/16384` golden | baseline context |
+| `conv2d` | L5 | C2g | `42,123,456` | 3/3 solved, all `4096/4096` golden | strong baseline context |
+| `dct_idct_8pt_pipelined` | L5 | C2g | `42,123,456` | 3/3 solved, all `16/16` golden | strong baseline context |
+| `aes_decryption` | L6 | C2g | `42,123,456` | 3/3 solved, all `8/8` golden | strong baseline context |
 
-Artifacts live under `artifacts/curated/golden_verified_secondary/`.
+Artifacts are indexed in `artifacts/inventories/artifact_index.csv`; older showcase rows may also appear under `artifacts/curated/golden_verified_secondary/`.
 
 ## Diagnostics
 

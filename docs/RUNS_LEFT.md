@@ -1,139 +1,86 @@
 # Runs Left
 
-This is the only run queue.
+This is the only run queue. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`.
+
+Last audited: 2026-07-04 after the AES decryption UTF-8 rerun.
 
 ## Required For Current Claims
 
 None.
 
-The current claims in [RESULTS.md](RESULTS.md) already have repo-local artifacts.
+The current claim rows in `docs/RESULTS.md` have repo-local artifacts and at least three clean seeds unless explicitly marked secondary.
 
-## AAAI No-Compromise Matrix Completion
+## Matrix Status
 
-The current claims are supported, but the full method matrix is uneven. For AAAI-grade comparison, complete the matched GPT-5.5 matrix for the primary methods:
+### Complete Claim-Ready Rows
 
-- `C1`
-- `C2g`
-- `C4i`
-- `C4tl`
+These have enough clean evidence for the current paper framing.
 
-Use [../artifacts/inventories/run_matrix_l3_l6.csv](../artifacts/inventories/run_matrix_l3_l6.csv) as the source of truth before and after every batch.
+| Level | Design | Clean methods |
+|---|---|---|
+| L3 | `fp_adder` | `C4i` 3/3 |
+| L3 | `fp_multiplier` | `C4i` 3/3 |
+| L3 | `gauss_siedel` | `C4i` 3/3 |
+| L3 | `gradient_descent` | `C4i` 3/3 |
+| L3 | `newton_raphson_sqrt` | `C4i` 3/3 |
+| L4 | `fft_16pt_iterative` | `C2g` 3/3, `C4tl` 5/5 |
+| L4 | `fp_adder_pipeline` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3, `C4tl` 5/5 |
+| L4 | `fp_mult_pipeline` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3, `C4tl` 5/5 |
+| L4 | `ifft_16pt_iterative` | `C2g` 3/3, `C4tl` 5/5 |
+| L5 | `conv1d` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
+| L5 | `conv2d` | `C2g` 3/3 |
+| L5 | `dct_idct_8pt_pipelined` | `C2g` 3/3 |
+| L5 | `harris_corner_detection` | `C2g` 3/3, `C4i` 3/3 |
+| L6 | `aes_decryption` | `C2g` 3/3, `C4i` 3/3 |
+| L6 | `aes_encryption` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
 
-### Priority 1: Complete C2g L5/L6 Baselines
+### Partial Valid Results
 
-C2g is the strongest monolithic baseline. Do these before adding more C4i/C4tl runs.
+These are real results, but not enough to present as robust method wins.
 
-Completed GPT-5.5 C2g baseline rows:
+| Level | Design | Current status |
+|---|---|---|
+| L3 | `newton_raphson_polynomial` | no clean solve; best `C4i` is `89/100` |
+| L5 | `unsharp_mask` | no clean solve; best `C2g` is `65535/65536` |
+| L6 | `fft_streaming_64pt` | `C2g` seed `42` clean `128/128`; seeds `123,456` fail |
+| L6 | `conv_3d` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
+| L6 | `quantized_matmul` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
 
-| Design | Status |
+### Excluded Or Hold
+
+Do not blind-run these until the checker/spec issue is resolved.
+
+| Level | Design | Reason |
+|---|---|---|
+| L4 | `band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
+| L4 | `high_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
+| L4 | `low_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
+| L5 | `systolic_gemm` | no reliable golden evidence; native pass is not enough |
+| L6 | `fp_band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
+| L6 | `fp_high_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
+| L6 | `fp_low_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
+| L6 | `multich_conv2d` | benchmark loader/testbench issue; currently excluded |
+
+## What Is Left To Run
+
+No same-method, same-seed completion run is currently queued for the existing claims.
+
+The only useful next runs are targeted research attempts, not table filling:
+
+| Priority | Action |
 |---|---|
-| `aes_decryption` | complete after UTF-8/ASCII-normalization fix, C2g seeds `42,123,456` clean `3/3`, golden `8/8` |
-| `conv1d` | complete, seeds `42,123,456`, clean `3/3`, golden `16/16` |
-| `harris_corner_detection` | complete, seeds `42,123,456`, clean `3/3`, golden `16384/16384` |
-| `aes_encryption` | complete, seeds `42,123,456`, clean `3/3`, golden `8/8` |
-| `conv2d` | complete, seeds `42,123,456`, clean `3/3`, golden `4096/4096` |
-| `fft_streaming_64pt` | complete, seeds `42,123,456`, clean `1/3`; seed `42` golden `128/128`, seeds `123,456` produced `0/0` golden |
-| `unsharp_mask` | complete, seeds `42,123,456`, clean `0/3`; best seeds `42,456` are `65535/65536` |
+| 1 | Decide whether to exclude or repair the FIR-family benchmark contract. |
+| 2 | Decide whether `systolic_gemm` has a valid golden checker; otherwise keep it excluded. |
+| 3 | If expanding coverage, try a new method or targeted repair on `unsharp_mask`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul`, and `newton_raphson_polynomial`. Re-running the same methods is not justified by the current evidence. |
+| 4 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
 
-Remaining GPT-5.5 C2g rows:
+## Execution Rules
 
-| Design | Seeds / action |
-|---|---|
-| `dct_idct_8pt_pipelined` | run seeds `123,456` after one diagnostic check of seed `42` failure |
-| `conv_3d` | run seeds `123,456` only if seed `42` failure is understood |
-| `quantized_matmul` | run seeds `123,456` only if seed `42` failure is understood |
-| `fp_band_pass_fir` | hold until FIR benchmark/spec-contract caveat is resolved |
-| `fp_high_pass_fir` | hold until FIR benchmark/spec-contract caveat is resolved |
-| `fp_low_pass_fir` | hold until FIR benchmark/spec-contract caveat is resolved |
-
-### Priority 2: Complete C4i Seeds For Non-Broken L4/L5/L6 Rows
-
-Run GPT-5.5 C4i seeds `123,456` where only seed `42` exists and the benchmark/checker is usable:
-
-| Level | Designs |
-|---|---|
-| L4 | `fft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline`, `ifft_16pt_iterative` |
-| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` |
-| L6 | `aes_decryption`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul` |
-
-Already complete on C4i seeds `42,123,456`:
-
-- L3 all current C4i rows
-- `conv1d`
-- `harris_corner_detection`
-- `aes_encryption`
-- `aes_decryption`
-
-Hold until benchmark/spec-contract caveat is resolved:
-
-- L4 FIR-family designs
-- L6 `fp_band_pass_fir`, `fp_high_pass_fir`, `fp_low_pass_fir`
-
-### Priority 3: Complete C4tl Only Where It Is Part Of The Story
-
-C4tl is currently strongest on the L4 core designs and weak/messy on L5/L6 golden verification. Run more C4tl only to support ablation/fairness, not as the main method.
-
-Already complete on C4tl seeds `42,123,456,789,1024`:
-
-- `fp_mult_pipeline`
-- `fp_adder_pipeline`
-- `fft_16pt_iterative`
-- `ifft_16pt_iterative`
-
-Optional C4tl seeds `123,456`:
-
-- `harris_corner_detection`
-- `aes_encryption`
-- `fft_streaming_64pt`
-- `aes_decryption`
-- `conv2d`
-- `unsharp_mask`
-- `dct_idct_8pt_pipelined`
-- `conv_3d`
-- `quantized_matmul`
-
-Do not promote C4tl rows unless they are strict-clean under the correct verifier. Native simulator pass is not enough for L5/L6.
-
-### Exclusions / Hold Until Fixed
-
-| Design | Reason |
-|---|---|
-| `multich_conv2d` | benchmark loader/testbench issue; currently excluded |
-| `systolic_gemm` | no reliable golden evidence in repo; decide checker first |
-| FIR-family designs | benchmark/spec-contract caveat unresolved |
-
-### Execution Rules
-
+- Use `artifacts/inventories/run_matrix_l3_l6.csv` as the source of truth before and after every batch.
 - Use `--parallel 2` for overnight paper-quality runs.
-- Use `--parallel 3` only for lighter diagnostic batches.
 - After every batch:
-  - copy/promote only strict-clean rows as needed
   - run `python scripts\build_artifact_index.py`
   - run `python scripts\build_run_matrix.py`
-  - update this file if the queue changes
+  - update this file
   - commit and push
 
-## Clean Optional Expansion
-
-None currently queued.
-
-`conv1d` C4i and `aes_encryption` C4i have been completed on seeds `42,123,456` with complete golden scores.
-
-## Do Not Blind-Run
-
-Do not run these just to fill a table. They need a method or checker decision first:
-
-| Design | Current status |
-|---|---|
-| `aes_encryption` C4tl | seed `42` fails golden; C4i is already clean on `42,123,456` |
-| `aes_decryption` | C2g and C4i are clean on seeds `42,123,456`; C4tl is clean only on seed `42`, with seeds `123,456` failing reference-decomposition validation |
-| `fft_streaming_64pt` | C2g seed `42` is golden-clean; C4i/C4tl seed `42` fail golden |
-| `conv1d` C4tl | seed `42` is clean, but seeds `123,456` failed reference-decomposition validation |
-| `conv2d` | current C4i/C4tl rows fail or partially match golden |
-| `unsharp_mask` | current C4i/C4tl rows partially match golden |
-| `harris_corner_detection` C4tl | current C4tl seed `42` fails golden; C4i is already clean on `42,123,456` |
-| `systolic_gemm` | no reliable golden evidence in repo |
-| `conv_3d` | diagnostic rows fail |
-| `quantized_matmul` | diagnostic rows fail |
-| `dct_idct_8pt_pipelined` | diagnostic rows fail |
-| FIR-family designs | benchmark/spec-contract caveat unresolved |
