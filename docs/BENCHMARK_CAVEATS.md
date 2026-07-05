@@ -6,6 +6,10 @@ For file-output designs, native simulator completion is not enough. A row counts
 
 Rows with native `1/1` pass but failing or missing golden scores are diagnostics.
 
+The file-output contract audit is recorded in `artifacts/inventories/file_output_contract_audit.csv`.
+Three original benchmark designs emit no native PASS/FAIL tokens and rely entirely on post-simulation
+golden comparison: `conv_3d`, `multich_conv2d`, and `quantized_matmul`.
+
 ## Self-Checking Testbenches
 
 Some designs have official self-checking testbenches and do not use external golden JSON. For these, use `best_passes/total_tests`.

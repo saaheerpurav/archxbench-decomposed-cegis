@@ -11,6 +11,7 @@ Canonical files:
 - Paper-readiness audit and baseline gap map: [PAPER_AUDIT.md](PAPER_AUDIT.md)
 - Benchmark caveats: [BENCHMARK_CAVEATS.md](BENCHMARK_CAVEATS.md)
 - Repaired benchmark-contract track: [EXECUTABLE_CONTRACT_REPAIR.md](EXECUTABLE_CONTRACT_REPAIR.md)
+- File-output golden audit: [FILE_OUTPUT_GOLDEN_AUDIT.md](FILE_OUTPUT_GOLDEN_AUDIT.md)
 - Artifact policy: [ARTIFACTS.md](ARTIFACTS.md)
 
 ## Current Bottom Line

@@ -1,0 +1,20 @@
+level,design,testbench_files,golden_files,writes_dut_output,has_native_pass_fail_tokens,has_compare_script,contract_class,note
+level-4,band_pass_fir,tb_band_pass_fir.v;tb_selfcheck.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-4,fft_16pt_iterative,tb_fft_16pt_iterative.v;tb_selfcheck.v,golden_output.json;golden_output_float.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-4,high_pass_fir,tb_high_pass_fir.v;tb_selfcheck.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-4,ifft_16pt_iterative,tb_ifft_16pt_iterative.v;tb_selfcheck.v,golden_output.json;golden_output_float.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-4,low_pass_fir,tb_low_pass_fir.v;tb_selfcheck.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-5,conv1d,tb_conv1d.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-5,conv2d,tb_conv2d.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-5,dct_idct_8pt_pipelined,tb_dct_idct_8pt_pipelined.v,golden_dct.json;golden_idct.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-5,harris_corner_detection,tb_harris_corner.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-5,unsharp_mask,tb_unsharp_mask.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-6,aes_decryption,tb_aes_decryption.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-6,aes_encryption,tb_aes_encryption.v,golden_output.json;golden_output1.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-6,conv_3d,tb_conv3d.v,golden_output.json,True,False,True,post_sim_golden_only,testbench emits no native PASS/FAIL; golden JSON comparison is mandatory
+level-6,fft_streaming_64pt,tb_fft_streaming_64pt.v,golden_output.json;golden_output_hex.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-6,fp_band_pass_fir,tb_fp_band_pass_fir.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-6,fp_high_pass_fir,tb_fp_high_pass_fir.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-6,fp_low_pass_fir,tb_fp_lowpass_fir.v,golden_output.json,True,True,True,native_or_dual_check,native PASS/FAIL tokens exist; golden comparison may still be required for file-output rows
+level-6,multich_conv2d,testbench.v,golden_output.json,True,False,True,post_sim_golden_only,testbench emits no native PASS/FAIL; golden JSON comparison is mandatory
+level-6,quantized_matmul,tb_qgemm.v,golden_output.json,True,False,True,post_sim_golden_only,testbench emits no native PASS/FAIL; golden JSON comparison is mandatory

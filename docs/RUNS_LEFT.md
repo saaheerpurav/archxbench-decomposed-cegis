@@ -2,7 +2,7 @@
 
 This is the only run queue. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`.
 
-Last audited: 2026-07-05 after the runner-fixed repaired-contract qgemm batch.
+Last audited: 2026-07-05 after the file-output golden-contract audit.
 
 ## Required For Current Claims
 
@@ -101,7 +101,7 @@ The only useful next runs are targeted research attempts, not table filling:
 | Priority | Action |
 |---|---|
 | 1 | Decide whether repaired `conv_3d` and repaired `quantized_matmul` belong in the paper as benchmark-audit/repaired-contract results, not original ArchXBench solves. |
-| 2 | Review other file-output rows for the same native PASS-token golden-verification bug. |
+| 2 | Decide whether to repair or formally exclude `multich_conv2d`, the remaining post-sim-golden-only design without a repaired-contract track. |
 | 3 | Decide whether to exclude or repair the FIR-family benchmark contract. |
 | 4 | Decide whether `systolic_gemm` has a valid golden checker; otherwise keep it excluded. |
 | 5 | If expanding beyond contract repair, target `unsharp_mask`, `fft_streaming_64pt`, and `newton_raphson_polynomial` with a genuinely new method. C4a was tried and failed, so re-running it is not justified by current evidence. |
@@ -115,5 +115,6 @@ The only useful next runs are targeted research attempts, not table filling:
 - After every batch:
   - run `python scripts\build_artifact_index.py`
   - run `python scripts\build_run_matrix.py`
+  - run `python scripts\audit_file_output_contracts.py` if benchmark contracts or testbenches changed
   - update this file
   - do not push unless explicitly requested
