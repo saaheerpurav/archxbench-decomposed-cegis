@@ -1,0 +1,9 @@
+{
+  "error": "Decomposition failed after 3 attempts: compilation exceeded 30s",
+  "design": "conv_3d",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 353.1,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

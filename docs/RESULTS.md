@@ -65,3 +65,20 @@ Artifacts: `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`
 | `newton_raphson_polynomial` | 0/3 solved; best `96/100`, no golden denominator |
 
 Conclusion: this is negative evidence. C4a should not be framed as a paper method improvement.
+
+### Repaired-Contract Track
+
+These rows are not original ArchXBench results. They use repaired executable contracts under
+`artifacts/benchmark_contracts/archxbench_repaired/`.
+
+Artifacts: `artifacts/raw_runs/repaired_contracts_20260705/`
+Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
+
+| Design | Method | Seeds | Result | Interpretation |
+|---|---|---|---|---|
+| `conv_3d` repaired contract | C2g | `42,123,456` | 3/3 solved, all `23064/23064` golden | benchmark repair unlocks the task; C2g is strongest |
+| `conv_3d` repaired contract | C4i | `42,123,456` | 2/3 solved, seeds `42,123` | partial decomposed result |
+| `conv_3d` repaired contract | C4tl | `42,123,456` | 0/3 solved | negative |
+| `quantized_matmul` repaired contract | C2g/C4i/C4tl | `42,123,456` each | 0/9 solved | still unsolved after contract repair |
+
+Do not merge these rows into original ArchXBench solve-rate tables.

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantizer.v",
+  "sub_modules": {
+    "qgemm_quantizer": "Combinational FP32-to-integer quantization stage that returns zero-point-centered rounded integer values.",
+    "qgemm_int_matmul": "Combinational integer-domain VLEN by VLEN matrix multiplication over K using INT32 accumulators.",
+    "qgemm_dequantizer": "Combinational fixed-point scale dequantization stage that converts INT32 accumulators back to packed IEEE-754 FP32 bit patterns."
+  }
+}

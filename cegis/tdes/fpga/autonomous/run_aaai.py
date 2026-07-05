@@ -77,10 +77,11 @@ def _verilog_text(text: str) -> str:
     """
     return (text or "").translate(_DASH_TRANSLATION)
 
-_ARCHX_ROOT = os.path.join(
+_DEFAULT_ARCHX_ROOT = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "..", "benchmarks", "archxbench",
 )
+_ARCHX_ROOT = os.environ.get("ARCHXBENCH_ROOT", _DEFAULT_ARCHX_ROOT)
 
 _LEVEL_DESIGNS = {
     "L2": [

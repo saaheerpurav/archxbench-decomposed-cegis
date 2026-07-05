@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp32_q15_quantizer.v",
+  "sub_modules": {
+    "fp32_q15_quantizer": "Converts packed IEEE-754 FP32 matrix inputs into clamped quantized integer values using a Q15 scale and zero-point.",
+    "qgemm_int_mac": "Computes the VLEN by VLEN integer GEMM accumulator by subtracting zero-points and summing K products.",
+    "qgemm_dequantizer": "Converts INT32 accumulators back to packed IEEE-754 FP32 using the product of the two Q15 scale values."
+  }
+}

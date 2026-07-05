@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv3d_stream_index.v",
+  "sub_modules": {
+    "conv3d_stream_index": "Combinational converter from flattened stream index to depth, row, and column coordinates.",
+    "conv3d_window_valid": "Combinational valid-window detector for stride-1 valid-padding 3D convolution.",
+    "conv3d_mac": "Combinational multiply-accumulate array over the flattened K1 by K2 by K3 convolution window and kernel."
+  }
+}

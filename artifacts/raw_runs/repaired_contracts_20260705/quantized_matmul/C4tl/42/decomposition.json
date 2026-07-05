@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_matrix.v",
+  "sub_modules": {
+    "qgemm_quantize_matrix": "Combinational FP32-to-quantized conversion for a packed matrix, including Q15 scale handling, zero-point addition, unsigned quantized clamp, and zero-point centering.",
+    "qgemm_int_matmul": "Combinational integer matrix multiplication over centered quantized A and B values, producing INT32 accumulators for each output element.",
+    "qgemm_dequantize_matrix": "Combinational dequantization of INT32 accumulators using Q15 scale_A and scale_B, packing each result as IEEE-754 FP32 bits."
+  }
+}

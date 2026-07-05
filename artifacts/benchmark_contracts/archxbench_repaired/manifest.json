@@ -1,0 +1,24 @@
+{
+  "source_root": "cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "repaired_root": "artifacts\\benchmark_contracts\\archxbench_repaired",
+  "designs": [
+    {
+      "level": "level-6",
+      "design": "quantized_matmul",
+      "repairs": [
+        "generate missing tb_float.mem",
+        "regenerate tb_params.mem from stimuli",
+        "normalize golden_output.json to FP32 bit-pattern integers"
+      ]
+    },
+    {
+      "level": "level-6",
+      "design": "conv_3d",
+      "repairs": [
+        "drive all-ones kernel to match Python reference",
+        "write only valid convolution outputs",
+        "use sufficient output width"
+      ]
+    }
+  ]
+}

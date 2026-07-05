@@ -1,0 +1,24 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 2,
+  "best_passes": 0,
+  "total_tests": 1,
+  "solved": false,
+  "decomp_modules": [
+    "conv3d_stream_coords",
+    "conv3d_window_valid",
+    "conv3d_window_sum"
+  ],
+  "ref_passes": 0,
+  "ref_total": 1,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "conv_3d",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 400.2,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

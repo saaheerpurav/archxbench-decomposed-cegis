@@ -96,9 +96,15 @@ Do these only if the goal is maximum paper strength, not incremental cleanup.
 
 No table-filling run is currently required for the existing claims.
 
-The highest-value next experiment is not another broad sweep. It is one of:
+The repaired-contract track has now been run:
 
+- repaired `conv_3d`: C2g 3/3, C4i 2/3, C4tl 0/3
+- repaired `quantized_matmul`: C2g/C4i/C4tl all 0/3
+- these rows must remain separate from original ArchXBench tables
+
+Current highest-value next attempts:
+
+- analyze why repaired `quantized_matmul` still returns `0/0`
 - repair/validate the FIR and `systolic_gemm` benchmark contracts, then rerun only if the checker is trustworthy
 - targeted solve attempt on `unsharp_mask`, because it is a near miss at `65535/65536`
 - targeted solve attempt on `newton_raphson_polynomial`, because C4a reached `96/100`
-- a fundamentally new method for `conv_3d` or `quantized_matmul`, since all current methods fail there

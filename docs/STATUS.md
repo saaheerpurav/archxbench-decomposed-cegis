@@ -10,6 +10,7 @@ Canonical files:
 - Run queue and unresolved gaps: [RUNS_LEFT.md](RUNS_LEFT.md)
 - Paper-readiness audit and baseline gap map: [PAPER_AUDIT.md](PAPER_AUDIT.md)
 - Benchmark caveats: [BENCHMARK_CAVEATS.md](BENCHMARK_CAVEATS.md)
+- Repaired benchmark-contract track: [EXECUTABLE_CONTRACT_REPAIR.md](EXECUTABLE_CONTRACT_REPAIR.md)
 - Artifact policy: [ARTIFACTS.md](ARTIFACTS.md)
 
 ## Current Bottom Line
@@ -25,6 +26,7 @@ The current evidence does not support claiming that C4i/C4tl dominates C2g every
 - File-output designs require strict golden verification.
 - Native simulator PASS without golden verification is diagnostic only.
 - Do not use outside folders, old local notes, or collaborator machine paths as evidence unless copied into this repo.
+- Keep repaired-contract experiments separate from original ArchXBench claim tables.
 - Do not push automatically.
 
 ## Inventory Commands
@@ -39,3 +41,4 @@ Primary inventory files:
 - `artifacts/inventories/artifact_index.csv`
 - `artifacts/inventories/artifact_index.json`
 - `artifacts/inventories/run_matrix_l3_l6.csv`
+- `artifacts/inventories/repaired_contract_run_matrix.csv`

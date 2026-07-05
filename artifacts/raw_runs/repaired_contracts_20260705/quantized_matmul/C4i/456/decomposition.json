@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp32_q15_quantizer.v",
+  "sub_modules": {
+    "fp32_q15_quantizer": "Converts one IEEE-754 FP32 input value to a zero-point-centered quantized integer using a Q15 scale.",
+    "int_dot_product": "Computes one INT32 dot product from K centered quantized A and B values.",
+    "q15_dequantizer": "Converts one INT32 accumulator result back to IEEE-754 FP32 using the product of the two Q15 scales."
+  }
+}

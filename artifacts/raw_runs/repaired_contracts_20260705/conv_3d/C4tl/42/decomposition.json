@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv3d_stream_indexer.v",
+  "sub_modules": {
+    "conv3d_stream_indexer": "Combinational conversion from flattened stream index to depth, row, and column coordinates.",
+    "conv3d_window_valid": "Combinational valid-window detector for padding-free stride-1 3D convolution positions.",
+    "conv3d_window_reader": "Combinational 3D line/frame/depth window extractor from the buffered input volume, with current-cycle voxel forwarding.",
+    "conv3d_mac_tree": "Combinational multiply-accumulate block for the flattened 3D window and kernel coefficients."
+  }
+}

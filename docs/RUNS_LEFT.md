@@ -2,7 +2,7 @@
 
 This is the only run queue. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`.
 
-Last audited: 2026-07-04 after the C4a weak-target sweep.
+Last audited: 2026-07-05 after running the repaired-contract batch for `conv_3d` and `quantized_matmul`.
 
 ## Required For Current Claims
 
@@ -63,6 +63,19 @@ Result: 0/15 solves.
 
 Conclusion: C4a is negative evidence. Do not promote it as a method improvement.
 
+### Repaired-Contract Batch
+
+`conv_3d` and `quantized_matmul` were rerun against the repaired executable contracts under
+`artifacts/benchmark_contracts/archxbench_repaired/`.
+
+Artifacts: `artifacts/raw_runs/repaired_contracts_20260705/`
+Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
+
+| Design | Repaired-contract result |
+|---|---|
+| `conv_3d` | C2g 3/3 solved; C4i 2/3 solved; C4tl 0/3 solved |
+| `quantized_matmul` | C2g 0/3, C4i 0/3, C4tl 0/3 |
+
 ### Excluded Or Hold
 
 Do not blind-run these until the checker/spec issue is resolved.
@@ -86,15 +99,18 @@ The only useful next runs are targeted research attempts, not table filling:
 
 | Priority | Action |
 |---|---|
-| 1 | Decide whether to exclude or repair the FIR-family benchmark contract. |
-| 2 | Decide whether `systolic_gemm` has a valid golden checker; otherwise keep it excluded. |
-| 3 | If expanding coverage, design a genuinely new method or benchmark-specific repair for `unsharp_mask`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul`, and `newton_raphson_polynomial`. C4a was tried and failed, so re-running it is not justified by current evidence. |
-| 4 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
+| 1 | Analyze why repaired `quantized_matmul` still produces `0/0` across methods. This is the next genuinely hard target. |
+| 2 | Decide whether repaired `conv_3d` belongs in the paper as a benchmark-audit/repaired-contract result, not as an original ArchXBench solve. |
+| 3 | Decide whether to exclude or repair the FIR-family benchmark contract. |
+| 4 | Decide whether `systolic_gemm` has a valid golden checker; otherwise keep it excluded. |
+| 5 | If expanding beyond contract repair, target `unsharp_mask`, `fft_streaming_64pt`, and `newton_raphson_polynomial` with a genuinely new method. C4a was tried and failed, so re-running it is not justified by current evidence. |
+| 6 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
 
 ## Execution Rules
 
 - Use `artifacts/inventories/run_matrix_l3_l6.csv` as the source of truth before and after every batch.
 - Use `--parallel 2` for overnight paper-quality runs.
+- For repaired-contract runs, set `ARCHXBENCH_ROOT` explicitly and record that root in the run note.
 - After every batch:
   - run `python scripts\build_artifact_index.py`
   - run `python scripts\build_run_matrix.py`
