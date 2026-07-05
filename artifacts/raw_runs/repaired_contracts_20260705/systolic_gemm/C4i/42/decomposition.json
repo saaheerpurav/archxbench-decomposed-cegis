@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/pe_cell_comb.v",
+  "sub_modules": {
+    "pe_cell_comb": "Combinational processing element datapath: forwards north/west operands and computes the next signed 64-bit accumulated product.",
+    "done_logic": "Combinational completion flag generator for the 9-cycle 4x4 systolic computation latency.",
+    "pe": "Standalone processing element matching the requested PE interface for reference use."
+  }
+}

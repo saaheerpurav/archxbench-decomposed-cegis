@@ -1,0 +1,20 @@
+{
+  "condition": "C4i",
+  "solved": false,
+  "llm_calls": 28,
+  "error": "final compile failed",
+  "decomp_modules": [
+    "pe_product",
+    "pe_forward",
+    "pe_accumulate"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "systolic_gemm",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 1241.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

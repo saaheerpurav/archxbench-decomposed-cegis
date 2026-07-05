@@ -71,7 +71,7 @@ Interpretation:
 | Design group | Status |
 |---|---|
 | FIR family | Exclude unless the benchmark/spec-contract issue is repaired and documented. Some rows show apparent C2g solves, but these should not become claims while the FIR contract remains disputed. |
-| `systolic_gemm` | Hold. Existing pass rows do not provide reliable golden evidence. |
+| `systolic_gemm` | Original checker is display-only. Repaired-contract run is complete and negative: C2g/C4i/C4tl all 0/3. |
 | `multich_conv2d` | Original contract issue. Repaired-contract rows are complete and must stay separate from original ArchXBench tables. |
 
 ## What Would Strengthen The AAAI Paper
@@ -102,10 +102,11 @@ The repaired-contract track has now been run:
 - repaired `multich_conv2d`: C2g 3/3, C4i 3/3, C4tl 3/3
 - repaired `quantized_matmul`, initial file-format repair: C2g/C4i/C4tl all 0/3
 - repaired `quantized_matmul`, after signed-quantization clarification and runner fix: C2g 3/3, C4i 3/3, C4tl 0/3
+- repaired `systolic_gemm`: C2g 0/3, C4i 0/3, C4tl 0/3
 - these rows must remain separate from original ArchXBench tables
 
 Current highest-value next attempts:
 
-- repair/validate the FIR and `systolic_gemm` benchmark contracts, then rerun only if the checker is trustworthy
+- repair/validate the FIR benchmark contracts, then rerun only if the checker is trustworthy
 - targeted solve attempt on `unsharp_mask`, because it is a near miss at `65535/65536`
 - targeted solve attempt on `newton_raphson_polynomial`, because C4a reached `96/100`

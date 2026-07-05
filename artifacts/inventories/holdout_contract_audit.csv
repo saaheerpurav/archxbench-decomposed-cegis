@@ -1,0 +1,8 @@
+level,design,status,notes,path
+L4,band_pass_fir,hold_repaired_style_in_source_tree,L4 FIR source tree contains repaired-style selfcheck/spec text while stale JSON testbench remains; keep as diagnostic unless provenance is explicitly framed.,cegis\tdes\fpga\benchmarks\archxbench\level-4\band_pass_fir
+L4,high_pass_fir,hold_repaired_style_in_source_tree,L4 FIR source tree contains repaired-style selfcheck/spec text while stale JSON testbench remains; keep as diagnostic unless provenance is explicitly framed.,cegis\tdes\fpga\benchmarks\archxbench\level-4\high_pass_fir
+L4,low_pass_fir,hold_repaired_style_in_source_tree,L4 FIR source tree contains repaired-style selfcheck/spec text while stale JSON testbench remains; keep as diagnostic unless provenance is explicitly framed.,cegis\tdes\fpga\benchmarks\archxbench\level-4\low_pass_fir
+L5,systolic_gemm,repairable_display_only,Original checker prints expected matrices but has no machine-readable PASS/FAIL; repaired contract can encode the printed expected values.,cegis\tdes\fpga\benchmarks\archxbench\level-5\systolic_gemm
+L6,fp_band_pass_fir,hold_unresolved_fp_fir_contract,hidden_dut_coeff_memory; coeffs=31 max_abs_diff=1.31758 mismatches_gt_1=152,cegis\tdes\fpga\benchmarks\archxbench\level-6\fp_band_pass_fir
+L6,fp_high_pass_fir,hold_unresolved_fp_fir_contract,hidden_dut_coeff_memory; loose_float_tolerance_masks_numeric_mismatch; coeffs=31 max_abs_diff=0.29918 mismatches_gt_1=0,cegis\tdes\fpga\benchmarks\archxbench\level-6\fp_high_pass_fir
+L6,fp_low_pass_fir,hold_unresolved_fp_fir_contract,wrong_input_filename; wrong_output_filename; module_name_mismatch; no_coefficients_in_testbench,cegis\tdes\fpga\benchmarks\archxbench\level-6\fp_low_pass_fir

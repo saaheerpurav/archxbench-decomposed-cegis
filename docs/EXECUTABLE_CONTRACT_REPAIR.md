@@ -140,6 +140,34 @@ Repaired-contract run:
 - C4tl, seeds `42,123,456`: 0/3 clean solves.
 - Interpretation: repairing the executable contract unlocks `conv_3d`, but the win is not specific to C4tl. C2g is strongest on this repaired contract.
 
+## `systolic_gemm`
+
+Original contract issue:
+
+- The original testbench prints actual and expected matrices, but it does not emit machine-readable `[PASS]` or `[FAIL]` checks.
+- Existing native-pass rows are therefore not reliable evidence of correctness.
+- The expected values are present in the original testbench text, so this is repairable without inventing a new oracle.
+
+Repair:
+
+- Preserve the two original test cases: `A x A` for values `1..16` and `A x I` for values `0..15`.
+- Convert the expected matrices already printed by the original testbench into 32 exact 64-bit result checks.
+- Remove the testbench-local `include` directive; the runner supplies the generated DUT as `systolic_matrix_mult.v`.
+- Append repaired-contract notes to `design-specs.txt`.
+
+Sanity check:
+
+- A hardcoded oracle DUT compiles/runs and reports `32/32` exact checks.
+
+Repaired-contract run:
+
+- Artifacts: `artifacts/raw_runs/repaired_contracts_20260705/`
+- Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
+- C2g, seeds `42,123,456`: 0/3 clean solves, all `0/0` after 30 calls.
+- C4i, seeds `42,123,456`: 0/3 clean solves; all failed final compile.
+- C4tl, seeds `42,123,456`: 0/3 clean solves; reference decompositions failed the repaired system checker.
+- Interpretation: the display-only checker was repaired, but none of the current methods solved the repaired `systolic_gemm` contract.
+
 ## Paper Use
 
 This can strengthen the paper only if framed honestly:

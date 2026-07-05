@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/pe_product.v",
+  "sub_modules": {
+    "pe_product": "Pure combinational signed 32-bit by 32-bit multiplier producing a 64-bit product for one processing element.",
+    "pe_forward": "Pure combinational forwarding block that routes west input eastward and north input southward.",
+    "pe_accumulate": "Pure combinational 64-bit accumulator adder that forms the next partial sum from the current result and product."
+  }
+}

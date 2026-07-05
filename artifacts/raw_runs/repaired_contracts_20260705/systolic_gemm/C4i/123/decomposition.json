@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/pe.v",
+  "sub_modules": {
+    "pe": "Combinational processing element that forwards north and west operands and produces their signed 64-bit product.",
+    "signed_multiplier": "Combinational 32-bit signed by 32-bit signed multiplier with 64-bit product output.",
+    "accumulate64": "Combinational 64-bit accumulator adder helper.",
+    "done_control": "Combinational completion flag generator for the 9-cycle systolic computation window."
+  }
+}

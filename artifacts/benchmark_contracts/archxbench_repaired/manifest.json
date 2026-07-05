@@ -30,6 +30,15 @@
         "write exactly the expected output count",
         "use valid JSON comma handling"
       ]
+    },
+    {
+      "level": "level-5",
+      "design": "systolic_gemm",
+      "repairs": [
+        "convert displayed expected matrices into machine-readable PASS/FAIL checks",
+        "preserve the original A x A and A x I test cases",
+        "remove duplicate include dependence from the testbench"
+      ]
     }
   ]
 }

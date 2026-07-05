@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/pe.v",
+  "sub_modules": {
+    "pe": "Combinational processing element datapath that forwards north/west inputs and computes the signed 32x32 product.",
+    "mac_accumulate": "Combinational 64-bit accumulator adder for one PE result path.",
+    "done_control": "Combinational completion decoder that asserts done after the 9-cycle systolic computation window."
+  }
+}

@@ -86,5 +86,8 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | `quantized_matmul` repaired contract, runner-fixed | C2g | `42,123,456` | 3/3 solved, all `64/64` golden | repaired contract is solvable |
 | `quantized_matmul` repaired contract, runner-fixed | C4i | `42,123,456` | 3/3 solved, all `64/64` golden | repaired contract is solvable |
 | `quantized_matmul` repaired contract, runner-fixed | C4tl | `42,123,456` | 0/3 solved | reference decomposition failed |
+| `systolic_gemm` repaired contract | C2g | `42,123,456` | 0/3 solved | 30-call monolithic repair failed all seeds |
+| `systolic_gemm` repaired contract | C4i | `42,123,456` | 0/3 solved | all seeds failed final compile |
+| `systolic_gemm` repaired contract | C4tl | `42,123,456` | 0/3 solved | reference decompositions failed |
 
 Do not merge these rows into original ArchXBench solve-rate tables.

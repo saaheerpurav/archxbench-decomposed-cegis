@@ -2,7 +2,7 @@
 
 This is the only run queue. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`.
 
-Last audited: 2026-07-05 after the file-output golden-contract audit.
+Last audited: 2026-07-05 after the repaired `systolic_gemm` contract run.
 
 ## Required For Current Claims
 
@@ -65,7 +65,7 @@ Conclusion: C4a is negative evidence. Do not promote it as a method improvement.
 
 ### Repaired-Contract Batch
 
-`conv_3d`, `multich_conv2d`, and `quantized_matmul` were rerun against the repaired executable contracts under
+`conv_3d`, `multich_conv2d`, `quantized_matmul`, and `systolic_gemm` were rerun against repaired executable contracts under
 `artifacts/benchmark_contracts/archxbench_repaired/`.
 
 Artifacts: `artifacts/raw_runs/repaired_contracts_20260705/`
@@ -77,6 +77,7 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | `multich_conv2d` | C2g 3/3 solved; C4i 3/3 solved; C4tl 3/3 solved |
 | `quantized_matmul` initial | C2g 0/3, C4i 0/3, C4tl 0/3; exposed signed-quantization and runner issues |
 | `quantized_matmul` runner-fixed | C2g 3/3 solved; C4i 3/3 solved; C4tl 0/3 solved |
+| `systolic_gemm` | C2g 0/3, C4i 0/3, C4tl 0/3; repaired display-only checker, but no method solved it |
 
 ### Excluded Or Hold
 
@@ -87,7 +88,7 @@ Do not blind-run these until the checker/spec issue is resolved.
 | L4 | `band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
 | L4 | `high_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
 | L4 | `low_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
-| L5 | `systolic_gemm` | no reliable golden evidence; native pass is not enough |
+| L5 | `systolic_gemm` | original checker is display-only; repaired-contract track completed with 0/9 solves |
 | L6 | `fp_band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
 | L6 | `fp_high_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
 | L6 | `fp_low_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
@@ -104,7 +105,7 @@ The only useful next runs are targeted research attempts, not table filling:
 | 1 | Decide whether repaired `conv_3d` and repaired `quantized_matmul` belong in the paper as benchmark-audit/repaired-contract results, not original ArchXBench solves. |
 | 2 | Decide how prominently to use repaired-contract rows in the paper; they are benchmark-audit results, not original ArchXBench solves. |
 | 3 | Decide whether to exclude or repair the FIR-family benchmark contract. |
-| 4 | Decide whether `systolic_gemm` has a valid golden checker; otherwise keep it excluded. |
+| 4 | Keep original `systolic_gemm` excluded; repaired-contract run is complete and negative. |
 | 5 | If expanding beyond contract repair, target `unsharp_mask`, `fft_streaming_64pt`, and `newton_raphson_polynomial` with a genuinely new method. C4a was tried and failed, so re-running it is not justified by current evidence. |
 | 6 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
 

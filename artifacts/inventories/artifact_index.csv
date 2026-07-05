@@ -1022,6 +1022,15 @@ artifacts/raw_runs/repaired_contracts_20260705/quantized_matmul/C4i/456/result.j
 artifacts/raw_runs/repaired_contracts_20260705/quantized_matmul/C4tl/123/result.json,raw_runs,repaired_contracts_20260705,mixed,quantized_matmul,C4tl,gpt-5.5,123,False,0/0,,3,307.2,True,4
 artifacts/raw_runs/repaired_contracts_20260705/quantized_matmul/C4tl/42/result.json,raw_runs,repaired_contracts_20260705,mixed,quantized_matmul,C4tl,gpt-5.5,42,False,0/0,,3,330.7,True,4
 artifacts/raw_runs/repaired_contracts_20260705/quantized_matmul/C4tl/456/result.json,raw_runs,repaired_contracts_20260705,mixed,quantized_matmul,C4tl,gpt-5.5,456,False,0/0,,2,379.1,True,4
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C2g/123/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C2g,gpt-5.5,123,False,0/0,,30,2253.5,False,1
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C2g/42/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C2g,gpt-5.5,42,False,0/0,,30,2224.2,False,1
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C2g/456/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C2g,gpt-5.5,456,False,0/0,,30,2287.0,False,1
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C4i/123/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C4i,gpt-5.5,123,False,,,29,1043.2,True,5
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C4i/42/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C4i,gpt-5.5,42,False,,,28,1476.7,True,4
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C4i/456/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C4i,gpt-5.5,456,False,,,28,1241.7,True,4
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C4tl/123/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C4tl,gpt-5.5,123,False,0/0,,2,312.1,True,4
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C4tl/42/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C4tl,gpt-5.5,42,False,0/0,,3,289.0,True,5
+artifacts/raw_runs/repaired_contracts_20260705/systolic_gemm/C4tl/456/result.json,raw_runs,repaired_contracts_20260705,mixed,systolic_gemm,C4tl,gpt-5.5,456,False,0/0,,2,297.7,True,4
 artifacts/raw_runs/repaired_contracts_multich_conv2d_20260705/multich_conv2d/C2g/123/result.json,raw_runs,repaired_contracts_multich_conv2d_20260705,mixed,multich_conv2d,C2g,gpt-5.5,123,True,30752/30752,30752/30752,1,63.2,False,1
 artifacts/raw_runs/repaired_contracts_multich_conv2d_20260705/multich_conv2d/C2g/42/result.json,raw_runs,repaired_contracts_multich_conv2d_20260705,mixed,multich_conv2d,C2g,gpt-5.5,42,True,30752/30752,30752/30752,1,74.3,False,1
 artifacts/raw_runs/repaired_contracts_multich_conv2d_20260705/multich_conv2d/C2g/456/result.json,raw_runs,repaired_contracts_multich_conv2d_20260705,mixed,multich_conv2d,C2g,gpt-5.5,456,True,30752/30752,30752/30752,1,63.1,False,1

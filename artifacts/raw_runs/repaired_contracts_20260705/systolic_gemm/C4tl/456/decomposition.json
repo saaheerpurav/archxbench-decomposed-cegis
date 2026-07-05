@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/mac_accumulate.v",
+  "sub_modules": {
+    "mac_accumulate": "Combinational signed 32x32 multiply and 64-bit accumulate unit for each systolic cell.",
+    "assign_result_outputs": "Combinational mapper from internal 4x4 accumulator matrix to the required flat result ports.",
+    "pe": "Processing element reference interface that forwards north/west operands and computes their signed product combinationally."
+  }
+}

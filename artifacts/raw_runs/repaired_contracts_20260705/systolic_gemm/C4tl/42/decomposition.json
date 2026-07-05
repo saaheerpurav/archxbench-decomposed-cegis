@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/mac_cell.v",
+  "sub_modules": {
+    "mac_cell": "Combinational signed 32-bit by 32-bit multiplier producing a 64-bit product for each systolic array cell.",
+    "data_forward": "Combinational 32-bit forwarding helper for systolic data movement.",
+    "done_logic": "Combinational completion flag generator for the 9-cycle matrix multiplication latency.",
+    "pe": "Combinational processing element interface that forwards north/west data and computes the current signed product."
+  }
+}
