@@ -22,6 +22,6 @@ L6 `fft_streaming_64pt` is different. Current C4i/C4tl rows fail golden comparis
 
 ## DCT And Systolic GEMM
 
-`dct_idct_8pt_pipelined` is currently unsolved.
+`dct_idct_8pt_pipelined` is solved by C2g in the current repo-local evidence. C4i/C4tl rows are diagnostics unless promoted in `docs/RESULTS.md`.
 
 `systolic_gemm` has pass-score rows without reliable golden evidence. Do not claim it as solved.

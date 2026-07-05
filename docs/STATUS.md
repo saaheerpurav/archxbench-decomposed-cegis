@@ -1,82 +1,41 @@
 # Current Status
 
-Date: 2026-07-03
+Date: 2026-07-05
 
-This file is the entry point for a fresh agent. Use this repo only. Do not use outside notes, local paths, old run folders, or memory from another machine.
+This file is only an entry point. Do not treat it as an independent result source.
 
-## Paper Center
+Canonical files:
 
-The paper is about decomposition-guided CEGIS for hard RTL synthesis on ArchXBench.
+- Clean claim and diagnostic tables: [RESULTS.md](RESULTS.md)
+- Run queue and unresolved gaps: [RUNS_LEFT.md](RUNS_LEFT.md)
+- Paper-readiness audit and baseline gap map: [PAPER_AUDIT.md](PAPER_AUDIT.md)
+- Benchmark caveats: [BENCHMARK_CAVEATS.md](BENCHMARK_CAVEATS.md)
+- Artifact policy: [ARTIFACTS.md](ARTIFACTS.md)
 
-Current clean mechanism evidence:
+## Current Bottom Line
 
-- C4i solves selected L3 designs on matched GPT-5.5 seeds.
-- C4tl solves four L4 core designs across five seeds.
-- C2g is the monolithic golden-feedback baseline.
-- File-output L5/L6 rows require full golden comparison before they can become claims.
+The repo has clean evidence that verifier-grounded decomposed/CEGIS-style RTL synthesis solves hard ArchXBench designs across L3-L6, including robust L4 C4tl rows and clean L5/L6 golden-verified rows.
 
-## Clean Main Claims
+The current evidence does not support claiming that C4i/C4tl dominates C2g everywhere. C2g is strong on several L5/L6 designs. The paper must frame method value carefully: decomposition helps on specific hard rows and gives a structured verifier-grounded synthesis pipeline, while C2g is a serious baseline.
 
-Use only these as current paper claims:
+## Rules
 
-- C4i solves `gauss_siedel` and `gradient_descent` on seeds `42,123,456`; matched C2g does not solve them.
-- C4i solves `fp_multiplier`, `fp_adder`, `newton_raphson_sqrt`, and `harris_corner_detection` on seeds `42,123,456`; these are solved rows, not exclusive wins.
-- C4i solves `conv1d` and `aes_encryption` on seeds `42,123,456` with complete external golden verification.
-- C4tl solves L4 `fp_mult_pipeline`, `fp_adder_pipeline`, `fft_16pt_iterative`, and `ifft_16pt_iterative` on seeds `42,123,456,789,1024`.
-- `newton_raphson_polynomial` is a clean negative result.
+- Use only repo-local artifacts under `artifacts/`.
+- A row is a paper claim only if it appears in [RESULTS.md](RESULTS.md).
+- File-output designs require strict golden verification.
+- Native simulator PASS without golden verification is diagnostic only.
+- Do not use outside folders, old local notes, or collaborator machine paths as evidence unless copied into this repo.
+- Do not push automatically.
 
-The exact tables are in [RESULTS.md](RESULTS.md).
-
-## Clean Secondary Evidence
-
-These rows are golden-verified but are not current main claims because they are one-seed or baseline context:
-
-- `conv1d` C4tl seed `42`: `16/16`
-- `harris_corner_detection` C2g seed `42`: `16384/16384`
-
-These live under `artifacts/curated/golden_verified_secondary/`.
-
-## Diagnostics
-
-Rows under `artifacts/curated/diagnostics/` are not claims. This includes:
-
-- native-pass but golden-fail L5/L6 rows
-- imported rows without golden fields
-- negative debug attempts
-
-Do not promote a diagnostic row unless it gets copied to a clean curated folder and appears in [RESULTS.md](RESULTS.md).
-
-## Not Solved As Clean Claims
-
-Do not claim these as solved:
-
-- `dct_idct_8pt_pipelined`
-- FIR-family designs
-- `conv_3d`
-- `quantized_matmul`
-- `systolic_gemm`
-- native-pass L5/L6 rows with incomplete or failing golden comparison
-- `conv1d` C4tl as a multi-seed claim, because seeds `123,456` failed
-
-## Run Queue
-
-No runs are required for the current claims. See [RUNS_LEFT.md](RUNS_LEFT.md) before starting any new run.
-
-## Artifact Policy
-
-All artifacts are under `artifacts/`.
-
-Current inventory:
-
-- `artifacts/inventories/artifact_index.csv`
-- `artifacts/inventories/artifact_index.json`
-- `artifacts/inventories/run_matrix_l3_l6.csv`
-
-Regenerate the inventory with:
+## Inventory Commands
 
 ```powershell
 python scripts\build_artifact_index.py
 python scripts\build_run_matrix.py
 ```
 
-Use `run_matrix_l3_l6.csv` to answer run-coverage questions. It covers every official L3-L6 design and the GPT-5.5 `C1`, `C2g`, `C4i`, and `C4tl` conditions.
+Primary inventory files:
+
+- `artifacts/inventories/artifact_index.csv`
+- `artifacts/inventories/artifact_index.json`
+- `artifacts/inventories/run_matrix_l3_l6.csv`
