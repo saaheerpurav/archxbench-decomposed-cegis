@@ -65,7 +65,7 @@ Conclusion: C4a is negative evidence. Do not promote it as a method improvement.
 
 ### Repaired-Contract Batch
 
-`conv_3d` and `quantized_matmul` were rerun against the repaired executable contracts under
+`conv_3d`, `multich_conv2d`, and `quantized_matmul` were rerun against the repaired executable contracts under
 `artifacts/benchmark_contracts/archxbench_repaired/`.
 
 Artifacts: `artifacts/raw_runs/repaired_contracts_20260705/`
@@ -74,6 +74,7 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | Design | Repaired-contract result |
 |---|---|
 | `conv_3d` | C2g 3/3 solved; C4i 2/3 solved; C4tl 0/3 solved |
+| `multich_conv2d` | C2g 3/3 solved; C4i 3/3 solved; C4tl 3/3 solved |
 | `quantized_matmul` initial | C2g 0/3, C4i 0/3, C4tl 0/3; exposed signed-quantization and runner issues |
 | `quantized_matmul` runner-fixed | C2g 3/3 solved; C4i 3/3 solved; C4tl 0/3 solved |
 
@@ -90,7 +91,7 @@ Do not blind-run these until the checker/spec issue is resolved.
 | L6 | `fp_band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
 | L6 | `fp_high_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
 | L6 | `fp_low_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
-| L6 | `multich_conv2d` | benchmark loader/testbench issue; currently excluded |
+| L6 | `multich_conv2d` | original benchmark contract issue; repaired-contract track complete |
 
 ## What Is Left To Run
 
@@ -101,7 +102,7 @@ The only useful next runs are targeted research attempts, not table filling:
 | Priority | Action |
 |---|---|
 | 1 | Decide whether repaired `conv_3d` and repaired `quantized_matmul` belong in the paper as benchmark-audit/repaired-contract results, not original ArchXBench solves. |
-| 2 | Decide whether to repair or formally exclude `multich_conv2d`, the remaining post-sim-golden-only design without a repaired-contract track. |
+| 2 | Decide how prominently to use repaired-contract rows in the paper; they are benchmark-audit results, not original ArchXBench solves. |
 | 3 | Decide whether to exclude or repair the FIR-family benchmark contract. |
 | 4 | Decide whether `systolic_gemm` has a valid golden checker; otherwise keep it excluded. |
 | 5 | If expanding beyond contract repair, target `unsharp_mask`, `fft_streaming_64pt`, and `newton_raphson_polynomial` with a genuinely new method. C4a was tried and failed, so re-running it is not justified by current evidence. |

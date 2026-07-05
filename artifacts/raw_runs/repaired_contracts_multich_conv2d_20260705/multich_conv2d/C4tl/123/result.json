@@ -1,0 +1,24 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 5,
+  "best_passes": 30752,
+  "total_tests": 30752,
+  "solved": true,
+  "decomp_modules": [
+    "conv2d_out_index",
+    "conv2d_window_mac",
+    "conv2d_bias_add",
+    "conv2d_clamp"
+  ],
+  "ref_passes": 30752,
+  "ref_total": 30752,
+  "golden_correct": 30752,
+  "golden_total": 30752,
+  "module_solve_rounds": {},
+  "design": "multich_conv2d",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 326.9,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

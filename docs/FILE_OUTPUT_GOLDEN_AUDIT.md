@@ -33,8 +33,9 @@ For these designs, `total_tests == 0` from native log parsing is not evidence of
 The runner now does this correctly:
 
 - `_golden_verify_final` runs for file-output designs even when native PASS/FAIL count is zero.
-- C2g and C4i/C4tl repaired-contract qgemm runs use this fixed behavior.
+- C2g and C4i/C4tl repaired-contract qgemm and multich-conv2d runs use this fixed behavior.
 - `quantized_matmul` repaired-contract runner-fixed rows are therefore valid: C2g 3/3 and C4i 3/3 golden verified.
+- `multich_conv2d` repaired-contract rows are therefore valid: C2g 3/3, C4i 3/3, and C4tl 3/3 golden verified.
 
 ## Paper Rule
 

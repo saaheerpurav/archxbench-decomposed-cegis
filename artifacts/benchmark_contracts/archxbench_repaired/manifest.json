@@ -20,6 +20,16 @@
         "write only valid convolution outputs",
         "use sufficient output width"
       ]
+    },
+    {
+      "level": "level-6",
+      "design": "multich_conv2d",
+      "repairs": [
+        "drive all-ones kernels to match Python reference",
+        "collect streaming outputs from simulation start",
+        "write exactly the expected output count",
+        "use valid JSON comma handling"
+      ]
     }
   ]
 }

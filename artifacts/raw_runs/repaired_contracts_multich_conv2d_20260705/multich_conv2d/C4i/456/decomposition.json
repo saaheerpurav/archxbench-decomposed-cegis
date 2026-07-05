@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/multich_conv2d_index_decode.v",
+  "sub_modules": {
+    "multich_conv2d_index_decode": "Combinationally decodes the flattened output index into output channel, row, and column coordinates.",
+    "multich_conv2d_window_mac": "Combinationally forms the channel-aware K by K window from the stored image tensor and computes the dot product with the selected output-channel kernel.",
+    "multich_conv2d_postprocess": "Combinationally adds the selected output-channel bias and clamps the result to OUT_W bits.",
+    "multich_conv2d_done_logic": "Combinationally reports when the programmed number of output pixels has been emitted."
+  }
+}

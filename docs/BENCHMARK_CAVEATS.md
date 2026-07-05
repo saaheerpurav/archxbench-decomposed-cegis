@@ -32,6 +32,6 @@ L6 `fft_streaming_64pt` is different. Current C4i/C4tl rows fail golden comparis
 
 ## Repaired Benchmark Contracts
 
-`conv_3d` and `quantized_matmul` have documented executable-contract issues in the original benchmark files. A repaired-contract copy now lives under `artifacts/benchmark_contracts/archxbench_repaired/`.
+`conv_3d`, `multich_conv2d`, and `quantized_matmul` have documented executable-contract issues in the original benchmark files. A repaired-contract copy now lives under `artifacts/benchmark_contracts/archxbench_repaired/`.
 
 Results from this repaired root must be reported separately from original ArchXBench results. See `docs/EXECUTABLE_CONTRACT_REPAIR.md`.

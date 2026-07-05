@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/multich_conv2d_out_coord.v",
+  "sub_modules": {
+    "multich_conv2d_out_coord": "Decodes flattened output index into output channel, row, and column coordinates.",
+    "multich_conv2d_kernel_select": "Selects the packed Cin by K by K kernel slice for the active output channel.",
+    "multich_conv2d_mac": "Computes the combinational dot product between the flattened input window and kernel slice.",
+    "multich_conv2d_bias_clamp": "Adds the selected output-channel bias and clamps the result to OUT_W bits.",
+    "multich_conv2d_done_logic": "Computes completion status from the output counter and emission state."
+  }
+}

@@ -125,6 +125,104 @@ endmodule
 """
 
 
+MULTICH_CONV2D_TB = r"""`timescale 1ns/1ps
+
+module tb_multich_conv2d;
+
+  parameter CIN = 3, COUT = 8, K = 3, H = 64, W = 64;
+  parameter DATA_W = 8, BIAS_W = 16, OUT_W = 16;
+
+  localparam N = CIN * H * W;
+  localparam OUT_H = H - K + 1;
+  localparam OUT_WID = W - K + 1;
+  localparam OUT_N = COUT * OUT_H * OUT_WID;
+
+  reg clk, rst, valid_in, last_in;
+  reg [DATA_W-1:0] pixel_in;
+  reg [COUT*CIN*K*K*DATA_W-1:0] kernel;
+  reg [COUT*BIAS_W-1:0] bias;
+  wire [OUT_W-1:0] pixel_out;
+  wire valid_out, done;
+
+  reg [7:0] input_image [0:N-1];
+  integer i, out_count, fout, cycles;
+
+  multich_conv2d #(
+    .CIN(CIN), .COUT(COUT), .K(K), .H(H), .W(W),
+    .DATA_W(DATA_W), .BIAS_W(BIAS_W), .OUT_W(OUT_W)
+  ) dut (
+    .clk(clk),
+    .rst(rst),
+    .pixel_in(pixel_in),
+    .valid_in(valid_in),
+    .last_in(last_in),
+    .kernel(kernel),
+    .bias(bias),
+    .pixel_out(pixel_out),
+    .valid_out(valid_out),
+    .done(done)
+  );
+
+  always #5 clk = ~clk;
+
+  initial begin
+    $readmemh("tb_input.mem", input_image);
+
+    clk = 0;
+    rst = 1;
+    valid_in = 0;
+    last_in = 0;
+    pixel_in = 0;
+    kernel = {COUT*CIN*K*K{8'h01}};  // Python reference uses all-ones kernels.
+    bias = {COUT{16'h0000}};
+    out_count = 0;
+    cycles = 0;
+
+    fout = $fopen("outputs/dut_output.json", "w");
+    $fwrite(fout, "{\n  \"C\": [\n");
+
+    #20 rst = 0;
+
+    for (i = 0; i < N; i = i + 1) begin
+      @(negedge clk);
+      pixel_in = input_image[i];
+      valid_in = 1;
+      last_in = (i == N-1);
+      @(posedge clk);
+      if (valid_out && out_count < OUT_N) begin
+        $fwrite(fout, "    %0d%s\n", pixel_out, (out_count == OUT_N-1) ? "" : ",");
+        out_count = out_count + 1;
+      end
+    end
+
+    @(negedge clk);
+    valid_in = 0;
+    last_in = 0;
+    pixel_in = 0;
+
+    while (out_count < OUT_N && cycles < N * COUT) begin
+      @(posedge clk);
+      if (valid_out) begin
+        $fwrite(fout, "    %0d%s\n", pixel_out, (out_count == OUT_N-1) ? "" : ",");
+        out_count = out_count + 1;
+      end
+      cycles = cycles + 1;
+    end
+
+    $fwrite(fout, "  ]\n}\n");
+    $fclose(fout);
+
+    if (out_count == OUT_N) begin
+      $display("[PASS] multich_conv2d wrote %0d outputs", out_count);
+    end else begin
+      $display("[FAIL] multich_conv2d wrote %0d/%0d outputs", out_count, OUT_N);
+    end
+    $finish;
+  end
+endmodule
+"""
+
+
 def _copy_design(level: str, design: str) -> Path:
     src = SOURCE_ROOT / level / design
     dst = REPAIRED_ROOT / level / design
@@ -219,6 +317,31 @@ def _repair_conv_3d() -> None:
     )
 
 
+def _repair_multich_conv2d() -> None:
+    dst = _copy_design("level-6", "multich_conv2d")
+    (dst / "testbench.v").write_text(MULTICH_CONV2D_TB, encoding="utf-8")
+    note = (
+        "# Repaired contract notes\n\n"
+        "- Original testbench drove `kernel = 0`, while the Python reference uses all-ones kernels.\n"
+        "- Original testbench opened `dut_output.json` only after all inputs were sent, which can drop streaming outputs.\n"
+        "- Original testbench had fragile JSON comma handling and no expected output-count check.\n"
+        "- This fixture collects outputs from the start of simulation and writes exactly `COUT*(H-K+1)*(W-K+1)` outputs.\n"
+        "- The original source benchmark is unchanged.\n"
+    )
+    (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
+    _append_contract_note(
+        dst / "design-specs.txt",
+        [
+            "Repaired benchmark contract:",
+            "- The testbench drives all-ones kernels, matching the Python reference model.",
+            "- Bias is zero for every output channel, matching the Python reference model.",
+            "- `valid_out` must assert only for valid output pixels.",
+            "- The DUT must emit exactly `COUT*(H-K+1)*(W-K+1)` outputs.",
+            "- Output order is flattened as output channel, then row, then column.",
+        ],
+    )
+
+
 def _append_contract_note(path: Path, lines: list[str]) -> None:
     text = path.read_text(encoding="utf-8", errors="ignore").rstrip()
     addition = "\n\n" + "\n".join(lines) + "\n"
@@ -229,6 +352,7 @@ def main() -> None:
     REPAIRED_ROOT.mkdir(parents=True, exist_ok=True)
     _repair_quantized_matmul()
     _repair_conv_3d()
+    _repair_multich_conv2d()
     manifest = {
         "source_root": str(SOURCE_ROOT.relative_to(REPO_ROOT)),
         "repaired_root": str(REPAIRED_ROOT.relative_to(REPO_ROOT)),
@@ -250,6 +374,16 @@ def main() -> None:
                     "drive all-ones kernel to match Python reference",
                     "write only valid convolution outputs",
                     "use sufficient output width",
+                ],
+            },
+            {
+                "level": "level-6",
+                "design": "multich_conv2d",
+                "repairs": [
+                    "drive all-ones kernels to match Python reference",
+                    "collect streaming outputs from simulation start",
+                    "write exactly the expected output count",
+                    "use valid JSON comma handling",
                 ],
             },
         ],

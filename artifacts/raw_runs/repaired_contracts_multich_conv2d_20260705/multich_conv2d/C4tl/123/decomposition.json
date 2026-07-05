@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv2d_out_index.v",
+  "sub_modules": {
+    "conv2d_out_index": "Decodes flattened output index into output channel, row, and column.",
+    "conv2d_window_mac": "Combinational multichannel K by K dot-product over the stored input frame and selected output-channel kernel.",
+    "conv2d_bias_add": "Selects and adds the per-output-channel bias to the MAC result.",
+    "conv2d_clamp": "Applies unsigned output clamp from accumulator width to OUT_W."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv2d_addr_gen.v",
+  "sub_modules": {
+    "conv2d_addr_gen": "Combinational address calculator for channel-major raster image storage.",
+    "conv2d_mac": "Combinational multichannel KxK dot-product with bias.",
+    "conv2d_clamp": "Combinational unsigned saturation clamp from accumulator width to output width."
+  }
+}

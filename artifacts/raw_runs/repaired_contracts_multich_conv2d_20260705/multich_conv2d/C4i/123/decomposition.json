@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv2d_out_coord.v",
+  "sub_modules": {
+    "conv2d_out_coord": "Combinational decoder for flattened output index into output channel, row, and column.",
+    "conv2d_window_mac": "Combinational multichannel KxK dot-product engine with selected output-channel kernel slice and bias.",
+    "conv2d_clamp": "Combinational ReLU-style nonnegative clamp and saturation to output width.",
+    "conv2d_done_flag": "Combinational done flag generation from the top-level completion state."
+  }
+}

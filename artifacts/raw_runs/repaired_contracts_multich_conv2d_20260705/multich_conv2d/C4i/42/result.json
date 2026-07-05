@@ -1,0 +1,27 @@
+{
+  "condition": "C4i",
+  "llm_calls": 5,
+  "best_passes": 30752,
+  "total_tests": 30752,
+  "solved": true,
+  "decomp_modules": [
+    "conv2d_input_decoder",
+    "conv2d_window_mac",
+    "conv2d_bias_clamp",
+    "conv2d_next_index"
+  ],
+  "module_solve_rounds": {
+    "conv2d_input_decoder": 1,
+    "conv2d_window_mac": 1,
+    "conv2d_bias_clamp": 1,
+    "conv2d_next_index": 1
+  },
+  "golden_correct": 30752,
+  "golden_total": 30752,
+  "design": "multich_conv2d",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "wall_seconds": 423.4,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

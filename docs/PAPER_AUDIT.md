@@ -26,7 +26,7 @@ ArchXBench L3-L6 has 28 designs in this repo.
 |---|---|
 | Clean main/secondary solves | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt`, `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, `aes_encryption`, `aes_decryption` |
 | Partial or unsolved but valid diagnostics | `newton_raphson_polynomial`, `unsharp_mask`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul` |
-| Excluded or hold | `band_pass_fir`, `high_pass_fir`, `low_pass_fir`, `fp_band_pass_fir`, `fp_high_pass_fir`, `fp_low_pass_fir`, `systolic_gemm`, `multich_conv2d` |
+| Excluded or hold | `band_pass_fir`, `high_pass_fir`, `low_pass_fir`, `fp_band_pass_fir`, `fp_high_pass_fir`, `fp_low_pass_fir`, `systolic_gemm` |
 
 ## Matched Baseline Status
 
@@ -72,7 +72,7 @@ Interpretation:
 |---|---|
 | FIR family | Exclude unless the benchmark/spec-contract issue is repaired and documented. Some rows show apparent C2g solves, but these should not become claims while the FIR contract remains disputed. |
 | `systolic_gemm` | Hold. Existing pass rows do not provide reliable golden evidence. |
-| `multich_conv2d` | Hold. Loader/testbench issue; no clean run matrix evidence. |
+| `multich_conv2d` | Original contract issue. Repaired-contract rows are complete and must stay separate from original ArchXBench tables. |
 
 ## What Would Strengthen The AAAI Paper
 
@@ -99,13 +99,13 @@ No table-filling run is currently required for the existing claims.
 The repaired-contract track has now been run:
 
 - repaired `conv_3d`: C2g 3/3, C4i 2/3, C4tl 0/3
+- repaired `multich_conv2d`: C2g 3/3, C4i 3/3, C4tl 3/3
 - repaired `quantized_matmul`, initial file-format repair: C2g/C4i/C4tl all 0/3
 - repaired `quantized_matmul`, after signed-quantization clarification and runner fix: C2g 3/3, C4i 3/3, C4tl 0/3
 - these rows must remain separate from original ArchXBench tables
 
 Current highest-value next attempts:
 
-- audit other file-output rows for the same native PASS-token golden-verification bug
 - repair/validate the FIR and `systolic_gemm` benchmark contracts, then rerun only if the checker is trustworthy
 - targeted solve attempt on `unsharp_mask`, because it is a near miss at `65535/65536`
 - targeted solve attempt on `newton_raphson_polynomial`, because C4a reached `96/100`

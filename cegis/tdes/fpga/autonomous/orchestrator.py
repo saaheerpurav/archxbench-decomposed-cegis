@@ -51,7 +51,8 @@ def read_benchmark(design_dir: str) -> Tuple[str, str, str]:
     kernel coefficients and constants there).
 
     Prefers ``tb_selfcheck.v`` (self-checking, inline [PASS]/[FAIL]) over the
-    original testbench.  Falls back to ``tb.v`` or ``tb_<design>.v``.
+    original testbench.  Falls back to ``tb.v``, ``tb_<design>.v``, or
+    ``testbench*.v``.
     """
     def _read(name):
         path = os.path.join(design_dir, name)
@@ -67,6 +68,11 @@ def read_benchmark(design_dir: str) -> Tuple[str, str, str]:
         if not os.path.exists(tb_path):
             for f in os.listdir(design_dir):
                 if f.startswith("tb_") and f.endswith(".v"):
+                    tb_path = os.path.join(design_dir, f)
+                    break
+        if not os.path.exists(tb_path):
+            for f in os.listdir(design_dir):
+                if f.startswith("testbench") and f.endswith(".v"):
                     tb_path = os.path.join(design_dir, f)
                     break
 

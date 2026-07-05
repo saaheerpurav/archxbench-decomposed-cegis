@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv2d_input_decoder.v",
+  "sub_modules": {
+    "conv2d_input_decoder": "Combinational decoder for flattened channel-major input stream indices into channel, row, and column coordinates.",
+    "conv2d_window_mac": "Combinational multiply-accumulate block over the packed Cin by K by K window and matching kernel slice.",
+    "conv2d_bias_clamp": "Combinational bias addition and unsigned saturation to the configured output width.",
+    "conv2d_next_index": "Combinational output iterator that advances in output-channel, row, then column flattened order and flags the final output."
+  }
+}

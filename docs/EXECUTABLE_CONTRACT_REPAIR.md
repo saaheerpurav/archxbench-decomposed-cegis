@@ -37,6 +37,37 @@ $env:ARCHXBENCH_ROOT=(Resolve-Path artifacts\benchmark_contracts\archxbench_repa
 
 The runner supports this via `ARCHXBENCH_ROOT`; the default remains the original benchmark root.
 
+## `multich_conv2d`
+
+Original contract issue:
+
+- Python reference uses all-ones kernels and zero bias.
+- Testbench drove `kernel = 0` and `bias = 0`, so the executable test did not match the reference/golden.
+- Testbench opened `outputs/dut_output.json` only after all inputs were sent, which can drop valid streaming outputs emitted during input ingestion.
+- Testbench had fragile JSON comma handling and no expected output-count check.
+- Testbench emits no native PASS/FAIL tokens in the original benchmark, so post-simulation golden comparison is mandatory.
+
+Repair:
+
+- Drive all-ones kernels and zero bias, matching the Python reference.
+- Open `dut_output.json` before streaming begins.
+- Record every `valid_out` sample until exactly `COUT*(H-K+1)*(W-K+1)` outputs have been written.
+- Emit valid JSON with deterministic comma handling.
+- Add an output-count PASS/FAIL display for infrastructure sanity.
+
+Sanity check:
+
+- A hardcoded oracle DUT that emits the official golden sequence compiles/runs and reports `30752/30752`.
+
+Repaired-contract run:
+
+- Artifacts: `artifacts/raw_runs/repaired_contracts_multich_conv2d_20260705/`
+- Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
+- C2g, seeds `42,123,456`: 3/3 clean solves, all `30752/30752` golden.
+- C4i, seeds `42,123,456`: 3/3 clean solves, all `30752/30752` golden.
+- C4tl, seeds `42,123,456`: 3/3 clean solves, all `30752/30752` golden.
+- Interpretation: repairing the executable contract unlocks `multich_conv2d` for all three methods. This is a benchmark-contract result, not a C4-specific method win.
+
 ## `quantized_matmul`
 
 Original contract issue:
