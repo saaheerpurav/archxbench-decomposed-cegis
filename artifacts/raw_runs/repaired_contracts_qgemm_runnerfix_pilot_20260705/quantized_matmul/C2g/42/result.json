@@ -1,0 +1,15 @@
+{
+  "condition": "C2g",
+  "llm_calls": 1,
+  "best_passes": 64,
+  "total_tests": 64,
+  "solved": true,
+  "golden_correct": 64,
+  "golden_total": 64,
+  "design": "quantized_matmul",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "wall_seconds": 87.9,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

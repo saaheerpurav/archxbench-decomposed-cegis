@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_matrix.v",
+  "sub_modules": {
+    "qgemm_quantize_matrix": "Unpacks FP32 matrix elements in testbench order and quantizes each element to signed two's-complement integer format.",
+    "qgemm_quantize_elem": "Converts one IEEE-754 FP32 value to real, applies Q15 scale quantization with round-to-nearest-even, adds signed zero-point, and wraps to QBW bits.",
+    "qgemm_int_matmul": "Computes VLEN by VLEN signed integer GEMM using centered quantized values and INT32 accumulators.",
+    "qgemm_dequantize_matrix": "Converts signed INT32 accumulators back to packed FP32 using the product of Q15 scale_A and scale_B."
+  }
+}

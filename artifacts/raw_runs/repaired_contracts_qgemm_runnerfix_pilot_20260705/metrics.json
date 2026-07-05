@@ -1,0 +1,190 @@
+{
+  "quantized_matmul__C2g__gpt-5.5__42": {
+    "condition": "C2g",
+    "llm_calls": 1,
+    "best_passes": 64,
+    "total_tests": 64,
+    "solved": true,
+    "golden_correct": 64,
+    "golden_total": 64,
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 87.9,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C4i__gpt-5.5__42": {
+    "condition": "C4i",
+    "llm_calls": 4,
+    "best_passes": 64,
+    "total_tests": 64,
+    "solved": true,
+    "decomp_modules": [
+      "qgemm_quantize_matrix",
+      "qgemm_int_gemm",
+      "qgemm_dequantize_matrix"
+    ],
+    "module_solve_rounds": {
+      "qgemm_quantize_matrix": 1,
+      "qgemm_int_gemm": 1,
+      "qgemm_dequantize_matrix": 1
+    },
+    "golden_correct": 64,
+    "golden_total": 64,
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 298.5,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C4tl__gpt-5.5__42": {
+    "condition": "C4tl",
+    "llm_calls": 0,
+    "best_passes": 0,
+    "total_tests": 0,
+    "solved": false,
+    "decomp_modules": [],
+    "ref_passes": 0,
+    "ref_total": 0,
+    "golden_correct": 0,
+    "golden_total": 0,
+    "module_solve_rounds": {},
+    "error": "reference decomposition failed original system testbench",
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 348.0,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C2g__gpt-5.5__456": {
+    "condition": "C2g",
+    "llm_calls": 1,
+    "best_passes": 64,
+    "total_tests": 64,
+    "solved": true,
+    "golden_correct": 64,
+    "golden_total": 64,
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 81.1,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C2g__gpt-5.5__123": {
+    "condition": "C2g",
+    "llm_calls": 1,
+    "best_passes": 64,
+    "total_tests": 64,
+    "solved": true,
+    "golden_correct": 64,
+    "golden_total": 64,
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 84.1,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C4i__gpt-5.5__123": {
+    "condition": "C4i",
+    "llm_calls": 4,
+    "best_passes": 64,
+    "total_tests": 64,
+    "solved": true,
+    "decomp_modules": [
+      "qgemm_quantize_tile",
+      "qgemm_int_matmul",
+      "qgemm_dequantize_tile"
+    ],
+    "module_solve_rounds": {
+      "qgemm_quantize_tile": 1,
+      "qgemm_int_matmul": 1,
+      "qgemm_dequantize_tile": 1
+    },
+    "golden_correct": 64,
+    "golden_total": 64,
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 276.2,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C4i__gpt-5.5__456": {
+    "condition": "C4i",
+    "llm_calls": 4,
+    "best_passes": 64,
+    "total_tests": 64,
+    "solved": true,
+    "decomp_modules": [
+      "qgemm_quantizer",
+      "qgemm_int_matmul",
+      "qgemm_dequantizer"
+    ],
+    "module_solve_rounds": {
+      "qgemm_quantizer": 1,
+      "qgemm_int_matmul": 1,
+      "qgemm_dequantizer": 1
+    },
+    "golden_correct": 64,
+    "golden_total": 64,
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 281.9,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C4tl__gpt-5.5__123": {
+    "condition": "C4tl",
+    "llm_calls": 3,
+    "best_passes": 0,
+    "total_tests": 0,
+    "solved": false,
+    "decomp_modules": [
+      "qgemm_quantize_matrix",
+      "qgemm_int_matmul",
+      "qgemm_dequantize_matrix"
+    ],
+    "ref_passes": 0,
+    "ref_total": 0,
+    "golden_correct": 0,
+    "golden_total": 0,
+    "module_solve_rounds": {},
+    "error": "reference decomposition failed original system testbench",
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 318.0,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "quantized_matmul__C4tl__gpt-5.5__456": {
+    "condition": "C4tl",
+    "llm_calls": 3,
+    "best_passes": 0,
+    "total_tests": 0,
+    "solved": false,
+    "decomp_modules": [
+      "qgemm_quantize_matrix",
+      "qgemm_int_matmul",
+      "qgemm_dequantize_matrix"
+    ],
+    "ref_passes": 0,
+    "ref_total": 0,
+    "golden_correct": 0,
+    "golden_total": 0,
+    "module_solve_rounds": {},
+    "error": "reference decomposition failed original system testbench",
+    "design": "quantized_matmul",
+    "model": "gpt-5.5",
+    "seed": 456,
+    "wall_seconds": 345.2,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  }
+}

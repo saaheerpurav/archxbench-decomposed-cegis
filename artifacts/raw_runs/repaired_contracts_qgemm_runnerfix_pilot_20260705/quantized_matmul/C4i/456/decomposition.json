@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantizer.v",
+  "sub_modules": {
+    "qgemm_quantizer": "Combinational FP32-to-signed-quantized conversion using Q15 scale and signed zero-point, preserving two's-complement wraparound behavior.",
+    "qgemm_int_matmul": "Combinational signed integer GEMM over VLEN by K and K by VLEN quantized tiles using centered zero-point subtraction and INT32 accumulation.",
+    "qgemm_dequantizer": "Combinational INT32 accumulator dequantization using Q15 scale_A and scale_B, producing packed IEEE-754 FP32 bit patterns."
+  }
+}

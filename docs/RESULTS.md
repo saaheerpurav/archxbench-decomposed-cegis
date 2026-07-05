@@ -79,6 +79,9 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | `conv_3d` repaired contract | C2g | `42,123,456` | 3/3 solved, all `23064/23064` golden | benchmark repair unlocks the task; C2g is strongest |
 | `conv_3d` repaired contract | C4i | `42,123,456` | 2/3 solved, seeds `42,123` | partial decomposed result |
 | `conv_3d` repaired contract | C4tl | `42,123,456` | 0/3 solved | negative |
-| `quantized_matmul` repaired contract | C2g/C4i/C4tl | `42,123,456` each | 0/9 solved | still unsolved after contract repair |
+| `quantized_matmul` repaired contract, initial | C2g/C4i/C4tl | `42,123,456` each | 0/9 solved | exposed remaining signed-quantization and runner issues |
+| `quantized_matmul` repaired contract, runner-fixed | C2g | `42,123,456` | 3/3 solved, all `64/64` golden | repaired contract is solvable |
+| `quantized_matmul` repaired contract, runner-fixed | C4i | `42,123,456` | 3/3 solved, all `64/64` golden | repaired contract is solvable |
+| `quantized_matmul` repaired contract, runner-fixed | C4tl | `42,123,456` | 0/3 solved | reference decomposition failed |
 
 Do not merge these rows into original ArchXBench solve-rate tables.

@@ -8,7 +8,8 @@
       "repairs": [
         "generate missing tb_float.mem",
         "regenerate tb_params.mem from stimuli",
-        "normalize golden_output.json to FP32 bit-pattern integers"
+        "normalize golden_output.json to FP32 bit-pattern integers",
+        "document signed no-saturation quantization semantics"
       ]
     },
     {

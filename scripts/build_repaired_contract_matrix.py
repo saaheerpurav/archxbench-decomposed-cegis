@@ -101,11 +101,11 @@ def collect() -> list[dict]:
 
 def main() -> None:
     results = collect()
-    designs = sorted({row["design"] for row in results})
     run_names = sorted({row["contract_run"] for row in results})
     matrix_rows: list[dict[str, str]] = []
 
     for run_name in run_names:
+        designs = sorted({row["design"] for row in results if row["contract_run"] == run_name})
         for design in designs:
             row: dict[str, str] = {"contract_run": run_name, "design": design}
             for condition in CONDITIONS:

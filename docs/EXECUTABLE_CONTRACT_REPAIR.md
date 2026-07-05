@@ -45,26 +45,39 @@ Original contract issue:
 - Testbench emits packed FP32 bit-pattern integers.
 - Golden JSON stores floating-point numeric values.
 - The generic golden comparator compares numeric JSON values, so packed FP32 integers and floats are not comparable.
+- The design spec did not explicitly say that internal quantization follows signed no-saturation Python semantics. The official stimulus has negative `B_q` values; many generated RTLs incorrectly clamped quantized values to unsigned `0..255`.
+- The runner incorrectly skipped golden comparison when a file-output testbench emitted no native PASS/FAIL tokens. `tb_qgemm.v` prints `[TB] Simulation done.` and relies on JSON comparison.
 
 Repair:
 
 - Generate `tb_float.mem` from `inputs/stimuli.json`.
 - Regenerate `tb_params.mem` from the same stimuli.
 - Normalize `outputs/golden_output.json` to flattened FP32 bit-pattern integers.
+- Document signed two's-complement INT8, no-clamp quantization semantics.
+- Fix the runner so file-output designs run golden comparison even with zero native PASS/FAIL tokens.
 - Append repaired-contract notes to `design-specs.txt`.
 
 Sanity check:
 
 - A dummy all-zero `qgemm` compiles/runs and reports a normal golden mismatch: `0/64`.
 
-Repaired-contract run:
+Initial repaired-contract run:
 
 - Artifacts: `artifacts/raw_runs/repaired_contracts_20260705/`
 - Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 - C2g, seeds `42,123,456`: 0/3 clean solves, all `0/0`.
 - C4i, seeds `42,123,456`: 0/3 clean solves, all `0/0`.
 - C4tl, seeds `42,123,456`: 0/3 clean solves, all `0/0`.
-- Interpretation: the file-format contract is executable now, but the design remains unsolved by current methods.
+- Interpretation: this exposed the remaining signed-quantization spec issue and the runner PASS-token bug.
+
+Runner-fix repaired-contract run:
+
+- Artifacts: `artifacts/raw_runs/repaired_contracts_qgemm_runnerfix_pilot_20260705/`
+- Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
+- C2g, seeds `42,123,456`: 3/3 clean solves, all `64/64` golden.
+- C4i, seeds `42,123,456`: 3/3 clean solves, all `64/64` golden.
+- C4tl, seeds `42,123,456`: 0/3 clean solves; reference decomposition failed before repair.
+- Interpretation: once the executable contract and runner are correct, `quantized_matmul` is solvable by C2g and C4i. This is not a C4tl win.
 
 ## `conv_3d`
 

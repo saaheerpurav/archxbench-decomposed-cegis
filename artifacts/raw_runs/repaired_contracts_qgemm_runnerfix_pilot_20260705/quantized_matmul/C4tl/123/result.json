@@ -1,0 +1,24 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 3,
+  "best_passes": 0,
+  "total_tests": 0,
+  "solved": false,
+  "decomp_modules": [
+    "qgemm_quantize_matrix",
+    "qgemm_int_matmul",
+    "qgemm_dequantize_matrix"
+  ],
+  "ref_passes": 0,
+  "ref_total": 0,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "quantized_matmul",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 318.0,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

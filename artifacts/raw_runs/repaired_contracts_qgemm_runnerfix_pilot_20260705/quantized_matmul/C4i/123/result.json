@@ -1,0 +1,25 @@
+{
+  "condition": "C4i",
+  "llm_calls": 4,
+  "best_passes": 64,
+  "total_tests": 64,
+  "solved": true,
+  "decomp_modules": [
+    "qgemm_quantize_tile",
+    "qgemm_int_matmul",
+    "qgemm_dequantize_tile"
+  ],
+  "module_solve_rounds": {
+    "qgemm_quantize_tile": 1,
+    "qgemm_int_matmul": 1,
+    "qgemm_dequantize_tile": 1
+  },
+  "golden_correct": 64,
+  "golden_total": 64,
+  "design": "quantized_matmul",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 276.2,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

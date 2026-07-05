@@ -72,3 +72,6 @@ Repaired benchmark contract:
 - Testbench input memory file is `tb_float.mem`, generated from `inputs/stimuli.json`.
 - `C_fp` is compared as packed IEEE-754 FP32 bit-patterns in output order.
 - The golden JSON in this repaired fixture stores those FP32 bit-pattern integers.
+- Quantization must match the Python reference: `q = round(fp / scale) + zp`, represented as signed two's-complement INT8.
+- Do not clamp quantized values to unsigned `0..255`; the official `B_q` values include negatives.
+- Matrix multiply uses the signed centered values `(A_q - zp_A)` and `(B_q - zp_B)`.

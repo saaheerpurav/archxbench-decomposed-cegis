@@ -331,12 +331,17 @@ def _run_golden_comparison(data_dir: str, sim_workdir: str) -> Tuple[int, int, s
 
 def _golden_verify_final(modules: dict, testbench: str, data_dir: Optional[str],
                          p: int, t: int, solved: bool) -> Tuple[int, int, bool, int, int]:
-    """Run golden comparison on L5/L6 designs after TB says PASS.
+    """Run golden comparison on file-output designs.
 
     Returns (p, t, solved, golden_correct, golden_total).
     For L3/L4 (no data_dir or no golden file), returns inputs unchanged with golden=0.
+
+    Some ArchXBench file-output testbenches print no native PASS/FAIL tokens
+    and rely entirely on post-simulation JSON comparison. In those cases
+    `t == 0` from `_count_tb_passes`, but golden verification is still the
+    authoritative result.
     """
-    if not data_dir or not solved:
+    if not data_dir:
         return p, t, solved, 0, 0
     import tempfile as _tf, shutil as _shutil, subprocess as _sp
     with _tf.TemporaryDirectory() as gtmp:
@@ -679,8 +684,9 @@ def run_C2g(
                 "`assign` statements.\n"
             )
 
-        # Golden comparison for L5/L6
-        if data_dir and p == t and t > 0:
+        # Golden comparison for file-output designs. Some testbenches emit no
+        # native PASS/FAIL tokens, so do not gate this on `t > 0`.
+        if data_dir:
             gp, gt, gdetail = _simulate_golden(
                 {top_name: current_source}, testbench, data_dir)
 
@@ -740,6 +746,7 @@ def run_C2g(
         "best_passes": bp, "total_tests": bt,
         "solved": solved,
         "golden_correct": best_golden_p, "golden_total": best_golden_t,
+        "_sources": {top_name: current_source} if current_source else None,
     }
 
 
@@ -1076,28 +1083,27 @@ def run_C4i(
                 p, t = _count_tb_passes(sim.stdout)
                 if p > best_passes:
                     best_passes, best_total = p, t
-                if p == t and t > 0:
-                    if data_dir:
-                        gp, gt, gdetail = _simulate_golden(
-                            test_modules, testbench, data_dir)
-                        if gt > 0 and gp == gt:
-                            module_solve_rounds[sub.name] = rnd + 1
-                            logger.info("C4i %s GOLDEN VERIFIED round %d (%d/%d)",
-                                        sub.name, rnd + 1, gp, gt)
-                            break
-                        elif gt > 0:
-                            logger.info("C4i %s round %d: TB PASS but golden %d/%d",
-                                        sub.name, rnd + 1, gp, gt)
-                            p, t = gp, gt
-                            golden_feedback = (
-                                f"\n\n## Golden Output Comparison ({gp}/{gt} correct)\n\n"
-                                f"The testbench says PASS but output does NOT match golden reference.\n"
-                                f"```\n{gdetail}\n```\n"
-                            )
-                    else:
+                if data_dir:
+                    gp, gt, gdetail = _simulate_golden(
+                        test_modules, testbench, data_dir)
+                    if gt > 0 and gp == gt:
                         module_solve_rounds[sub.name] = rnd + 1
-                        logger.info("C4i %s solved at round %d (%d/%d)", sub.name, rnd + 1, p, t)
+                        logger.info("C4i %s GOLDEN VERIFIED round %d (%d/%d)",
+                                    sub.name, rnd + 1, gp, gt)
                         break
+                    elif gt > 0:
+                        logger.info("C4i %s round %d: golden %d/%d",
+                                    sub.name, rnd + 1, gp, gt)
+                        p, t = gp, gt
+                        golden_feedback = (
+                            f"\n\n## Golden Output Comparison ({gp}/{gt} correct)\n\n"
+                            f"The output does NOT match golden reference.\n"
+                            f"```\n{gdetail}\n```\n"
+                        )
+                elif p == t and t > 0:
+                    module_solve_rounds[sub.name] = rnd + 1
+                    logger.info("C4i %s solved at round %d (%d/%d)", sub.name, rnd + 1, p, t)
+                    break
             else:
                 p, t = 0, 0
 
@@ -1392,55 +1398,25 @@ def run_C4tl(
             if p > best_passes:
                 best_passes, best_total = p, t
 
-            # Golden comparison for L5/L6 (file-based testbenches that always say PASS)
-            if data_dir and p == t and t > 0:
-                import tempfile as _tf
-                # Re-simulate in a persistent dir to get dut_output.json
-                with _tf.TemporaryDirectory() as gtmp:
-                    import shutil
-                    for sub_d in ("inputs", "outputs"):
-                        src = os.path.join(data_dir, sub_d)
-                        if os.path.isdir(src):
-                            shutil.copytree(src, os.path.join(gtmp, sub_d))
-                    os.makedirs(os.path.join(gtmp, "outputs"), exist_ok=True)
-                    for name, src in full_modules.items():
-                        with open(os.path.join(gtmp, f"{name}.v"), "w", encoding="utf-8") as f:
-                            f.write(_verilog_text(src))
-                    tb_file = os.path.join(gtmp, "tb.v")
-                    with open(tb_file, "w", encoding="utf-8") as f:
-                        f.write(_verilog_text(testbench))
-                    srcs = [os.path.join(gtmp, f) for f in os.listdir(gtmp) if f.endswith(".v")]
-                    iverilog = find_tool(["iverilog"]) or "iverilog"
-                    vvp = find_tool(["vvp"]) or "vvp"
-                    _, _, _, c_timeout = _run(
-                        [iverilog, "-g2012", "-o", os.path.join(gtmp, "sim.vvp")] + srcs,
-                        gtmp,
-                        120,
+            # Golden comparison for file-output designs. Some testbenches emit
+            # no native PASS/FAIL tokens, so do not gate this on `t > 0`.
+            if data_dir:
+                gp, gt, gdetail = _simulate_golden(full_modules, testbench, data_dir)
+                golden_correct, golden_total_count = gp, gt
+                if gt > 0 and gp == gt:
+                    logger.info("C4tl GOLDEN VERIFIED at round %d (%d/%d)", rnd + 1, gp, gt)
+                    best_passes, best_total = gp, gt
+                    break
+                elif gt > 0:
+                    golden_feedback = (
+                        f"\n\n## Golden Output Comparison ({gp}/{gt} correct)\n\n"
+                        f"The output does NOT match golden reference.\n"
+                        f"```\n{gdetail}\n```\n"
                     )
-                    if c_timeout:
-                        golden_correct, golden_total_count = 0, 0
-                        continue
-                    _, _, _, r_timeout = _run([vvp, os.path.join(gtmp, "sim.vvp")], gtmp, 120)
-                    if r_timeout:
-                        golden_correct, golden_total_count = 0, 0
-                        continue
-
-                    gp, gt, gdetail = _run_golden_comparison(data_dir, gtmp)
-                    golden_correct, golden_total_count = gp, gt
-                    if gt > 0 and gp == gt:
-                        logger.info("C4tl GOLDEN VERIFIED at round %d (%d/%d)", rnd + 1, gp, gt)
-                        best_passes, best_total = gp, gt
-                        break
-                    elif gt > 0:
-                        golden_feedback = (
-                            f"\n\n## Golden Output Comparison ({gp}/{gt} correct)\n\n"
-                            f"The testbench says PASS but the output does NOT match the golden reference.\n"
-                            f"```\n{gdetail}\n```\n"
-                        )
-                        logger.info("C4tl round %d: TB says PASS but golden %d/%d", rnd + 1, gp, gt)
-                        p, t = gp, gt  # Use golden scores for localization
-                        best_passes = max(best_passes, gp)
-                        best_total = gt
+                    logger.info("C4tl round %d: golden %d/%d", rnd + 1, gp, gt)
+                    p, t = gp, gt  # Use golden scores for localization
+                    best_passes = max(best_passes, gp)
+                    best_total = gt
             elif p == t and t > 0 and not data_dir:
                 logger.info("C4tl SOLVED at round %d (%d/%d)", rnd + 1, p, t)
                 break
@@ -1717,7 +1693,7 @@ def run_C4m(
         golden_feedback = ""
         if sim.compiled:
             p, t = _count_tb_passes(sim.stdout)
-            if data_dir and p == t and t > 0:
+            if data_dir:
                 gp, gt, gdetail = _simulate_golden(full_modules, testbench, data_dir)
                 golden_correct, golden_total_count = gp, gt
                 if gt > 0 and gp == gt:
@@ -2075,7 +2051,7 @@ def run_C4a(
 
         if sim.compiled:
             p, t = _count_tb_passes(sim.stdout)
-            if data_dir and p == t and t > 0:
+            if data_dir:
                 gp, gt, _ = _simulate_golden(full_modules, testbench, data_dir)
                 golden_correct, golden_total_count = gp, gt
                 if gt > 0:

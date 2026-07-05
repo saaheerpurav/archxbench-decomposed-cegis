@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_tile.v",
+  "sub_modules": {
+    "qgemm_quantize_tile": "Combinational FP32-to-signed-quantized tile converter using Q15 scale and signed zero-point.",
+    "qgemm_int_matmul": "Combinational signed integer GEMM over centered quantized operands with INT32 accumulators.",
+    "qgemm_dequantize_tile": "Combinational INT32 accumulator dequantizer that applies Q15 scale_A*scale_B and emits packed IEEE-754 FP32 bit patterns."
+  }
+}

@@ -2,7 +2,7 @@
 
 This is the only run queue. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`.
 
-Last audited: 2026-07-05 after running the repaired-contract batch for `conv_3d` and `quantized_matmul`.
+Last audited: 2026-07-05 after the runner-fixed repaired-contract qgemm batch.
 
 ## Required For Current Claims
 
@@ -74,7 +74,8 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | Design | Repaired-contract result |
 |---|---|
 | `conv_3d` | C2g 3/3 solved; C4i 2/3 solved; C4tl 0/3 solved |
-| `quantized_matmul` | C2g 0/3, C4i 0/3, C4tl 0/3 |
+| `quantized_matmul` initial | C2g 0/3, C4i 0/3, C4tl 0/3; exposed signed-quantization and runner issues |
+| `quantized_matmul` runner-fixed | C2g 3/3 solved; C4i 3/3 solved; C4tl 0/3 solved |
 
 ### Excluded Or Hold
 
@@ -99,8 +100,8 @@ The only useful next runs are targeted research attempts, not table filling:
 
 | Priority | Action |
 |---|---|
-| 1 | Analyze why repaired `quantized_matmul` still produces `0/0` across methods. This is the next genuinely hard target. |
-| 2 | Decide whether repaired `conv_3d` belongs in the paper as a benchmark-audit/repaired-contract result, not as an original ArchXBench solve. |
+| 1 | Decide whether repaired `conv_3d` and repaired `quantized_matmul` belong in the paper as benchmark-audit/repaired-contract results, not original ArchXBench solves. |
+| 2 | Review other file-output rows for the same native PASS-token golden-verification bug. |
 | 3 | Decide whether to exclude or repair the FIR-family benchmark contract. |
 | 4 | Decide whether `systolic_gemm` has a valid golden checker; otherwise keep it excluded. |
 | 5 | If expanding beyond contract repair, target `unsharp_mask`, `fft_streaming_64pt`, and `newton_raphson_polynomial` with a genuinely new method. C4a was tried and failed, so re-running it is not justified by current evidence. |

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_matrix.v",
+  "sub_modules": {
+    "qgemm_quantize_matrix": "Combinational FP32-to-signed-quantized matrix conversion using Q15 scale and signed zero-point with two's-complement wrapping.",
+    "qgemm_int_matmul": "Combinational signed integer GEMM over centered quantized operands with INT32 accumulators.",
+    "qgemm_dequantize_matrix": "Combinational INT32 accumulator dequantization to packed IEEE-754 FP32 using the product of Q15 input scales."
+  }
+}

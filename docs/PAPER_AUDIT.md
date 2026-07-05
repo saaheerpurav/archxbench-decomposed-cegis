@@ -99,12 +99,13 @@ No table-filling run is currently required for the existing claims.
 The repaired-contract track has now been run:
 
 - repaired `conv_3d`: C2g 3/3, C4i 2/3, C4tl 0/3
-- repaired `quantized_matmul`: C2g/C4i/C4tl all 0/3
+- repaired `quantized_matmul`, initial file-format repair: C2g/C4i/C4tl all 0/3
+- repaired `quantized_matmul`, after signed-quantization clarification and runner fix: C2g 3/3, C4i 3/3, C4tl 0/3
 - these rows must remain separate from original ArchXBench tables
 
 Current highest-value next attempts:
 
-- analyze why repaired `quantized_matmul` still returns `0/0`
+- audit other file-output rows for the same native PASS-token golden-verification bug
 - repair/validate the FIR and `systolic_gemm` benchmark contracts, then rerun only if the checker is trustworthy
 - targeted solve attempt on `unsharp_mask`, because it is a near miss at `65535/65536`
 - targeted solve attempt on `newton_raphson_polynomial`, because C4a reached `96/100`

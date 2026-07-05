@@ -176,6 +176,8 @@ def _repair_quantized_matmul() -> None:
         "- Original `tb_qgemm.v` read `tb_float.mem`, but the benchmark only shipped `tb_data.mem`.\n"
         "- This fixture regenerates `tb_float.mem` from `inputs/stimuli.json`.\n"
         "- The DUT interface emits packed FP32 bits, so `golden_output.json` is normalized to FP32 bit-pattern integers.\n"
+        "- Internal quantization follows the Python reference exactly: signed two's-complement INT8 values, no unsigned clamp to `0..255`.\n"
+        "- For the official stimulus, `B_q = round(B_fp / scale_B) + zp_B` includes negative values.\n"
         "- The original source benchmark is unchanged.\n"
     )
     (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
@@ -186,6 +188,9 @@ def _repair_quantized_matmul() -> None:
             "- Testbench input memory file is `tb_float.mem`, generated from `inputs/stimuli.json`.",
             "- `C_fp` is compared as packed IEEE-754 FP32 bit-patterns in output order.",
             "- The golden JSON in this repaired fixture stores those FP32 bit-pattern integers.",
+            "- Quantization must match the Python reference: `q = round(fp / scale) + zp`, represented as signed two's-complement INT8.",
+            "- Do not clamp quantized values to unsigned `0..255`; the official `B_q` values include negatives.",
+            "- Matrix multiply uses the signed centered values `(A_q - zp_A)` and `(B_q - zp_B)`.",
         ],
     )
 
@@ -235,6 +240,7 @@ def main() -> None:
                     "generate missing tb_float.mem",
                     "regenerate tb_params.mem from stimuli",
                     "normalize golden_output.json to FP32 bit-pattern integers",
+                    "document signed no-saturation quantization semantics",
                 ],
             },
             {
