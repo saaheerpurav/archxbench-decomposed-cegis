@@ -37,6 +37,8 @@ artifacts/
 
 Older level-specific C2g metric files are preserved for auditability.
 
+`artifacts/inventories/log_metric_only_results.csv` records historical rows found in committed logs/aggregate metrics where the generated RTL/result artifacts were not preserved. Those rows are remembered for audit completeness, but they are not artifact-backed claims.
+
 ## Model Label Normalization
 
 All GPT-5.5-family runs are normalized to `gpt-5.5` in repo-local artifacts and inventories. The repo-local artifacts are the canonical evidence, regardless of which collaborator or machine generated the run.

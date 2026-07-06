@@ -1,6 +1,6 @@
 # Current Status
 
-Date: 2026-07-05
+Date: 2026-07-06
 
 This file is only an entry point. Do not treat it as an independent result source.
 
@@ -27,6 +27,7 @@ The current evidence does not support claiming that C4i/C4tl dominates C2g every
 - File-output designs require strict golden verification.
 - Native simulator PASS without golden verification is diagnostic only.
 - Do not use outside folders, old local notes, or collaborator machine paths as evidence unless copied into this repo.
+- Historical log/metrics-only rows are allowed only when recorded in `artifacts/inventories/log_metric_only_results.csv`; they are not artifact-backed claims.
 - Keep repaired-contract experiments separate from original ArchXBench claim tables.
 - Do not push automatically.
 

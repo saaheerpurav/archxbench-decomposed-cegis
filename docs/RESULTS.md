@@ -33,6 +33,7 @@ These rows are clean but not central claims yet.
 | `harris_corner_detection` | L5 | C2g | `42` | `16384/16384` golden | baseline context |
 | `conv2d` | L5 | C2g | `42,123,456` | 3/3 solved, all `4096/4096` golden | strong baseline context |
 | `dct_idct_8pt_pipelined` | L5 | C2g | `42,123,456` | 3/3 solved, all `16/16` golden | strong baseline context |
+| `unsharp_mask` | L5 | C2g | `42,456` | 2/2 solved, both `65536/65536` golden | artifact-backed rerun; seed `123` not clean |
 | `aes_decryption` | L6 | C2g | `42,123,456` | 3/3 solved, all `8/8` golden | strong baseline context |
 
 Artifacts are indexed in `artifacts/inventories/artifact_index.csv`; older showcase rows may also appear under `artifacts/curated/golden_verified_secondary/`.
@@ -47,7 +48,9 @@ Known diagnostic categories:
 - imported rows with no golden fields
 - `conv1d` C4tl seeds `123,456`, which failed reference-decomposition validation
 - failed debug rows for DCT, FIR-family designs, `conv_3d`, and `quantized_matmul`
+- historical L4 FIR C4i GPT-5.5 log/metrics-only rows: `band_pass_fir` 0/5, `high_pass_fir` 2/5, `low_pass_fir` 1/5; see `artifacts/inventories/log_metric_only_results.csv`
 - `systolic_gemm` rows without reliable golden evidence
+- old score-only `unsharp_mask` C2g near-miss rows; see `docs/UNSHARP_MASK_DIAGNOSTIC.md`
 
 ### C4a Weak-Target Sweep
 

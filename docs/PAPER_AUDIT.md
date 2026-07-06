@@ -1,6 +1,6 @@
 # Paper Audit
 
-Date: 2026-07-05
+Date: 2026-07-06
 
 This is the paper-readiness and baseline gap map. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv` plus the C4a diagnostic sweep in `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`.
 
@@ -73,6 +73,20 @@ Interpretation:
 | FIR family | Exclude unless the benchmark/spec-contract issue is repaired and documented. Some rows show apparent C2g solves, but these should not become claims while the FIR contract remains disputed. |
 | `systolic_gemm` | Original checker is display-only. Repaired-contract run is complete and negative: C2g/C4i/C4tl all 0/3. |
 | `multich_conv2d` | Original contract issue. Repaired-contract rows are complete and must stay separate from original ArchXBench tables. |
+
+### Historical FIR Sweep
+
+A GitHub-history audit found a historical C4i GPT-5.5 L4 FIR sweep in committed logs and old aggregate metrics. These are remembered but not promoted as artifact-backed claims:
+
+| Design | C4i GPT-5.5 seeds | Result | Evidence status |
+|---|---|---|---|
+| `band_pass_fir` | `42,123,456,789,1024` | 0/5 solved; best `5/1001` | log/metrics-only |
+| `high_pass_fir` | `42,123,456,789,1024` | 2/5 solved; seeds `456,1024` scored `1001/1001` | log/metrics-only |
+| `low_pass_fir` | `42,123,456,789,1024` | 1/5 solved; seed `123` scored `1001/1001` | log/metrics-only |
+
+Inventory: `artifacts/inventories/log_metric_only_results.csv`.
+
+These results matter for historical completeness, but they do not change the paper-claim table because the generated RTL/result artifacts for those specific cells were not preserved.
 
 ## What Would Strengthen The AAAI Paper
 

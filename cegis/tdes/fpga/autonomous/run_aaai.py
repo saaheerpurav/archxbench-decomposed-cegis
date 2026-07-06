@@ -629,6 +629,7 @@ def run_C2g(
     conversation = [{"role": "user", "content": study_prompt}]
     total_calls = 0
     current_source = ""
+    best_source = ""
     best_golden_p, best_golden_t = 0, 0
     best_tb_p, best_tb_t = 0, 0
 
@@ -692,9 +693,11 @@ def run_C2g(
 
             if gt > 0 and gp > best_golden_p:
                 best_golden_p, best_golden_t = gp, gt
+                best_source = current_source
 
             if gt > 0 and gp == gt:
                 logger.info("C2g %s GOLDEN VERIFIED round %d (%d/%d)", top_name, rnd + 1, gp, gt)
+                best_source = current_source
                 break
 
             if gt > 0:
@@ -717,6 +720,7 @@ def run_C2g(
             break
         if p > best_tb_p:
             best_tb_p, best_tb_t = p, t
+            best_source = current_source
 
         fail_lines = [l.strip() for l in sim.stdout.split("\n") if "[FAIL]" in l][:10]
         conversation.append({"role": "user", "content":
@@ -746,7 +750,7 @@ def run_C2g(
         "best_passes": bp, "total_tests": bt,
         "solved": solved,
         "golden_correct": best_golden_p, "golden_total": best_golden_t,
-        "_sources": {top_name: current_source} if current_source else None,
+        "_sources": {top_name: best_source or current_source} if (best_source or current_source) else None,
     }
 
 

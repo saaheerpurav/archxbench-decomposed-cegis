@@ -2,7 +2,7 @@
 
 This is the only run queue. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`.
 
-Last audited: 2026-07-05 after the repaired `systolic_gemm` contract run.
+Last audited: 2026-07-06 after GitHub-history audit of both `archxbench-decomposed-cegis` and `archxbench-cegis`.
 
 ## Required For Current Claims
 
@@ -31,6 +31,7 @@ These have enough clean evidence for the current paper framing.
 | L5 | `conv2d` | `C2g` 3/3 |
 | L5 | `dct_idct_8pt_pipelined` | `C2g` 3/3 |
 | L5 | `harris_corner_detection` | `C2g` 3/3, `C4i` 3/3 |
+| L5 | `unsharp_mask` | `C2g` 2/2 artifact-backed on seeds `42,456` |
 | L6 | `aes_decryption` | `C2g` 3/3, `C4i` 3/3 |
 | L6 | `aes_encryption` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
 
@@ -41,10 +42,19 @@ These are real results, but not enough to present as robust method wins.
 | Level | Design | Current status |
 |---|---|---|
 | L3 | `newton_raphson_polynomial` | no clean solve; best `C4i` is `89/100` |
-| L5 | `unsharp_mask` | no clean solve; best `C2g` is `65535/65536` |
 | L6 | `fft_streaming_64pt` | `C2g` seed `42` clean `128/128`; seeds `123,456` fail |
 | L6 | `conv_3d` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
 | L6 | `quantized_matmul` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
+
+### Log/Metrics-Only Historical Results
+
+These runs were found in committed logs and old aggregate metrics, but the generated RTL/result artifacts were not preserved. They are remembered in `artifacts/inventories/log_metric_only_results.csv` and are not artifact-backed paper claims.
+
+| Level | Design | Method | Historical result |
+|---|---|---|---|
+| L4 | `band_pass_fir` | C4i GPT-5.5, seeds `42,123,456,789,1024` | 0/5 solved; best `5/1001` |
+| L4 | `high_pass_fir` | C4i GPT-5.5, seeds `42,123,456,789,1024` | 2/5 solved; seeds `456,1024` scored `1001/1001` |
+| L4 | `low_pass_fir` | C4i GPT-5.5, seeds `42,123,456,789,1024` | 1/5 solved; seed `123` scored `1001/1001` |
 
 ### Latest Targeted Research Attempt
 
@@ -86,8 +96,8 @@ Do not blind-run these until the checker/spec issue is resolved.
 | Level | Design | Reason |
 |---|---|---|
 | L4 | `band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
-| L4 | `high_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
-| L4 | `low_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
+| L4 | `high_pass_fir` | FIR benchmark/spec-contract caveat unresolved; historical C4i log/metrics-only result is 2/5 solved |
+| L4 | `low_pass_fir` | FIR benchmark/spec-contract caveat unresolved; historical C4i log/metrics-only result is 1/5 solved |
 | L5 | `systolic_gemm` | original checker is display-only; repaired-contract track completed with 0/9 solves |
 | L6 | `fp_band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
 | L6 | `fp_high_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
@@ -106,12 +116,14 @@ The only useful next runs are targeted research attempts, not table filling:
 | 2 | Decide how prominently to use repaired-contract rows in the paper; they are benchmark-audit results, not original ArchXBench solves. |
 | 3 | Decide whether to exclude or repair the FIR-family benchmark contract. |
 | 4 | Keep original `systolic_gemm` excluded; repaired-contract run is complete and negative. |
-| 5 | If expanding beyond contract repair, target `unsharp_mask`, `fft_streaming_64pt`, and `newton_raphson_polynomial` with a genuinely new method. C4a was tried and failed, so re-running it is not justified by current evidence. |
+| 5 | If promoting `unsharp_mask` as a 3-seed result, rerun C2g seed `123` with artifact saving; current artifact-backed evidence is clean on seeds `42,456`. |
 | 6 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
+| 7 | Rerun any C1/C2g score-only baseline row before using it as artifact-backed paper evidence; see `docs/ARTIFACT_AUDIT_STATUS.md`. |
 
 ## Execution Rules
 
-- Use `artifacts/inventories/run_matrix_l3_l6.csv` as the source of truth before and after every batch.
+- Use `artifacts/inventories/run_matrix_l3_l6.csv` as the source of truth for repo-local `result.json` cells before and after every batch.
+- Use `artifacts/inventories/log_metric_only_results.csv` only for historical log/metrics-only rows that lack saved RTL/result artifacts.
 - Use `--parallel 2` for overnight paper-quality runs.
 - For repaired-contract runs, set `ARCHXBENCH_ROOT` explicitly and record that root in the run note.
 - After every batch:

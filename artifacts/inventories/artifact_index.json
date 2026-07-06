@@ -17848,5 +17848,39 @@
     "wall_seconds": "345.2",
     "has_decomposition": "True",
     "verilog_files": "4"
+  },
+  {
+    "artifact_path": "artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/unsharp_mask/C2g/42/result.json",
+    "roof": "raw_runs",
+    "tier": "unsharp_c2g_artifact_rerun_20260706",
+    "level": "mixed",
+    "design": "unsharp_mask",
+    "condition": "C2g",
+    "model": "gpt-5.5",
+    "seed": "42",
+    "solved": "True",
+    "score": "65536/65536",
+    "golden": "65536/65536",
+    "llm_calls": "24",
+    "wall_seconds": "1801.7",
+    "has_decomposition": "False",
+    "verilog_files": "1"
+  },
+  {
+    "artifact_path": "artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/unsharp_mask/C2g/456/result.json",
+    "roof": "raw_runs",
+    "tier": "unsharp_c2g_artifact_rerun_20260706",
+    "level": "mixed",
+    "design": "unsharp_mask",
+    "condition": "C2g",
+    "model": "gpt-5.5",
+    "seed": "456",
+    "solved": "True",
+    "score": "65536/65536",
+    "golden": "65536/65536",
+    "llm_calls": "27",
+    "wall_seconds": "2402.3",
+    "has_decomposition": "False",
+    "verilog_files": "1"
   }
 ]
