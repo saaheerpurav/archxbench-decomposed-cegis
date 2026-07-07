@@ -2,6 +2,9 @@
 
 This file contains clean result tables only. A row is a paper claim only if it appears here.
 
+For paper table construction, use the separated plan in `docs/PAPER_AUDIT.md`:
+original ArchXBench main evidence, baseline context, repaired-contract evidence, held/excluded rows, and artifact-backed vs score-only rows must stay separate.
+
 ## Main Claims
 
 All rows use GPT-5.5 or Codex GPT-5.5 as recorded in `result.json`.

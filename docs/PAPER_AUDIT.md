@@ -18,6 +18,66 @@ The current paper is viable only if it is framed honestly:
 
 The paper should not claim a universal method win. It should claim a verified, decomposed RTL synthesis pipeline with hard benchmark solves, clear ablations, and transparent benchmark caveats.
 
+## Paper-Facing Table Plan
+
+Use these tables in the paper. Do not merge rows across table classes.
+
+### Table A: Original ArchXBench Main Evidence
+
+These are the clean original-benchmark rows to emphasize. They are artifact-backed unless noted.
+
+| Level | Designs | Main evidence | Paper use |
+|---|---|---|---|
+| L3 | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt` | C4i solves 3/3; C1/C2g fail or are weaker | strongest method-value evidence |
+| L4 | `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline` | C4tl solves 5/5; C2g also solves FFT/IFFT and both pipelines solve under multiple methods | strongest hard-level coverage evidence |
+| L5 | `conv1d`, `harris_corner_detection` | C4i solves 3/3 with golden verification | clean golden-verified L5 evidence |
+| L6 | `aes_encryption`, `aes_decryption` | C4i solves 3/3 with golden verification | clean golden-verified L6 evidence |
+
+### Table B: Original ArchXBench Baseline Context
+
+These are real original-benchmark results, but they should be framed as baseline/context rows rather than the central method claim.
+
+| Level | Designs | Evidence | Artifact status |
+|---|---|---|---|
+| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` | C2g solves 3/3 with golden verification | `unsharp_mask` is artifact-backed; `conv2d` and `dct_idct_8pt_pipelined` are score-only unless rerun |
+| L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 | useful for ablation context; some C2g rows are score-only |
+| L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong baselines; C2g solves 3/3 | C2g rows are score-only unless rerun |
+| L6 | `fft_streaming_64pt` | C2g solves only seed `42`; four other seeds fail | partial diagnostic only, not a robust solve |
+
+### Table C: Repaired-Contract Evidence
+
+These rows must be reported as repaired executable contracts, not original ArchXBench solves.
+
+| Design | Repaired-contract result | Paper use |
+|---|---|---|
+| `conv_3d` | C2g 3/3, C4i 2/3, C4tl 0/3 | benchmark-contract repair unlocks intended task; not a C4tl win |
+| `multich_conv2d` | C2g/C4i/C4tl all 3/3 | clean repaired-contract validation result |
+| `quantized_matmul` | runner-fixed repair: C2g 3/3, C4i 3/3, C4tl 0/3 | shows file-format/runner contract mattered |
+| `fp_band_pass_fir`, `fp_high_pass_fir` | C2g 3/3 on both; C4i/C4tl pilots fail or near-miss | benchmark-contract result; C2g strongest |
+| `newton_raphson_polynomial` | repaired checker: C2g 3/3, C4i 1/3, C4tl 1/3 | shows original checker ceiling and repaired executable contract |
+| `systolic_gemm` | C2g/C4i/C4tl all 0/3 | negative repaired-contract result |
+| L4 FIR family | single-seed repaired pilots all fail | negative benchmark-audit evidence |
+
+### Table D: Held Or Excluded Rows
+
+These should not appear as solve-rate wins.
+
+| Design/group | Final status | Reason |
+|---|---|---|
+| `fft_streaming_64pt` | hold | input encoding, output schema, and comparator are inconsistent |
+| `fp_low_pass_fir` | hold | coefficient/cutoff oracle is not explicit |
+| `band_pass_fir`, `high_pass_fir`, `low_pass_fir` | exclude from positive claims | repaired L4 pilots are negative; historical successes are log/metrics-only |
+| `systolic_gemm` | negative | repaired checker exists and all current methods fail |
+
+### Table E: Artifact-Backed Vs Score-Only
+
+| Evidence class | Rows |
+|---|---|
+| Artifact-backed main claims | all rows in `docs/RESULTS.md` Main Claims |
+| Artifact-backed repaired positives | `multich_conv2d`, `quantized_matmul` runner-fixed, `fp_band_pass_fir`, `fp_high_pass_fir`, `newton_raphson_polynomial`; `conv_3d` C4i is artifact-backed, C2g is score-only |
+| Score-only baseline rows | C2g `aes_encryption`, `aes_decryption`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, and repaired-contract C2g `conv_3d` |
+| Log/metrics-only historical rows | L4 FIR C4i historical sweep: `band_pass_fir`, `high_pass_fir`, `low_pass_fir` |
+
 ## Official L3-L6 Coverage
 
 ArchXBench L3-L6 has 28 designs in this repo.
