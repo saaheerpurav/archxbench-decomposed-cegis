@@ -47,6 +47,20 @@ L4 `fft_16pt_iterative` and `ifft_16pt_iterative` are clean self-checking solves
 
 L6 `fft_streaming_64pt` is different. Current C4i/C4tl rows fail golden comparison and are diagnostics. C2g has one clean seed (`42`, `128/128`) but fails four other seeds (`123,456,789,1024`), so it is partial rather than robust.
 
+Contract audit finding: the released file-output stack is internally inconsistent. The shipped golden file is a dict with `real_out` and `imag_out` arrays, while `tb_fft_streaming_64pt.v` writes a list of objects with `real` and `imag` fields. The shipped `scripts/compare_outputs.py` is also a copied scalar-filter comparator and cannot compare the FFT dict/list structure correctly. The input side is also ambiguous: the stimuli are JSON floats / FP32 hex words, while the testbench reads decimal integer pairs into 16-bit signed ports. Treat this row as hold, not just dirty, until a principled repaired contract specifies numeric encoding, normalizes the output schema, and validates an oracle DUT.
+
+## Newton-Raphson Polynomial
+
+`newton_raphson_polynomial` is self-checking, but the released testbench is not fully satisfiable. It performs two checks per 50 test cases: root comparison against a real-number Newton solver and polynomial residual verification. Three checks are structurally impossible to satisfy simultaneously:
+
+- case 6: polynomial has no real root, but the testbench still demands both real-Newton root proximity and low residual
+- case 13: constant polynomial `p(x)=1`, so residual verification cannot pass
+- case 35: real Newton reference does not land near a residual-zero point within the fixed-point tolerance
+
+Therefore the effective ceiling is `97/100`, not `100/100`, unless the benchmark contract is repaired. A repo-local C4a debug artifact reaches `97/100`; do not spend more method runs chasing `100/100` on the original checker.
+
+A repaired contract now exists under `artifacts/benchmark_contracts/archxbench_repaired/level-3/newton_raphson_polynomial/`. It skips only the three impossible polynomial residual checks while preserving all 50 root-comparison checks and the remaining 47 residual checks. Oracle validation passes `97/97` with 3 explicit skipped residual checks. Repaired-contract runs are separate from original ArchXBench results: C2g solves 3/3, C4i solves 1/3, and C4tl solves 1/3.
+
 ## DCT And Systolic GEMM
 
 `dct_idct_8pt_pipelined` is solved by C2g in the current repo-local evidence. C4i/C4tl rows are diagnostics unless promoted in `docs/RESULTS.md`.

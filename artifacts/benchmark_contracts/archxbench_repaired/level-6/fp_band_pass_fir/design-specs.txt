@@ -49,4 +49,5 @@ Repaired benchmark contract:
 - The top module is `fp_bandpass_fir`.
 - Coefficients must be hard-coded from the public 31-tap coefficient list in the testbench/spec.
 - Do not rely on a testbench write to `dut.coeffs`; that hidden internal memory is not part of the module interface.
+- The output JSON writer uses an explicit output counter, so only actual `valid_out` writes control comma placement.
 - Outputs are 32-bit IEEE-754 hex words compared as floats with +/-1.0 tolerance, matching the shipped comparison script.

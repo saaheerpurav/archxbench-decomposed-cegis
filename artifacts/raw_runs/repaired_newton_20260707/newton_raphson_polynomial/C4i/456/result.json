@@ -1,0 +1,29 @@
+{
+  "condition": "C4i",
+  "llm_calls": 7,
+  "best_passes": 97,
+  "total_tests": 97,
+  "solved": true,
+  "decomp_modules": [
+    "nr_poly_eval_fixed",
+    "nr_derivative_eval_fixed",
+    "nr_fixed_divide",
+    "nr_abs_fixed",
+    "nr_root_verify"
+  ],
+  "module_solve_rounds": {
+    "nr_poly_eval_fixed": 2,
+    "nr_derivative_eval_fixed": 1,
+    "nr_fixed_divide": 1,
+    "nr_abs_fixed": 1,
+    "nr_root_verify": 1
+  },
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "newton_raphson_polynomial",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 379.8,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

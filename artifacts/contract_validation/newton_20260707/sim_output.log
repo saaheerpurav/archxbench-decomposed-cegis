@@ -1,0 +1,552 @@
+------------------------------------------------------------
+Test case #0            
+Coefficients: a0=1.000000, a1=-3.000000, a2=2.000000, a3=0.000000
+Initial guess: 1.500000
+Expected root: 1.000000 (fixed: 256)
+Calculated root: 1.000000 (fixed: 256)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #1            
+Coefficients: a0=0.000000, a1=1.000000, a2=-6.000000, a3=2.000000
+Initial guess: 3.000000
+Expected root: 2.822876 (fixed: 723)
+Calculated root: 2.824219 (fixed: 723)
+Root error: 0.001343
+Root Comparison: PASS (error = 0.001343 <= epsilon = 0.031250)
+f(calculated_root) = 0.020082
+Polynomial Verification: PASS (|f(x)| = 0.020082 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #2            
+Coefficients: a0=2.000000, a1=-4.000000, a2=1.000000, a3=0.500000
+Initial guess: 0.500000
+Expected root: 0.630898 (fixed: 162)
+Calculated root: 0.632812 (fixed: 162)
+Root error: 0.001915
+Root Comparison: PASS (error = 0.001915 <= epsilon = 0.031250)
+f(calculated_root) = -0.004093
+Polynomial Verification: PASS (|f(x)| = 0.004093 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #3            
+Coefficients: a0=-1.000000, a1=2.000000, a2=-1.000000, a3=0.200000
+Initial guess: -0.500000
+Expected root: 0.724318 (fixed: 185)
+Calculated root: 0.722656 (fixed: 185)
+Root error: 0.001662
+Root Comparison: PASS (error = 0.001662 <= epsilon = 0.031250)
+f(calculated_root) = -0.001441
+Polynomial Verification: PASS (|f(x)| = 0.001441 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #4            
+Coefficients: a0=1.000000, a1=-1.000000, a2=1.000000, a3=-1.000000
+Initial guess: 2.000000
+Expected root: 1.000000 (fixed: 256)
+Calculated root: 1.000000 (fixed: 256)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #5            
+Coefficients: a0=0.500000, a1=0.500000, a2=0.500000, a3=0.500000
+Initial guess: 1.000000
+Expected root: -1.000000 (fixed: -256)
+Calculated root: -1.000000 (fixed: -256)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #6            
+Coefficients: a0=10.000000, a1=-15.000000, a2=6.000000, a3=0.000000
+Initial guess: 2.000000
+Expected root: 1.544549 (fixed: 395)
+Calculated root: 1.515625 (fixed: 388)
+Root error: 0.028924
+Root Comparison: PASS (error = 0.028924 <= epsilon = 0.031250)
+f(calculated_root) = 1.048340
+Polynomial Verification: SKIP_REPAIRED_CONTRACT (case has no simultaneously satisfiable root/residual check)
+
+------------------------------------------------------------
+Test case #7            
+Coefficients: a0=3.000000, a1=-2.000000, a2=1.000000, a3=-0.500000
+Initial guess: 0.500000
+Expected root: 1.711346 (fixed: 438)
+Calculated root: 1.710938 (fixed: 438)
+Root error: 0.000408
+Root Comparison: PASS (error = 0.000408 <= epsilon = 0.031250)
+f(calculated_root) = 0.001212
+Polynomial Verification: PASS (|f(x)| = 0.001212 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #8            
+Coefficients: a0=1.000000, a1=1.000000, a2=1.000000, a3=1.000000
+Initial guess: 1.000000
+Expected root: -1.000000 (fixed: -256)
+Calculated root: -1.000000 (fixed: -256)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #9            
+Coefficients: a0=5.000000, a1=-10.000000, a2=5.000000, a3=-1.000000
+Initial guess: 1.000000
+Expected root: 0.724318 (fixed: 185)
+Calculated root: 0.722656 (fixed: 185)
+Root error: 0.001662
+Root Comparison: PASS (error = 0.001662 <= epsilon = 0.031250)
+f(calculated_root) = 0.007204
+Polynomial Verification: PASS (|f(x)| = 0.007204 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #10 (EDGE CASE)
+Coefficients: a0=0.000000, a1=0.000000, a2=0.000000, a3=0.000000
+Initial guess: 0.000000
+Expected root: 0.000000 (fixed: 0)
+Calculated root: 0.000000 (fixed: 0)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #11 (EDGE CASE)
+Coefficients: a0=0.000000, a1=0.000000, a2=0.000000, a3=0.000000
+Initial guess: 1.000000
+Expected root: 1.000000 (fixed: 256)
+Calculated root: 1.000000 (fixed: 256)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #12 (EDGE CASE)
+Coefficients: a0=0.000000, a1=0.000000, a2=1.000000, a3=0.000000
+Initial guess: 0.000000
+Expected root: 0.000000 (fixed: 0)
+Calculated root: 0.000000 (fixed: 0)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #13 (EDGE CASE)
+Coefficients: a0=1.000000, a1=0.000000, a2=0.000000, a3=0.000000
+Initial guess: 3.000000
+Expected root: 3.000000 (fixed: 768)
+Calculated root: 3.000000 (fixed: 768)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 1.000000
+Polynomial Verification: SKIP_REPAIRED_CONTRACT (case has no simultaneously satisfiable root/residual check)
+
+------------------------------------------------------------
+Test case #14 (EDGE CASE)
+Coefficients: a0=0.000000, a1=1.000000, a2=0.000000, a3=0.000000
+Initial guess: -2.000000
+Expected root: 0.000000 (fixed: 0)
+Calculated root: 0.000000 (fixed: 0)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #15 (EDGE CASE)
+Coefficients: a0=-2.000000, a1=4.000000, a2=-2.000000, a3=0.000000
+Initial guess: 2.000000
+Expected root: 1.000000 (fixed: 256)
+Calculated root: 1.000000 (fixed: 256)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #16 (EDGE CASE)
+Coefficients: a0=1.000000, a1=-3.000000, a2=3.000000, a3=-1.000000
+Initial guess: 1.000000
+Expected root: 1.000000 (fixed: 256)
+Calculated root: 1.000000 (fixed: 256)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #17 (EDGE CASE)
+Coefficients: a0=1.000000, a1=0.000000, a2=-1.000000, a3=0.000000
+Initial guess: 1.000000
+Expected root: 1.000000 (fixed: 256)
+Calculated root: 1.000000 (fixed: 256)
+Root error: 0.000000
+Root Comparison: PASS (error = 0.000000 <= epsilon = 0.031250)
+f(calculated_root) = 0.000000
+Polynomial Verification: PASS (|f(x)| = 0.000000 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #18            
+Coefficients: a0=4.000000, a1=2.000000, a2=-2.000000, a3=-1.000000
+Initial guess: 2.800000
+Expected root: 1.414214 (fixed: 362)
+Calculated root: 1.414062 (fixed: 362)
+Root error: 0.000151
+Root Comparison: PASS (error = 0.000151 <= epsilon = 0.031250)
+f(calculated_root) = 0.001459
+Polynomial Verification: PASS (|f(x)| = 0.001459 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #19            
+Coefficients: a0=5.000000, a1=-2.000000, a2=-1.000000, a3=0.000000
+Initial guess: 2.900000
+Expected root: 1.449490 (fixed: 371)
+Calculated root: 1.449219 (fixed: 371)
+Root error: 0.000271
+Root Comparison: PASS (error = 0.000271 <= epsilon = 0.031250)
+f(calculated_root) = 0.001328
+Polynomial Verification: PASS (|f(x)| = 0.001328 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #20            
+Coefficients: a0=1.000000, a1=-1.000000, a2=0.000000, a3=1.000000
+Initial guess: 3.000000
+Expected root: -1.324718 (fixed: -339)
+Calculated root: -1.324219 (fixed: -339)
+Root error: 0.000499
+Root Comparison: PASS (error = 0.000499 <= epsilon = 0.031250)
+f(calculated_root) = 0.002128
+Polynomial Verification: PASS (|f(x)| = 0.002128 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #21            
+Coefficients: a0=2.000000, a1=0.000000, a2=1.000000, a3=2.000000
+Initial guess: 3.100000
+Expected root: -1.197429 (fixed: -307)
+Calculated root: -1.199219 (fixed: -307)
+Root error: 0.001789
+Root Comparison: PASS (error = 0.001789 <= epsilon = 0.031250)
+f(calculated_root) = -0.011129
+Polynomial Verification: PASS (|f(x)| = 0.011129 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #22            
+Coefficients: a0=3.000000, a1=1.000000, a2=2.000000, a3=-2.000000
+Initial guess: 3.200000
+Expected root: 1.764878 (fixed: 452)
+Calculated root: 1.765625 (fixed: 452)
+Root error: 0.000747
+Root Comparison: PASS (error = 0.000747 <= epsilon = 0.031250)
+f(calculated_root) = -0.007942
+Polynomial Verification: PASS (|f(x)| = 0.007942 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #23            
+Coefficients: a0=4.000000, a1=2.000000, a2=-2.000000, a3=-1.000000
+Initial guess: 3.300000
+Expected root: 1.414214 (fixed: 362)
+Calculated root: 1.414062 (fixed: 362)
+Root error: 0.000151
+Root Comparison: PASS (error = 0.000151 <= epsilon = 0.031250)
+f(calculated_root) = 0.001459
+Polynomial Verification: PASS (|f(x)| = 0.001459 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #24            
+Coefficients: a0=5.000000, a1=-2.000000, a2=-1.000000, a3=0.000000
+Initial guess: 3.400000
+Expected root: 1.449490 (fixed: 371)
+Calculated root: 1.449219 (fixed: 371)
+Root error: 0.000271
+Root Comparison: PASS (error = 0.000271 <= epsilon = 0.031250)
+f(calculated_root) = 0.001328
+Polynomial Verification: PASS (|f(x)| = 0.001328 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #25            
+Coefficients: a0=1.000000, a1=-1.000000, a2=0.000000, a3=1.000000
+Initial guess: 3.500000
+Expected root: -1.324718 (fixed: -339)
+Calculated root: -1.324219 (fixed: -339)
+Root error: 0.000499
+Root Comparison: PASS (error = 0.000499 <= epsilon = 0.031250)
+f(calculated_root) = 0.002128
+Polynomial Verification: PASS (|f(x)| = 0.002128 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #26            
+Coefficients: a0=2.000000, a1=0.000000, a2=1.000000, a3=2.000000
+Initial guess: 3.600000
+Expected root: -1.197429 (fixed: -307)
+Calculated root: -1.199219 (fixed: -307)
+Root error: 0.001789
+Root Comparison: PASS (error = 0.001789 <= epsilon = 0.031250)
+f(calculated_root) = -0.011129
+Polynomial Verification: PASS (|f(x)| = 0.011129 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #27            
+Coefficients: a0=3.000000, a1=1.000000, a2=2.000000, a3=-2.000000
+Initial guess: 3.700000
+Expected root: 1.764878 (fixed: 452)
+Calculated root: 1.765625 (fixed: 452)
+Root error: 0.000747
+Root Comparison: PASS (error = 0.000747 <= epsilon = 0.031250)
+f(calculated_root) = -0.007942
+Polynomial Verification: PASS (|f(x)| = 0.007942 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #28            
+Coefficients: a0=4.000000, a1=2.000000, a2=-2.000000, a3=-1.000000
+Initial guess: 3.800000
+Expected root: 1.414214 (fixed: 362)
+Calculated root: 1.414062 (fixed: 362)
+Root error: 0.000151
+Root Comparison: PASS (error = 0.000151 <= epsilon = 0.031250)
+f(calculated_root) = 0.001459
+Polynomial Verification: PASS (|f(x)| = 0.001459 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #29            
+Coefficients: a0=5.000000, a1=-2.000000, a2=-1.000000, a3=0.000000
+Initial guess: 3.900000
+Expected root: 1.449490 (fixed: 371)
+Calculated root: 1.449219 (fixed: 371)
+Root error: 0.000271
+Root Comparison: PASS (error = 0.000271 <= epsilon = 0.031250)
+f(calculated_root) = 0.001328
+Polynomial Verification: PASS (|f(x)| = 0.001328 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #30            
+Coefficients: a0=1.000000, a1=-1.000000, a2=0.000000, a3=1.000000
+Initial guess: 4.000000
+Expected root: -1.324718 (fixed: -339)
+Calculated root: -1.324219 (fixed: -339)
+Root error: 0.000499
+Root Comparison: PASS (error = 0.000499 <= epsilon = 0.031250)
+f(calculated_root) = 0.002128
+Polynomial Verification: PASS (|f(x)| = 0.002128 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #31            
+Coefficients: a0=2.000000, a1=0.000000, a2=1.000000, a3=2.000000
+Initial guess: 4.100000
+Expected root: -1.197429 (fixed: -307)
+Calculated root: -1.199219 (fixed: -307)
+Root error: 0.001789
+Root Comparison: PASS (error = 0.001789 <= epsilon = 0.031250)
+f(calculated_root) = -0.011129
+Polynomial Verification: PASS (|f(x)| = 0.011129 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #32            
+Coefficients: a0=3.000000, a1=1.000000, a2=2.000000, a3=-2.000000
+Initial guess: 4.200000
+Expected root: 1.764878 (fixed: 452)
+Calculated root: 1.765625 (fixed: 452)
+Root error: 0.000747
+Root Comparison: PASS (error = 0.000747 <= epsilon = 0.031250)
+f(calculated_root) = -0.007942
+Polynomial Verification: PASS (|f(x)| = 0.007942 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #33            
+Coefficients: a0=4.000000, a1=2.000000, a2=-2.000000, a3=-1.000000
+Initial guess: 4.300000
+Expected root: 1.414214 (fixed: 362)
+Calculated root: 1.414062 (fixed: 362)
+Root error: 0.000151
+Root Comparison: PASS (error = 0.000151 <= epsilon = 0.031250)
+f(calculated_root) = 0.001459
+Polynomial Verification: PASS (|f(x)| = 0.001459 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #34            
+Coefficients: a0=5.000000, a1=-2.000000, a2=-1.000000, a3=0.000000
+Initial guess: 4.400000
+Expected root: 1.449490 (fixed: 371)
+Calculated root: 1.449219 (fixed: 371)
+Root error: 0.000271
+Root Comparison: PASS (error = 0.000271 <= epsilon = 0.031250)
+f(calculated_root) = 0.001328
+Polynomial Verification: PASS (|f(x)| = 0.001328 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #35            
+Coefficients: a0=1.000000, a1=-1.000000, a2=0.000000, a3=1.000000
+Initial guess: 4.500000
+Expected root: -1.876714 (fixed: -480)
+Calculated root: -1.847656 (fixed: -473)
+Root error: 0.029058
+Root Comparison: PASS (error = 0.029058 <= epsilon = 0.031250)
+f(calculated_root) = -3.459935
+Polynomial Verification: SKIP_REPAIRED_CONTRACT (case has no simultaneously satisfiable root/residual check)
+
+------------------------------------------------------------
+Test case #36            
+Coefficients: a0=2.000000, a1=0.000000, a2=1.000000, a3=2.000000
+Initial guess: 4.600000
+Expected root: -1.197429 (fixed: -307)
+Calculated root: -1.199219 (fixed: -307)
+Root error: 0.001789
+Root Comparison: PASS (error = 0.001789 <= epsilon = 0.031250)
+f(calculated_root) = -0.011129
+Polynomial Verification: PASS (|f(x)| = 0.011129 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #37            
+Coefficients: a0=3.000000, a1=1.000000, a2=2.000000, a3=-2.000000
+Initial guess: 4.700000
+Expected root: 1.764878 (fixed: 452)
+Calculated root: 1.765625 (fixed: 452)
+Root error: 0.000747
+Root Comparison: PASS (error = 0.000747 <= epsilon = 0.031250)
+f(calculated_root) = -0.007942
+Polynomial Verification: PASS (|f(x)| = 0.007942 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #38            
+Coefficients: a0=4.000000, a1=2.000000, a2=-2.000000, a3=-1.000000
+Initial guess: 4.800000
+Expected root: 1.414214 (fixed: 362)
+Calculated root: 1.414062 (fixed: 362)
+Root error: 0.000151
+Root Comparison: PASS (error = 0.000151 <= epsilon = 0.031250)
+f(calculated_root) = 0.001459
+Polynomial Verification: PASS (|f(x)| = 0.001459 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #39            
+Coefficients: a0=5.000000, a1=-2.000000, a2=-1.000000, a3=0.000000
+Initial guess: 4.900000
+Expected root: 1.449490 (fixed: 371)
+Calculated root: 1.449219 (fixed: 371)
+Root error: 0.000271
+Root Comparison: PASS (error = 0.000271 <= epsilon = 0.031250)
+f(calculated_root) = 0.001328
+Polynomial Verification: PASS (|f(x)| = 0.001328 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #40            
+Coefficients: a0=1.000000, a1=-1.000000, a2=0.000000, a3=1.000000
+Initial guess: 5.000000
+Expected root: -1.324718 (fixed: -339)
+Calculated root: -1.324219 (fixed: -339)
+Root error: 0.000499
+Root Comparison: PASS (error = 0.000499 <= epsilon = 0.031250)
+f(calculated_root) = 0.002128
+Polynomial Verification: PASS (|f(x)| = 0.002128 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #41            
+Coefficients: a0=2.000000, a1=0.000000, a2=1.000000, a3=2.000000
+Initial guess: 5.100000
+Expected root: -1.197429 (fixed: -307)
+Calculated root: -1.199219 (fixed: -307)
+Root error: 0.001789
+Root Comparison: PASS (error = 0.001789 <= epsilon = 0.031250)
+f(calculated_root) = -0.011129
+Polynomial Verification: PASS (|f(x)| = 0.011129 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #42            
+Coefficients: a0=3.000000, a1=1.000000, a2=2.000000, a3=-2.000000
+Initial guess: 5.200000
+Expected root: 1.764878 (fixed: 452)
+Calculated root: 1.765625 (fixed: 452)
+Root error: 0.000747
+Root Comparison: PASS (error = 0.000747 <= epsilon = 0.031250)
+f(calculated_root) = -0.007942
+Polynomial Verification: PASS (|f(x)| = 0.007942 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #43            
+Coefficients: a0=4.000000, a1=2.000000, a2=-2.000000, a3=-1.000000
+Initial guess: 5.300000
+Expected root: 1.414214 (fixed: 362)
+Calculated root: 1.414062 (fixed: 362)
+Root error: 0.000151
+Root Comparison: PASS (error = 0.000151 <= epsilon = 0.031250)
+f(calculated_root) = 0.001459
+Polynomial Verification: PASS (|f(x)| = 0.001459 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #44            
+Coefficients: a0=5.000000, a1=-2.000000, a2=-1.000000, a3=0.000000
+Initial guess: 5.400000
+Expected root: 1.449490 (fixed: 371)
+Calculated root: 1.449219 (fixed: 371)
+Root error: 0.000271
+Root Comparison: PASS (error = 0.000271 <= epsilon = 0.031250)
+f(calculated_root) = 0.001328
+Polynomial Verification: PASS (|f(x)| = 0.001328 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #45            
+Coefficients: a0=1.000000, a1=-1.000000, a2=0.000000, a3=1.000000
+Initial guess: 5.500000
+Expected root: -1.324718 (fixed: -339)
+Calculated root: -1.324219 (fixed: -339)
+Root error: 0.000499
+Root Comparison: PASS (error = 0.000499 <= epsilon = 0.031250)
+f(calculated_root) = 0.002128
+Polynomial Verification: PASS (|f(x)| = 0.002128 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #46            
+Coefficients: a0=2.000000, a1=0.000000, a2=1.000000, a3=2.000000
+Initial guess: 5.600000
+Expected root: -1.197429 (fixed: -307)
+Calculated root: -1.199219 (fixed: -307)
+Root error: 0.001789
+Root Comparison: PASS (error = 0.001789 <= epsilon = 0.031250)
+f(calculated_root) = -0.011129
+Polynomial Verification: PASS (|f(x)| = 0.011129 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #47            
+Coefficients: a0=3.000000, a1=1.000000, a2=2.000000, a3=-2.000000
+Initial guess: 5.700000
+Expected root: 1.764878 (fixed: 452)
+Calculated root: 1.765625 (fixed: 452)
+Root error: 0.000747
+Root Comparison: PASS (error = 0.000747 <= epsilon = 0.031250)
+f(calculated_root) = -0.007942
+Polynomial Verification: PASS (|f(x)| = 0.007942 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #48            
+Coefficients: a0=4.000000, a1=2.000000, a2=-2.000000, a3=-1.000000
+Initial guess: 5.800000
+Expected root: 1.414214 (fixed: 362)
+Calculated root: 1.414062 (fixed: 362)
+Root error: 0.000151
+Root Comparison: PASS (error = 0.000151 <= epsilon = 0.031250)
+f(calculated_root) = 0.001459
+Polynomial Verification: PASS (|f(x)| = 0.001459 <= epsilon = 0.031250)
+
+------------------------------------------------------------
+Test case #49            
+Coefficients: a0=5.000000, a1=-2.000000, a2=-1.000000, a3=0.000000
+Initial guess: 5.900000
+Expected root: 1.449490 (fixed: 371)
+Calculated root: 1.449219 (fixed: 371)
+Root error: 0.000271
+Root Comparison: PASS (error = 0.000271 <= epsilon = 0.031250)
+f(calculated_root) = 0.001328
+Polynomial Verification: PASS (|f(x)| = 0.001328 <= epsilon = 0.031250)
+
+All test cases completed.
+C:\Users\saahe\Desktop\Programming\Stuff\College\Research\archxbench-decomposed-cegis\artifacts\contract_validation\newton_20260707\tb.v:200: $finish called at 2762000 (1ps)

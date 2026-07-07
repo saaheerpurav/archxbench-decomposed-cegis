@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fixed_poly_eval.v",
+  "sub_modules": {
+    "fixed_poly_eval": "Combinational fixed-point cubic polynomial evaluator using Horner form.",
+    "fixed_derivative_eval": "Combinational fixed-point derivative evaluator for a cubic polynomial.",
+    "fixed_root_verifier": "Combinational residual tolerance checker for a candidate root.",
+    "fixed_abs": "Combinational signed absolute value helper used by verification."
+  }
+}

@@ -35,16 +35,17 @@ These have enough clean evidence for the current paper framing.
 | L6 | `aes_decryption` | `C2g` 3/3, `C4i` 3/3 |
 | L6 | `aes_encryption` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
 
-### Partial Valid Results
+### Original-Contract Diagnostics, Not Run Queue
 
-These are real results, but not enough to present as robust method wins.
+These rows explain original benchmark behavior. They are not queued for more original-contract runs.
 
 | Level | Design | Current status |
 |---|---|---|
-| L3 | `newton_raphson_polynomial` | no clean solve; best `C4i` is `89/100` |
-| L6 | `fft_streaming_64pt` | `C2g` seed `42` clean `128/128`; seeds `123,456,789,1024` fail |
-| L6 | `conv_3d` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
-| L6 | `quantized_matmul` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
+| L3 | `newton_raphson_polynomial` | original checker has three unsatisfiable checks; repo-local C4a debug reaches the effective ceiling `97/100` |
+| L6 | `fft_streaming_64pt` | `C2g` seed `42` clean `128/128`; seeds `123,456,789,1024` fail; input encoding, output schema, and comparator are inconsistent |
+| L6 | `conv_3d` | DONE: original contract is flawed; repaired-contract track is complete, so no more original-contract runs |
+| L6 | `quantized_matmul` | DONE: original contract is flawed; repaired-contract runner-fixed track is complete, so no more original-contract runs |
+| L3 | `newton_raphson_polynomial` repaired contract | DONE: oracle-validated repaired checker; C2g 3/3 solved, C4i 1/3 solved, C4tl 1/3 solved |
 
 ### Log/Metrics-Only Historical Results
 
@@ -93,6 +94,7 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | `systolic_gemm` | C2g 0/3, C4i 0/3, C4tl 0/3; repaired display-only checker, but no method solved it |
 | L4 FIR repaired pilot | C2g/C4i/C4tl seed `42` all failed on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`; best score 5/1001 |
 | L6 FP FIR repaired contracts | Oracle validation passed for `fp_band_pass_fir` and `fp_high_pass_fir`; C2g solves both 3/3, C4i/C4tl seed `42` pilots fail |
+| `newton_raphson_polynomial` repaired contract | Oracle validation passed with `97/97` executable checks and 3 skipped impossible residual checks; C2g 3/3 solved, C4i 1/3 solved, C4tl 1/3 solved |
 
 ### Excluded Or Hold
 
@@ -108,18 +110,19 @@ Do not blind-run these until the checker/spec issue is resolved.
 | L6 | `fp_high_pass_fir` | original contract issue; repaired-contract C2g 3/3 complete |
 | L6 | `fp_low_pass_fir` | still held out; coefficient oracle not explicit |
 | L6 | `multich_conv2d` | original benchmark contract issue; repaired-contract track complete |
+| L6 | `fft_streaming_64pt` | hold; output schema, comparator, and input encoding are internally inconsistent, so no principled repaired run exists yet |
 
 ## What Is Left To Run
 
 No same-method, same-seed completion run is currently queued for the existing claims.
 
-The only useful next runs are targeted research attempts, not table filling:
+The controlled audit has now been done for the remaining weak rows. The only useful next work is principled contract repair or genuinely general research attempts, not table filling. The target is AAAI-27 acceptance, so do not run or repair just to inflate solve counts. Any benchmark repair must be minimal, principled, and reported separately from original ArchXBench results.
 
 | Priority | Action |
 |---|---|
-| 1 | New general method only for `fft_streaming_64pt`; C2g robustness probe is complete and negative beyond seed `42`. |
-| 2 | New general method only for `newton_raphson_polynomial`; C4a extra seeds are complete and negative. |
-| 3 | New general method only for original-contract `conv_3d` / `quantized_matmul`; repaired-contract rows are already complete. |
+| 1 | Keep `fft_streaming_64pt` on hold unless a principled repair specifies both numeric input encoding and output schema, then validates an oracle DUT. Do not run more original-contract seeds. |
+| 2 | Keep `fp_low_pass_fir` held out unless the coefficient/cutoff oracle is found explicitly. Deriving coefficients from golden output would be overfitting. |
+| 3 | No more original-contract `conv_3d` / `quantized_matmul` / `newton_raphson_polynomial` runs are needed; flaw evidence and repaired-contract rows are already complete. |
 | 4 | Keep `systolic_gemm` parked unless a genuinely new general method appears; repaired-contract run is complete and negative. |
 | 5 | Rerun any C1/C2g score-only baseline row before using it as artifact-backed paper evidence; see `docs/ARTIFACT_AUDIT_STATUS.md`. |
 

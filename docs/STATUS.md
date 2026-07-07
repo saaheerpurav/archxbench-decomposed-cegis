@@ -20,6 +20,12 @@ The repo has clean evidence that verifier-grounded decomposed/CEGIS-style RTL sy
 
 The current evidence does not support claiming that C4i/C4tl dominates C2g everywhere. C2g is strong on several L5/L6 designs. The paper must frame method value carefully: decomposition helps on specific hard rows and gives a structured verifier-grounded synthesis pipeline, while C2g is a serious baseline.
 
+## Primary Goal
+
+The only strategic goal is AAAI-27 acceptance. Do not optimize for extra benchmark rows, method branding, or cosmetic completeness if it weakens the paper. Time is not a constraint, but every run, repair, and claim must make the submission stronger, cleaner, and easier for reviewers to trust.
+
+Benchmark repair is allowed only as a principled executable-contract audit. Do not patch a benchmark to make one method look good. Repaired-contract rows must stay separate from original ArchXBench rows and must be framed as benchmark-validity evidence unless the repair is minimal, general, and clearly justified.
+
 ## Rules
 
 - Use only repo-local artifacts under `artifacts/`.
@@ -29,6 +35,7 @@ The current evidence does not support claiming that C4i/C4tl dominates C2g every
 - Do not use outside folders, old local notes, or collaborator machine paths as evidence unless copied into this repo.
 - Historical log/metrics-only rows are allowed only when recorded in `artifacts/inventories/log_metric_only_results.csv`; they are not artifact-backed claims.
 - Keep repaired-contract experiments separate from original ArchXBench claim tables.
+- Avoid one-off design hacks. If a new method is introduced, it must be general enough to test on multiple weak rows.
 - Do not push automatically.
 
 ## Matrix Ownership

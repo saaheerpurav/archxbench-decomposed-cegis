@@ -51,7 +51,8 @@ Known diagnostic categories:
 - historical L4 FIR C4i GPT-5.5 log/metrics-only rows: `band_pass_fir` 0/5, `high_pass_fir` 2/5, `low_pass_fir` 1/5; see `artifacts/inventories/log_metric_only_results.csv`
 - repaired L4 FIR pilot rows: C2g/C4i/C4tl seed `42` all fail on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`; best score is 5/1001
 - repaired L6 FP FIR rows: C2g solves `fp_band_pass_fir` and `fp_high_pass_fir` 3/3 on validated repaired contracts; C4i/C4tl seed `42` pilots fail
-- `fft_streaming_64pt` C2g is partial only: seed `42` solves `128/128`, while seeds `123,456,789,1024` fail
+- `fft_streaming_64pt` C2g is partial only: seed `42` solves `128/128`, while seeds `123,456,789,1024` fail; the released file-output schema/comparator is internally inconsistent
+- `newton_raphson_polynomial` original checker appears capped at `97/100` because three root/residual checks are unsatisfiable simultaneously
 - `systolic_gemm` rows without reliable golden evidence
 - old score-only `unsharp_mask` C2g near-miss rows; current artifact-backed C2g reruns solve seeds `42,123,456`
 
@@ -71,7 +72,7 @@ Extra Newton artifacts: `artifacts/raw_runs/newton_poly_c4a_extra_20260707/`
 | `fft_streaming_64pt` | 0/3 solved; all `0/1` |
 | `conv_3d` | 0/3 solved; all `0/0` |
 | `quantized_matmul` | 0/3 solved; two `0/0`, one final compile failure |
-| `newton_raphson_polynomial` | 0/5 solved; best `96/100`, extra seeds scored `88/100` and `94/100` |
+| `newton_raphson_polynomial` | 0/5 solved in the main C4a sweep; separate debug artifact reaches `97/100`, matching the audited effective ceiling |
 
 Conclusion: this is negative evidence. C4a should not be framed as a paper method improvement.
 
@@ -99,6 +100,9 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | `fp_band_pass_fir` repaired contract | C4i/C4tl | `42` | C4i `804/1000`, C4tl `0/1000` | negative pilot |
 | `fp_high_pass_fir` repaired contract | C2g | `42,123,456` | 3/3 solved, all `1000/1000` golden | repaired contract is solvable; C2g is strongest |
 | `fp_high_pass_fir` repaired contract | C4i/C4tl | `42` | C4i `969/1000`, C4tl `969/1000` | near-miss negative pilot |
+| `newton_raphson_polynomial` repaired contract | C2g | `42,123,456` | 3/3 solved, all `97/97` | original checker has 3 unsatisfiable residual checks; repaired checker is oracle-validated |
+| `newton_raphson_polynomial` repaired contract | C4i | `42,123,456` | 1/3 solved, seed `456`; other scores `87/97`, `89/97` | partial repaired-contract result |
+| `newton_raphson_polynomial` repaired contract | C4tl | `42,123,456` | 1/3 solved, seed `456`; other scores `16/97`, `17/97` | partial repaired-contract result |
 | `systolic_gemm` repaired contract | C2g | `42,123,456` | 0/3 solved | 30-call monolithic repair failed all seeds |
 | `systolic_gemm` repaired contract | C4i | `42,123,456` | 0/3 solved | all seeds failed final compile |
 | `systolic_gemm` repaired contract | C4tl | `42,123,456` | 0/3 solved | reference decompositions failed |

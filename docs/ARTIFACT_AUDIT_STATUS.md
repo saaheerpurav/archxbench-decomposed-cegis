@@ -4,8 +4,8 @@ Last audited: 2026-07-07.
 
 ## Summary
 
-- Total repo-local `result.json` files: `1076`.
-- Result rows with at least one saved Verilog file: `344`.
+- Total repo-local `result.json` files: `1085`.
+- Result rows with at least one saved Verilog file: `353`.
 - Result rows without saved Verilog: `732`.
 - The current `docs/RESULTS.md` main C4i/C4tl claim rows are artifact-backed.
 - Many C1/C2g baseline and secondary rows are score-only and must be rerun before being used as artifact-backed paper evidence.
@@ -62,6 +62,7 @@ Current clean C2g rows with saved Verilog:
 | `quantized_matmul` repaired contract, runner-fixed | `42,123,456` | `64/64` | `artifacts/raw_runs/repaired_contracts_qgemm_runnerfix_pilot_20260705/` |
 | `fp_band_pass_fir` repaired contract | `42,123,456` | `1000/1000` | `artifacts/raw_runs/repaired_fp_fir_c2g_pilot_20260707/` and `artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/` |
 | `fp_high_pass_fir` repaired contract | `42,123,456` | `1000/1000` | `artifacts/raw_runs/repaired_fp_fir_c2g_pilot_20260707/` and `artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/` |
+| `newton_raphson_polynomial` repaired contract | `42,123,456` | `97/97` | `artifacts/raw_runs/repaired_newton_20260707/` |
 
 ## Artifact-Backed Repaired FIR Negative Rows
 

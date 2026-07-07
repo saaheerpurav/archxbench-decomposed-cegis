@@ -1,0 +1,9 @@
+{
+  "status": "pass",
+  "returncode": 0,
+  "pass_count": 97,
+  "fail_count": 0,
+  "skip_count": 3,
+  "expected_pass_count": 97,
+  "expected_skip_count": 3
+}

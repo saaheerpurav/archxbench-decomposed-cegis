@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/nr_poly_eval_fixed.v",
+  "sub_modules": {
+    "nr_poly_eval_fixed": "Combinational fixed-point cubic polynomial evaluator using Horner form.",
+    "nr_poly_deriv_fixed": "Combinational fixed-point derivative evaluator for the cubic polynomial.",
+    "nr_fixed_div": "Combinational signed fixed-point divider used to compute p(x)/p'(x).",
+    "nr_update_step": "Combinational Newton-Raphson update stage with zero-derivative hold behavior.",
+    "nr_saturate_fixed": "Combinational saturation stage that maps the wide internal root to the output width.",
+    "nr_root_verify": "Combinational residual verification block that checks |p(root)| against EPSILON."
+  }
+}

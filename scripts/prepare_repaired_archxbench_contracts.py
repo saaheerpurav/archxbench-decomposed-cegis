@@ -643,6 +643,72 @@ def _repair_fp_low_pass_fir_hold() -> None:
     )
 
 
+def _repair_newton_raphson_polynomial() -> None:
+    dst = _copy_design("level-3", "newton_raphson_polynomial")
+    tb_path = dst / "tb.v"
+    tb_text = tb_path.read_text(encoding="utf-8", errors="ignore")
+    old = """            $display("f(calculated_root) = %f", fx);
+            if(fx_err <= to_real(EPSILON))
+                $display("Polynomial Verification: PASS (|f(x)| = %f <= epsilon = %f)\\n", fx_err, to_real(EPSILON));
+            else
+                $display("Polynomial Verification: FAIL (|f(x)| = %f > epsilon = %f)\\n", fx_err, to_real(EPSILON));
+"""
+    new = """            $display("f(calculated_root) = %f", fx);
+            if (i == 6 || i == 13 || i == 35) begin
+                $display("Polynomial Verification: SKIP_REPAIRED_CONTRACT (case has no simultaneously satisfiable root/residual check)\\n");
+            end else if(fx_err <= to_real(EPSILON))
+                $display("Polynomial Verification: PASS (|f(x)| = %f <= epsilon = %f)\\n", fx_err, to_real(EPSILON));
+            else
+                $display("Polynomial Verification: FAIL (|f(x)| = %f > epsilon = %f)\\n", fx_err, to_real(EPSILON));
+"""
+    if old not in tb_text:
+        raise RuntimeError("Could not find Newton polynomial verification block to repair")
+    tb_path.write_text(tb_text.replace(old, new), encoding="utf-8")
+    note = (
+        "# Repaired contract notes\n\n"
+        "- The original checker compares each case against a real-valued 50-iteration Newton solver and also checks `|p(root)| <= EPSILON`.\n"
+        "- Cases 6, 13, and 35 cannot satisfy both checks simultaneously under the released 16-bit Q8.8 fixed-point contract.\n"
+        "- Case 6 uses a polynomial with no real root, so the real Newton iterate does not have a near-zero residual.\n"
+        "- Case 13 is the constant polynomial `p(x)=1`, so the residual check cannot pass for any root.\n"
+        "- Case 35's real Newton iterate is not within the residual tolerance under Q8.8 rounding.\n"
+        "- This fixture keeps all root-comparison checks and all satisfiable residual checks, but marks those three residual checks as `SKIP_REPAIRED_CONTRACT` without `[PASS]` or `[FAIL]` tokens.\n"
+        "- The original source benchmark is unchanged.\n"
+    )
+    (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
+    _append_contract_note(
+        dst / "design-specs.txt",
+        [
+            "Repaired benchmark contract:",
+            "- The executable checker omits only three unsatisfiable polynomial-residual checks: cases 6, 13, and 35.",
+            "- All 50 root-comparison checks remain active.",
+            "- All other polynomial-residual checks remain active.",
+            "- A clean solve on this fixture is 97/97 checks.",
+        ],
+    )
+
+
+def _repair_fft_streaming_hold() -> None:
+    dst = _copy_design("level-6", "fft_streaming_64pt")
+    note = (
+        "# Repaired contract status\n\n"
+        "- HOLD: no principled repaired executable contract is generated yet.\n"
+        "- The shipped golden file is a dict with `real_out` and `imag_out` arrays, while the testbench writes a list of objects with `real` and `imag` fields.\n"
+        "- The shipped comparator is copied from a scalar filter benchmark and cannot compare the FFT output structure correctly.\n"
+        "- The input contract is also ambiguous: stimuli are JSON floats / FP32 hex words, while the testbench uses `$fscanf(\"%d %d\")` into 16-bit signed ports.\n"
+        "- Repairing only the output schema would still leave an unspecified numeric encoding for the inputs, so this row is held rather than patched to fit the golden file.\n"
+        "- The original source benchmark is unchanged.\n"
+    )
+    (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
+    _append_contract_note(
+        dst / "design-specs.txt",
+        [
+            "Repaired benchmark contract status:",
+            "- Hold unresolved. Output schema and input numeric encoding are both inconsistent in the released executable files.",
+            "- Do not run this fixture until a principled input/output encoding is recovered from an upstream source or independently validated.",
+        ],
+    )
+
+
 def _append_contract_note(path: Path, lines: list[str]) -> None:
     text = path.read_text(encoding="utf-8", errors="ignore").rstrip()
     addition = "\n\n" + "\n".join(lines) + "\n"
@@ -661,6 +727,8 @@ def main() -> None:
     _repair_fp_fir_with_public_coeffs("fp_band_pass_fir", "tb_fp_band_pass_fir.v", "fp_bandpass_fir")
     _repair_fp_fir_with_public_coeffs("fp_high_pass_fir", "tb_fp_high_pass_fir.v", "fp_highpass_fir")
     _repair_fp_low_pass_fir_hold()
+    _repair_newton_raphson_polynomial()
+    _repair_fft_streaming_hold()
     manifest = {
         "source_root": str(SOURCE_ROOT.relative_to(REPO_ROOT)),
         "repaired_root": str(REPAIRED_ROOT.relative_to(REPO_ROOT)),
@@ -754,6 +822,24 @@ def main() -> None:
                 "repairs": [
                     "document unresolved filename mismatch",
                     "document missing coefficient oracle",
+                    "hold out from repaired-contract runs",
+                ],
+            },
+            {
+                "level": "level-3",
+                "design": "newton_raphson_polynomial",
+                "repairs": [
+                    "mark unsatisfiable polynomial-residual checks as skipped",
+                    "preserve all root-comparison checks",
+                    "preserve all satisfiable residual checks",
+                ],
+            },
+            {
+                "level": "level-6",
+                "design": "fft_streaming_64pt",
+                "repairs": [
+                    "document unresolved output-schema mismatch",
+                    "document unresolved input numeric-encoding ambiguity",
                     "hold out from repaired-contract runs",
                 ],
             },

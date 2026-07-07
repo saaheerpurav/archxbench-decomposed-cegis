@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/nr_poly_eval_fixed.v",
+  "sub_modules": {
+    "nr_poly_eval_fixed": "Combinational fixed-point cubic polynomial evaluator using Horner form.",
+    "nr_derivative_eval_fixed": "Combinational fixed-point derivative evaluator for a1 + 2*a2*x + 3*a3*x^2.",
+    "nr_fixed_divide": "Combinational fixed-point divider that produces a Q-format Newton correction term.",
+    "nr_abs_fixed": "Combinational signed absolute-value helper for fixed-point residual checks.",
+    "nr_root_verify": "Combinational verification block that checks whether the polynomial residual is within tolerance."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 7,
+  "best_passes": 97,
+  "total_tests": 97,
+  "solved": true,
+  "decomp_modules": [
+    "fixed_poly_eval",
+    "fixed_derivative_eval",
+    "fixed_root_verifier",
+    "fixed_abs"
+  ],
+  "ref_passes": 97,
+  "ref_total": 97,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "design": "newton_raphson_polynomial",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 513.5,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

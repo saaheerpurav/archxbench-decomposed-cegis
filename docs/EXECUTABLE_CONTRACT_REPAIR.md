@@ -215,6 +215,58 @@ Repaired L6 FP FIR run:
 - C4tl, seed `42`: `fp_band_pass_fir` 0/1000; `fp_high_pass_fir` 969/1000.
 - Interpretation: repaired L6 FP FIR is solvable by C2g after contract repair, but current decomposed C4i/C4tl variants do not solve it.
 
+## `newton_raphson_polynomial`
+
+Original contract issue:
+
+- The released self-checking testbench performs 100 checks: 50 root-comparison checks and 50 polynomial residual checks.
+- Three residual checks are unsatisfiable together with the root-comparison requirement:
+  - case 6 has no real root but still requires a low residual;
+  - case 13 is the constant polynomial `p(x)=1`;
+  - case 35's real-Newton reference does not land near a residual-zero point within the fixed-point tolerance.
+- The effective original-checker ceiling is therefore `97/100`, not `100/100`.
+
+Repair:
+
+- Preserve all 50 root-comparison checks.
+- Preserve the 47 satisfiable polynomial residual checks.
+- Convert only residual checks 6, 13, and 35 into explicit `SKIP_REPAIRED_CONTRACT` messages with no `[PASS]` or `[FAIL]` token.
+- Append repaired-contract notes to `design-specs.txt`.
+
+Validation:
+
+- Script: `scripts/validate_repaired_newton_contract.py`
+- Artifacts: `artifacts/contract_validation/newton_20260707/`
+- Oracle validation: `97/97` checks pass, 3 repaired-contract skips are emitted, and no failures occur.
+
+Repaired-contract run:
+
+- Artifacts: `artifacts/raw_runs/repaired_newton_20260707/`
+- Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
+- C2g, seeds `42,123,456`: 3/3 solved, all `97/97`.
+- C4i, seeds `42,123,456`: 1/3 solved; seed `456` scores `97/97`, other seeds score `87/97` and `89/97`.
+- C4tl, seeds `42,123,456`: 1/3 solved; seed `456` scores `97/97`, other seeds score `16/97` and `17/97`.
+- Interpretation: the repaired contract makes the intended task executable, but C2g is strongest. This is not a C4i/C4tl method win.
+
+## `fft_streaming_64pt`
+
+Current status:
+
+- A repaired-contract fixture is copied under `artifacts/benchmark_contracts/archxbench_repaired/level-6/fft_streaming_64pt/` only as a hold/audit record.
+- It is not a runnable repaired-contract claim.
+
+Reason:
+
+- The released golden file uses a dict with `real_out` and `imag_out` arrays.
+- The testbench writes a list of objects with `real` and `imag` fields.
+- The comparator is a copied scalar-filter comparator and cannot compare this FFT structure.
+- The input path is also ambiguous: stimuli are JSON floats / FP32 hex words, while the testbench reads decimal integer pairs into 16-bit signed ports.
+
+Decision:
+
+- Do not run more original-contract seeds.
+- Do not create a positive repaired-contract row unless both input encoding and output schema are specified and an oracle DUT validates the repaired checker.
+
 ## Paper Use
 
 This can strengthen the paper only if framed honestly:

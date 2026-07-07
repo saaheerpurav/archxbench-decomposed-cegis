@@ -93,6 +93,24 @@
         "document missing coefficient oracle",
         "hold out from repaired-contract runs"
       ]
+    },
+    {
+      "level": "level-3",
+      "design": "newton_raphson_polynomial",
+      "repairs": [
+        "mark unsatisfiable polynomial-residual checks as skipped",
+        "preserve all root-comparison checks",
+        "preserve all satisfiable residual checks"
+      ]
+    },
+    {
+      "level": "level-6",
+      "design": "fft_streaming_64pt",
+      "repairs": [
+        "document unresolved output-schema mismatch",
+        "document unresolved input numeric-encoding ambiguity",
+        "hold out from repaired-contract runs"
+      ]
     }
   ]
 }

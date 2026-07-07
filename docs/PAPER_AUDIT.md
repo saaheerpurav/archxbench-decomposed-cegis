@@ -2,7 +2,7 @@
 
 Date: 2026-07-07
 
-This is the paper-readiness and baseline gap map. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`, the C4a diagnostic sweep in `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`, and the extra C4a Newton run in `artifacts/raw_runs/newton_poly_c4a_extra_20260707/`.
+This is the paper-readiness and baseline gap map. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`, `artifacts/inventories/repaired_contract_run_matrix.csv`, the C4a diagnostic sweep in `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`, and the extra C4a Newton run in `artifacts/raw_runs/newton_poly_c4a_extra_20260707/`.
 
 ## Bottom Line
 
@@ -25,8 +25,9 @@ ArchXBench L3-L6 has 28 designs in this repo.
 | Category | Designs |
 |---|---|
 | Clean main/secondary solves | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt`, `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, `unsharp_mask`, `aes_encryption`, `aes_decryption` |
-| Partial or unsolved but valid diagnostics | `newton_raphson_polynomial`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul` |
-| Excluded or hold | `band_pass_fir`, `high_pass_fir`, `low_pass_fir`, `fp_band_pass_fir`, `fp_high_pass_fir`, `fp_low_pass_fir`, `systolic_gemm` |
+| Partial or unsolved original-contract diagnostics | `newton_raphson_polynomial`, `fft_streaming_64pt` |
+| Original-contract flawed, repaired-contract complete | `conv_3d`, `quantized_matmul`, `multich_conv2d`, `newton_raphson_polynomial` |
+| Excluded or hold | `band_pass_fir`, `high_pass_fir`, `low_pass_fir`, `fp_band_pass_fir`, `fp_high_pass_fir`, `fp_low_pass_fir`, `fft_streaming_64pt`, `systolic_gemm` |
 
 ## Matched Baseline Status
 
@@ -61,10 +62,10 @@ Interpretation:
 
 | Design | Current best evidence |
 |---|---|
-| `newton_raphson_polynomial` | C4i best `89/100`; C4a 0/5 with best `96/100`; no clean solve |
-| `fft_streaming_64pt` | C2g is 1/5: seed `42` clean `128/128`, seeds `123,456,789,1024` fail; C4i/C4tl/C4a fail |
-| `conv_3d` | C1/C2g/C4i/C4tl/C4a all fail cleanly |
-| `quantized_matmul` | C1/C2g/C4i/C4tl/C4a all fail cleanly |
+| `newton_raphson_polynomial` | Original checker has three unsatisfiable checks; C4a debug reaches the effective ceiling `97/100`; no original `100/100` possible without contract repair |
+| `fft_streaming_64pt` | C2g is 1/5: seed `42` clean `128/128`, seeds `123,456,789,1024` fail; released output schema/comparator are inconsistent |
+| `conv_3d` | DONE for run planning: original contract is flawed and fails; repaired-contract track is complete with C2g 3/3 and C4i 2/3 |
+| `quantized_matmul` | DONE for run planning: original contract is flawed and fails; runner-fixed repaired-contract track is complete with C2g 3/3 and C4i 3/3 |
 
 ## Exclusions And Holds
 
@@ -73,6 +74,7 @@ Interpretation:
 | FIR family | Exclude unless the benchmark/spec-contract issue is repaired and documented. Some rows show apparent C2g solves, but these should not become claims while the FIR contract remains disputed. |
 | `systolic_gemm` | Original checker is display-only. Repaired-contract run is complete and negative: C2g/C4i/C4tl all 0/3. |
 | `multich_conv2d` | Original contract issue. Repaired-contract rows are complete and must stay separate from original ArchXBench tables. |
+| `fft_streaming_64pt` | Hold. The issue is not only output schema; the input numeric encoding and copied scalar comparator are also inconsistent, so no repaired-contract run is claimable yet. |
 
 ### Repaired FIR Pilot
 
@@ -128,9 +130,9 @@ Do these only if the goal is maximum paper strength, not incremental cleanup.
    - excluded benchmark-contract rows
 3. Write a benchmark-audit section explaining why golden verification is required and why FIR/systolic/multich are excluded or held.
 4. If running more experiments, do not run another small C4 variant. The useful research attempts are:
-   - repair or formally validate excluded benchmark checkers
-   - targeted benchmark-specific repair for `newton_raphson_polynomial`; extra C4a seeds did not solve it
-   - a new verification-driven method that attacks `conv_3d` or `quantized_matmul`
+   - repair or formally validate excluded benchmark checkers only when the repair is principled and oracle-validated
+   - optional repaired contract for `fft_streaming_64pt` only if input encoding and output schema can both be specified and oracle-validated
+   - repaired contract for `newton_raphson_polynomial` only if the unsatisfiable test cases are explicitly addressed
 5. Avoid claiming C4a. It is negative evidence.
 
 ## Current Run Recommendation
@@ -145,9 +147,10 @@ The repaired-contract track has now been run:
 - repaired `quantized_matmul`, after signed-quantization clarification and runner fix: C2g 3/3, C4i 3/3, C4tl 0/3
 - repaired L6 FP FIR: C2g 3/3 on `fp_band_pass_fir` and `fp_high_pass_fir`; C4i/C4tl seed-42 pilots fail
 - repaired `systolic_gemm`: C2g 0/3, C4i 0/3, C4tl 0/3
+- repaired `newton_raphson_polynomial`: oracle validation passes; C2g 3/3, C4i 1/3, C4tl 1/3 on the `97/97` repaired checker
 - these rows must remain separate from original ArchXBench tables
 
 Current highest-value next attempts:
 
-- new general method only for `fft_streaming_64pt`; extra C2g seeds `789,1024` failed, leaving C2g at 1/5
-- new general method only for `newton_raphson_polynomial`; extra C4a seeds `789,1024` failed at `88/100` and `94/100`
+- only a principled `fft_streaming_64pt` contract repair if input encoding and output schema can both be specified and oracle-validated
+- no more original-contract `conv_3d` / `quantized_matmul` runs are needed because repaired-contract rows are already complete
