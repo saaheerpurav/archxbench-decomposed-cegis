@@ -1,0 +1,10 @@
+2026-07-06 17:58:12,644 __main__ INFO Total: 1 cells (1 to run, 0 already done)
+2026-07-06 17:58:12,644 __main__ INFO === Cell: unsharp_mask / C2g / gpt-5.5 / seed=123 ===
+2026-07-06 17:59:44,431 __main__ INFO C2g unsharp_mask round 1: golden 62181/65536
+2026-07-06 18:01:06,786 __main__ INFO C2g unsharp_mask round 2: golden 62786/65536
+2026-07-06 18:02:08,011 __main__ INFO C2g unsharp_mask round 3: golden 63483/65536
+2026-07-06 18:02:57,939 __main__ INFO C2g unsharp_mask round 4: golden 783/65536
+2026-07-06 18:03:47,262 __main__ INFO C2g unsharp_mask round 5: golden 63483/65536
+2026-07-06 18:05:10,217 __main__ INFO C2g unsharp_mask round 6: golden 61506/65536
+2026-07-06 18:06:33,012 __main__ INFO C2g unsharp_mask GOLDEN VERIFIED round 7 (65536/65536)
+2026-07-06 18:06:33,035 __main__ INFO Progress: 1/1 cells (100%) — unsharp_mask__C2g__gpt-5.5__123: SOLVED (65536/65536) — $0.00 (total: $0.00)

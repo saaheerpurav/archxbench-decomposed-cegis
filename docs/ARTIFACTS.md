@@ -50,6 +50,8 @@ Use these files for programmatic lookup:
 - `artifacts/inventories/artifact_index.csv`
 - `artifacts/inventories/artifact_index.json`
 - `artifacts/inventories/run_matrix_l3_l6.csv`
+- `artifacts/inventories/repaired_contract_run_matrix.csv`
+- `artifacts/inventories/log_metric_only_results.csv`
 
 Regenerate the artifact index with:
 
@@ -64,6 +66,21 @@ python scripts\build_run_matrix.py
 ```
 
 The run matrix is the easiest way to inspect which GPT-5.5 `C1`, `C2g`, `C4i`, and `C4tl` runs exist for every official L3-L6 design. It reports strict clean solves, not paper claims.
+
+Regenerate the repaired-contract matrix with:
+
+```powershell
+python scripts\build_repaired_contract_matrix.py
+```
+
+## Matrix Ownership
+
+| File | Owns | Update rule |
+|---|---|---|
+| `run_matrix_l3_l6.csv` | original ArchXBench L3-L6 runs | never include repaired-contract rows |
+| `repaired_contract_run_matrix.csv` | repaired executable-contract runs | never count as original ArchXBench solves |
+| `log_metric_only_results.csv` | historical log/metrics-only rows | not artifact-backed; not paper claims |
+| `artifact_index.csv` / `.json` | flat repo-local artifact inventory | regenerate after every run |
 
 ## Claim Rule
 

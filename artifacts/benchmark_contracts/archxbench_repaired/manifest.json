@@ -39,6 +39,60 @@
         "preserve the original A x A and A x I test cases",
         "remove duplicate include dependence from the testbench"
       ]
+    },
+    {
+      "level": "level-4",
+      "design": "band_pass_fir",
+      "repairs": [
+        "remove stale file-output testbench",
+        "use embedded-golden self-checking testbench",
+        "preserve explicit repaired coefficient spec"
+      ]
+    },
+    {
+      "level": "level-4",
+      "design": "high_pass_fir",
+      "repairs": [
+        "remove stale file-output testbench",
+        "use embedded-golden self-checking testbench",
+        "preserve explicit repaired coefficient spec"
+      ]
+    },
+    {
+      "level": "level-4",
+      "design": "low_pass_fir",
+      "repairs": [
+        "remove stale file-output testbench",
+        "use embedded-golden self-checking testbench",
+        "preserve explicit repaired coefficient spec"
+      ]
+    },
+    {
+      "level": "level-6",
+      "design": "fp_band_pass_fir",
+      "repairs": [
+        "remove hidden DUT coefficient-memory writes",
+        "require hard-coded public coefficient list",
+        "compare 32-bit hex outputs as IEEE-754 floats"
+      ]
+    },
+    {
+      "level": "level-6",
+      "design": "fp_high_pass_fir",
+      "repairs": [
+        "remove hidden DUT coefficient-memory writes",
+        "require hard-coded public coefficient list",
+        "compare 32-bit hex outputs as IEEE-754 floats"
+      ]
+    },
+    {
+      "level": "level-6",
+      "design": "fp_low_pass_fir",
+      "repairs": [
+        "document unresolved filename mismatch",
+        "document missing coefficient oracle",
+        "hold out from repaired-contract runs"
+      ]
     }
   ]
 }

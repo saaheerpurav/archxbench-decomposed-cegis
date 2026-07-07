@@ -31,7 +31,7 @@ These have enough clean evidence for the current paper framing.
 | L5 | `conv2d` | `C2g` 3/3 |
 | L5 | `dct_idct_8pt_pipelined` | `C2g` 3/3 |
 | L5 | `harris_corner_detection` | `C2g` 3/3, `C4i` 3/3 |
-| L5 | `unsharp_mask` | `C2g` 2/2 artifact-backed on seeds `42,456` |
+| L5 | `unsharp_mask` | `C2g` 3/3 artifact-backed on seeds `42,123,456` |
 | L6 | `aes_decryption` | `C2g` 3/3, `C4i` 3/3 |
 | L6 | `aes_encryption` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
 
@@ -88,6 +88,7 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | `quantized_matmul` initial | C2g 0/3, C4i 0/3, C4tl 0/3; exposed signed-quantization and runner issues |
 | `quantized_matmul` runner-fixed | C2g 3/3 solved; C4i 3/3 solved; C4tl 0/3 solved |
 | `systolic_gemm` | C2g 0/3, C4i 0/3, C4tl 0/3; repaired display-only checker, but no method solved it |
+| L4 FIR repaired pilot | C2g/C4i/C4tl seed `42` all failed on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`; best score 5/1001 |
 
 ### Excluded Or Hold
 
@@ -95,13 +96,13 @@ Do not blind-run these until the checker/spec issue is resolved.
 
 | Level | Design | Reason |
 |---|---|---|
-| L4 | `band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
-| L4 | `high_pass_fir` | FIR benchmark/spec-contract caveat unresolved; historical C4i log/metrics-only result is 2/5 solved |
-| L4 | `low_pass_fir` | FIR benchmark/spec-contract caveat unresolved; historical C4i log/metrics-only result is 1/5 solved |
+| L4 | `band_pass_fir` | repaired-contract pilot complete and negative; do not rerun without a new general method |
+| L4 | `high_pass_fir` | repaired-contract pilot complete and negative; historical C4i log/metrics-only result is 2/5 solved but not artifact-backed |
+| L4 | `low_pass_fir` | repaired-contract pilot complete and negative; historical C4i log/metrics-only result is 1/5 solved but not artifact-backed |
 | L5 | `systolic_gemm` | original checker is display-only; repaired-contract track completed with 0/9 solves |
-| L6 | `fp_band_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
-| L6 | `fp_high_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
-| L6 | `fp_low_pass_fir` | FIR benchmark/spec-contract caveat unresolved |
+| L6 | `fp_band_pass_fir` | repaired fixture exists; run only as a new targeted research attempt |
+| L6 | `fp_high_pass_fir` | repaired fixture exists; run only as a new targeted research attempt |
+| L6 | `fp_low_pass_fir` | still held out; coefficient oracle not explicit |
 | L6 | `multich_conv2d` | original benchmark contract issue; repaired-contract track complete |
 
 ## What Is Left To Run
@@ -114,21 +115,22 @@ The only useful next runs are targeted research attempts, not table filling:
 |---|---|
 | 1 | Decide whether repaired `conv_3d` and repaired `quantized_matmul` belong in the paper as benchmark-audit/repaired-contract results, not original ArchXBench solves. |
 | 2 | Decide how prominently to use repaired-contract rows in the paper; they are benchmark-audit results, not original ArchXBench solves. |
-| 3 | Decide whether to exclude or repair the FIR-family benchmark contract. |
+| 3 | FIR L4 repaired-contract pilot is complete and negative; only continue FIR with a genuinely new general method or L6 FP FIR pilot. |
 | 4 | Keep original `systolic_gemm` excluded; repaired-contract run is complete and negative. |
-| 5 | If promoting `unsharp_mask` as a 3-seed result, rerun C2g seed `123` with artifact saving; current artifact-backed evidence is clean on seeds `42,456`. |
-| 6 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
-| 7 | Rerun any C1/C2g score-only baseline row before using it as artifact-backed paper evidence; see `docs/ARTIFACT_AUDIT_STATUS.md`. |
+| 5 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
+| 6 | Rerun any C1/C2g score-only baseline row before using it as artifact-backed paper evidence; see `docs/ARTIFACT_AUDIT_STATUS.md`. |
 
 ## Execution Rules
 
 - Use `artifacts/inventories/run_matrix_l3_l6.csv` as the source of truth for repo-local `result.json` cells before and after every batch.
+- Use `artifacts/inventories/repaired_contract_run_matrix.csv` only for repaired-contract rows. Do not merge repaired-contract rows into the original ArchXBench matrix.
 - Use `artifacts/inventories/log_metric_only_results.csv` only for historical log/metrics-only rows that lack saved RTL/result artifacts.
 - Use `--parallel 2` for overnight paper-quality runs.
 - For repaired-contract runs, set `ARCHXBENCH_ROOT` explicitly and record that root in the run note.
 - After every batch:
   - run `python scripts\build_artifact_index.py`
   - run `python scripts\build_run_matrix.py`
+  - run `python scripts\build_repaired_contract_matrix.py` if repaired-contract runs changed
   - run `python scripts\audit_file_output_contracts.py` if benchmark contracts or testbenches changed
   - update this file
   - do not push unless explicitly requested

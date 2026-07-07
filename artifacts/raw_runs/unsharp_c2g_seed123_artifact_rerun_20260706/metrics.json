@@ -1,0 +1,17 @@
+{
+  "unsharp_mask__C2g__gpt-5.5__123": {
+    "condition": "C2g",
+    "llm_calls": 7,
+    "best_passes": 65536,
+    "total_tests": 65536,
+    "solved": true,
+    "golden_correct": 65536,
+    "golden_total": 65536,
+    "design": "unsharp_mask",
+    "model": "gpt-5.5",
+    "seed": 123,
+    "wall_seconds": 500.4,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  }
+}

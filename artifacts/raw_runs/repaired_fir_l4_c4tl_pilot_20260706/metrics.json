@@ -1,0 +1,76 @@
+{
+  "high_pass_fir__C4tl__gpt-5.5__42": {
+    "condition": "C4tl",
+    "llm_calls": 3,
+    "best_passes": 0,
+    "total_tests": 1001,
+    "solved": false,
+    "decomp_modules": [
+      "hpf_tap_vector",
+      "hpf_coeff_rom",
+      "hpf_mac",
+      "hpf_quantize"
+    ],
+    "ref_passes": 0,
+    "ref_total": 1001,
+    "golden_correct": 0,
+    "golden_total": 0,
+    "module_solve_rounds": {},
+    "error": "reference decomposition failed original system testbench",
+    "design": "high_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 326.2,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "band_pass_fir__C4tl__gpt-5.5__42": {
+    "condition": "C4tl",
+    "llm_calls": 3,
+    "best_passes": 2,
+    "total_tests": 1001,
+    "solved": false,
+    "decomp_modules": [
+      "bpf_coeff_rom",
+      "bpf_tap_multiply",
+      "bpf_accumulator",
+      "bpf_output_scaler"
+    ],
+    "ref_passes": 2,
+    "ref_total": 1001,
+    "golden_correct": 0,
+    "golden_total": 0,
+    "module_solve_rounds": {},
+    "error": "reference decomposition failed original system testbench",
+    "design": "band_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 394.4,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "low_pass_fir__C4tl__gpt-5.5__42": {
+    "condition": "C4tl",
+    "llm_calls": 3,
+    "best_passes": 3,
+    "total_tests": 1001,
+    "solved": false,
+    "decomp_modules": [
+      "fir_symmetric_preadd",
+      "fir_symmetric_mac",
+      "fir_output_scale"
+    ],
+    "ref_passes": 3,
+    "ref_total": 1001,
+    "golden_correct": 0,
+    "golden_total": 0,
+    "module_solve_rounds": {},
+    "error": "reference decomposition failed original system testbench",
+    "design": "low_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 354.0,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 3,
+  "best_passes": 0,
+  "total_tests": 1001,
+  "solved": false,
+  "decomp_modules": [
+    "hpf_tap_vector",
+    "hpf_coeff_rom",
+    "hpf_mac",
+    "hpf_quantize"
+  ],
+  "ref_passes": 0,
+  "ref_total": 1001,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "high_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "wall_seconds": 326.2,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

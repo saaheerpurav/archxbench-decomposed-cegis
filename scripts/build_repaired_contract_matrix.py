@@ -39,8 +39,17 @@ def strict_clean(data: dict) -> bool:
         correct = int(data.get("golden_correct"))
         total = int(data.get("golden_total"))
     except (TypeError, ValueError):
+        correct = 0
+        total = 0
+    if total > 0:
+        return correct == total
+
+    try:
+        passes = int(data.get("best_passes"))
+        tests = int(data.get("total_tests"))
+    except (TypeError, ValueError):
         return False
-    return total > 0 and correct == total
+    return bool(data.get("solved")) and tests > 0 and passes == tests
 
 
 def seed_sort_key(seed: str) -> tuple[int, str]:
@@ -71,7 +80,11 @@ def collect() -> list[dict]:
     rows: list[dict] = []
     for result_path in ARTIFACTS.rglob("result.json"):
         rel_parts = result_path.relative_to(ROOT).parts
-        run_names = [part for part in rel_parts if part.startswith("repaired_contracts_")]
+        run_names = [
+            part
+            for part in rel_parts
+            if part.startswith(("repaired_contracts_", "repaired_fir_"))
+        ]
         if not run_names:
             continue
         try:

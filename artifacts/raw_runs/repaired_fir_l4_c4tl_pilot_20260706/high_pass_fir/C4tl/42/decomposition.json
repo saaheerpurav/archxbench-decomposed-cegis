@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/hpf_tap_vector.v",
+  "sub_modules": {
+    "hpf_tap_vector": "Combinational packing of the current input sample and stored delay-line samples into tap order.",
+    "hpf_coeff_rom": "Combinational ROM containing the exact 101 signed high-pass FIR coefficients.",
+    "hpf_mac": "Combinational fixed-point multiply-accumulate over all 101 taps using 64-bit accumulation.",
+    "hpf_quantize": "Combinational fixed-point output scaling by arithmetic right shift to the 24-bit output width."
+  }
+}

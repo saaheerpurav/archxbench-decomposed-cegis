@@ -150,6 +150,12 @@ def _estimate_cost(model: str, input_tokens: int, output_tokens: int) -> float:
 
 def _prepare_data_dir(design_dir: str) -> Optional[str]:
     """Return design_dir if it contains inputs/ or outputs/ subdirectories."""
+    # Self-checking benchmarks embed their oracle in the Verilog testbench and
+    # report native [PASS]/[FAIL] lines.  Do not override those scores with
+    # file-output golden comparison just because stale inputs/outputs folders
+    # are present beside the self-checking testbench.
+    if os.path.exists(os.path.join(design_dir, "tb_selfcheck.v")):
+        return None
     for sub in ("inputs", "outputs"):
         if os.path.isdir(os.path.join(design_dir, sub)):
             return design_dir
@@ -235,6 +241,21 @@ def _run_golden_comparison(data_dir: str, sim_workdir: str) -> Tuple[int, int, s
             value = [x for row in value for x in row]
         return value
 
+    def _parse_hex_word(value):
+        if isinstance(value, int):
+            return value & 0xFFFFFFFF
+        if isinstance(value, str):
+            text = value.strip().strip('"').lower()
+            if text.startswith("0x"):
+                text = text[2:]
+            if re.fullmatch(r"[0-9a-f]{1,8}", text):
+                return int(text, 16) & 0xFFFFFFFF
+        return None
+
+    def _hex_word_to_float(value: int) -> float:
+        import struct as _struct
+        return _struct.unpack("!f", _struct.pack("!I", value & 0xFFFFFFFF))[0]
+
     def _compare(golden, dut, label: str) -> Tuple[int, int, str]:
         golden = _flatten(golden)
         dut = _flatten(dut)
@@ -249,6 +270,12 @@ def _run_golden_comparison(data_dir: str, sim_workdir: str) -> Tuple[int, int, s
 
         mismatches = []
         for i in range(n_compare):
+            golden_hex = _parse_hex_word(golden[i])
+            dut_hex = _parse_hex_word(dut[i])
+            if golden_hex is not None and dut_hex is not None:
+                if abs(_hex_word_to_float(golden_hex) - _hex_word_to_float(dut_hex)) > 1:
+                    mismatches.append((i, golden[i], dut[i]))
+                continue
             try:
                 if abs(float(golden[i]) - float(dut[i])) > 1:
                     mismatches.append((i, golden[i], dut[i]))

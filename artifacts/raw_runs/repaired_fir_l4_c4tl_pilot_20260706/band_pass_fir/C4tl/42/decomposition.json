@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/bpf_coeff_rom.v",
+  "sub_modules": {
+    "bpf_coeff_rom": "Combinational ROM that returns the exact hard-coded 101-tap signed FIR coefficient for each tap index.",
+    "bpf_tap_multiply": "Combinational signed multiplier for one delayed sample and one FIR coefficient.",
+    "bpf_accumulator": "Combinational wide signed adder that sums all tap products into a 64-bit accumulator.",
+    "bpf_output_scaler": "Combinational fixed-point output scaler that arithmetic-right-shifts the accumulator to the 24-bit output width."
+  }
+}

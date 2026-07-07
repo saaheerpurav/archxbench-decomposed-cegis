@@ -31,11 +31,25 @@ The current evidence does not support claiming that C4i/C4tl dominates C2g every
 - Keep repaired-contract experiments separate from original ArchXBench claim tables.
 - Do not push automatically.
 
+## Matrix Ownership
+
+Do not hand-edit generated matrices except as a last-resort audit note. Add or fix the underlying artifact/result files, then regenerate.
+
+| File | Owns | How to update |
+|---|---|---|
+| `artifacts/inventories/run_matrix_l3_l6.csv` | Original ArchXBench L3-L6 results only | add/fix repo-local `result.json` rows under `artifacts/raw_runs/` or `artifacts/curated/`, then run `python scripts\build_run_matrix.py` |
+| `artifacts/inventories/repaired_contract_run_matrix.csv` | Repaired-contract experiments only | add/fix runs under `artifacts/raw_runs/repaired_contracts*`, then run `python scripts\build_repaired_contract_matrix.py` |
+| `artifacts/inventories/log_metric_only_results.csv` | Historical log/metrics-only rows without generated RTL/result artifacts | edit this file directly only when preserving a historical non-claim row |
+| `artifacts/inventories/artifact_index.csv` and `.json` | Flat artifact inventory for all repo-local result rows | run `python scripts\build_artifact_index.py` |
+
+Original and repaired-contract results must never be merged into the same paper table without an explicit label.
+
 ## Inventory Commands
 
 ```powershell
 python scripts\build_artifact_index.py
 python scripts\build_run_matrix.py
+python scripts\build_repaired_contract_matrix.py
 ```
 
 Primary inventory files:

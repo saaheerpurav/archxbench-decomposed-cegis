@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fir_symmetric_preadd.v",
+  "sub_modules": {
+    "fir_symmetric_preadd": "Combinational symmetric tap pre-adder that pairs mirrored delay-line samples and forwards the center sample.",
+    "fir_symmetric_mac": "Combinational multiply-accumulate engine using the exact 101-tap symmetric coefficient set and 64-bit accumulation.",
+    "fir_output_scale": "Combinational fixed-point output scaler that arithmetic right-shifts the 64-bit accumulator by 20 bits."
+  }
+}

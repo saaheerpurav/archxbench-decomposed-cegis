@@ -1,0 +1,47 @@
+{
+  "high_pass_fir__C2g__gpt-5.5__42": {
+    "condition": "C2g",
+    "llm_calls": 30,
+    "best_passes": 0,
+    "total_tests": 1,
+    "solved": false,
+    "golden_correct": 0,
+    "golden_total": 1,
+    "design": "high_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 2614.7,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "band_pass_fir__C2g__gpt-5.5__42": {
+    "condition": "C2g",
+    "llm_calls": 30,
+    "best_passes": 0,
+    "total_tests": 1,
+    "solved": false,
+    "golden_correct": 0,
+    "golden_total": 1,
+    "design": "band_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 2828.4,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "low_pass_fir__C2g__gpt-5.5__42": {
+    "condition": "C2g",
+    "llm_calls": 30,
+    "best_passes": 0,
+    "total_tests": 1,
+    "solved": false,
+    "golden_correct": 0,
+    "golden_total": 1,
+    "design": "low_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 2737.9,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  }
+}

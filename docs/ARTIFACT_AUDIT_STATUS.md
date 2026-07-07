@@ -4,7 +4,7 @@ Last audited: 2026-07-06.
 
 ## Summary
 
-- Total repo-local `result.json` files: `1052`.
+- Total repo-local `result.json` files: `1062`.
 - Result rows with at least one saved Verilog file: `320`.
 - Result rows without saved Verilog: `732`.
 - The current `docs/RESULTS.md` main C4i/C4tl claim rows are artifact-backed.
@@ -57,9 +57,23 @@ Current clean C2g rows with saved Verilog:
 
 | Design | Seeds | Score | Location |
 |---|---|---:|---|
-| `unsharp_mask` | `42,456` | `65536/65536` | `artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/` |
+| `unsharp_mask` | `42,123,456` | `65536/65536` | `artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/` and `artifacts/raw_runs/unsharp_c2g_seed123_artifact_rerun_20260706/` |
 | `multich_conv2d` repaired contract | `42,123,456` | `30752/30752` | `artifacts/raw_runs/repaired_contracts_multich_conv2d_20260705/` |
 | `quantized_matmul` repaired contract, runner-fixed | `42,123,456` | `64/64` | `artifacts/raw_runs/repaired_contracts_qgemm_runnerfix_pilot_20260705/` |
+
+## Artifact-Backed Repaired FIR Negative Rows
+
+These are negative repaired-contract pilots with saved Verilog. They are not paper claims.
+
+| Design group | Conditions | Seed | Result |
+|---|---|---:|---|
+| L4 repaired FIR | C2g/C4i/C4tl | `42` | all nine cells fail; best score 5/1001 |
+
+Locations:
+
+- `artifacts/raw_runs/repaired_fir_l4_c2g_pilot_20260706/`
+- `artifacts/raw_runs/repaired_fir_l4_c4i_pilot_20260706/`
+- `artifacts/raw_runs/repaired_fir_l4_c4tl_pilot_20260706/`
 
 ## Rule Going Forward
 

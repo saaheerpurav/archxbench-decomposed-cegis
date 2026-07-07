@@ -24,8 +24,8 @@ ArchXBench L3-L6 has 28 designs in this repo.
 
 | Category | Designs |
 |---|---|
-| Clean main/secondary solves | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt`, `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, `aes_encryption`, `aes_decryption` |
-| Partial or unsolved but valid diagnostics | `newton_raphson_polynomial`, `unsharp_mask`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul` |
+| Clean main/secondary solves | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt`, `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, `unsharp_mask`, `aes_encryption`, `aes_decryption` |
+| Partial or unsolved but valid diagnostics | `newton_raphson_polynomial`, `fft_streaming_64pt`, `conv_3d`, `quantized_matmul` |
 | Excluded or hold | `band_pass_fir`, `high_pass_fir`, `low_pass_fir`, `fp_band_pass_fir`, `fp_high_pass_fir`, `fp_low_pass_fir`, `systolic_gemm` |
 
 ## Matched Baseline Status
@@ -47,6 +47,7 @@ The key paper tables can be clean if we avoid overclaiming.
 | L5 | `conv2d` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 0/3 |
 | L5 | `dct_idct_8pt_pipelined` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 0/3 |
 | L5 | `harris_corner_detection` | C1 0/3, C2g 3/3, C4i 3/3, C4tl 0/3 |
+| L5 | `unsharp_mask` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 0/3 |
 | L6 | `aes_encryption` | C1 3/3, C2g 3/3, C4i 3/3, C4tl 2/3 |
 | L6 | `aes_decryption` | C1 1/3, C2g 3/3, C4i 3/3, C4tl 1/3 |
 
@@ -61,7 +62,6 @@ Interpretation:
 | Design | Current best evidence |
 |---|---|
 | `newton_raphson_polynomial` | C4i best `89/100`; C4a best `96/100`; no clean solve |
-| `unsharp_mask` | C2g best `65535/65536`; C4a best `63780/65536`; no clean solve |
 | `fft_streaming_64pt` | C2g has one clean seed `128/128`, but not robust across seeds; C4i/C4tl/C4a fail |
 | `conv_3d` | C1/C2g/C4i/C4tl/C4a all fail cleanly |
 | `quantized_matmul` | C1/C2g/C4i/C4tl/C4a all fail cleanly |
@@ -73,6 +73,20 @@ Interpretation:
 | FIR family | Exclude unless the benchmark/spec-contract issue is repaired and documented. Some rows show apparent C2g solves, but these should not become claims while the FIR contract remains disputed. |
 | `systolic_gemm` | Original checker is display-only. Repaired-contract run is complete and negative: C2g/C4i/C4tl all 0/3. |
 | `multich_conv2d` | Original contract issue. Repaired-contract rows are complete and must stay separate from original ArchXBench tables. |
+
+### Repaired FIR Pilot
+
+L4 FIR repaired fixtures were created under `artifacts/benchmark_contracts/archxbench_repaired/level-4/` by removing stale file-output testbenches and using only embedded-golden `tb_selfcheck.v`.
+
+Single-seed pilots on repaired L4 FIR are negative:
+
+| Design | C2g seed 42 | C4i seed 42 | C4tl seed 42 |
+|---|---:|---:|---:|
+| `band_pass_fir` | 1/1001 | 5/1001 | 2/1001 |
+| `high_pass_fir` | 4/1001 | 4/1001 | 0/1001 |
+| `low_pass_fir` | 3/1001 | 5/1001 | 3/1001 |
+
+Interpretation: FIR repair did not unlock a positive result with current methods. Do not spend more runs here unless there is a new general method or a clean L6 FP FIR hypothesis.
 
 ### Historical FIR Sweep
 
@@ -102,7 +116,7 @@ Do these only if the goal is maximum paper strength, not incremental cleanup.
 3. Write a benchmark-audit section explaining why golden verification is required and why FIR/systolic/multich are excluded or held.
 4. If running more experiments, do not run another small C4 variant. The useful research attempts are:
    - repair or formally validate excluded benchmark checkers
-   - targeted benchmark-specific repair for `unsharp_mask` or `newton_raphson_polynomial`
+   - targeted benchmark-specific repair for `newton_raphson_polynomial`
    - a new verification-driven method that attacks `conv_3d` or `quantized_matmul`
 5. Avoid claiming C4a. It is negative evidence.
 
@@ -121,6 +135,5 @@ The repaired-contract track has now been run:
 
 Current highest-value next attempts:
 
-- repair/validate the FIR benchmark contracts, then rerun only if the checker is trustworthy
-- targeted solve attempt on `unsharp_mask`, because it is a near miss at `65535/65536`
 - targeted solve attempt on `newton_raphson_polynomial`, because C4a reached `96/100`
+- optional L6 FP FIR repaired-contract pilot for `fp_band_pass_fir` and `fp_high_pass_fir`, but only as a targeted research attempt

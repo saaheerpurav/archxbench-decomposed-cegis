@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/highpass_fir_coeff_rom.v",
+  "sub_modules": {
+    "highpass_fir_coeff_rom": "Combinational ROM that packs the exact 101 signed high-pass FIR coefficients into a flat coefficient bus.",
+    "highpass_fir_mac": "Combinational multiply-accumulate block over the delayed sample vector and coefficient vector using a 64-bit accumulator.",
+    "highpass_fir_quantize": "Combinational fixed-point output scaler that arithmetic right shifts the accumulator by 15 bits into the 24-bit output width.",
+    "highpass_fir_zero_extend_valid": "Combinational valid-path helper used by the top-level wrapper; sequential valid timing is registered in the top module."
+  }
+}

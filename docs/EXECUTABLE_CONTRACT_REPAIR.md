@@ -168,6 +168,35 @@ Repaired-contract run:
 - C4tl, seeds `42,123,456`: 0/3 clean solves; reference decompositions failed the repaired system checker.
 - Interpretation: the display-only checker was repaired, but none of the current methods solved the repaired `systolic_gemm` contract.
 
+## FIR Family
+
+Original contract issue:
+
+- L4 FIR directories contain two executable contracts: stale file-output testbenches and large embedded-golden `tb_selfcheck.v` files.
+- The stale L4 file-output testbenches use outdated parameters and JSON plumbing, while the specs contain repaired coefficient/parameter text.
+- L6 `fp_band_pass_fir` and `fp_high_pass_fir` load coefficients through `dut.coeffs[j]`, which assumes a hidden internal DUT memory name that is not part of the module interface.
+- L6 `fp_low_pass_fir` has inconsistent filenames (`stimuli_fp.json`, `lowpass_out_fp.json`) and does not expose the coefficient oracle in the testbench.
+- The generic runner previously treated L4 self-checking FIR directories as file-output golden tests because `inputs/outputs` folders were present.
+
+Repair:
+
+- L4 `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`: create repaired fixtures that remove the stale file-output testbench and keep only `tb_selfcheck.v`.
+- L6 `fp_band_pass_fir` and `fp_high_pass_fir`: remove hidden `dut.coeffs` writes; require coefficients to be hard-coded from the public coefficient list.
+- L6 `fp_low_pass_fir`: copy into the repaired root for audit completeness, but keep it held out because the coefficient oracle is still not explicit.
+- Runner: self-checking `tb_selfcheck.v` directories no longer trigger file-output golden comparison just because stale `inputs/outputs` folders exist.
+- Runner: 32-bit hex JSON words are compared as IEEE-754 floats with the benchmark's `+/-1.0` tolerance.
+
+Repaired-contract pilot:
+
+- Artifacts: `artifacts/raw_runs/repaired_fir_l4_c2g_pilot_20260706/`
+- Artifacts: `artifacts/raw_runs/repaired_fir_l4_c4i_pilot_20260706/`
+- Artifacts: `artifacts/raw_runs/repaired_fir_l4_c4tl_pilot_20260706/`
+- Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
+- C2g, seed `42`: `band_pass_fir` 1/1001, `high_pass_fir` 4/1001, `low_pass_fir` 3/1001.
+- C4i, seed `42`: `band_pass_fir` 5/1001, `high_pass_fir` 4/1001, `low_pass_fir` 5/1001.
+- C4tl, seed `42`: `band_pass_fir` 2/1001, `high_pass_fir` 0/1001, `low_pass_fir` 3/1001.
+- Interpretation: repaired L4 FIR contracts are still not solved by current methods. FIR remains a benchmark-audit/negative-result track, not a new positive solve.
+
 ## Paper Use
 
 This can strengthen the paper only if framed honestly:

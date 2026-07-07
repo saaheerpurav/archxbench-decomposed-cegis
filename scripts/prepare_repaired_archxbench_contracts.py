@@ -15,6 +15,7 @@ The goal is to make benchmark-contract changes explicit and reproducible.
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import struct
 from pathlib import Path
@@ -511,6 +512,96 @@ def _repair_systolic_gemm() -> None:
     )
 
 
+def _repair_l4_fir(design: str, stale_tb: str, module_name: str) -> None:
+    dst = _copy_design("level-4", design)
+    stale_path = dst / stale_tb
+    if stale_path.exists():
+        stale_path.unlink()
+    note = (
+        "# Repaired contract notes\n\n"
+        "- The original file-output FIR testbench uses stale interface parameters and JSON output plumbing.\n"
+        "- The benchmark directory already contains `tb_selfcheck.v`, an embedded-golden self-checking contract generated from the shipped stimuli and golden outputs.\n"
+        "- This repaired fixture removes the stale file-output testbench and makes `tb_selfcheck.v` the only executable contract.\n"
+        "- The design spec explicitly lists the required coefficient set and parameters.\n"
+        "- The original source benchmark is unchanged.\n"
+    )
+    (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
+    _append_contract_note(
+        dst / "design-specs.txt",
+        [
+            "Repaired benchmark contract:",
+            "- Use `tb_selfcheck.v` as the only executable testbench for this fixture.",
+            f"- The top module remains `{module_name}`.",
+            "- The stale file-output testbench from the original directory is intentionally removed.",
+            "- Correctness is the embedded official 1000-sample golden sequence with +/-1 LSB tolerance.",
+        ],
+    )
+
+
+def _strip_hidden_coeff_write(testbench: str) -> str:
+    """Remove hierarchical writes like `dut.coeffs[j] = coeffs[j]`.
+
+    Those writes make the benchmark depend on a hidden internal DUT memory name.
+    The repaired contract instead requires coefficients to be hard-coded from
+    the public spec/testbench coefficient list.
+    """
+    return re.sub(
+        r"\n\s*// Load (?:coefficients|taps) into DUT\s*\n"
+        r"\s*for\s*\([^;]+;\s*[^;]+;\s*[^\)]+\)\s*(?:begin\s*)?\n?"
+        r"\s*dut\.coeffs\[[^\]]+\]\s*=\s*coeffs\[[^\]]+\];\s*\n"
+        r"\s*(?:end\s*)?",
+        "\n",
+        testbench,
+        flags=re.IGNORECASE,
+    )
+
+
+def _repair_fp_fir_with_public_coeffs(design: str, tb_name: str, module_name: str) -> None:
+    dst = _copy_design("level-6", design)
+    tb_path = dst / tb_name
+    tb_text = tb_path.read_text(encoding="utf-8", errors="ignore")
+    tb_path.write_text(_strip_hidden_coeff_write(tb_text), encoding="utf-8")
+    note = (
+        "# Repaired contract notes\n\n"
+        "- The original testbench loaded coefficients through `dut.coeffs[j]`, which assumes a hidden internal DUT memory name not present in the public module interface.\n"
+        "- This fixture removes the hierarchical coefficient write. The DUT must hard-code the coefficient set listed in the testbench/spec.\n"
+        "- The generic runner now compares 32-bit hex JSON outputs as IEEE-754 floats with the benchmark's +/-1.0 tolerance.\n"
+        "- The original source benchmark is unchanged.\n"
+    )
+    (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
+    _append_contract_note(
+        dst / "design-specs.txt",
+        [
+            "Repaired benchmark contract:",
+            f"- The top module is `{module_name}`.",
+            "- Coefficients must be hard-coded from the public 31-tap coefficient list in the testbench/spec.",
+            "- Do not rely on a testbench write to `dut.coeffs`; that hidden internal memory is not part of the module interface.",
+            "- Outputs are 32-bit IEEE-754 hex words compared as floats with +/-1.0 tolerance, matching the shipped comparison script.",
+        ],
+    )
+
+
+def _repair_fp_low_pass_fir_hold() -> None:
+    dst = _copy_design("level-6", "fp_low_pass_fir")
+    note = (
+        "# Repaired contract notes\n\n"
+        "- This design is copied into the repaired root for audit completeness, but it is intentionally not marked runnable yet.\n"
+        "- The original testbench references `inputs/stimuli_fp.json` and `outputs/lowpass_out_fp.json`, while the shipped files are `inputs/stimuli.json` and `outputs/golden_output.json`.\n"
+        "- Unlike the band/high-pass FP FIRs, the coefficient list is not present in the testbench.\n"
+        "- Do not run or claim this row until the coefficient oracle is recovered from an upstream source or independently validated.\n"
+        "- The original source benchmark is unchanged.\n"
+    )
+    (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
+    _append_contract_note(
+        dst / "design-specs.txt",
+        [
+            "Repaired benchmark contract status:",
+            "- Hold unresolved. The shipped file names are inconsistent and the coefficient oracle is not explicit.",
+            "- This fixture documents the issue but does not provide a trustworthy repaired executable contract yet.",
+        ],
+    )
+
+
 def _append_contract_note(path: Path, lines: list[str]) -> None:
     text = path.read_text(encoding="utf-8", errors="ignore").rstrip()
     addition = "\n\n" + "\n".join(lines) + "\n"
@@ -523,6 +614,12 @@ def main() -> None:
     _repair_conv_3d()
     _repair_multich_conv2d()
     _repair_systolic_gemm()
+    _repair_l4_fir("band_pass_fir", "tb_band_pass_fir.v", "bandpass_fir")
+    _repair_l4_fir("high_pass_fir", "tb_high_pass_fir.v", "highpass_fir")
+    _repair_l4_fir("low_pass_fir", "tb_low_pass_fir.v", "lowpass_fir")
+    _repair_fp_fir_with_public_coeffs("fp_band_pass_fir", "tb_fp_band_pass_fir.v", "fp_bandpass_fir")
+    _repair_fp_fir_with_public_coeffs("fp_high_pass_fir", "tb_fp_high_pass_fir.v", "fp_highpass_fir")
+    _repair_fp_low_pass_fir_hold()
     manifest = {
         "source_root": str(SOURCE_ROOT.relative_to(REPO_ROOT)),
         "repaired_root": str(REPAIRED_ROOT.relative_to(REPO_ROOT)),
@@ -563,6 +660,60 @@ def main() -> None:
                     "convert displayed expected matrices into machine-readable PASS/FAIL checks",
                     "preserve the original A x A and A x I test cases",
                     "remove duplicate include dependence from the testbench",
+                ],
+            },
+            {
+                "level": "level-4",
+                "design": "band_pass_fir",
+                "repairs": [
+                    "remove stale file-output testbench",
+                    "use embedded-golden self-checking testbench",
+                    "preserve explicit repaired coefficient spec",
+                ],
+            },
+            {
+                "level": "level-4",
+                "design": "high_pass_fir",
+                "repairs": [
+                    "remove stale file-output testbench",
+                    "use embedded-golden self-checking testbench",
+                    "preserve explicit repaired coefficient spec",
+                ],
+            },
+            {
+                "level": "level-4",
+                "design": "low_pass_fir",
+                "repairs": [
+                    "remove stale file-output testbench",
+                    "use embedded-golden self-checking testbench",
+                    "preserve explicit repaired coefficient spec",
+                ],
+            },
+            {
+                "level": "level-6",
+                "design": "fp_band_pass_fir",
+                "repairs": [
+                    "remove hidden DUT coefficient-memory writes",
+                    "require hard-coded public coefficient list",
+                    "compare 32-bit hex outputs as IEEE-754 floats",
+                ],
+            },
+            {
+                "level": "level-6",
+                "design": "fp_high_pass_fir",
+                "repairs": [
+                    "remove hidden DUT coefficient-memory writes",
+                    "require hard-coded public coefficient list",
+                    "compare 32-bit hex outputs as IEEE-754 floats",
+                ],
+            },
+            {
+                "level": "level-6",
+                "design": "fp_low_pass_fir",
+                "repairs": [
+                    "document unresolved filename mismatch",
+                    "document missing coefficient oracle",
+                    "hold out from repaired-contract runs",
                 ],
             },
         ],

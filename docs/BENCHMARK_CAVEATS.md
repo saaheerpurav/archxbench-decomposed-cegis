@@ -18,6 +18,17 @@ Some designs have official self-checking testbenches and do not use external gol
 
 FIR-family results are diagnostics only. The benchmark/spec-contract issue around coefficients and hidden reference behavior is unresolved.
 
+Current repaired-contract status:
+
+- L4 FIR repaired fixtures now live under `artifacts/benchmark_contracts/archxbench_repaired/level-4/`.
+- Those fixtures remove stale file-output testbenches and keep only embedded-golden `tb_selfcheck.v`.
+- Single-seed repaired-contract pilots were run for C2g, C4i, and C4tl on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`.
+- Result: all nine pilot cells failed, with best scores only 0-5/1001. Do not claim FIR as solved.
+- L6 `fp_band_pass_fir` and `fp_high_pass_fir` have repaired fixtures that remove hidden `dut.coeffs` writes, but no synthesis pilot has solved them yet.
+- L6 `fp_low_pass_fir` remains held out because the coefficient oracle is still not explicit.
+
+See `docs/EXECUTABLE_CONTRACT_REPAIR.md` and `artifacts/inventories/repaired_contract_run_matrix.csv`.
+
 A historical C4i GPT-5.5 L4 FIR sweep was run for five seeds (`42,123,456,789,1024`) and is recorded in committed logs plus the older openevolve metrics. These rows are intentionally kept as log/metrics-only evidence because the corresponding generated RTL/result artifacts were not preserved:
 
 | Design | Historical C4i result | Evidence status |
@@ -44,11 +55,18 @@ L6 `fft_streaming_64pt` is different. Current C4i/C4tl rows fail golden comparis
 
 ## Unsharp Mask
 
-`unsharp_mask` has artifact-backed C2g solves on seeds `42` and `456` under `artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/`. Both saved RTL files locally replay at `65536/65536` against `golden_output.json`.
+`unsharp_mask` has artifact-backed C2g solves on seeds `42,123,456`.
+
+Artifact locations:
+
+- seeds `42,456`: `artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/`
+- seed `123`: `artifacts/raw_runs/unsharp_c2g_seed123_artifact_rerun_20260706/`
+
+All three saved RTL files score `65536/65536` against the shipped `golden_output.json`.
 
 The older C2g near-miss rows in `overnight_c2g_priority1_20260703` are score-only and have no generated RTL. Do not use those old rows as artifact-backed evidence.
 
-The shipped golden does not match a textbook centered 3x3 unsharp-mask reference. See `docs/UNSHARP_MASK_DIAGNOSTIC.md`.
+The shipped golden does not match a textbook centered 3x3 unsharp-mask reference. Treat `unsharp_mask` as a valid ArchXBench executable-contract solve, but avoid using it as a qualitative example of textbook image-processing semantics.
 
 ## Repaired Benchmark Contracts
 
