@@ -1,0 +1,32 @@
+{
+  "fft_streaming_64pt__C2g__gpt-5.5__1024": {
+    "condition": "C2g",
+    "llm_calls": 30,
+    "best_passes": 0,
+    "total_tests": 128,
+    "solved": false,
+    "golden_correct": 0,
+    "golden_total": 128,
+    "design": "fft_streaming_64pt",
+    "model": "gpt-5.5",
+    "seed": 1024,
+    "wall_seconds": 1914.3,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "fft_streaming_64pt__C2g__gpt-5.5__789": {
+    "condition": "C2g",
+    "llm_calls": 30,
+    "best_passes": 0,
+    "total_tests": 1,
+    "solved": false,
+    "golden_correct": 0,
+    "golden_total": 1,
+    "design": "fft_streaming_64pt",
+    "model": "gpt-5.5",
+    "seed": 789,
+    "wall_seconds": 2070.5,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  }
+}

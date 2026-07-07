@@ -1,0 +1,20 @@
+[
+  {
+    "design": "fp_band_pass_fir",
+    "status": "pass",
+    "correct": 1000,
+    "total": 1000,
+    "dut_count": 1000,
+    "first_mismatches": [],
+    "sim_stdout_tail": "[PASS] BPF floating-point test complete\ntb_fp_band_pass_fir.v:127: $finish called at 10335000 (1ps)\n"
+  },
+  {
+    "design": "fp_high_pass_fir",
+    "status": "pass",
+    "correct": 1000,
+    "total": 1000,
+    "dut_count": 1000,
+    "first_mismatches": [],
+    "sim_stdout_tail": "[PASS] Highpass FIR test complete\ntb_fp_high_pass_fir.v:120: $finish called at 10335000 (1ps)\n"
+  }
+]

@@ -136,7 +136,7 @@ def collect_results() -> list[dict]:
     results: list[dict] = []
     for result_path in ARTIFACTS.rglob("result.json"):
         rel_parts = result_path.relative_to(ROOT).parts
-        if any(part.startswith(("repaired_contracts_", "repaired_fir_")) for part in rel_parts):
+        if any(part.startswith(("repaired_contracts_", "repaired_fir_", "repaired_fp_fir_")) for part in rel_parts):
             continue
         try:
             data = json.loads(result_path.read_text(encoding="utf-8", errors="replace"))

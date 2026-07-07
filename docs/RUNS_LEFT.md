@@ -2,7 +2,7 @@
 
 This is the only run queue. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`.
 
-Last audited: 2026-07-06 after GitHub-history audit of both `archxbench-decomposed-cegis` and `archxbench-cegis`.
+Last audited: 2026-07-07 after repository-local result and artifact audit.
 
 ## Required For Current Claims
 
@@ -42,7 +42,7 @@ These are real results, but not enough to present as robust method wins.
 | Level | Design | Current status |
 |---|---|---|
 | L3 | `newton_raphson_polynomial` | no clean solve; best `C4i` is `89/100` |
-| L6 | `fft_streaming_64pt` | `C2g` seed `42` clean `128/128`; seeds `123,456` fail |
+| L6 | `fft_streaming_64pt` | `C2g` seed `42` clean `128/128`; seeds `123,456,789,1024` fail |
 | L6 | `conv_3d` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
 | L6 | `quantized_matmul` | no clean solve across `C1`, `C2g`, `C4i`, `C4tl` |
 
@@ -61,7 +61,10 @@ These runs were found in committed logs and old aggregate metrics, but the gener
 `C4a` was run on all five weak targets with `gpt-5.5`, seeds `42,123,456`, under
 `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`.
 
-Result: 0/15 solves.
+Two extra `newton_raphson_polynomial` C4a seeds (`789,1024`) were then run under
+`artifacts/raw_runs/newton_poly_c4a_extra_20260707/`.
+
+Result: 0/17 diagnostic solves.
 
 | Design | C4a result |
 |---|---|
@@ -69,7 +72,7 @@ Result: 0/15 solves.
 | `fft_streaming_64pt` | failed all three seeds; all `0/1` |
 | `conv_3d` | failed all three seeds; all `0/0` |
 | `quantized_matmul` | failed all three seeds; two `0/0`, one final compile failure |
-| `newton_raphson_polynomial` | failed all three seeds; best `96/100`, no golden denominator |
+| `newton_raphson_polynomial` | failed five seeds; best `96/100`; extra seeds scored `88/100` and `94/100` |
 
 Conclusion: C4a is negative evidence. Do not promote it as a method improvement.
 
@@ -89,6 +92,7 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | `quantized_matmul` runner-fixed | C2g 3/3 solved; C4i 3/3 solved; C4tl 0/3 solved |
 | `systolic_gemm` | C2g 0/3, C4i 0/3, C4tl 0/3; repaired display-only checker, but no method solved it |
 | L4 FIR repaired pilot | C2g/C4i/C4tl seed `42` all failed on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`; best score 5/1001 |
+| L6 FP FIR repaired contracts | Oracle validation passed for `fp_band_pass_fir` and `fp_high_pass_fir`; C2g solves both 3/3, C4i/C4tl seed `42` pilots fail |
 
 ### Excluded Or Hold
 
@@ -100,8 +104,8 @@ Do not blind-run these until the checker/spec issue is resolved.
 | L4 | `high_pass_fir` | repaired-contract pilot complete and negative; historical C4i log/metrics-only result is 2/5 solved but not artifact-backed |
 | L4 | `low_pass_fir` | repaired-contract pilot complete and negative; historical C4i log/metrics-only result is 1/5 solved but not artifact-backed |
 | L5 | `systolic_gemm` | original checker is display-only; repaired-contract track completed with 0/9 solves |
-| L6 | `fp_band_pass_fir` | repaired fixture exists; run only as a new targeted research attempt |
-| L6 | `fp_high_pass_fir` | repaired fixture exists; run only as a new targeted research attempt |
+| L6 | `fp_band_pass_fir` | original contract issue; repaired-contract C2g 3/3 complete |
+| L6 | `fp_high_pass_fir` | original contract issue; repaired-contract C2g 3/3 complete |
 | L6 | `fp_low_pass_fir` | still held out; coefficient oracle not explicit |
 | L6 | `multich_conv2d` | original benchmark contract issue; repaired-contract track complete |
 
@@ -113,12 +117,11 @@ The only useful next runs are targeted research attempts, not table filling:
 
 | Priority | Action |
 |---|---|
-| 1 | Decide whether repaired `conv_3d` and repaired `quantized_matmul` belong in the paper as benchmark-audit/repaired-contract results, not original ArchXBench solves. |
-| 2 | Decide how prominently to use repaired-contract rows in the paper; they are benchmark-audit results, not original ArchXBench solves. |
-| 3 | FIR L4 repaired-contract pilot is complete and negative; only continue FIR with a genuinely new general method or L6 FP FIR pilot. |
-| 4 | Keep original `systolic_gemm` excluded; repaired-contract run is complete and negative. |
-| 5 | If the paper needs a C4tl ablation table, use the existing C4tl rows as negative/partial evidence; do not promote native-pass rows without golden verification. |
-| 6 | Rerun any C1/C2g score-only baseline row before using it as artifact-backed paper evidence; see `docs/ARTIFACT_AUDIT_STATUS.md`. |
+| 1 | New general method only for `fft_streaming_64pt`; C2g robustness probe is complete and negative beyond seed `42`. |
+| 2 | New general method only for `newton_raphson_polynomial`; C4a extra seeds are complete and negative. |
+| 3 | New general method only for original-contract `conv_3d` / `quantized_matmul`; repaired-contract rows are already complete. |
+| 4 | Keep `systolic_gemm` parked unless a genuinely new general method appears; repaired-contract run is complete and negative. |
+| 5 | Rerun any C1/C2g score-only baseline row before using it as artifact-backed paper evidence; see `docs/ARTIFACT_AUDIT_STATUS.md`. |
 
 ## Execution Rules
 

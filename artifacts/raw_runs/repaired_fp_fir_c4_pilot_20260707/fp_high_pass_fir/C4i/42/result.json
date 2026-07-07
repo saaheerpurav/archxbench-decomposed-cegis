@@ -1,0 +1,20 @@
+{
+  "condition": "C4i",
+  "llm_calls": 29,
+  "best_passes": 969,
+  "total_tests": 1000,
+  "solved": false,
+  "decomp_modules": [
+    "fp_highpass_coeff_rom",
+    "fp_highpass_mac"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 969,
+  "golden_total": 1000,
+  "design": "fp_high_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "wall_seconds": 2598.6,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

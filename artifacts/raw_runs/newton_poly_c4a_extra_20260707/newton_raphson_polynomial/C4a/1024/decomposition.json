@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/nr_poly_eval.v",
+  "sub_modules": {
+    "nr_poly_eval": "Combinational fixed-point cubic polynomial evaluator using Horner's method.",
+    "nr_derivative_eval": "Combinational fixed-point derivative evaluator for a cubic polynomial.",
+    "nr_fixed_div": "Combinational extended-width fixed-point divider used to compute the Newton correction term.",
+    "nr_newton_update": "Combinational Newton-Raphson state update block with derivative-zero hold behavior.",
+    "nr_root_verify": "Combinational verification block that checks whether the polynomial value is within tolerance."
+  }
+}

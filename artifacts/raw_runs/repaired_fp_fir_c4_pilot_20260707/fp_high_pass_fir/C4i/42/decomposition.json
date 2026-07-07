@@ -1,0 +1,7 @@
+{
+  "top_source_file": "verilog/fp_highpass_coeff_rom.v",
+  "sub_modules": {
+    "fp_highpass_coeff_rom": "Combinational coefficient ROM with the hard-coded public 31-tap high-pass FIR coefficient list.",
+    "fp_highpass_mac": "Combinational floating-point FIR multiply-accumulate datapath over the flattened sample delay line and coefficient bus."
+  }
+}

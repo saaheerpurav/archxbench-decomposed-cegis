@@ -50,15 +50,20 @@ Known diagnostic categories:
 - failed debug rows for DCT, FIR-family designs, `conv_3d`, and `quantized_matmul`
 - historical L4 FIR C4i GPT-5.5 log/metrics-only rows: `band_pass_fir` 0/5, `high_pass_fir` 2/5, `low_pass_fir` 1/5; see `artifacts/inventories/log_metric_only_results.csv`
 - repaired L4 FIR pilot rows: C2g/C4i/C4tl seed `42` all fail on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`; best score is 5/1001
+- repaired L6 FP FIR rows: C2g solves `fp_band_pass_fir` and `fp_high_pass_fir` 3/3 on validated repaired contracts; C4i/C4tl seed `42` pilots fail
+- `fft_streaming_64pt` C2g is partial only: seed `42` solves `128/128`, while seeds `123,456,789,1024` fail
 - `systolic_gemm` rows without reliable golden evidence
 - old score-only `unsharp_mask` C2g near-miss rows; current artifact-backed C2g reruns solve seeds `42,123,456`
 
 ### C4a Weak-Target Sweep
 
 `C4a` was run as a targeted research attempt on the remaining weak targets with
-`gpt-5.5`, seeds `42,123,456`.
+`gpt-5.5`, seeds `42,123,456`. Two extra `newton_raphson_polynomial`
+seeds (`789,1024`) were added on 2026-07-07 because the original C4a sweep
+reached a near miss.
 
 Artifacts: `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`
+Extra Newton artifacts: `artifacts/raw_runs/newton_poly_c4a_extra_20260707/`
 
 | Design | Result |
 |---|---|
@@ -66,7 +71,7 @@ Artifacts: `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`
 | `fft_streaming_64pt` | 0/3 solved; all `0/1` |
 | `conv_3d` | 0/3 solved; all `0/0` |
 | `quantized_matmul` | 0/3 solved; two `0/0`, one final compile failure |
-| `newton_raphson_polynomial` | 0/3 solved; best `96/100`, no golden denominator |
+| `newton_raphson_polynomial` | 0/5 solved; best `96/100`, extra seeds scored `88/100` and `94/100` |
 
 Conclusion: this is negative evidence. C4a should not be framed as a paper method improvement.
 
@@ -90,6 +95,10 @@ Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 | `quantized_matmul` repaired contract, runner-fixed | C2g | `42,123,456` | 3/3 solved, all `64/64` golden | repaired contract is solvable |
 | `quantized_matmul` repaired contract, runner-fixed | C4i | `42,123,456` | 3/3 solved, all `64/64` golden | repaired contract is solvable |
 | `quantized_matmul` repaired contract, runner-fixed | C4tl | `42,123,456` | 0/3 solved | reference decomposition failed |
+| `fp_band_pass_fir` repaired contract | C2g | `42,123,456` | 3/3 solved, all `1000/1000` golden | repaired contract is solvable; C2g is strongest |
+| `fp_band_pass_fir` repaired contract | C4i/C4tl | `42` | C4i `804/1000`, C4tl `0/1000` | negative pilot |
+| `fp_high_pass_fir` repaired contract | C2g | `42,123,456` | 3/3 solved, all `1000/1000` golden | repaired contract is solvable; C2g is strongest |
+| `fp_high_pass_fir` repaired contract | C4i/C4tl | `42` | C4i `969/1000`, C4tl `969/1000` | near-miss negative pilot |
 | `systolic_gemm` repaired contract | C2g | `42,123,456` | 0/3 solved | 30-call monolithic repair failed all seeds |
 | `systolic_gemm` repaired contract | C4i | `42,123,456` | 0/3 solved | all seeds failed final compile |
 | `systolic_gemm` repaired contract | C4tl | `42,123,456` | 0/3 solved | reference decompositions failed |

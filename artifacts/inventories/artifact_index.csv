@@ -936,6 +936,10 @@ artifacts/raw_runs/conv3d_debug/conv_3d/C4tl/42/result.json,raw_runs,conv3d_debu
 artifacts/raw_runs/dct_retry_1/dct_idct_8pt_pipelined/C4tl/42/result.json,raw_runs,dct_retry_1,mixed,dct_idct_8pt_pipelined,C4tl,gpt-5.5,42,False,0/16,0/16,29,2383.2,True,4
 artifacts/raw_runs/dct_retry_2/dct_idct_8pt_pipelined/C4tl/42/result.json,raw_runs,dct_retry_2,mixed,dct_idct_8pt_pipelined,C4tl,gpt-5.5,42,,,,,130.8,False,0
 artifacts/raw_runs/dct_retry_3/dct_idct_8pt_pipelined/C4tl/42/result.json,raw_runs,dct_retry_3,mixed,dct_idct_8pt_pipelined,C4tl,gpt-5.5,42,False,0/1,,2,538.1,True,5
+artifacts/raw_runs/fft_streaming_c2g_extra_20260707/fft_streaming_64pt/C2g/1024/result.json,raw_runs,fft_streaming_c2g_extra_20260707,mixed,fft_streaming_64pt,C2g,gpt-5.5,1024,False,0/128,0/128,30,1914.3,False,1
+artifacts/raw_runs/fft_streaming_c2g_extra_20260707/fft_streaming_64pt/C2g/789/result.json,raw_runs,fft_streaming_c2g_extra_20260707,mixed,fft_streaming_64pt,C2g,gpt-5.5,789,False,0/1,0/1,30,2070.5,False,1
+artifacts/raw_runs/newton_poly_c4a_extra_20260707/newton_raphson_polynomial/C4a/1024/result.json,raw_runs,newton_poly_c4a_extra_20260707,mixed,newton_raphson_polynomial,C4a,gpt-5.5,1024,False,94/100,,40,1751.2,True,6
+artifacts/raw_runs/newton_poly_c4a_extra_20260707/newton_raphson_polynomial/C4a/789/result.json,raw_runs,newton_poly_c4a_extra_20260707,mixed,newton_raphson_polynomial,C4a,gpt-5.5,789,False,88/100,,40,1811.9,True,6
 artifacts/raw_runs/overnight_c2g_conditional_20260704/aes_decryption/C2g/123/result.json,raw_runs,overnight_c2g_conditional_20260704,mixed,aes_decryption,C2g,gpt-5.5,123,,,,,188.5,False,0
 artifacts/raw_runs/overnight_c2g_conditional_20260704/aes_decryption/C2g/42/result.json,raw_runs,overnight_c2g_conditional_20260704,mixed,aes_decryption,C2g,gpt-5.5,42,,,,,198.1,False,0
 artifacts/raw_runs/overnight_c2g_conditional_20260704/aes_decryption/C2g/456/result.json,raw_runs,overnight_c2g_conditional_20260704,mixed,aes_decryption,C2g,gpt-5.5,456,,,,,98.2,False,0
@@ -1058,6 +1062,16 @@ artifacts/raw_runs/repaired_fir_l4_c4i_pilot_20260706/low_pass_fir/C4i/42/result
 artifacts/raw_runs/repaired_fir_l4_c4tl_pilot_20260706/band_pass_fir/C4tl/42/result.json,raw_runs,repaired_fir_l4_c4tl_pilot_20260706,mixed,band_pass_fir,C4tl,gpt-5.5,42,False,2/1001,,3,394.4,True,5
 artifacts/raw_runs/repaired_fir_l4_c4tl_pilot_20260706/high_pass_fir/C4tl/42/result.json,raw_runs,repaired_fir_l4_c4tl_pilot_20260706,mixed,high_pass_fir,C4tl,gpt-5.5,42,False,0/1001,,3,326.2,True,5
 artifacts/raw_runs/repaired_fir_l4_c4tl_pilot_20260706/low_pass_fir/C4tl/42/result.json,raw_runs,repaired_fir_l4_c4tl_pilot_20260706,mixed,low_pass_fir,C4tl,gpt-5.5,42,False,3/1001,,3,354.0,True,4
+artifacts/raw_runs/repaired_fp_fir_c2g_pilot_20260707/fp_band_pass_fir/C2g/42/result.json,raw_runs,repaired_fp_fir_c2g_pilot_20260707,mixed,fp_band_pass_fir,C2g,gpt-5.5,42,True,1000/1000,1000/1000,4,264.3,False,1
+artifacts/raw_runs/repaired_fp_fir_c2g_pilot_20260707/fp_high_pass_fir/C2g/42/result.json,raw_runs,repaired_fp_fir_c2g_pilot_20260707,mixed,fp_high_pass_fir,C2g,gpt-5.5,42,True,1000/1000,1000/1000,5,364.9,False,1
+artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/fp_band_pass_fir/C2g/123/result.json,raw_runs,repaired_fp_fir_c2g_seeds_20260707,mixed,fp_band_pass_fir,C2g,gpt-5.5,123,True,1000/1000,1000/1000,9,580.4,False,1
+artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/fp_band_pass_fir/C2g/456/result.json,raw_runs,repaired_fp_fir_c2g_seeds_20260707,mixed,fp_band_pass_fir,C2g,gpt-5.5,456,True,1000/1000,1000/1000,10,576.9,False,1
+artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/fp_high_pass_fir/C2g/123/result.json,raw_runs,repaired_fp_fir_c2g_seeds_20260707,mixed,fp_high_pass_fir,C2g,gpt-5.5,123,True,1000/1000,1000/1000,5,359.3,False,1
+artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/fp_high_pass_fir/C2g/456/result.json,raw_runs,repaired_fp_fir_c2g_seeds_20260707,mixed,fp_high_pass_fir,C2g,gpt-5.5,456,True,1000/1000,1000/1000,4,237.7,False,1
+artifacts/raw_runs/repaired_fp_fir_c4_pilot_20260707/fp_band_pass_fir/C4i/42/result.json,raw_runs,repaired_fp_fir_c4_pilot_20260707,mixed,fp_band_pass_fir,C4i,gpt-5.5,42,False,804/1000,804/1000,26,1229.4,True,6
+artifacts/raw_runs/repaired_fp_fir_c4_pilot_20260707/fp_band_pass_fir/C4tl/42/result.json,raw_runs,repaired_fp_fir_c4_pilot_20260707,mixed,fp_band_pass_fir,C4tl,gpt-5.5,42,False,0/1000,,1,320.9,True,5
+artifacts/raw_runs/repaired_fp_fir_c4_pilot_20260707/fp_high_pass_fir/C4i/42/result.json,raw_runs,repaired_fp_fir_c4_pilot_20260707,mixed,fp_high_pass_fir,C4i,gpt-5.5,42,False,969/1000,969/1000,29,2598.6,True,3
+artifacts/raw_runs/repaired_fp_fir_c4_pilot_20260707/fp_high_pass_fir/C4tl/42/result.json,raw_runs,repaired_fp_fir_c4_pilot_20260707,mixed,fp_high_pass_fir,C4tl,gpt-5.5,42,False,969/1000,,2,273.4,True,4
 artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/unsharp_mask/C2g/42/result.json,raw_runs,unsharp_c2g_artifact_rerun_20260706,mixed,unsharp_mask,C2g,gpt-5.5,42,True,65536/65536,65536/65536,24,1801.7,False,1
 artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/unsharp_mask/C2g/456/result.json,raw_runs,unsharp_c2g_artifact_rerun_20260706,mixed,unsharp_mask,C2g,gpt-5.5,456,True,65536/65536,65536/65536,27,2402.3,False,1
 artifacts/raw_runs/unsharp_c2g_seed123_artifact_rerun_20260706/unsharp_mask/C2g/123/result.json,raw_runs,unsharp_c2g_seed123_artifact_rerun_20260706,mixed,unsharp_mask,C2g,gpt-5.5,123,True,65536/65536,65536/65536,7,500.4,False,1

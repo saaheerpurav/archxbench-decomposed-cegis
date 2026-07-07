@@ -556,15 +556,55 @@ def _strip_hidden_coeff_write(testbench: str) -> str:
     )
 
 
+def _repair_valid_out_json_writer(testbench: str) -> str:
+    """Make file-output JSON commas depend on actual valid_out count.
+
+    The original FP FIR testbenches decide comma placement from loop indices
+    even though output writes are gated by `valid_out`. That can create invalid
+    JSON when the number/timing of valid outputs differs from the loop bound.
+    """
+    text = testbench.replace(
+        "integer infile, outfile, code, idx, N;",
+        "integer infile, outfile, code, idx, N, out_count;",
+    )
+    text = text.replace(
+        '$fwrite(outfile, "[\\n");\n\n',
+        '$fwrite(outfile, "[\\n");\n    out_count = 0;\n\n',
+    )
+    text = text.replace(
+        '        $fwrite(outfile, "  \\"%h\\"", data_out);\n'
+        '        if (idx < N-1) $fwrite(outfile, ",\\n");',
+        '        if (out_count > 0) $fwrite(outfile, ",\\n");\n'
+        '        $fwrite(outfile, "  \\"%h\\"", data_out);\n'
+        '        out_count = out_count + 1;',
+    )
+    text = text.replace(
+        '        $fwrite(outfile, "  \\"%h\\"", data_out);\n'
+        '        if (idx < TAP_CNT-1) $fwrite(outfile, ",\\n");\n'
+        '        else                 $fwrite(outfile, "\\n");',
+        '        if (out_count > 0) $fwrite(outfile, ",\\n");\n'
+        '        $fwrite(outfile, "  \\"%h\\"", data_out);\n'
+        '        out_count = out_count + 1;',
+    )
+    text = text.replace(
+        '$fwrite(outfile, "]\\n");',
+        '$fwrite(outfile, "\\n]\\n");',
+    )
+    return text
+
+
 def _repair_fp_fir_with_public_coeffs(design: str, tb_name: str, module_name: str) -> None:
     dst = _copy_design("level-6", design)
     tb_path = dst / tb_name
     tb_text = tb_path.read_text(encoding="utf-8", errors="ignore")
-    tb_path.write_text(_strip_hidden_coeff_write(tb_text), encoding="utf-8")
+    tb_text = _strip_hidden_coeff_write(tb_text)
+    tb_text = _repair_valid_out_json_writer(tb_text)
+    tb_path.write_text(tb_text, encoding="utf-8")
     note = (
         "# Repaired contract notes\n\n"
         "- The original testbench loaded coefficients through `dut.coeffs[j]`, which assumes a hidden internal DUT memory name not present in the public module interface.\n"
         "- This fixture removes the hierarchical coefficient write. The DUT must hard-code the coefficient set listed in the testbench/spec.\n"
+        "- The file-output JSON writer is repaired so commas depend on actual `valid_out` writes instead of loop indices.\n"
         "- The generic runner now compares 32-bit hex JSON outputs as IEEE-754 floats with the benchmark's +/-1.0 tolerance.\n"
         "- The original source benchmark is unchanged.\n"
     )
@@ -576,6 +616,7 @@ def _repair_fp_fir_with_public_coeffs(design: str, tb_name: str, module_name: st
             f"- The top module is `{module_name}`.",
             "- Coefficients must be hard-coded from the public 31-tap coefficient list in the testbench/spec.",
             "- Do not rely on a testbench write to `dut.coeffs`; that hidden internal memory is not part of the module interface.",
+            "- The output JSON writer uses an explicit output counter, so only actual `valid_out` writes control comma placement.",
             "- Outputs are 32-bit IEEE-754 hex words compared as floats with +/-1.0 tolerance, matching the shipped comparison script.",
         ],
     )

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fp_bandpass_coeff.v",
+  "sub_modules": {
+    "fp_bandpass_coeff": "Combinational hard-coded 31-tap band-pass FIR coefficient provider using the public coefficient list scaled to fixed point.",
+    "fp32_to_q": "Combinational IEEE-754 single-precision to signed fixed-point converter for each input sample.",
+    "fp_fir_mac": "Combinational multiply-accumulate datapath for the 31 FIR taps using fixed-point sample and coefficient values.",
+    "q_to_fp32": "Combinational signed fixed-point to IEEE-754 single-precision converter for the filtered output."
+  }
+}

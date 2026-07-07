@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_bpf_coeff_rom.v",
+  "sub_modules": {
+    "fp_bpf_coeff_rom": "Combinational hard-coded coefficient ROM containing the public 31-tap band-pass coefficient list and zero coefficients beyond tap 30.",
+    "fp_bpf_fp32_to_q16": "Combinational IEEE-754 single-precision to signed Q16.16 fixed-point converter for input samples.",
+    "fp_bpf_coeffs_to_q30": "Combinational coefficient conversion block that maps flattened IEEE-754 coefficients into signed Q2.30 fixed-point values.",
+    "fp_bpf_mac_tree": "Combinational FIR multiply-accumulate block over the shifted samples and fixed-point coefficients.",
+    "fp_bpf_q16_to_fp32": "Combinational signed Q16.16 fixed-point to IEEE-754 single-precision converter for the filtered output."
+  }
+}

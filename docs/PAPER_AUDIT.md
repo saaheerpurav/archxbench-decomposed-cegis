@@ -1,8 +1,8 @@
 # Paper Audit
 
-Date: 2026-07-06
+Date: 2026-07-07
 
-This is the paper-readiness and baseline gap map. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv` plus the C4a diagnostic sweep in `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`.
+This is the paper-readiness and baseline gap map. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`, the C4a diagnostic sweep in `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`, and the extra C4a Newton run in `artifacts/raw_runs/newton_poly_c4a_extra_20260707/`.
 
 ## Bottom Line
 
@@ -14,7 +14,7 @@ The current paper is viable only if it is framed honestly:
 - Strong: L5/L6 golden-verified solves exist, including `conv1d`, `harris_corner_detection`, `aes_encryption`, and `aes_decryption`.
 - Weak: C4i/C4tl do not dominate C2g globally.
 - Weak: C2g is the clean winner on several L5 rows.
-- Negative: C4a was tried on all weak targets and got 0/15 solves.
+- Negative: C4a was tried on all weak targets and got 0/15 solves; two extra C4a Newton seeds also failed, for 0/17 diagnostic solves overall.
 
 The paper should not claim a universal method win. It should claim a verified, decomposed RTL synthesis pipeline with hard benchmark solves, clear ablations, and transparent benchmark caveats.
 
@@ -61,8 +61,8 @@ Interpretation:
 
 | Design | Current best evidence |
 |---|---|
-| `newton_raphson_polynomial` | C4i best `89/100`; C4a best `96/100`; no clean solve |
-| `fft_streaming_64pt` | C2g has one clean seed `128/128`, but not robust across seeds; C4i/C4tl/C4a fail |
+| `newton_raphson_polynomial` | C4i best `89/100`; C4a 0/5 with best `96/100`; no clean solve |
+| `fft_streaming_64pt` | C2g is 1/5: seed `42` clean `128/128`, seeds `123,456,789,1024` fail; C4i/C4tl/C4a fail |
 | `conv_3d` | C1/C2g/C4i/C4tl/C4a all fail cleanly |
 | `quantized_matmul` | C1/C2g/C4i/C4tl/C4a all fail cleanly |
 
@@ -86,7 +86,20 @@ Single-seed pilots on repaired L4 FIR are negative:
 | `high_pass_fir` | 4/1001 | 4/1001 | 0/1001 |
 | `low_pass_fir` | 3/1001 | 5/1001 | 3/1001 |
 
-Interpretation: FIR repair did not unlock a positive result with current methods. Do not spend more runs here unless there is a new general method or a clean L6 FP FIR hypothesis.
+Interpretation: repaired L4 FIR did not unlock a positive result with current methods. Do not spend more L4 FIR runs unless there is a new general method.
+
+### Repaired L6 FP FIR
+
+The L6 FP FIR fixtures were repaired separately under `artifacts/benchmark_contracts/archxbench_repaired/level-6/`.
+The repaired contracts expose public coefficients, remove the hidden-DUT coefficient dependency, and fix malformed JSON output.
+Oracle validation passed for both repaired fixtures:
+
+| Design | Oracle validation | C2g seeds | C4i/C4tl pilot |
+|---|---:|---:|---|
+| `fp_band_pass_fir` | `1000/1000` | 3/3 solved, all `1000/1000` | seed `42` failed: C4i `804/1000`, C4tl `0/1000` |
+| `fp_high_pass_fir` | `1000/1000` | 3/3 solved, all `1000/1000` | seed `42` failed: C4i `969/1000`, C4tl `969/1000` |
+
+Interpretation: repaired L6 FP FIR is a useful benchmark-contract repair result, but it is not a C4i/C4tl win. C2g is the strongest method on these repaired rows.
 
 ### Historical FIR Sweep
 
@@ -116,7 +129,7 @@ Do these only if the goal is maximum paper strength, not incremental cleanup.
 3. Write a benchmark-audit section explaining why golden verification is required and why FIR/systolic/multich are excluded or held.
 4. If running more experiments, do not run another small C4 variant. The useful research attempts are:
    - repair or formally validate excluded benchmark checkers
-   - targeted benchmark-specific repair for `newton_raphson_polynomial`
+   - targeted benchmark-specific repair for `newton_raphson_polynomial`; extra C4a seeds did not solve it
    - a new verification-driven method that attacks `conv_3d` or `quantized_matmul`
 5. Avoid claiming C4a. It is negative evidence.
 
@@ -130,10 +143,11 @@ The repaired-contract track has now been run:
 - repaired `multich_conv2d`: C2g 3/3, C4i 3/3, C4tl 3/3
 - repaired `quantized_matmul`, initial file-format repair: C2g/C4i/C4tl all 0/3
 - repaired `quantized_matmul`, after signed-quantization clarification and runner fix: C2g 3/3, C4i 3/3, C4tl 0/3
+- repaired L6 FP FIR: C2g 3/3 on `fp_band_pass_fir` and `fp_high_pass_fir`; C4i/C4tl seed-42 pilots fail
 - repaired `systolic_gemm`: C2g 0/3, C4i 0/3, C4tl 0/3
 - these rows must remain separate from original ArchXBench tables
 
 Current highest-value next attempts:
 
-- targeted solve attempt on `newton_raphson_polynomial`, because C4a reached `96/100`
-- optional L6 FP FIR repaired-contract pilot for `fp_band_pass_fir` and `fp_high_pass_fir`, but only as a targeted research attempt
+- new general method only for `fft_streaming_64pt`; extra C2g seeds `789,1024` failed, leaving C2g at 1/5
+- new general method only for `newton_raphson_polynomial`; extra C4a seeds `789,1024` failed at `88/100` and `94/100`

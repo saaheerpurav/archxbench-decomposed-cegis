@@ -83,7 +83,7 @@ def collect() -> list[dict]:
         run_names = [
             part
             for part in rel_parts
-            if part.startswith(("repaired_contracts_", "repaired_fir_"))
+            if part.startswith(("repaired_contracts_", "repaired_fir_", "repaired_fp_fir_"))
         ]
         if not run_names:
             continue

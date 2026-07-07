@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp_hp_coeff_rom.v",
+  "sub_modules": {
+    "fp_hp_coeff_rom": "Combinational ROM containing the public 31-tap high-pass FIR coefficient list, returning zero for unused tap indices.",
+    "fp_float_mul_comb": "Combinational IEEE-754 single-precision multiply model using float-to-real and real-to-float conversion for simulation accuracy.",
+    "fp_float_add_comb": "Combinational IEEE-754 single-precision add model using float-to-real and real-to-float conversion for simulation accuracy."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "fp_band_pass_fir__C2g__gpt-5.5__42": {
+    "condition": "C2g",
+    "llm_calls": 4,
+    "best_passes": 1000,
+    "total_tests": 1000,
+    "solved": true,
+    "golden_correct": 1000,
+    "golden_total": 1000,
+    "design": "fp_band_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 264.3,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  },
+  "fp_high_pass_fir__C2g__gpt-5.5__42": {
+    "condition": "C2g",
+    "llm_calls": 5,
+    "best_passes": 1000,
+    "total_tests": 1000,
+    "solved": true,
+    "golden_correct": 1000,
+    "golden_total": 1000,
+    "design": "fp_high_pass_fir",
+    "model": "gpt-5.5",
+    "seed": 42,
+    "wall_seconds": 364.9,
+    "total_input_tokens": 0,
+    "total_output_tokens": 0
+  }
+}

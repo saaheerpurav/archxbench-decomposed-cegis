@@ -100,6 +100,17 @@ def _classify(level: str, design: str, design_dir: Path) -> tuple[str, str]:
             issues.append("module_name_mismatch")
         if "mismatches_gt_1=0" in fp_status:
             issues.append("loose_float_tolerance_masks_numeric_mismatch")
+        if design in {"fp_band_pass_fir", "fp_high_pass_fir"}:
+            return (
+                "hold_original_contract_repaired_fixture_validated",
+                "; ".join(
+                    issues
+                    + [
+                        fp_status,
+                        "repaired fixture oracle-validated; see repaired_contract_run_matrix.csv",
+                    ]
+                ),
+            )
         return (
             "hold_unresolved_fp_fir_contract",
             "; ".join(issues + [fp_status]),

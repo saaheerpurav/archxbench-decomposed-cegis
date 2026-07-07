@@ -16,7 +16,7 @@ Some designs have official self-checking testbenches and do not use external gol
 
 ## FIR Designs
 
-FIR-family results are diagnostics only. The benchmark/spec-contract issue around coefficients and hidden reference behavior is unresolved.
+FIR-family rows are diagnostics/repaired-contract evidence only. L4 FIR has repaired-contract fixtures and a completed negative pilot. L6 `fp_band_pass_fir` and `fp_high_pass_fir` now have validated repaired contracts and C2g solves, while `fp_low_pass_fir` remains a benchmark-contract hold because the coefficient oracle is not explicit.
 
 Current repaired-contract status:
 
@@ -24,12 +24,12 @@ Current repaired-contract status:
 - Those fixtures remove stale file-output testbenches and keep only embedded-golden `tb_selfcheck.v`.
 - Single-seed repaired-contract pilots were run for C2g, C4i, and C4tl on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`.
 - Result: all nine pilot cells failed, with best scores only 0-5/1001. Do not claim FIR as solved.
-- L6 `fp_band_pass_fir` and `fp_high_pass_fir` have repaired fixtures that remove hidden `dut.coeffs` writes, but no synthesis pilot has solved them yet.
+- L6 `fp_band_pass_fir` and `fp_high_pass_fir` have repaired fixtures that remove hidden `dut.coeffs` writes and repair file-output JSON comma handling. Oracle validation passes `1000/1000`, and C2g solves both repaired contracts 3/3.
 - L6 `fp_low_pass_fir` remains held out because the coefficient oracle is still not explicit.
 
 See `docs/EXECUTABLE_CONTRACT_REPAIR.md` and `artifacts/inventories/repaired_contract_run_matrix.csv`.
 
-A historical C4i GPT-5.5 L4 FIR sweep was run for five seeds (`42,123,456,789,1024`) and is recorded in committed logs plus the older openevolve metrics. These rows are intentionally kept as log/metrics-only evidence because the corresponding generated RTL/result artifacts were not preserved:
+A historical C4i GPT-5.5 L4 FIR sweep was run for five seeds (`42,123,456,789,1024`) and is recorded in repo-local committed logs and `artifacts/inventories/log_metric_only_results.csv`. These rows are intentionally kept as log/metrics-only evidence because the corresponding generated RTL/result artifacts were not preserved:
 
 | Design | Historical C4i result | Evidence status |
 |---|---|---|
@@ -45,7 +45,7 @@ Do not present these as artifact-backed paper claims unless they are rerun with 
 
 L4 `fft_16pt_iterative` and `ifft_16pt_iterative` are clean self-checking solves.
 
-L6 `fft_streaming_64pt` is different. Current C4i/C4tl rows fail golden comparison and are diagnostics.
+L6 `fft_streaming_64pt` is different. Current C4i/C4tl rows fail golden comparison and are diagnostics. C2g has one clean seed (`42`, `128/128`) but fails four other seeds (`123,456,789,1024`), so it is partial rather than robust.
 
 ## DCT And Systolic GEMM
 

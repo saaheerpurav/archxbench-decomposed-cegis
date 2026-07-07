@@ -182,9 +182,16 @@ Repair:
 
 - L4 `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`: create repaired fixtures that remove the stale file-output testbench and keep only `tb_selfcheck.v`.
 - L6 `fp_band_pass_fir` and `fp_high_pass_fir`: remove hidden `dut.coeffs` writes; require coefficients to be hard-coded from the public coefficient list.
+- L6 `fp_band_pass_fir` and `fp_high_pass_fir`: repair file-output JSON comma handling so entries are separated according to actual `valid_out` writes.
 - L6 `fp_low_pass_fir`: copy into the repaired root for audit completeness, but keep it held out because the coefficient oracle is still not explicit.
 - Runner: self-checking `tb_selfcheck.v` directories no longer trigger file-output golden comparison just because stale `inputs/outputs` folders exist.
 - Runner: 32-bit hex JSON words are compared as IEEE-754 floats with the benchmark's `+/-1.0` tolerance.
+
+Validation:
+
+- Script: `scripts/validate_repaired_fp_fir_contracts.py`
+- Artifacts: `artifacts/contract_validation/fp_fir_20260707/`
+- Oracle validation: `fp_band_pass_fir` 1000/1000 and `fp_high_pass_fir` 1000/1000 through the repaired executable testbenches.
 
 Repaired-contract pilot:
 
@@ -196,6 +203,17 @@ Repaired-contract pilot:
 - C4i, seed `42`: `band_pass_fir` 5/1001, `high_pass_fir` 4/1001, `low_pass_fir` 5/1001.
 - C4tl, seed `42`: `band_pass_fir` 2/1001, `high_pass_fir` 0/1001, `low_pass_fir` 3/1001.
 - Interpretation: repaired L4 FIR contracts are still not solved by current methods. FIR remains a benchmark-audit/negative-result track, not a new positive solve.
+
+Repaired L6 FP FIR run:
+
+- Artifacts: `artifacts/raw_runs/repaired_fp_fir_c2g_pilot_20260707/`
+- Artifacts: `artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/`
+- Artifacts: `artifacts/raw_runs/repaired_fp_fir_c4_pilot_20260707/`
+- Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
+- C2g, seeds `42,123,456`: `fp_band_pass_fir` 3/3 solved, all `1000/1000`; `fp_high_pass_fir` 3/3 solved, all `1000/1000`.
+- C4i, seed `42`: `fp_band_pass_fir` 804/1000; `fp_high_pass_fir` 969/1000.
+- C4tl, seed `42`: `fp_band_pass_fir` 0/1000; `fp_high_pass_fir` 969/1000.
+- Interpretation: repaired L6 FP FIR is solvable by C2g after contract repair, but current decomposed C4i/C4tl variants do not solve it.
 
 ## Paper Use
 

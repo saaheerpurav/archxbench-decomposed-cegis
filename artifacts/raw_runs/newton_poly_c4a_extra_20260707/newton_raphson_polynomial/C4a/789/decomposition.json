@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/nr_poly_eval_fixed.v",
+  "sub_modules": {
+    "nr_poly_eval_fixed": "Combinational fixed-point cubic polynomial evaluator using Horner's method.",
+    "nr_derivative_eval_fixed": "Combinational fixed-point derivative evaluator for a1 + 2*a2*x + 3*a3*x^2.",
+    "nr_fixed_divider": "Combinational signed fixed-point divider computing p(x)/p'(x), with divide-by-zero producing zero update.",
+    "nr_newton_update": "Combinational Newton step subtractor computing x_next = x_current - step.",
+    "nr_root_verifier": "Combinational verification block checking that absolute polynomial residual is within tolerance."
+  }
+}

@@ -1,11 +1,11 @@
 # Artifact Audit Status
 
-Last audited: 2026-07-06.
+Last audited: 2026-07-07.
 
 ## Summary
 
-- Total repo-local `result.json` files: `1062`.
-- Result rows with at least one saved Verilog file: `320`.
+- Total repo-local `result.json` files: `1076`.
+- Result rows with at least one saved Verilog file: `344`.
 - Result rows without saved Verilog: `732`.
 - The current `docs/RESULTS.md` main C4i/C4tl claim rows are artifact-backed.
 - Many C1/C2g baseline and secondary rows are score-only and must be rerun before being used as artifact-backed paper evidence.
@@ -39,13 +39,13 @@ These clean C2g rows have no saved Verilog and must be rerun if used as artifact
 
 ## Known Log/Metrics-Only Non-C2g Rows
 
-The GitHub-history audit found historical C4i GPT-5.5 L4 FIR results in committed logs and old aggregate metrics, but without preserved generated RTL/result artifacts for those cells:
+The repository-local audit preserves historical C4i GPT-5.5 L4 FIR results from committed logs and `artifacts/inventories/log_metric_only_results.csv`, but without preserved generated RTL/result artifacts for those cells:
 
 | Design | Seeds | Result | Current evidence |
 |---|---|---:|---|
-| `band_pass_fir` | `42,123,456,789,1024` | 0/5 solved; best `5/1001` | committed logs and old metrics only |
-| `high_pass_fir` | `42,123,456,789,1024` | 2/5 solved; seeds `456,1024` scored `1001/1001` | committed logs and old metrics only |
-| `low_pass_fir` | `42,123,456,789,1024` | 1/5 solved; seed `123` scored `1001/1001` | committed logs and old metrics only |
+| `band_pass_fir` | `42,123,456,789,1024` | 0/5 solved; best `5/1001` | repo-local logs and log/metrics inventory only |
+| `high_pass_fir` | `42,123,456,789,1024` | 2/5 solved; seeds `456,1024` scored `1001/1001` | repo-local logs and log/metrics inventory only |
+| `low_pass_fir` | `42,123,456,789,1024` | 1/5 solved; seed `123` scored `1001/1001` | repo-local logs and log/metrics inventory only |
 
 Inventory: `artifacts/inventories/log_metric_only_results.csv`.
 
@@ -60,6 +60,8 @@ Current clean C2g rows with saved Verilog:
 | `unsharp_mask` | `42,123,456` | `65536/65536` | `artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/` and `artifacts/raw_runs/unsharp_c2g_seed123_artifact_rerun_20260706/` |
 | `multich_conv2d` repaired contract | `42,123,456` | `30752/30752` | `artifacts/raw_runs/repaired_contracts_multich_conv2d_20260705/` |
 | `quantized_matmul` repaired contract, runner-fixed | `42,123,456` | `64/64` | `artifacts/raw_runs/repaired_contracts_qgemm_runnerfix_pilot_20260705/` |
+| `fp_band_pass_fir` repaired contract | `42,123,456` | `1000/1000` | `artifacts/raw_runs/repaired_fp_fir_c2g_pilot_20260707/` and `artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/` |
+| `fp_high_pass_fir` repaired contract | `42,123,456` | `1000/1000` | `artifacts/raw_runs/repaired_fp_fir_c2g_pilot_20260707/` and `artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/` |
 
 ## Artifact-Backed Repaired FIR Negative Rows
 
