@@ -232,4 +232,6 @@ The repaired-contract track has now been run:
 - repaired `newton_raphson_polynomial`: oracle validation passes; C2g 3/3, C4i 1/3, C4tl 1/3 on the `97/97` repaired checker
 - these rows must remain separate from original ArchXBench tables
 
-Remaining work is paper writing, table polishing, and optional artifact-collection reruns for trusted score-only rows.
+The consolidated paper-facing table source is `docs/PAPER_TABLES.md`.
+
+Remaining work before submission is paper writing and final manuscript consistency checks. Artifact-collection reruns for trusted score-only rows are release polish only and are not queued here.

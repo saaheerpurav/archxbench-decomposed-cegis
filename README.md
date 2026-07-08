@@ -11,6 +11,7 @@ Start with [docs/STATUS.md](docs/STATUS.md). It defines the current paper state,
 Supporting files:
 
 - [docs/RESULTS.md](docs/RESULTS.md): clean result tables only
+- [docs/PAPER_TABLES.md](docs/PAPER_TABLES.md): consolidated paper-facing table source
 - [docs/RUNS_LEFT.md](docs/RUNS_LEFT.md): exact run queue
 - [docs/ARTIFACTS.md](docs/ARTIFACTS.md): artifact layout and inventory rules
 - [docs/METHODS.md](docs/METHODS.md): method definitions

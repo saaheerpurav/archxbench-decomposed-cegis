@@ -11,6 +11,7 @@ This file is only an entry point. Do not treat it as an independent result sourc
 Canonical files:
 
 - Clean claim and diagnostic tables: [RESULTS.md](RESULTS.md)
+- Consolidated paper-facing table source: [PAPER_TABLES.md](PAPER_TABLES.md)
 - Run queue and unresolved gaps: [RUNS_LEFT.md](RUNS_LEFT.md)
 - Paper-readiness audit and baseline gap map: [PAPER_AUDIT.md](PAPER_AUDIT.md)
 - Benchmark caveats: [BENCHMARK_CAVEATS.md](BENCHMARK_CAVEATS.md)
@@ -33,6 +34,8 @@ Completed on 2026-07-08: selected L3 C4tl condition coverage on seeds `42,123,45
 Results: `fp_adder` 3/3, `fp_multiplier` 3/3, `gauss_siedel` 1/3, `gradient_descent` 3/3, `newton_raphson_sqrt` 3/3, and `newton_raphson_polynomial` 0/3.
 
 The authoritative queue is [RUNS_LEFT.md](RUNS_LEFT.md).
+
+The consolidated paper-facing tables are in [PAPER_TABLES.md](PAPER_TABLES.md).
 
 ## Primary Goal
 

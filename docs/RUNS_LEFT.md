@@ -97,7 +97,7 @@ Artifact collection can be done later for release polish. It is not part of the 
 
 No experiment run is currently queued.
 
-Remaining work is paper writing, table polishing, artifact-release cleanup, and any future principled benchmark-contract audit explicitly approved as a new research step.
+Remaining work before submission is paper writing and final manuscript consistency checks. Artifact-release cleanup is not part of the current run queue.
 
 ## Execution Rules
 

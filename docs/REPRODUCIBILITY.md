@@ -33,8 +33,10 @@ python scripts\build_artifact_index.py
 
 ## Claim Validation
 
-A claim is valid only if:
+A paper row is valid only if:
 
-- it appears in `docs/RESULTS.md`
-- it has artifacts under `artifacts/curated/main_claims/`
-- it is indexed in `artifacts/inventories/artifact_index.csv`
+- it appears in `docs/RESULTS.md` or `docs/PAPER_TABLES.md`
+- it is backed by repo-local evidence under `artifacts/`
+- it is labeled with the correct evidence class: artifact-backed, trusted score-only, repaired-contract, held/excluded, or historical log/metrics-only
+
+Artifact-backed rows should have generated RTL indexed in `artifacts/inventories/artifact_index.csv`. Trusted score-only rows can support result tables but must not be described as artifact-backed until generated RTL is present in the repo.

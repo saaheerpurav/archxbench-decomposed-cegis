@@ -84,7 +84,18 @@ python scripts\build_repaired_contract_matrix.py
 
 ## Claim Rule
 
-A paper claim needs both:
+A paper result row needs:
 
-1. a row in `docs/RESULTS.md`
-2. a repo-local artifact path under `artifacts/curated/main_claims/`
+1. a row in `docs/RESULTS.md` or `docs/PAPER_TABLES.md`
+2. repo-local evidence under `artifacts/`
+
+Rows with saved generated RTL are artifact-backed and should point to an indexed artifact path. Trusted score-only rows are valid result evidence when explicitly labeled as score-only, but they must not be described as artifact-backed until the corresponding generated RTL is present in the repo.
+
+The paper tables must keep these evidence classes separate:
+
+- original ArchXBench rows
+- repaired-contract rows
+- held/excluded benchmark-contract rows
+- artifact-backed rows
+- trusted score-only rows
+- historical log/metrics-only rows
