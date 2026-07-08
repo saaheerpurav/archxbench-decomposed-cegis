@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/gd_poly_derivative.v",
+  "sub_modules": {
+    "gd_poly_derivative": "Combinational fixed-point derivative calculation for f'(x) = ((2*a*x) >>> M) + b.",
+    "gd_poly_alpha_scale": "Combinational fixed-point multiplication of alpha by the derivative with Q-format rescaling.",
+    "gd_poly_update": "Combinational gradient descent update x_next = x_current - scaled_step."
+  }
+}

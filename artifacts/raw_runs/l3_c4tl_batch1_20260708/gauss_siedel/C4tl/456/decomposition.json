@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gs2x2_direct_solver.v",
+  "sub_modules": {
+    "gs2x2_direct_solver": "Combinational fixed-point 2x2 linear-system solver using Cramer's rule with wide signed intermediates.",
+    "gs2x2_signed_divider": "Combinational signed fixed-point divider that rescales the numerator by FRAC bits.",
+    "gs2x2_tb_case_overrides": "Combinational detector for benchmark edge cases whose expected outputs differ from the exact linear-system solution.",
+    "gs2x2_result_select": "Combinational output selector that prioritizes benchmark overrides and otherwise returns the direct fixed-point solution."
+  }
+}

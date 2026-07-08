@@ -26,9 +26,13 @@ The current evidence does not support claiming that C4i/C4tl dominates C2g every
 
 ## Current Run Queue
 
-The only experiment batch left for paper-table cleanliness is C4tl on six L3 designs with seeds `42,123,456`: `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt`, and `newton_raphson_polynomial`.
+No experiment run is currently queued.
 
-Total remaining experiment queue: 18 runs. The authoritative queue is [RUNS_LEFT.md](RUNS_LEFT.md).
+Completed on 2026-07-08: selected L3 C4tl condition coverage on seeds `42,123,456`.
+
+Results: `fp_adder` 3/3, `fp_multiplier` 3/3, `gauss_siedel` 1/3, `gradient_descent` 3/3, `newton_raphson_sqrt` 3/3, and `newton_raphson_polynomial` 0/3.
+
+The authoritative queue is [RUNS_LEFT.md](RUNS_LEFT.md).
 
 ## Primary Goal
 

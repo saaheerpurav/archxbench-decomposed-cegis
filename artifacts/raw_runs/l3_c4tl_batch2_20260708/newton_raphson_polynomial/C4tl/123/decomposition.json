@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/newton_poly_eval_fixed.v",
+  "sub_modules": {
+    "newton_poly_eval_fixed": "Combinational fixed-point cubic polynomial evaluator using Horner form.",
+    "newton_derivative_eval_fixed": "Combinational fixed-point derivative evaluator for a cubic polynomial.",
+    "newton_fixed_divide": "Combinational signed fixed-point divider that computes p(x)/p'(x) with numerator scaling.",
+    "newton_update_step": "Combinational Newton update block that applies x_next = x - step or holds on zero derivative.",
+    "newton_verify_fixed": "Combinational verification block that checks whether the absolute polynomial residual is within tolerance."
+  }
+}

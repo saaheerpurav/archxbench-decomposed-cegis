@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/gd_poly_gradient.v",
+  "sub_modules": {
+    "gd_poly_gradient": "Combinational fixed-point derivative calculator for f'(x) = 2*a*x + b with Q-format rescaling.",
+    "gd_poly_step": "Combinational fixed-point learning-rate multiplier computing alpha * gradient with Q-format rescaling.",
+    "gd_poly_update": "Combinational gradient descent update subtracting the scaled step from the current estimate."
+  }
+}

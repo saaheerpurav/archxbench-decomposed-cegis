@@ -1,0 +1,24 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 5,
+  "best_passes": 50,
+  "total_tests": 50,
+  "solved": true,
+  "decomp_modules": [
+    "gs_reciprocal",
+    "gs_fixed_mul",
+    "gs_iteration",
+    "gs_solution_select"
+  ],
+  "ref_passes": 50,
+  "ref_total": 50,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "design": "gauss_siedel",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 352.2,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

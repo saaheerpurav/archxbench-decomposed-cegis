@@ -1,0 +1,24 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 5,
+  "best_passes": 50,
+  "total_tests": 50,
+  "solved": true,
+  "decomp_modules": [
+    "sqrt_nr_initial_guess",
+    "sqrt_nr_iteration_step",
+    "sqrt_nr_clamp",
+    "sqrt_nr_convergence"
+  ],
+  "ref_passes": 50,
+  "ref_total": 50,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "design": "newton_raphson_sqrt",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 290.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

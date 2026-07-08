@@ -32,7 +32,7 @@ These are the clean original-benchmark rows to emphasize. They are artifact-back
 
 | Level | Designs | Main evidence | Paper use |
 |---|---|---|---|
-| L3 | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt` | C4i solves 3/3; C1/C2g fail or are weaker | strongest method-value evidence |
+| L3 | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt` | C4i solves 3/3; C1/C2g fail or are weaker; C4tl support rows solve `fp_adder`, `fp_multiplier`, `gradient_descent`, and `newton_raphson_sqrt` 3/3, while `gauss_siedel` is 1/3 | strongest method-value evidence |
 | L4 | `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline` | C4tl solves 3/3 main seeds and 5/5 including robustness seeds; C2g also solves FFT/IFFT and both pipelines solve under multiple methods | strongest hard-level coverage evidence |
 | L5 | `conv1d`, `harris_corner_detection` | C4i solves 3/3 with golden verification | clean golden-verified L5 evidence |
 | L6 | `aes_encryption`, `aes_decryption` | C4i solves 3/3 with golden verification | clean golden-verified L6 evidence |
@@ -110,11 +110,12 @@ The key paper tables can be clean if we avoid overclaiming and do not present th
 
 | Level | Design | Baseline situation |
 |---|---|---|
-| L3 | `fp_adder` | C1 0/5, C2g 1/5, C4i 3/3 |
-| L3 | `fp_multiplier` | C1 0/5, C2g 0/3, C4i 3/3 |
-| L3 | `gauss_siedel` | C1 0/3, C2g 0/3, C4i 3/3 |
-| L3 | `gradient_descent` | C1 0/3, C2g 0/3, C4i 3/3 |
-| L3 | `newton_raphson_sqrt` | C1 0/3, C2g 0/3, C4i 3/3 |
+| L3 | `fp_adder` | C1 0/5, C2g 1/5, C4i 3/3, C4tl 3/3 |
+| L3 | `fp_multiplier` | C1 0/5, C2g 0/3, C4i 3/3, C4tl 3/3 |
+| L3 | `gauss_siedel` | C1 0/3, C2g 0/3, C4i 3/3, C4tl 1/3 |
+| L3 | `gradient_descent` | C1 0/3, C2g 0/3, C4i 3/3, C4tl 3/3 |
+| L3 | `newton_raphson_sqrt` | C1 0/3, C2g 0/3, C4i 3/3, C4tl 3/3 |
+| L3 | `newton_raphson_polynomial` | original checker has unsatisfiable checks; C4i 0/3, C4tl 0/3 on original checker |
 | L4 | `fft_16pt_iterative` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 3/3 main seeds plus 2/2 robustness seeds |
 | L4 | `ifft_16pt_iterative` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 3/3 main seeds plus 2/2 robustness seeds |
 | L4 | `fp_adder_pipeline` | C1 3/3, C2g 3/3, C4i 3/3, C4tl 3/3 main seeds plus 2/2 robustness seeds |
@@ -204,22 +205,21 @@ Do these only if the goal is maximum paper strength, not incremental cleanup.
    - unsolved/near-miss rows
    - excluded benchmark-contract rows
 3. Write a benchmark-audit section explaining why golden verification is required and why FIR/systolic/multich are excluded or held.
-4. Complete the remaining L3 C4tl condition-coverage batch listed in `docs/RUNS_LEFT.md`.
-5. If running more experiments after that, do not run another small C4 variant. The useful research attempts are principled benchmark-contract repairs only when the repair is minimal, oracle-validated, and reported separately from original ArchXBench results.
-6. Avoid claiming C4a. It is negative evidence.
+4. If running more experiments, do not run another small C4 variant. The useful research attempts are principled benchmark-contract repairs only when the repair is minimal, oracle-validated, and reported separately from original ArchXBench results.
+5. Avoid claiming C4a. It is negative evidence.
 
 ## Current Run Recommendation
 
-The only table-cleanliness run currently required is C4tl on six L3 designs, seeds `42,123,456`:
+No experiment run is currently queued.
 
-- `fp_adder`
-- `fp_multiplier`
-- `gauss_siedel`
-- `gradient_descent`
-- `newton_raphson_sqrt`
-- `newton_raphson_polynomial`
+The selected L3 C4tl condition-coverage batch is complete:
 
-Total: 18 runs. See `docs/RUNS_LEFT.md`.
+- `fp_adder`: 3/3
+- `fp_multiplier`: 3/3
+- `gauss_siedel`: 1/3
+- `gradient_descent`: 3/3
+- `newton_raphson_sqrt`: 3/3
+- `newton_raphson_polynomial`: 0/3
 
 The repaired-contract track has now been run:
 
@@ -232,4 +232,4 @@ The repaired-contract track has now been run:
 - repaired `newton_raphson_polynomial`: oracle validation passes; C2g 3/3, C4i 1/3, C4tl 1/3 on the `97/97` repaired checker
 - these rows must remain separate from original ArchXBench tables
 
-After that, the remaining work is paper writing, table polishing, and optional artifact-collection reruns for trusted score-only rows.
+Remaining work is paper writing, table polishing, and optional artifact-collection reruns for trusted score-only rows.

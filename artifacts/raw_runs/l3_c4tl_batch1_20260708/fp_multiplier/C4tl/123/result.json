@@ -1,0 +1,24 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 5,
+  "best_passes": 10,
+  "total_tests": 10,
+  "solved": true,
+  "decomp_modules": [
+    "fp_operand_classify",
+    "fp_special_cases",
+    "fp_significand_multiply",
+    "fp_normalize_round"
+  ],
+  "ref_passes": 10,
+  "ref_total": 10,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "design": "fp_multiplier",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 385.6,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

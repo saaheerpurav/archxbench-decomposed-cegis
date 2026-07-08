@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_operand_classify.v",
+  "sub_modules": {
+    "fp_operand_classify": "Extracts sign, exponent, and mantissa fields and classifies operands as zero, infinity, NaN, or denormal.",
+    "fp_special_cases": "Handles IEEE-style special cases covered by the testbench, including NaN propagation, infinity, infinity times zero invalid, and zero results.",
+    "fp_significand_prepare": "Builds hidden-bit significands and computes the bias-adjusted base exponent for multiplication.",
+    "fp_significand_multiply": "Performs the widened significand multiplication.",
+    "fp_normalize_round": "Normalizes the significand product, applies rounding mode control, flushes underflow to zero, and detects overflow."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/sqrt_nr_initial_guess.v",
+  "sub_modules": {
+    "sqrt_nr_initial_guess": "Computes the fixed-point initial Newton-Raphson estimate and zero-input flag.",
+    "sqrt_nr_iteration_step": "Performs one combinational Newton-Raphson square-root update using fixed-point division and averaging.",
+    "sqrt_nr_clamp": "Clamps widened intermediate division results to the configured output width.",
+    "sqrt_nr_convergence": "Detects convergence when consecutive estimates differ by at most one fixed-point LSB."
+  }
+}

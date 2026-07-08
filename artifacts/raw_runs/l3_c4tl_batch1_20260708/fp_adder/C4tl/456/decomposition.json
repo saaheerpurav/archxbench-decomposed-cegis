@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_unpack_special.v",
+  "sub_modules": {
+    "fp_unpack_special": "Extracts sign, exponent, fraction, and classifies zeros, denormals, infinities, and NaNs.",
+    "fp_special_cases": "Handles NaN, infinity, and zero bypass cases with required exception flags.",
+    "fp_align": "Orders operands by magnitude and right-shifts the smaller significand with sticky-bit preservation.",
+    "fp_addsub": "Performs aligned significand addition or subtraction and produces a raw signed result.",
+    "fp_normalize_round": "Normalizes the raw significand, applies rounding mode control, packs the result, and generates overflow or underflow flags."
+  }
+}

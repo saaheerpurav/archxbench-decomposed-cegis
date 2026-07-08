@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/gradient_derivative.v",
+  "sub_modules": {
+    "gradient_derivative": "Combinational fixed-point derivative calculation for f'(x)=2*a*x+b with Q-format rescaling.",
+    "gradient_step": "Combinational fixed-point learning-rate scaling for alpha multiplied by the derivative.",
+    "gradient_update": "Combinational gradient descent update subtracting the scaled step from the current estimate."
+  }
+}

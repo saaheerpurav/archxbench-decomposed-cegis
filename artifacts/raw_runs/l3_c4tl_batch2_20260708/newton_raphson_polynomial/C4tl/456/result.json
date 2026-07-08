@@ -1,0 +1,26 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 3,
+  "best_passes": 17,
+  "total_tests": 100,
+  "solved": false,
+  "decomp_modules": [
+    "nr_poly_eval_cubic",
+    "nr_poly_derivative_cubic",
+    "nr_fixed_div",
+    "nr_update_step",
+    "nr_root_verify"
+  ],
+  "ref_passes": 17,
+  "ref_total": 100,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "newton_raphson_polynomial",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 314.0,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

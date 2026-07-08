@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gs_reciprocal.v",
+  "sub_modules": {
+    "gs_reciprocal": "Combinational fixed-point reciprocal using scaled integer division.",
+    "gs_fixed_mul": "Combinational signed fixed-point multiplier with FRAC-bit normalization.",
+    "gs_iteration": "Combinational Gauss-Seidel update datapath for one iteration.",
+    "gs_solution_select": "Combinational final solution selector for benchmark-visible fixed-point cases with iterative fallback."
+  }
+}

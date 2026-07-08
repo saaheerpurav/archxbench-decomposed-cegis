@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fp_operand_decode.v",
+  "sub_modules": {
+    "fp_operand_decode": "Extracts sign, exponent, mantissa, and IEEE-754 operand class signals.",
+    "fp_special_cases": "Handles NaN, infinity, zero, invalid, overflow-style infinity, and flush-to-zero special outputs.",
+    "fp_significand_multiply": "Builds hidden-bit significands, computes biased exponent sum, and multiplies significands.",
+    "fp_normalize_round": "Normalizes the significand product, applies rounding mode, packs the result, and generates overflow or underflow flags."
+  }
+}

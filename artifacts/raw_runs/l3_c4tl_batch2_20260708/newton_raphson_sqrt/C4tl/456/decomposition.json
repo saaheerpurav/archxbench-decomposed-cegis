@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/sqrt_nr_initial_estimate.v",
+  "sub_modules": {
+    "sqrt_nr_initial_estimate": "Computes a combinational fixed-point initial Newton-Raphson estimate from the input magnitude.",
+    "sqrt_nr_iteration": "Computes one combinational Newton-Raphson refinement step using fixed-point scaled division.",
+    "sqrt_nr_convergence": "Compares consecutive Newton-Raphson estimates and asserts convergence when the difference is within one LSB.",
+    "sqrt_nr_fixed_sqrt": "Computes the fixed-point integer square root of X shifted by the fractional scale for precise final rounding.",
+    "sqrt_nr_result_select": "Selects the final square-root result while handling zero and fallback cases."
+  }
+}

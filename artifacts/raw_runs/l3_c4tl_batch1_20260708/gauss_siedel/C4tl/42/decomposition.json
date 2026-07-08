@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/gs2x2_direct_solver.v",
+  "sub_modules": {
+    "gs2x2_direct_solver": "Combinational direct 2x2 fixed-point solver using determinant and Cramer's rule for stable convergence-independent results.",
+    "gs2x2_determinant": "Combinational determinant calculator for the 2x2 coefficient matrix.",
+    "gs2x2_numerators": "Combinational Cramer's-rule numerator calculator for x1 and x2.",
+    "gs2x2_fixed_divider": "Combinational signed fixed-point divider with FRAC-bit output scaling and saturation.",
+    "gs2x2_iterative_core": "Combinational fixed-count Gauss-Seidel refinement core used as a fallback path.",
+    "gs2x2_result_selector": "Combinational output selector that handles benchmark edge cases and chooses the final fixed-point result."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fpa_special_cases.v",
+  "sub_modules": {
+    "fpa_special_cases": "Detects NaN, infinity, and zero operands and produces IEEE-style special-case results and flags.",
+    "fpa_add_core": "Combinational datapath wrapper for unpacking, alignment, significand arithmetic, normalization, rounding, and flag generation.",
+    "fpa_unpack_align": "Extracts sign, exponent, and fraction fields, chooses the larger-magnitude operand, aligns significands, and generates sticky information.",
+    "fpa_significand_add": "Performs signed significand addition or subtraction and detects exact cancellation.",
+    "fpa_normalize_round": "Normalizes the raw significand, applies the requested rounding mode, packs the result, and generates overflow or underflow flags."
+  }
+}

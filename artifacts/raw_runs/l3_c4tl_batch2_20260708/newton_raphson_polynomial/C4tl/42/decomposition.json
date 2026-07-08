@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/newton_poly_eval_fixed.v",
+  "sub_modules": {
+    "newton_poly_eval_fixed": "Combinational fixed-point cubic polynomial evaluator using Horner form.",
+    "newton_deriv_eval_fixed": "Combinational fixed-point derivative evaluator for a1 + 2*a2*x + 3*a3*x^2.",
+    "newton_update_fixed": "Combinational Newton-Raphson update block using extended fixed-point signed division.",
+    "newton_root_verify_fixed": "Combinational verification block that checks the absolute polynomial residual against tolerance."
+  }
+}

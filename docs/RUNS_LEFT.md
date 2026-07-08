@@ -6,28 +6,26 @@ This is the only run queue. It is derived from:
 - `artifacts/inventories/repaired_contract_run_matrix.csv`
 - `artifacts/inventories/log_metric_only_results.csv`
 
-Last audited: 2026-07-08.
+Last audited: 2026-07-08 after `l3_c4tl_batch2_20260708`.
 
 Primary goal: AAAI-27 acceptance. Time is not a constraint. Do not sacrifice experimental cleanliness for speed, and do not run benchmark repairs just to convert failures into wins. Repairs must be minimal, principled, oracle-validated, and reported separately from original ArchXBench results.
 
 ## Required Runs
 
-The only paper-cleanliness run left is C4tl on selected L3 designs, seeds `42,123,456`.
+No experiment runs remain in the current paper-cleanliness queue.
 
-These rows are not central to the L4-L6 headline, but they make the L3 support table cleaner because C1/C2g/C4i already exist for these designs.
+The selected L3 C4tl condition-coverage batch has been completed on seeds `42,123,456`.
 
-| Level | Design | Method | Seeds |
-|---|---|---|---|
-| L3 | `fp_adder` | C4tl | `42,123,456` |
-| L3 | `fp_multiplier` | C4tl | `42,123,456` |
-| L3 | `gauss_siedel` | C4tl | `42,123,456` |
-| L3 | `gradient_descent` | C4tl | `42,123,456` |
-| L3 | `newton_raphson_sqrt` | C4tl | `42,123,456` |
-| L3 | `newton_raphson_polynomial` | C4tl | `42,123,456` |
+Completed from this queue:
 
-Total remaining experiment queue: 18 runs.
-
-After this batch, rebuild inventories, update docs, then move to paper writing and optional artifact-collection reruns.
+| Level | Design | Method | Seeds | Result | Artifact root |
+|---|---|---|---|---|---|
+| L3 | `fp_adder` | C4tl | `42,123,456` | 3/3 solved, all `36/36` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
+| L3 | `fp_multiplier` | C4tl | `42,123,456` | 3/3 solved, all `10/10` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
+| L3 | `gauss_siedel` | C4tl | `42,123,456` | 1/3 solved; seed `123` scored `50/50`, seed `42` scored `47/50`, seed `456` scored `49/50` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
+| L3 | `gradient_descent` | C4tl | `42,123,456` | 3/3 solved, all `50/50` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
+| L3 | `newton_raphson_sqrt` | C4tl | `42,123,456` | 3/3 solved, all `50/50` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
+| L3 | `newton_raphson_polynomial` | C4tl | `42,123,456` | 0/3 solved, all `17/100` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
 
 ## Complete Original-Contract Rows
 
@@ -51,6 +49,17 @@ These have enough evidence for the current paper framing.
 | L5 | `unsharp_mask` | `C2g` 3/3 artifact-backed on seeds `42,123,456` |
 | L6 | `aes_decryption` | `C2g` 3/3, `C4i` 3/3 |
 | L6 | `aes_encryption` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
+
+Additional L3 C4tl support rows now run:
+
+| Level | Design | C4tl result |
+|---|---|---|
+| L3 | `fp_adder` | 3/3 solved |
+| L3 | `fp_multiplier` | 3/3 solved |
+| L3 | `gauss_siedel` | 1/3 solved; near misses on two seeds |
+| L3 | `gradient_descent` | 3/3 solved |
+| L3 | `newton_raphson_sqrt` | 3/3 solved |
+| L3 | `newton_raphson_polynomial` | 0/3 solved |
 
 ## Repaired-Contract Rows
 
@@ -83,6 +92,12 @@ Do not run these unless a principled benchmark-contract audit changes the status
 Trusted score-only rows are valid experimental results. Missing generated RTL is artifact collection debt for paper/code release, not a reason to discard the score.
 
 Artifact collection can be done later for release polish. It is not part of the current experiment queue.
+
+## What Is Left
+
+No experiment run is currently queued.
+
+Remaining work is paper writing, table polishing, artifact-release cleanup, and any future principled benchmark-contract audit explicitly approved as a new research step.
 
 ## Execution Rules
 

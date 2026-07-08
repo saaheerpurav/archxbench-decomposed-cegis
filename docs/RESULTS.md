@@ -43,6 +43,19 @@ These rows are clean but not central claims yet.
 
 Artifacts are indexed in `artifacts/inventories/artifact_index.csv`; older showcase rows may also appear under `artifacts/curated/golden_verified_secondary/`.
 
+## Self-Checking Secondary Rows
+
+These rows use official self-checking testbenches and are clean support/condition-coverage evidence, but they are not central claims.
+
+| Design | Level | Method | Seeds | Result | Artifact root |
+|---|---:|---|---|---|---|
+| `fp_adder` | L3 | C4tl | `42,123,456` | 3/3 solved, all `36/36` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
+| `fp_multiplier` | L3 | C4tl | `42,123,456` | 3/3 solved, all `10/10` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
+| `gauss_siedel` | L3 | C4tl | `42,123,456` | 1/3 solved; seed `123` scored `50/50`, seed `42` scored `47/50`, seed `456` scored `49/50` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
+| `gradient_descent` | L3 | C4tl | `42,123,456` | 3/3 solved, all `50/50` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
+| `newton_raphson_sqrt` | L3 | C4tl | `42,123,456` | 3/3 solved, all `50/50` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
+| `newton_raphson_polynomial` | L3 | C4tl | `42,123,456` | 0/3 solved, all `17/100` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
+
 ## Diagnostics
 
 Diagnostics are not claims. They live under `artifacts/curated/diagnostics/`.

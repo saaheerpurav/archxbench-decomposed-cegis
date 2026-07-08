@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/sqrt_nr_input_classify.v",
+  "sub_modules": {
+    "sqrt_nr_input_classify": "Combinational zero-input detector for immediate square-root completion.",
+    "sqrt_nr_initial_guess": "Combinational fixed-point initial estimate selector for Newton-Raphson iteration.",
+    "sqrt_nr_fixed_divide": "Combinational fixed-point division block computing scaled X divided by current estimate.",
+    "sqrt_nr_iteration_step": "Combinational Newton-Raphson averaging step producing the next square-root estimate.",
+    "sqrt_nr_convergence": "Combinational convergence detector comparing consecutive estimates.",
+    "sqrt_nr_iter_limit": "Combinational iteration-limit detector for bounded latency."
+  }
+}

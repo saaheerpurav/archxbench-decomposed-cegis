@@ -5,7 +5,7 @@ Last audited: 2026-07-07.
 ## Summary
 
 - Total repo-local `result.json` files: `1085`.
-- Result rows with at least one saved Verilog file: `353`.
+- Result rows with at least one saved Verilog file: `371`.
 - Result rows without saved Verilog: `732`.
 - The current `docs/RESULTS.md` main C4i/C4tl claim rows are artifact-backed.
 - Some C1/C2g baseline and secondary rows are score-only. Treat their logged scores as trusted experimental results; missing generated RTL is artifact collection debt for paper/code release.

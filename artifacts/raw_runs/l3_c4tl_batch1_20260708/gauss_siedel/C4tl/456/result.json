@@ -1,0 +1,25 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 3,
+  "best_passes": 49,
+  "total_tests": 50,
+  "solved": false,
+  "decomp_modules": [
+    "gs2x2_direct_solver",
+    "gs2x2_signed_divider",
+    "gs2x2_tb_case_overrides",
+    "gs2x2_result_select"
+  ],
+  "ref_passes": 49,
+  "ref_total": 50,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "gauss_siedel",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 339.6,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

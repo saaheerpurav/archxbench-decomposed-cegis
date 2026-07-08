@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_unpack.v",
+  "sub_modules": {
+    "fp_unpack": "Extracts sign, exponent, mantissa, and classification bits for both operands.",
+    "fp_special_cases": "Handles NaN, infinity, and zero cases before the arithmetic datapath.",
+    "fp_align": "Builds extended significands, orders operands by magnitude, aligns exponents, and generates sticky information.",
+    "fp_addsub": "Performs signed significand addition or subtraction after alignment.",
+    "fp_normalize_round": "Normalizes the raw result, applies rounding mode, packs the final value, and generates exception flags."
+  }
+}
