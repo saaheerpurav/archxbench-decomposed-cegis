@@ -16,14 +16,18 @@ Some designs have official self-checking testbenches and do not use external gol
 
 ## FIR Designs
 
-FIR-family rows are diagnostics/repaired-contract evidence only. L4 FIR has repaired-contract fixtures and a completed negative pilot. L6 `fp_band_pass_fir` and `fp_high_pass_fir` now have validated repaired contracts and C2g solves, while `fp_low_pass_fir` remains a benchmark-contract hold because the coefficient oracle is not explicit.
+FIR-family rows are diagnostics/repaired-contract evidence only.
+
+We exclude L4 FIR designs from primary and repaired-contract positive tables due to inconsistent evaluation contracts where specification and executable testbench disagree on filter coefficients/source-of-truth behavior. L4 FIR has repaired-contract fixtures and a completed negative pilot.
+
+L6 `fp_band_pass_fir` and `fp_high_pass_fir` have validated repaired contracts and C2g solves, while `fp_low_pass_fir` remains a benchmark-contract hold because the released files do not expose an explicit coefficient/cutoff oracle.
 
 Current repaired-contract status:
 
 - L4 FIR repaired fixtures now live under `artifacts/benchmark_contracts/archxbench_repaired/level-4/`.
 - Those fixtures remove stale file-output testbenches and keep only embedded-golden `tb_selfcheck.v`.
 - Single-seed repaired-contract pilots were run for C2g, C4i, and C4tl on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`.
-- Result: all nine pilot cells failed, with best scores only 0-5/1001. Do not claim FIR as solved.
+- Result: all nine L4 FIR pilot cells failed, with best scores only 0-5/1001. Do not claim L4 FIR as solved.
 - L6 `fp_band_pass_fir` and `fp_high_pass_fir` have repaired fixtures that remove hidden `dut.coeffs` writes and repair file-output JSON comma handling. Oracle validation passes `1000/1000`, and C2g solves both repaired contracts 3/3.
 - L6 `fp_low_pass_fir` remains held out because the coefficient oracle is still not explicit.
 
@@ -45,9 +49,9 @@ Do not present these as artifact-backed paper claims unless they are rerun with 
 
 L4 `fft_16pt_iterative` and `ifft_16pt_iterative` are clean self-checking solves.
 
-L6 `fft_streaming_64pt` is different. Current C4i/C4tl rows fail golden comparison and are diagnostics. C2g has one clean seed (`42`, `128/128`) but fails four other seeds (`123,456,789,1024`), so it is partial rather than robust.
+L6 `fft_streaming_64pt` is excluded from result tables. Current C4i/C4tl rows fail golden comparison and are diagnostics. C2g has one clean seed (`42`, `128/128`) but fails four other seeds (`123,456,789,1024`), so it is partial rather than robust.
 
-Contract audit finding: the released file-output stack is internally inconsistent. The shipped golden file is a dict with `real_out` and `imag_out` arrays, while `tb_fft_streaming_64pt.v` writes a list of objects with `real` and `imag` fields. The shipped `scripts/compare_outputs.py` is also a copied scalar-filter comparator and cannot compare the FFT dict/list structure correctly. The input side is also ambiguous: the stimuli are JSON floats / FP32 hex words, while the testbench reads decimal integer pairs into 16-bit signed ports. Treat this row as hold, not just dirty, until a principled repaired contract specifies numeric encoding, normalizes the output schema, and validates an oracle DUT.
+Contract audit finding: the released benchmark contains unresolved input/output contract ambiguities. The shipped golden file is a dict with `real_out` and `imag_out` arrays, while `tb_fft_streaming_64pt.v` writes a list of objects with `real` and `imag` fields. The shipped `scripts/compare_outputs.py` is also a copied scalar-filter comparator and cannot compare the FFT dict/list structure correctly. The input side is ambiguous: the stimuli are JSON floats / FP32 hex words, while the testbench reads decimal integer pairs into 16-bit signed ports. Keep this row excluded unless a principled repaired contract specifies numeric encoding, normalizes the output schema, and validates an oracle DUT.
 
 ## Newton-Raphson Polynomial
 
@@ -65,7 +69,7 @@ A repaired contract now exists under `artifacts/benchmark_contracts/archxbench_r
 
 `dct_idct_8pt_pipelined` is solved by C2g in the current repo-local evidence. C4i/C4tl rows are diagnostics unless promoted in `docs/RESULTS.md`.
 
-`systolic_gemm` has pass-score rows without reliable golden evidence in the original benchmark because the checker only prints expected values. A repaired-contract checker exists, but C2g/C4i/C4tl all fail 3/3; do not claim it as solved.
+`systolic_gemm` has pass-score rows without reliable golden evidence in the original benchmark because the checker only prints expected values. After converting the display-only checker into executable checks using expected matrices already present in the testbench, C2g/C4i/C4tl all fail 3/3. Treat this as a genuine capability boundary for current methods, not as a solved row.
 
 ## Unsharp Mask
 

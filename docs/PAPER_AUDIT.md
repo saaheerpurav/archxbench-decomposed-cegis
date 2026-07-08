@@ -1,6 +1,10 @@
 # Paper Audit
 
-Date: 2026-07-07
+Date: 2026-07-08
+
+Working paper title:
+
+**Autonomous Synthesis of Hard RTL Designs via Iterative Repair and Modular Decomposition**
 
 This is the paper-readiness and baseline gap map. It is derived from `artifacts/inventories/run_matrix_l3_l6.csv`, `artifacts/inventories/repaired_contract_run_matrix.csv`, the C4a diagnostic sweep in `artifacts/raw_runs/adaptive_c4a_weak_targets_20260704/`, and the extra C4a Newton run in `artifacts/raw_runs/newton_poly_c4a_extra_20260707/`.
 
@@ -10,7 +14,7 @@ The current paper is viable only if it is framed honestly:
 
 - Strong: hard ArchXBench RTL synthesis can be solved across L3-L6 with verifier-grounded decomposed/CEGIS-style pipelines.
 - Strong: C4i has clear wins on selected L3 designs where C1/C2g fail.
-- Strong: C4tl robustly solves the four core L4 rows across five seeds.
+- Strong: C4tl solves the four core L4 rows on the three main seeds, with two additional robustness seeds also solved.
 - Strong: L5/L6 golden-verified solves exist, including `conv1d`, `harris_corner_detection`, `aes_encryption`, and `aes_decryption`.
 - Weak: C4i/C4tl do not dominate C2g globally.
 - Weak: C2g is the clean winner on several L5 rows.
@@ -29,7 +33,7 @@ These are the clean original-benchmark rows to emphasize. They are artifact-back
 | Level | Designs | Main evidence | Paper use |
 |---|---|---|---|
 | L3 | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt` | C4i solves 3/3; C1/C2g fail or are weaker | strongest method-value evidence |
-| L4 | `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline` | C4tl solves 5/5; C2g also solves FFT/IFFT and both pipelines solve under multiple methods | strongest hard-level coverage evidence |
+| L4 | `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline` | C4tl solves 3/3 main seeds and 5/5 including robustness seeds; C2g also solves FFT/IFFT and both pipelines solve under multiple methods | strongest hard-level coverage evidence |
 | L5 | `conv1d`, `harris_corner_detection` | C4i solves 3/3 with golden verification | clean golden-verified L5 evidence |
 | L6 | `aes_encryption`, `aes_decryption` | C4i solves 3/3 with golden verification | clean golden-verified L6 evidence |
 
@@ -39,9 +43,9 @@ These are real original-benchmark results, but they should be framed as baseline
 
 | Level | Designs | Evidence | Artifact status |
 |---|---|---|---|
-| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` | C2g solves 3/3 with golden verification | `unsharp_mask` is artifact-backed; `conv2d` and `dct_idct_8pt_pipelined` are score-only unless rerun |
-| L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 | useful for ablation context; some C2g rows are score-only |
-| L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong baselines; C2g solves 3/3 | C2g rows are score-only unless rerun |
+| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` | C2g solves 3/3 with golden verification | `unsharp_mask` is artifact-backed; `conv2d` and `dct_idct_8pt_pipelined` are trusted score-only rows with artifact collection pending |
+| L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 | useful for ablation context; some C2g rows are trusted score-only rows with artifact collection pending |
+| L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong baselines; C2g solves 3/3 | C2g rows are trusted score-only rows with artifact collection pending |
 | L6 | `fft_streaming_64pt` | C2g solves only seed `42`; four other seeds fail | partial diagnostic only, not a robust solve |
 
 ### Table C: Repaired-Contract Evidence
@@ -64,10 +68,10 @@ These should not appear as solve-rate wins.
 
 | Design/group | Final status | Reason |
 |---|---|---|
-| `fft_streaming_64pt` | hold | input encoding, output schema, and comparator are inconsistent |
-| `fp_low_pass_fir` | hold | coefficient/cutoff oracle is not explicit |
-| `band_pass_fir`, `high_pass_fir`, `low_pass_fir` | exclude from positive claims | repaired L4 pilots are negative; historical successes are log/metrics-only |
-| `systolic_gemm` | negative | repaired checker exists and all current methods fail |
+| `fft_streaming_64pt` | exclude | released benchmark contains unresolved input/output contract ambiguities, including mismatched output schema and input numeric encoding |
+| `fp_low_pass_fir` | hold | released files do not expose an explicit coefficient/cutoff oracle |
+| `band_pass_fir`, `high_pass_fir`, `low_pass_fir` | exclude | inconsistent evaluation contracts where specification and executable testbench disagree on filter coefficients/source-of-truth behavior; repaired pilots are negative |
+| `systolic_gemm` | negative | after converting the display-only checker into executable checks using expected matrices already present in the testbench, all evaluated methods remain at 0/3 |
 
 ### Table E: Artifact-Backed Vs Score-Only
 
@@ -75,8 +79,19 @@ These should not appear as solve-rate wins.
 |---|---|
 | Artifact-backed main claims | all rows in `docs/RESULTS.md` Main Claims |
 | Artifact-backed repaired positives | `multich_conv2d`, `quantized_matmul` runner-fixed, `fp_band_pass_fir`, `fp_high_pass_fir`, `newton_raphson_polynomial`; `conv_3d` C4i is artifact-backed, C2g is score-only |
-| Score-only baseline rows | C2g `aes_encryption`, `aes_decryption`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, and repaired-contract C2g `conv_3d` |
+| Trusted score-only rows needing artifact collection | C2g `aes_encryption`, `aes_decryption`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, and repaired-contract C2g `conv_3d` |
 | Log/metrics-only historical rows | L4 FIR C4i historical sweep: `band_pass_fir`, `high_pass_fir`, `low_pass_fir` |
+
+### Seed And Condition Policy
+
+Main paper tables use exactly seeds `42,123,456`. Existing C4tl seeds `789,1024` on L4 rows are robustness/appendix evidence only.
+
+The paper should not present one global all-design/all-condition matrix across all 28 L3-L6 designs, because some rows are held, repaired-contract-only, or intentionally not applicable to every method. Instead:
+
+- Original ArchXBench main table: report selected L3-L6 evidence rows with the conditions that were run on seeds `42,123,456`.
+- Repaired-contract table: report repaired rows separately, using seeds `42,123,456` where full runs exist and explicitly marking pilots.
+- Held/excluded table: list `fft_streaming_64pt`, `fp_low_pass_fir`, L4 FIR, and `systolic_gemm` separately, not as missing wins.
+- Artifact-release checklist: track trusted score-only rows as artifact collection debt, not invalid results.
 
 ## Official L3-L6 Coverage
 
@@ -91,7 +106,7 @@ ArchXBench L3-L6 has 28 designs in this repo.
 
 ## Matched Baseline Status
 
-The key paper tables can be clean if we avoid overclaiming.
+The key paper tables can be clean if we avoid overclaiming and do not present the entire 28-design matrix as fully crossed by every condition.
 
 | Level | Design | Baseline situation |
 |---|---|---|
@@ -100,10 +115,10 @@ The key paper tables can be clean if we avoid overclaiming.
 | L3 | `gauss_siedel` | C1 0/3, C2g 0/3, C4i 3/3 |
 | L3 | `gradient_descent` | C1 0/3, C2g 0/3, C4i 3/3 |
 | L3 | `newton_raphson_sqrt` | C1 0/3, C2g 0/3, C4i 3/3 |
-| L4 | `fft_16pt_iterative` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 5/5 |
-| L4 | `ifft_16pt_iterative` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 5/5 |
-| L4 | `fp_adder_pipeline` | C1 3/3, C2g 3/3, C4i 3/3, C4tl 5/5 |
-| L4 | `fp_mult_pipeline` | C1 3/3, C2g 3/3, C4i 3/3, C4tl 5/5 |
+| L4 | `fft_16pt_iterative` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 3/3 main seeds plus 2/2 robustness seeds |
+| L4 | `ifft_16pt_iterative` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 3/3 main seeds plus 2/2 robustness seeds |
+| L4 | `fp_adder_pipeline` | C1 3/3, C2g 3/3, C4i 3/3, C4tl 3/3 main seeds plus 2/2 robustness seeds |
+| L4 | `fp_mult_pipeline` | C1 3/3, C2g 3/3, C4i 3/3, C4tl 3/3 main seeds plus 2/2 robustness seeds |
 | L5 | `conv1d` | C1 3/3, C2g 3/3, C4i 3/3, C4tl 1/3 |
 | L5 | `conv2d` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 0/3 |
 | L5 | `dct_idct_8pt_pipelined` | C1 0/3, C2g 3/3, C4i 0/3, C4tl 0/3 |
@@ -131,10 +146,10 @@ Interpretation:
 
 | Design group | Status |
 |---|---|
-| FIR family | Exclude unless the benchmark/spec-contract issue is repaired and documented. Some rows show apparent C2g solves, but these should not become claims while the FIR contract remains disputed. |
+| FIR family | L4 FIR designs are excluded due to inconsistent evaluation contracts where specification and executable testbench disagree on filter coefficients/source-of-truth behavior. L6 `fp_band_pass_fir` and `fp_high_pass_fir` are repaired-contract rows only; `fp_low_pass_fir` remains held out. |
 | `systolic_gemm` | Original checker is display-only. Repaired-contract run is complete and negative: C2g/C4i/C4tl all 0/3. |
 | `multich_conv2d` | Original contract issue. Repaired-contract rows are complete and must stay separate from original ArchXBench tables. |
-| `fft_streaming_64pt` | Hold. The issue is not only output schema; the input numeric encoding and copied scalar comparator are also inconsistent, so no repaired-contract run is claimable yet. |
+| `fft_streaming_64pt` | Excluded from result tables. The issue is not only output schema; the input numeric encoding and copied scalar comparator are also inconsistent, so no repaired-contract run is claimable yet. |
 
 ### Repaired FIR Pilot
 
@@ -189,15 +204,22 @@ Do these only if the goal is maximum paper strength, not incremental cleanup.
    - unsolved/near-miss rows
    - excluded benchmark-contract rows
 3. Write a benchmark-audit section explaining why golden verification is required and why FIR/systolic/multich are excluded or held.
-4. If running more experiments, do not run another small C4 variant. The useful research attempts are:
-   - repair or formally validate excluded benchmark checkers only when the repair is principled and oracle-validated
-   - optional repaired contract for `fft_streaming_64pt` only if input encoding and output schema can both be specified and oracle-validated
-   - repaired contract for `newton_raphson_polynomial` only if the unsatisfiable test cases are explicitly addressed
-5. Avoid claiming C4a. It is negative evidence.
+4. Complete the remaining L3 C4tl condition-coverage batch listed in `docs/RUNS_LEFT.md`.
+5. If running more experiments after that, do not run another small C4 variant. The useful research attempts are principled benchmark-contract repairs only when the repair is minimal, oracle-validated, and reported separately from original ArchXBench results.
+6. Avoid claiming C4a. It is negative evidence.
 
 ## Current Run Recommendation
 
-No table-filling run is currently required for the existing claims.
+The only table-cleanliness run currently required is C4tl on six L3 designs, seeds `42,123,456`:
+
+- `fp_adder`
+- `fp_multiplier`
+- `gauss_siedel`
+- `gradient_descent`
+- `newton_raphson_sqrt`
+- `newton_raphson_polynomial`
+
+Total: 18 runs. See `docs/RUNS_LEFT.md`.
 
 The repaired-contract track has now been run:
 
@@ -210,7 +232,4 @@ The repaired-contract track has now been run:
 - repaired `newton_raphson_polynomial`: oracle validation passes; C2g 3/3, C4i 1/3, C4tl 1/3 on the `97/97` repaired checker
 - these rows must remain separate from original ArchXBench tables
 
-Current highest-value next attempts:
-
-- only a principled `fft_streaming_64pt` contract repair if input encoding and output schema can both be specified and oracle-validated
-- no more original-contract `conv_3d` / `quantized_matmul` runs are needed because repaired-contract rows are already complete
+After that, the remaining work is paper writing, table polishing, and optional artifact-collection reruns for trusted score-only rows.

@@ -2,6 +2,10 @@
 
 This repository is the only source of truth for the ArchXBench CEGIS paper work.
 
+Working paper title:
+
+**Autonomous Synthesis of Hard RTL Designs via Iterative Repair and Modular Decomposition**
+
 Start with [docs/STATUS.md](docs/STATUS.md). It defines the current paper state, clean claims, secondary evidence, diagnostics, and run queue.
 
 Supporting files:
@@ -17,5 +21,6 @@ Repository rules:
 
 - All evidence lives under `artifacts/`.
 - A paper claim must appear in `docs/RESULTS.md`.
-- A paper claim must have repo-local artifacts indexed in `artifacts/inventories/artifact_index.csv`.
+- Trusted score-only rows are valid experimental results; missing generated RTL is artifact collection debt, not invalid evidence.
+- Artifact-backed rows must be indexed in `artifacts/inventories/artifact_index.csv`.
 - Raw runs are audit data. Curated folders define which rows are clean, secondary, or diagnostic.

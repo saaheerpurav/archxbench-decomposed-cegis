@@ -1,6 +1,10 @@
 # Current Status
 
-Date: 2026-07-07
+Date: 2026-07-08
+
+Working paper title:
+
+**Autonomous Synthesis of Hard RTL Designs via Iterative Repair and Modular Decomposition**
 
 This file is only an entry point. Do not treat it as an independent result source.
 
@@ -20,6 +24,12 @@ The repo has clean evidence that verifier-grounded decomposed/CEGIS-style RTL sy
 
 The current evidence does not support claiming that C4i/C4tl dominates C2g everywhere. C2g is strong on several L5/L6 designs. The paper must frame method value carefully: decomposition helps on specific hard rows and gives a structured verifier-grounded synthesis pipeline, while C2g is a serious baseline.
 
+## Current Run Queue
+
+The only experiment batch left for paper-table cleanliness is C4tl on six L3 designs with seeds `42,123,456`: `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt`, and `newton_raphson_polynomial`.
+
+Total remaining experiment queue: 18 runs. The authoritative queue is [RUNS_LEFT.md](RUNS_LEFT.md).
+
 ## Primary Goal
 
 The only strategic goal is AAAI-27 acceptance. Do not optimize for extra benchmark rows, method branding, or cosmetic completeness if it weakens the paper. Time is not a constraint, but every run, repair, and claim must make the submission stronger, cleaner, and easier for reviewers to trust.
@@ -30,6 +40,8 @@ Benchmark repair is allowed only as a principled executable-contract audit. Do n
 
 - Use only repo-local artifacts under `artifacts/`.
 - A row is a paper claim only if it appears in [RESULTS.md](RESULTS.md).
+- Main paper tables use seeds `42,123,456`. Extra C4tl seeds `789,1024` are robustness/appendix evidence, not separate main-table rows.
+- Trusted score-only rows are valid experimental results. Missing generated RTL is artifact collection debt for paper/code release, not a reason to discard the score.
 - File-output designs require strict golden verification.
 - Native simulator PASS without golden verification is diagnostic only.
 - Do not use outside folders, old local notes, or collaborator machine paths as evidence unless copied into this repo.

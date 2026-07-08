@@ -8,7 +8,7 @@ Last audited: 2026-07-07.
 - Result rows with at least one saved Verilog file: `353`.
 - Result rows without saved Verilog: `732`.
 - The current `docs/RESULTS.md` main C4i/C4tl claim rows are artifact-backed.
-- Many C1/C2g baseline and secondary rows are score-only and must be rerun before being used as artifact-backed paper evidence.
+- Some C1/C2g baseline and secondary rows are score-only. Treat their logged scores as trusted experimental results; missing generated RTL is artifact collection debt for paper/code release.
 
 ## Main Claims
 
@@ -21,9 +21,9 @@ Examples:
 - L5 C4i main claims have `verilog/*.v` under `artifacts/curated/main_claims/L5/...`.
 - L6 C4i main claims have `verilog/*.v` under `artifacts/curated/main_claims/L6/...` or the AES decryption encoding-fix run.
 
-## Known Score-Only C2g Gaps
+## Trusted Score-Only C2g Rows Needing Artifact Collection
 
-These clean C2g rows have no saved Verilog and must be rerun if used as artifact-backed evidence:
+These clean C2g rows have trusted logged scores but no saved Verilog in this repo. They can be used as result evidence, but the generated RTL artifacts should be regenerated or copied before public artifact release:
 
 | Design | Seeds | Score | Current location |
 |---|---|---:|---|
@@ -49,7 +49,7 @@ The repository-local audit preserves historical C4i GPT-5.5 L4 FIR results from 
 
 Inventory: `artifacts/inventories/log_metric_only_results.csv`.
 
-These rows can be used to avoid forgetting that the sweep happened. They cannot be used as artifact-backed claims unless rerun with saved RTL.
+These rows can be used to avoid forgetting that the sweep happened. They should not be described as artifact-backed unless rerun with saved RTL.
 
 ## Artifact-Backed C2g Rows
 
@@ -85,4 +85,4 @@ A run is artifact-backed only if its cell directory contains both:
 - `result.json`
 - `verilog/*.v`
 
-Score-only rows can remain in diagnostics or baseline context, but they cannot support a paper claim until rerun with saved RTL.
+Score-only rows can support trusted result tables when the logged score is accepted, but they must not be described as artifact-backed until the corresponding Verilog is present in the repo.

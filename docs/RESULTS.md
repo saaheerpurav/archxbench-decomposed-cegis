@@ -5,6 +5,8 @@ This file contains clean result tables only. A row is a paper claim only if it a
 For paper table construction, use the separated plan in `docs/PAPER_AUDIT.md`:
 original ArchXBench main evidence, baseline context, repaired-contract evidence, held/excluded rows, and artifact-backed vs score-only rows must stay separate.
 
+Main paper tables use seeds `42,123,456`. Extra C4tl seeds are robustness/appendix evidence. Trusted score-only rows are valid result evidence, but should not be described as artifact-backed until generated RTL is present in the repo.
+
 ## Main Claims
 
 All rows use GPT-5.5 or Codex GPT-5.5 as recorded in `result.json`.
@@ -17,10 +19,10 @@ All rows use GPT-5.5 or Codex GPT-5.5 as recorded in `result.json`.
 | `gauss_siedel` | L3 | C4i | `42,123,456` | 3/3 solved, all `50/50` | official self-checking testbench | C4i win over C2g |
 | `gradient_descent` | L3 | C4i | `42,123,456` | 3/3 solved, all `50/50` | official self-checking testbench | C4i win over C2g |
 | `newton_raphson_polynomial` | L3 | C4i | `42,123,456` | 0/3 solved, best `89/100` | official self-checking testbench | negative result |
-| `fp_mult_pipeline` | L4 | C4tl | `42,123,456,789,1024` | 5/5 solved, all `31/31` | official self-checking testbench | robust L4 solve |
-| `fp_adder_pipeline` | L4 | C4tl | `42,123,456,789,1024` | 5/5 solved, all `23/23` | official self-checking testbench | robust L4 solve |
-| `fft_16pt_iterative` | L4 | C4tl | `42,123,456,789,1024` | 5/5 solved, all `33/33` | official self-checking testbench | robust L4 solve |
-| `ifft_16pt_iterative` | L4 | C4tl | `42,123,456,789,1024` | 5/5 solved, all `33/33` | official self-checking testbench | robust L4 solve |
+| `fp_mult_pipeline` | L4 | C4tl | `42,123,456` | 3/3 solved, all `31/31` | official self-checking testbench | robust L4 solve; seeds `789,1024` also solve in appendix/robustness |
+| `fp_adder_pipeline` | L4 | C4tl | `42,123,456` | 3/3 solved, all `23/23` | official self-checking testbench | robust L4 solve; seeds `789,1024` also solve in appendix/robustness |
+| `fft_16pt_iterative` | L4 | C4tl | `42,123,456` | 3/3 solved, all `33/33` | official self-checking testbench | robust L4 solve; seeds `789,1024` also solve in appendix/robustness |
+| `ifft_16pt_iterative` | L4 | C4tl | `42,123,456` | 3/3 solved, all `33/33` | official self-checking testbench | robust L4 solve; seeds `789,1024` also solve in appendix/robustness |
 | `harris_corner_detection` | L5 | C4i | `42,123,456` | 3/3 solved, all `16384/16384` | external golden JSON | solved, not exclusive |
 | `conv1d` | L5 | C4i | `42,123,456` | 3/3 solved, all `16/16` | external golden JSON | clean L5 golden solve |
 | `aes_encryption` | L6 | C4i | `42,123,456` | 3/3 solved, all `8/8` | external golden JSON | clean L6 golden solve |
