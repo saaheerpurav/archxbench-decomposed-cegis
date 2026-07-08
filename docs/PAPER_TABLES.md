@@ -1,6 +1,6 @@
 # Paper Tables
 
-Date: 2026-07-08
+Date: 2026-07-09
 
 Working paper title:
 
@@ -35,9 +35,9 @@ Rules:
 | L3 | `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt` | C1/C2g solve 0/3 or 0/5 | artifact-backed/logged matrix | C4i gives the cleanest L3 method-value evidence |
 | L4 | `fft_16pt_iterative`, `ifft_16pt_iterative` | C2g solves 3/3; C1/C4i solve 0/3 | artifact-backed/logged matrix | C2g is a strong baseline on some hard rows |
 | L4 | `fp_adder_pipeline`, `fp_mult_pipeline` | C1/C2g/C4i/C4tl all solve 3/3 main seeds | artifact-backed/logged matrix | not exclusive method wins |
-| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` | C2g solves 3/3 with golden verification | mixed: `unsharp_mask` artifact-backed; others trusted score-only | C2g is strongest on these rows |
-| L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 where present | mixed artifact-backed/trusted score-only | useful ablation context |
-| L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong; C2g solves 3/3 | trusted score-only for some C2g rows | C4i does not dominate C2g globally |
+| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` | C2g solves 3/3 with golden verification | artifact-backed | C2g is strongest on these rows |
+| L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 where present | artifact-backed for C2g rows | useful ablation context |
+| L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong; C2g solves 3/3 | artifact-backed for C2g rows | C4i does not dominate C2g globally |
 
 ## Table 3: Repaired Executable-Contract Evidence
 
@@ -45,7 +45,7 @@ These rows are not original ArchXBench solves.
 
 | Design | Repaired-contract result | Evidence class | Interpretation |
 |---|---|---|---|
-| `conv_3d` | C2g 3/3, C4i 2/3, C4tl 0/3 | mixed artifact-backed/trusted score-only | benchmark-contract repair unlocks intended task |
+| `conv_3d` | C2g 3/3, C4i 2/3, C4tl 0/3 | artifact-backed for C2g and solved C4i rows | benchmark-contract repair unlocks intended task |
 | `multich_conv2d` | C2g/C4i/C4tl all 3/3 | artifact-backed | clean repaired-contract validation |
 | `quantized_matmul` runner-fixed | C2g 3/3, C4i 3/3, C4tl 0/3 | artifact-backed | file-format/runner contract mattered |
 | `fp_band_pass_fir` | C2g 3/3; C4i/C4tl seed-42 pilots fail | artifact-backed | repaired-contract C2g win |
@@ -76,4 +76,4 @@ These rows are not original ArchXBench solves.
 
 No experiment run is currently queued.
 
-Remaining work before submission is paper writing and final manuscript consistency checks. Artifact-collection reruns for trusted score-only rows are release polish only and are intentionally not queued here.
+Remaining work before submission is paper writing and final manuscript consistency checks. The Priority 1 and Priority 2 C2g artifact-collection reruns were completed on 2026-07-09.

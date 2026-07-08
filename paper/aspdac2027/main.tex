@@ -27,13 +27,15 @@
 \title{Autonomous Synthesis of Hard RTL Designs via Iterative Repair and Modular Decomposition}
 
 \begin{abstract}
-Large language models can generate short RTL fragments, but remain unreliable on benchmark-level hardware designs that require timing, bit-accurate arithmetic, memory protocols, and golden-output agreement.
-This study evaluates verifier-grounded autonomous RTL synthesis on \arch, a complex digital-systems benchmark whose reported frontier-model results collapse from Level 4 onward under direct prompting.
+Large language models can generate short RTL fragments, but the gap between small-code generation and benchmark-level hardware synthesis remains substantial.
+\arch exposes this gap sharply: its reported frontier-model results solve lower levels but collapse from Level 4 onward under direct prompting.
+This study asks whether the failure frontier is inherent to current models, or whether it can be crossed by verifier-grounded autonomous synthesis.
 Four conditions are compared: single-shot generation, monolithic golden-feedback repair, decomposition-guided iterative repair, and testbench-localized decomposition.
 On original \arch contracts, the evaluated pipeline obtains clean solves across Levels 3--6, including robust Level-4 FFT/IFFT and floating-point pipeline solves, Level-5 convolution/image-processing designs, and Level-6 AES encryption/decryption with golden verification.
-The results also show that decomposition is not universally superior: monolithic golden-feedback repair is a strong baseline on several Level-5 and repaired-contract rows.
-A second contribution is an executable-contract audit that separates original benchmark solves from minimally repaired contract fixtures.
-The audit reveals both benchmark defects and genuine unsolved capability boundaries, showing that hard RTL synthesis evaluation requires trustworthy executable contracts in addition to strong generation methods.
+This demonstrates that hard RTL rows reported as unsolved by direct LLM generation can become solvable when generation is embedded in an executable repair loop.
+At the same time, the results show that decomposition is not universally superior: monolithic golden-feedback repair is a strong baseline on several Level-5 and repaired-contract rows.
+The second contribution is an executable-contract audit that separates original benchmark solves from minimally repaired contract fixtures.
+The audit reveals both benchmark defects and genuine unsolved capability boundaries, showing that progress on autonomous RTL synthesis depends on trustworthy executable contracts as much as stronger generation methods.
 \end{abstract}
 
 \begin{CCSXML}
@@ -66,16 +68,19 @@ The audit reveals both benchmark defects and genuine unsolved capability boundar
 
 \section{Introduction}
 
-Autonomous code agents are commonly evaluated by an executable loop: generate a candidate, run a checker, inspect failures, and repair.
-This loop is appealing because it grounds language-model generation in objective feedback.
-However, the same loop is substantially more difficult when the target artifact is a register-transfer level (RTL) hardware design rather than a short software function.
+Autonomous code agents are increasingly judged by whether they can close a complete executable loop: generate a candidate, run a checker, inspect failures, and repair.
+For software tasks, this loop has already changed what counts as a meaningful benchmark result.
+For hardware design, the corresponding question is more demanding: can an autonomous agent synthesize a nontrivial RTL design that survives simulation, timing/protocol assumptions, and golden-output comparison?
+
+This study argues that hard RTL synthesis is an important test of autonomous design automation.
 RTL behavior depends on bit widths, signedness, clocking, reset protocols, pipeline latency, streaming handshakes, and external file-output conventions.
 A design may compile while still being functionally wrong; a simulator may run to completion while still producing incorrect golden traces.
 
 This work studies this problem on \arch, a recent benchmark suite for complex RTL synthesis.
 Unlike VerilogEval~\cite{liu2023verilogeval} and RTLLM~\cite{lu2023rtllm}, which established automatic evaluation for Verilog generation on smaller designs, \arch includes multi-level tasks spanning arithmetic kernels, FFTs, filters, image processing, matrix multiplication, and cryptography~\cite{purini2025archxbench}.
 The \arch paper reports that frontier models solve lower-level tasks but fail from Level 4 onward under zero-shot pass@5 evaluation.
-This failure frontier makes \arch a useful stress test for autonomous RTL synthesis.
+This reported Level-4 boundary is the starting point of this paper.
+If an autonomous synthesis loop can solve rows beyond that boundary, the result is not merely an incremental prompt improvement; it changes the evaluation question from ``can an LLM emit the whole design in one shot?'' to ``can a verifier-grounded design agent converge to correct RTL?''
 
 The central question addressed in this study is:
 \emph{can verifier-grounded autonomous synthesis solve hard RTL benchmark tasks that direct generation does not reliably solve, while preserving a clear distinction between model failures and benchmark-contract failures?}
@@ -85,13 +90,13 @@ Four conditions are evaluated: a single-shot baseline (\cOne), a monolithic gold
 \cFourI and \cFourTL solve several rows that direct prompting does not solve, including hard Level-4 and golden-verified Level-5/Level-6 tasks.
 At the same time, \cTwoG is a strong baseline and matches or exceeds decomposition on several rows.
 The contribution is therefore not a claim that modular decomposition dominates monolithic repair.
-Rather, the study shows that verifier-grounded repair and decomposition can close important hard-task gaps, and that benchmark contracts must be audited before successes or failures are interpreted.
+Rather, the study shows that verifier-grounded repair and decomposition can cross important parts of the reported hard-task frontier, and that benchmark contracts must be audited before successes or failures are interpreted.
 
 This paper makes three contributions:
 \begin{enumerate}[leftmargin=*]
-    \item A verifier-grounded autonomous RTL synthesis pipeline combining iterative repair, modular decomposition, and simulator/golden feedback.
-    \item A controlled \arch Level 3--6 evaluation that separates original-contract results, repaired-contract results, held rows, and diagnostic failures.
-    \item A benchmark-contract audit documenting executable evaluation defects in hard RTL tasks and showing how these defects change the interpretation of synthesis results.
+    \item It demonstrates that verifier-grounded autonomous synthesis can solve hard \arch rows beyond the direct-generation failure frontier, including robust original-contract Level-4 solves and golden-verified Level-5/Level-6 solves.
+    \item It compares single-shot generation, monolithic golden-feedback repair, decomposition-guided repair, and localized decomposition under a common artifact discipline, showing where each strategy succeeds or fails.
+    \item It introduces an executable-contract audit for hard RTL benchmarks, separating original-contract results, minimally repaired-contract results, held rows, and genuine remaining failures.
 \end{enumerate}
 
 \section{Related Work}
@@ -122,7 +127,7 @@ The present study is complementary: it focuses on hard \arch rows and on the rel
 
 \begin{table*}[t]
 \centering
-\caption{Positioning relative to recent LLM-aided RTL and verification work. The distinguishing focus of this work is hard \arch L3--L6 evaluation with explicit original-contract versus repaired-contract accounting.}
+\caption{Positioning relative to recent LLM-aided RTL and verification work. The key distinction is not another prompt template, but a hard-\arch study that combines verifier-grounded synthesis with explicit original-contract versus repaired-contract accounting.}
 \label{tab:positioning}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -172,7 +177,7 @@ For example, a self-checking testbench can directly define a solve, while a disp
 
 \begin{table}[t]
 \centering
-\caption{Executable-contract taxonomy used to classify \arch rows.}
+\caption{Executable-contract taxonomy used to prevent false wins and false failures. This taxonomy is central to interpreting hard RTL benchmark results.}
 \label{tab:contracts}
 \scriptsize
 \setlength{\tabcolsep}{3.0pt}
@@ -237,7 +242,7 @@ The goal is to reduce repair diffusion by identifying which module or interface 
 \end{tikzpicture}
 }
 \Description{A pipeline diagram showing specification and testbench input, decomposition, reference validation, RTL generation and repair, simulation with golden checking, and feedback into repair.}
-\caption{Verifier-grounded decomposition and repair loop. The decomposition is useful only after a reference composition passes the system-level checker.}
+\caption{Verifier-grounded decomposition and repair loop. The pipeline converts one-shot RTL generation into an executable synthesis process: decompose, validate the reference composition, generate RTL, simulate, compare against golden behavior, and repair.}
 \label{fig:pipeline}
 \end{figure}
 
@@ -271,7 +276,7 @@ These values are not used as a primary efficiency benchmark because the rows inc
 
 \begin{table}[t]
 \centering
-\caption{Practical profile across repo-local \texttt{gpt-5.5} artifacts. Wall time is measured on local runs and is hardware-dependent.}
+\caption{Practical profile across repo-local \texttt{gpt-5.5} artifacts. The data show that stronger feedback loops are not free: \cTwoG and \cFourI are heavier, while \cFourTL is cheaper but less robust on some rows.}
 \label{tab:cost}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -287,16 +292,20 @@ Cond. & Runs & Clean & Avg. calls & Avg. wall \\
 \end{tabular}
 \end{table}
 
-\section{Results on Original ArchXBench Contracts}
+\section{Crossing the Original-Contract Frontier}
 
 Table~\ref{tab:original-main} summarizes the main original-contract results.
 The strongest Level-3 method-value evidence is produced by \cFourI, which solves five selected Level-3 rows on all three seeds while \cOne and \cTwoG fail or nearly fail on those rows.
 The strongest hard-level coverage evidence is produced by \cFourTL on Level 4: the FFT/IFFT and floating-point pipeline rows solve on all three main seeds, and remain solved on two additional robustness seeds.
 At Levels 5 and 6, golden-verified solves are obtained on convolution/image-processing and AES rows.
 
+The headline result is that original \arch rows above the reported direct-generation failure frontier are no longer uniformly out of reach.
+The Level-4 FFT/IFFT rows are especially important because they are clean self-checking original-contract solves rather than repaired-contract results.
+The Level-6 AES rows further show that file-output/golden verification can be satisfied, not merely that a simulator runs to completion.
+
 \begin{table*}[t]
 \centering
-\caption{Original-contract results on \arch. Values are clean solves over seeds. GV denotes golden-verified file-output rows.}
+\caption{Original-contract results on \arch. Values are clean solves over seeds. The table shows that hard rows above the reported direct-generation frontier become solvable under verifier-grounded repair, while also showing that no single condition dominates. GV denotes golden-verified file-output rows.}
 \label{tab:original-main}
 \scriptsize
 \setlength{\tabcolsep}{3.5pt}
@@ -339,13 +348,18 @@ During evaluation, several rows were found to contain inconsistent specification
 The released benchmark is not overwritten.
 Instead, repaired fixtures are kept under a separate artifact root and are reported separately from original-contract results.
 
+This audit is not a peripheral cleanup step.
+It is a prerequisite for credible autonomous RTL synthesis evaluation.
+At high difficulty levels, a benchmark row can fail because the model is incapable, because the generated RTL is wrong, because the output format is mismatched, or because the executable checker does not encode the intended task.
+Without separating these cases, a leaderboard can reward the wrong behavior or hide genuine progress.
+
 Table~\ref{tab:repaired} reports the repaired-contract evidence.
 These rows are not counted as original \arch solves.
 They answer a narrower question: when an infrastructure or executable-contract inconsistency is minimally repaired and oracle-validated, do the synthesis agents solve the intended task?
 
 \begin{table}[t]
 \centering
-\caption{Repaired-contract results. These rows are separate from original \arch results.}
+\caption{Repaired-contract results. These rows are separate from original \arch results and are used to distinguish benchmark-contract failures from model capability failures.}
 \label{tab:repaired}
 \scriptsize
 \setlength{\tabcolsep}{3.0pt}
@@ -364,7 +378,7 @@ Design & \cTwoG & \cFourI & \cFourTL \\
 \end{tabular}
 \end{table}
 
-The audit produces both positive and negative evidence.
+The audit produces both positive and negative evidence, which is why it is not simply a mechanism for producing extra wins.
 For \texttt{multich\_conv2d} and \texttt{quantized\_matmul}, repairing the executable contract makes the intended task measurable and solvable.
 For \texttt{systolic\_gemm}, converting display-only expected matrices into executable checks does not produce a win; all methods still fail.
 This is an important negative result because it shows that the audit is not merely a mechanism for converting failures into successes.
@@ -384,6 +398,7 @@ The L6 \texttt{fft\_streaming\_64pt} row is excluded because the released input/
 
 \subsection{When Decomposition Helps}
 
+The results suggest a more nuanced conclusion than ``decomposition is better.''
 Decomposition is most useful when a design naturally factors into modules and when failure localization reduces the repair burden.
 The Level-4 FFT/IFFT and floating-point pipeline rows support this conclusion: \cFourTL robustly solves all four core Level-4 rows on the main seeds and two additional robustness seeds.
 \cFourI also provides strong Level-3 evidence on numerical kernels where \cOne and \cTwoG fail.
@@ -398,7 +413,7 @@ This requirement prevents arbitrary module boundaries from becoming a source of 
 \cFourI and \cFourTL do not dominate \cTwoG.
 Several Level-5 and repaired-contract rows are solved most cleanly by monolithic golden-feedback repair.
 This can happen when the design is compact enough for whole-design repair, when module boundaries introduce integration risk, or when the primary difficulty is a global convention such as file format, fixed-point encoding, or streaming protocol.
-Therefore, the paper's claim is intentionally conservative: decomposition is a useful synthesis strategy, not a universally superior one.
+Therefore, the paper's claim is intentionally conservative and, in our view, more useful for design automation: decomposition is a powerful synthesis strategy for some hard rows, but monolithic golden-feedback repair remains a strong tool that should be treated as a primary baseline.
 
 \subsection{Why Benchmark Contracts Matter}
 
@@ -421,12 +436,13 @@ The broader lesson may transfer to other executable synthesis domains, but that 
 \section{Conclusion}
 
 This study evaluated autonomous RTL synthesis on hard \arch designs using iterative repair, modular decomposition, and strict simulator/golden feedback.
-Clean original-contract solves were obtained across Levels 3--6, including robust Level-4 rows and golden-verified Level-5/Level-6 designs.
-The results also show that monolithic golden-feedback repair is a strong baseline and that decomposition is not universally superior.
-A separate executable-contract audit revealed benchmark defects, repaired some infrastructure-level contracts, and identified genuine remaining failures such as \texttt{systolic\_gemm}.
+The results cross a reported hard frontier: original-contract solves are obtained across Levels 3--6, including robust Level-4 rows and golden-verified Level-5/Level-6 designs.
+The study also shows why this frontier should be interpreted carefully.
+Monolithic golden-feedback repair is a strong baseline, decomposition is powerful but not universally superior, and benchmark-contract defects can otherwise obscure both progress and failure.
 
-The main conclusion is that hard autonomous RTL synthesis requires three ingredients together: structured generation, executable feedback, and trustworthy benchmark contracts.
-Without all three, both successes and failures can be misinterpreted.
+The broader implication is that the next stage of RTL-generation research should not be judged only by one-shot code emission.
+Hard autonomous RTL synthesis requires structured generation, executable feedback, and trustworthy benchmark contracts together.
+Without all three, both successes and failures can be misinterpreted; with all three, benchmark-level hardware synthesis begins to move from direct generation toward autonomous design automation.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

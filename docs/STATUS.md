@@ -1,6 +1,6 @@
 # Current Status
 
-Date: 2026-07-08
+Date: 2026-07-09
 
 Working paper title:
 
@@ -34,6 +34,10 @@ No experiment run is currently queued.
 Completed on 2026-07-08: selected L3 C4tl condition coverage on seeds `42,123,456`.
 
 Results: `fp_adder` 3/3, `fp_multiplier` 3/3, `gauss_siedel` 1/3, `gradient_descent` 3/3, `newton_raphson_sqrt` 3/3, and `newton_raphson_polynomial` 0/3.
+
+Completed on 2026-07-09: Priority 1 and Priority 2 C2g artifact collection on seeds `42,123,456`.
+
+Results: `conv2d`, `dct_idct_8pt_pipelined`, `aes_encryption`, `aes_decryption`, `conv1d`, `harris_corner_detection`, and repaired-contract `conv_3d` all solved 3/3 with golden verification and saved generated Verilog.
 
 The authoritative queue is [RUNS_LEFT.md](RUNS_LEFT.md).
 

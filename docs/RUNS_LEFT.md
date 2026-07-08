@@ -6,7 +6,7 @@ This is the only run queue. It is derived from:
 - `artifacts/inventories/repaired_contract_run_matrix.csv`
 - `artifacts/inventories/log_metric_only_results.csv`
 
-Last audited: 2026-07-08 after `l3_c4tl_batch2_20260708`.
+Last audited: 2026-07-09 after C2g artifact collection for Priority 1 and Priority 2 rows.
 
 Primary goal: ASP-DAC 2027 acceptance. Time is not a constraint. Do not sacrifice experimental cleanliness for speed, and do not run benchmark repairs just to convert failures into wins. Repairs must be minimal, principled, oracle-validated, and reported separately from original ArchXBench results.
 
@@ -42,10 +42,10 @@ These have enough evidence for the current paper framing.
 | L4 | `fp_adder_pipeline` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3, `C4tl` 3/3 main seeds; C4tl 5/5 with robustness seeds |
 | L4 | `fp_mult_pipeline` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3, `C4tl` 3/3 main seeds; C4tl 5/5 with robustness seeds |
 | L4 | `ifft_16pt_iterative` | `C2g` 3/3, `C4tl` 3/3 main seeds; C4tl 5/5 with robustness seeds |
-| L5 | `conv1d` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
-| L5 | `conv2d` | `C2g` 3/3 |
-| L5 | `dct_idct_8pt_pipelined` | `C2g` 3/3 |
-| L5 | `harris_corner_detection` | `C2g` 3/3, `C4i` 3/3 |
+| L5 | `conv1d` | `C1` 3/3, `C2g` 3/3 artifact-backed, `C4i` 3/3 |
+| L5 | `conv2d` | `C2g` 3/3 artifact-backed |
+| L5 | `dct_idct_8pt_pipelined` | `C2g` 3/3 artifact-backed |
+| L5 | `harris_corner_detection` | `C2g` 3/3 artifact-backed, `C4i` 3/3 |
 | L5 | `unsharp_mask` | `C2g` 3/3 artifact-backed on seeds `42,123,456` |
 | L6 | `aes_decryption` | `C2g` 3/3, `C4i` 3/3 |
 | L6 | `aes_encryption` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
@@ -67,7 +67,7 @@ These rows are complete for the current paper, but they must stay separate from 
 
 | Design | Repaired-contract result |
 |---|---|
-| `conv_3d` | C2g 3/3 solved; C4i 2/3 solved; C4tl 0/3 solved |
+| `conv_3d` | C2g 3/3 solved artifact-backed in the 2026-07-09 collection run; C4i 2/3 solved; C4tl 0/3 solved |
 | `multich_conv2d` | C2g 3/3 solved; C4i 3/3 solved; C4tl 3/3 solved |
 | `quantized_matmul` runner-fixed | C2g 3/3 solved; C4i 3/3 solved; C4tl 0/3 solved |
 | `fp_band_pass_fir` | oracle-validated repaired contract; C2g 3/3 solved; C4i/C4tl seed-42 pilots fail |
@@ -87,17 +87,36 @@ Do not run these unless a principled benchmark-contract audit changes the status
 | L6 | `fp_low_pass_fir` | hold because the released files do not expose an explicit coefficient/cutoff oracle |
 | L6 | `fft_streaming_64pt` | exclude from result tables because the released benchmark contains unresolved input/output contract ambiguities, including mismatched output schema and input numeric encoding |
 
-## Artifact Debt, Not Run Debt
+## Artifact Collection Completed
 
 Trusted score-only rows are valid experimental results. Missing generated RTL is artifact collection debt for paper/code release, not a reason to discard the score.
 
-Artifact collection can be done later for release polish. It is not part of the current experiment queue.
+The Priority 1 and Priority 2 C2g artifact-collection reruns were completed on 2026-07-09. Every listed cell below has both `result.json` and at least one generated Verilog file under `verilog/*.v`.
+
+| Priority | Design | Condition | Seeds | Result | Artifact root |
+|---|---|---|---|---|---|
+| 1 | `conv2d` | C2g | `42,123,456` | 3/3 solved, all `4096/4096` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| 1 | `dct_idct_8pt_pipelined` | C2g | `42,123,456` | 3/3 solved, all `16/16` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| 1 | `aes_encryption` | C2g | `42,123,456` | 3/3 solved, all `8/8` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| 1 | `aes_decryption` | C2g | `42,123,456` | 3/3 solved, all `8/8` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| 2 | `conv1d` | C2g | `42,123,456` | 3/3 solved, all `16/16` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| 2 | `harris_corner_detection` | C2g | `42,123,456` | 3/3 solved, all `16384/16384` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| 2 | repaired `conv_3d` | C2g | `42,123,456` | 3/3 solved, all `23064/23064` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_repaired/` |
+
+These were artifact-collection reruns, not new scientific experiments. The reruns matched the trusted scores and added generated RTL artifacts.
+
+Additional paper-strengthening work that is not a run queue:
+
+- Add a compact hard-frontier headline table if page space allows.
+- Add one real decomposition example from a solved L4 row, preferably `fft_16pt_iterative` or `ifft_16pt_iterative`.
+- Add one failure-anatomy example, currently `systolic_gemm`, to show benchmark repair does not manufacture wins.
+- If feasible, run an open prior method such as REvolution/VFlow/AutoVeriFix-style code on a small ArchXBench L4-L6 subset. This would be a new baseline study, not artifact collection.
 
 ## What Is Left
 
 No experiment run is currently queued.
 
-Remaining work before submission is paper writing and final manuscript consistency checks. Artifact-release cleanup is not part of the current run queue.
+Remaining work before submission is paper writing and final manuscript consistency checks. The Priority 1 and Priority 2 artifact-release cleanup queue is complete.
 
 ## Execution Rules
 

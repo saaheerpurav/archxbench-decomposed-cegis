@@ -84,6 +84,7 @@ def collect() -> list[dict]:
             part
             for part in rel_parts
             if part.startswith(("repaired_contracts_", "repaired_fir_", "repaired_fp_fir_", "repaired_newton_"))
+            or part.endswith("_repaired")
         ]
         if not run_names:
             continue

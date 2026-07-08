@@ -1,0 +1,15 @@
+{
+  "condition": "C2g",
+  "llm_calls": 5,
+  "best_passes": 4096,
+  "total_tests": 4096,
+  "solved": true,
+  "golden_correct": 4096,
+  "golden_total": 4096,
+  "design": "conv2d",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 309.2,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,14 +1,15 @@
 # Artifact Audit Status
 
-Last audited: 2026-07-07.
+Last audited: 2026-07-09.
 
 ## Summary
 
-- Total repo-local `result.json` files: `1085`.
-- Result rows with at least one saved Verilog file: `371`.
+- Total repo-local `result.json` files: `1124`.
+- Result rows with at least one saved Verilog file: `392`.
 - Result rows without saved Verilog: `732`.
 - The current `docs/RESULTS.md` main C4i/C4tl claim rows are artifact-backed.
-- Some C1/C2g baseline and secondary rows are score-only. Treat their logged scores as trusted experimental results; missing generated RTL is artifact collection debt for paper/code release.
+- Priority 1 and Priority 2 C2g artifact-collection rows were rerun on 2026-07-09 and now have generated RTL.
+- Some remaining historical baseline and secondary rows are score-only. Treat their logged scores as trusted experimental results; missing generated RTL is artifact collection debt for paper/code release.
 
 ## Main Claims
 
@@ -21,21 +22,21 @@ Examples:
 - L5 C4i main claims have `verilog/*.v` under `artifacts/curated/main_claims/L5/...`.
 - L6 C4i main claims have `verilog/*.v` under `artifacts/curated/main_claims/L6/...` or the AES decryption encoding-fix run.
 
-## Trusted Score-Only C2g Rows Needing Artifact Collection
+## Completed C2g Artifact Collection
 
-These clean C2g rows have trusted logged scores but no saved Verilog in this repo. They can be used as result evidence, but the generated RTL artifacts should be regenerated or copied before public artifact release:
+These clean C2g rows previously had trusted logged scores but no saved Verilog in this repo. They were rerun on 2026-07-09 for artifact collection. Each listed cell now has `result.json` and `verilog/*.v`.
 
-| Design | Seeds | Score | Current location |
+| Design | Seeds | Score | Artifact location |
 |---|---|---:|---|
-| `aes_encryption` | `42,123,456` | `8/8` | baseline/overnight C2g score-only rows |
-| `aes_decryption` | `42,123,456` | `8/8` | `aes_decryption_encoding_fix_20260704` C2g score-only rows |
-| `conv1d` | `42,123,456` | `16/16` | baseline/overnight C2g score-only rows |
-| `conv2d` | `42,123,456` | `4096/4096` | `overnight_c2g_priority1_20260703` |
-| `dct_idct_8pt_pipelined` | `42,123,456` | `16/16` | `overnight_c2g_conditional_20260704` |
-| `harris_corner_detection` | `42,123,456` | `16384/16384` | baseline/overnight C2g score-only rows |
-| `conv_3d` repaired contract | `42,123,456` | `23064/23064` | `repaired_contracts_20260705` C2g score-only rows |
+| `aes_encryption` | `42,123,456` | `8/8` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `aes_decryption` | `42,123,456` | `8/8` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `conv1d` | `42,123,456` | `16/16` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `conv2d` | `42,123,456` | `4096/4096` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `dct_idct_8pt_pipelined` | `42,123,456` | `16/16` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `harris_corner_detection` | `42,123,456` | `16384/16384` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `conv_3d` repaired contract | `42,123,456` | `23064/23064` | `artifacts/raw_runs/c2g_artifact_collection_20260709_repaired/` |
 
-`overnight_c2g_priority1_20260703` specifically has `14` result JSON files and no saved Verilog at all.
+Historical folders such as `overnight_c2g_priority1_20260703` still have result JSONs without saved Verilog. They are superseded for artifact-backed C2g evidence by the 2026-07-09 collection roots above.
 
 ## Known Log/Metrics-Only Non-C2g Rows
 
@@ -58,6 +59,13 @@ Current clean C2g rows with saved Verilog:
 | Design | Seeds | Score | Location |
 |---|---|---:|---|
 | `unsharp_mask` | `42,123,456` | `65536/65536` | `artifacts/raw_runs/unsharp_c2g_artifact_rerun_20260706/` and `artifacts/raw_runs/unsharp_c2g_seed123_artifact_rerun_20260706/` |
+| `conv1d` | `42,123,456` | `16/16` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `conv2d` | `42,123,456` | `4096/4096` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `dct_idct_8pt_pipelined` | `42,123,456` | `16/16` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `harris_corner_detection` | `42,123,456` | `16384/16384` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `aes_encryption` | `42,123,456` | `8/8` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `aes_decryption` | `42,123,456` | `8/8` | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
+| `conv_3d` repaired contract | `42,123,456` | `23064/23064` | `artifacts/raw_runs/c2g_artifact_collection_20260709_repaired/` |
 | `multich_conv2d` repaired contract | `42,123,456` | `30752/30752` | `artifacts/raw_runs/repaired_contracts_multich_conv2d_20260705/` |
 | `quantized_matmul` repaired contract, runner-fixed | `42,123,456` | `64/64` | `artifacts/raw_runs/repaired_contracts_qgemm_runnerfix_pilot_20260705/` |
 | `fp_band_pass_fir` repaired contract | `42,123,456` | `1000/1000` | `artifacts/raw_runs/repaired_fp_fir_c2g_pilot_20260707/` and `artifacts/raw_runs/repaired_fp_fir_c2g_seeds_20260707/` |
