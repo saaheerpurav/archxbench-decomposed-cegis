@@ -8,7 +8,7 @@ This is the only run queue. It is derived from:
 
 Last audited: 2026-07-08 after `l3_c4tl_batch2_20260708`.
 
-Primary goal: AAAI-27 acceptance. Time is not a constraint. Do not sacrifice experimental cleanliness for speed, and do not run benchmark repairs just to convert failures into wins. Repairs must be minimal, principled, oracle-validated, and reported separately from original ArchXBench results.
+Primary goal: ASP-DAC 2027 acceptance. Time is not a constraint. Do not sacrifice experimental cleanliness for speed, and do not run benchmark repairs just to convert failures into wins. Repairs must be minimal, principled, oracle-validated, and reported separately from original ArchXBench results.
 
 ## Required Runs
 

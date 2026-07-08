@@ -193,7 +193,7 @@ Inventory: `artifacts/inventories/log_metric_only_results.csv`.
 
 These results matter for historical completeness, but they do not change the paper-claim table because the generated RTL/result artifacts for those specific cells were not preserved.
 
-## What Would Strengthen The AAAI Paper
+## What Would Strengthen The ASP-DAC Paper
 
 Do these only if the goal is maximum paper strength, not incremental cleanup.
 

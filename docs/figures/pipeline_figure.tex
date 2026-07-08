@@ -1,0 +1,30 @@
+\begin{figure}[t]
+\centering
+\fbox{
+\begin{minipage}{0.96\linewidth}
+\centering
+\small
+\begin{tabular}{c}
+\textbf{ArchXBench task} \\
+specification + testbench + inputs/goldens \\
+$\downarrow$ \\
+\textbf{Decompose} \\
+module interfaces + reference implementations + top composition \\
+$\downarrow$ \\
+\textbf{Reference-composition gate} \\
+compose references; require system testbench pass \\
+$\downarrow$ \\
+\textbf{Module synthesis and integration} \\
+generate RTL modules; assemble complete design \\
+$\downarrow$ \\
+\textbf{Executable verification} \\
+Icarus Verilog simulation + self-checking or golden comparison \\
+$\downarrow$ \\
+\textbf{Localized repair loop} \\
+feed compile/simulation/golden failures back to the model
+\end{tabular}
+\end{minipage}
+}
+\caption{Verifier-grounded modular RTL synthesis pipeline. The reference-composition gate prevents unvalidated decompositions from becoming synthesis scaffolding; final correctness is always judged by the system testbench or golden-output checker.}
+\label{fig:pipeline}
+\end{figure}

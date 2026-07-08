@@ -10,7 +10,10 @@ Start with [docs/STATUS.md](docs/STATUS.md). It defines the current paper state,
 
 Supporting files:
 
+- [paper/aspdac2027/main.tex](paper/aspdac2027/main.tex): ASP-DAC 2027 ACM `sigconf` LaTeX draft
+- [paper/aspdac2027/README.md](paper/aspdac2027/README.md): paper build notes and formatting constraints
 - [docs/RESULTS.md](docs/RESULTS.md): clean result tables only
+- [docs/PAPER_DRAFT.md](docs/PAPER_DRAFT.md): first complete paper draft
 - [docs/PAPER_TABLES.md](docs/PAPER_TABLES.md): consolidated paper-facing table source
 - [docs/RUNS_LEFT.md](docs/RUNS_LEFT.md): exact run queue
 - [docs/ARTIFACTS.md](docs/ARTIFACTS.md): artifact layout and inventory rules

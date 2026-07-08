@@ -10,7 +10,9 @@ This file is only an entry point. Do not treat it as an independent result sourc
 
 Canonical files:
 
+- ASP-DAC 2027 LaTeX draft: [../paper/aspdac2027/main.tex](../paper/aspdac2027/main.tex)
 - Clean claim and diagnostic tables: [RESULTS.md](RESULTS.md)
+- First complete paper draft: [PAPER_DRAFT.md](PAPER_DRAFT.md)
 - Consolidated paper-facing table source: [PAPER_TABLES.md](PAPER_TABLES.md)
 - Run queue and unresolved gaps: [RUNS_LEFT.md](RUNS_LEFT.md)
 - Paper-readiness audit and baseline gap map: [PAPER_AUDIT.md](PAPER_AUDIT.md)
@@ -39,7 +41,7 @@ The consolidated paper-facing tables are in [PAPER_TABLES.md](PAPER_TABLES.md).
 
 ## Primary Goal
 
-The only strategic goal is AAAI-27 acceptance. Do not optimize for extra benchmark rows, method branding, or cosmetic completeness if it weakens the paper. Time is not a constraint, but every run, repair, and claim must make the submission stronger, cleaner, and easier for reviewers to trust.
+The strategic target is ASP-DAC 2027. Do not optimize for extra benchmark rows, method branding, or cosmetic completeness if it weakens the paper. Time is not a constraint, but every run, repair, and claim must make the submission stronger, cleaner, and easier for design-automation reviewers to trust.
 
 Benchmark repair is allowed only as a principled executable-contract audit. Do not patch a benchmark to make one method look good. Repaired-contract rows must stay separate from original ArchXBench rows and must be framed as benchmark-validity evidence unless the repair is minimal, general, and clearly justified.
 
