@@ -22,6 +22,14 @@
 \newcommand{\cFourTL}{C4tl\xspace}
 \newcommand{\yes}{\textbf{3/3}}
 \newcommand{\no}{0/3}
+\definecolor{hmsolve}{RGB}{217,234,211}
+\definecolor{hmpartial}{RGB}{255,242,204}
+\definecolor{hmfail}{RGB}{244,204,204}
+\definecolor{hmneutral}{RGB}{217,225,242}
+\newcommand{\hmcell}[2]{\begingroup\setlength{\fboxsep}{1pt}\colorbox{#1}{\makebox[0.78cm][c]{\strut #2}}\endgroup}
+\newcommand{\hmyes}{\hmcell{hmsolve}{\textbf{3/3}}}
+\newcommand{\hmno}{\hmcell{hmfail}{0/3}}
+\newcommand{\hmpart}[1]{\hmcell{hmpartial}{#1}}
 \emergencystretch=2em
 
 \begin{document}
@@ -94,8 +102,6 @@ For software tasks, this loop has changed what counts as a meaningful benchmark 
 For hardware design, the question is harder: can an autonomous agent synthesize RTL that survives simulation, protocol assumptions, and golden-output comparison?
 
 RTL correctness depends on bit widths, signedness, clocking, reset protocols, pipeline latency, and streaming handshakes.
-A design may compile and still be functionally wrong.
-A simulator may run to completion and still produce incorrect golden traces.
 Hard RTL synthesis therefore tests whether autonomous agents can handle low-level, state-dependent, timing-sensitive design, not just surface-level code generation.
 
 This paper studies the problem on \arch, a benchmark suite for complex RTL synthesis~\cite{purini2025archxbench}.
@@ -191,26 +197,44 @@ Three evaluation classes are distinguished:
     \item \textbf{Held or excluded rows:} tasks where the released contract remains too ambiguous for a credible positive result.
 \end{itemize}
 
-Table~\ref{tab:contracts} gives the contract taxonomy used during the audit.
-\begin{table}[t]
+Figure~\ref{tab:contracts} gives the contract-classification procedure used during the audit.
+\begin{figure}[t]
 \centering
-\caption{Executable-contract taxonomy. Each category changes how a run is interpreted.}
-\label{tab:contracts}
 \scriptsize
-\setlength{\tabcolsep}{3.0pt}
-\begin{tabular}{p{2.25cm}p{4.7cm}}
-\toprule
-Contract type & Paper treatment \\
-\midrule
-Self-checking TB & Pass all official checks; native score is sufficient. \\
-File-output w/ golden & Post-simulation golden comparison required; simulation completion is diagnostic only. \\
-Display-only checker & Not a solve until expected values are converted into executable checks. \\
-Stale comparator & Repair in a separate fixture; report separately. \\
-Spec/TB disagreement & Exclude unless a principled source of truth exists. \\
-Missing oracle & Hold; do not claim positive results. \\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{tikzpicture}[
+node distance=1.8mm,
+q/.style={draw,rounded corners,align=center,text width=2.15cm,minimum height=5.5mm,inner sep=1.5pt},
+a/.style={draw,rounded corners,fill=hmsolve,align=center,text width=2.45cm,minimum height=5.5mm,inner sep=1.5pt},
+h/.style={draw,rounded corners,fill=hmpartial,align=center,text width=2.45cm,minimum height=5.5mm,inner sep=1.5pt},
+bad/.style={draw,rounded corners,fill=hmfail,align=center,text width=2.45cm,minimum height=5.5mm,inner sep=1.5pt},
+arr/.style={-{Latex[length=1.4mm]},thick}
+]
+\node[q] (run) {Run released fixture};
+\node[q, below=of run] (self) {Self-checking TB?};
+\node[a, right=4mm of self] (native) {native pass score sufficient};
+\node[q, below=of self] (file) {File-output golden?};
+\node[a, right=4mm of file] (golden) {post-simulation golden comparison};
+\node[q, below=of file] (display) {Display-only checker?};
+\node[h, right=4mm of display] (nosolve) {not a solve until executable};
+\node[q, below=of display] (spec) {Spec/TB disagreement?};
+\node[bad, right=4mm of spec] (exclude) {exclude or hold unless oracle exists};
+\node[q, below=of spec] (oracle) {Missing oracle?};
+\node[bad, right=4mm of oracle] (hold) {hold; no positive claim};
+\draw[arr] (run) -- (self);
+\draw[arr] (self) -- node[above,font=\tiny] {yes} (native);
+\draw[arr] (self) -- node[right,font=\tiny] {no} (file);
+\draw[arr] (file) -- node[above,font=\tiny] {yes} (golden);
+\draw[arr] (file) -- node[right,font=\tiny] {no} (display);
+\draw[arr] (display) -- node[above,font=\tiny] {yes} (nosolve);
+\draw[arr] (display) -- node[right,font=\tiny] {no} (spec);
+\draw[arr] (spec) -- node[above,font=\tiny] {yes} (exclude);
+\draw[arr] (spec) -- node[right,font=\tiny] {no} (oracle);
+\draw[arr] (oracle) -- node[above,font=\tiny] {yes} (hold);
+\end{tikzpicture}
+\caption{Executable-contract classification. Positive results are claimed only when the released or repaired fixture has an executable oracle.}
+\Description{Flowchart classifying benchmark fixtures as self-checking, file-output with golden comparison, display-only, specification-disagreeing, or missing-oracle cases.}
+\label{tab:contracts}
+\end{figure}
 
 \section{Method}
 
@@ -335,36 +359,7 @@ The primary model is GPT-5.5 as recorded in the repository artifacts.
 A clean solve requires all official checks to pass (self-checking designs) or all golden outputs to match (file-output designs).
 Solve rates are reported over seeds.
 
-\subsection{Implementation and Cost}
-
-All methods run as executable synthesis loops.
-\cOne uses five independent generations.
-\cTwoG uses a 30-round monolithic repair loop.
-\cFourI allocates a per-module budget from a 28-round total.
-\cFourTL uses up to three decomposition attempts followed by a bounded localization-and-repair loop.
-All simulations use Icarus Verilog.
-
-Table~\ref{tab:cost} reports aggregate statistics across all repository-local GPT-5.5 Level-3--6 artifact rows.
-\cTwoG uses fewer total runs but more calls per run.
-\cFourTL averages 7.4 calls per run, roughly half of \cFourI, because targeted repair avoids diffuse iteration.
-
-\begin{table}[t]
-\centering
-\caption{Aggregate profile across all Level-3--6 GPT-5.5 artifact rows, including original-contract, repaired-contract, and diagnostic runs. Because the aggregate is heterogeneous, this table is descriptive rather than a controlled per-design comparison.}
-\label{tab:cost}
-\scriptsize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lrrrr}
-\toprule
-Cond. & Runs & Clean & Avg.\ calls & Avg.\ wall \\
-\midrule
-\cOne & 100 & 16 & 5.0 & 9.2\,min \\
-\cTwoG & 69 & 41 & 15.5 & 22.6\,min \\
-\cFourI & 125 & 76 & 14.6 & 14.8\,min \\
-\cFourTL & 143 & 83 & 7.4 & 9.3\,min \\
-\bottomrule
-\end{tabular}
-\end{table}
+All methods run as executable synthesis loops using Icarus Verilog; the method budgets are summarized in Table~\ref{tab:method-compare}.
 
 Table~\ref{tab:perdesign} reports per-design statistics for selected solved rows, averaged over seeds.
 These illustrate the practical cost of individual solves: the Level-4 FFT solves in roughly 5 minutes and 6 LLM calls, while harder designs such as \texttt{harris\_corner\_detection} require 10.7 calls and 9.4 minutes.
@@ -416,34 +411,34 @@ These rows demonstrate that monolithic repair is the stronger strategy when the 
 
 \begin{table*}[t]
 \centering
-\caption{Original-contract results on \arch. Values are clean solves over seeds; bold \yes indicates 3/3 on the main seed set. GV: golden-verified file-output row. ``+2'' means seeds 789 and 1024 also solve, giving 5/5 total.}
+\caption{Original-contract result heatmap on \arch. Green cells solve all main seeds; yellow cells are partial; red cells fail. GV marks golden-verified file-output rows. Level-4 \cFourTL rows additionally solve robustness seeds 789 and 1024, giving 5/5 total.}
 \label{tab:original-main}
 \scriptsize
-\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{llccccp{2.9cm}}
+\setlength{\tabcolsep}{3.0pt}
+\begin{tabular}{llccccp{2.7cm}}
 \toprule
 Level & Design & \cOne & \cTwoG & \cFourI & \cFourTL & Evidence \\
 \midrule
-L3 & \texttt{fp\_adder} & 0/5 & 1/5 & \yes & \yes & decomposition wins \\
-L3 & \texttt{fp\_multiplier} & 0/5 & \no & \yes & \yes & decomposition wins \\
-L3 & \texttt{gauss\_siedel} & \no & \no & \yes & 1/3 & \cFourI strongest \\
-L3 & \texttt{gradient\_descent} & \no & \no & \yes & \yes & decomposition wins \\
-L3 & \texttt{newton\_raphson\_sqrt} & \no & \no & \yes & \yes & decomposition wins \\
-L3 & \texttt{newton\_raphson\_poly.} & \no & \no & \no & \no & checker ceiling at 97/100 \\
+L3 & \texttt{fp\_adder} & \hmcell{hmfail}{0/5} & \hmpart{1/5} & \hmyes & \hmyes & decomposition wins \\
+L3 & \texttt{fp\_multiplier} & \hmcell{hmfail}{0/5} & \hmno & \hmyes & \hmyes & decomposition wins \\
+L3 & \texttt{gauss\_siedel} & \hmno & \hmno & \hmyes & \hmpart{1/3} & \cFourI strongest \\
+L3 & \texttt{gradient\_descent} & \hmno & \hmno & \hmyes & \hmyes & decomposition wins \\
+L3 & \texttt{newton\_raphson\_sqrt} & \hmno & \hmno & \hmyes & \hmyes & decomposition wins \\
+L3 & \texttt{newton\_raphson\_poly.} & \hmno & \hmno & \hmno & \hmno & checker ceiling at 97/100 \\
 \midrule
-L4 & \texttt{fft\_16pt\_iterative} & \no & \yes & \no & \yes\ (+2) & hard-row solve \\
-L4 & \texttt{ifft\_16pt\_iterative} & \no & \yes & \no & \yes\ (+2) & hard-row solve \\
-L4 & \texttt{fp\_adder\_pipeline} & \yes & \yes & \yes & \yes\ (+2) & all methods solve \\
-L4 & \texttt{fp\_mult\_pipeline} & \yes & \yes & \yes & \yes\ (+2) & all methods solve \\
+L4 & \texttt{fft\_16pt\_iterative} & \hmno & \hmyes & \hmno & \hmyes & hard-row solve; 5/5 \\
+L4 & \texttt{ifft\_16pt\_iterative} & \hmno & \hmyes & \hmno & \hmyes & hard-row solve; 5/5 \\
+L4 & \texttt{fp\_adder\_pipeline} & \hmyes & \hmyes & \hmyes & \hmyes & all methods solve; 5/5 \\
+L4 & \texttt{fp\_mult\_pipeline} & \hmyes & \hmyes & \hmyes & \hmyes & all methods solve; 5/5 \\
 \midrule
-L5 & \texttt{conv1d} & \yes & \yes & \yes & 1/3 & GV \\
-L5 & \texttt{conv2d} & \no & \yes & \no & \no & GV; \cTwoG strongest \\
-L5 & \texttt{dct\_idct\_8pt\_pipelined} & \no & \yes & \no & \no & GV; \cTwoG strongest \\
-L5 & \texttt{harris\_corner\_detection} & \no & \yes & \yes & \no & GV \\
-L5 & \texttt{unsharp\_mask} & \no & \yes & \no & \no & GV; \cTwoG strongest \\
+L5 & \texttt{conv1d} & \hmyes & \hmyes & \hmyes & \hmpart{1/3} & GV \\
+L5 & \texttt{conv2d} & \hmno & \hmyes & \hmno & \hmno & GV; \cTwoG strongest \\
+L5 & \texttt{dct\_idct\_8pt\_pipelined} & \hmno & \hmyes & \hmno & \hmno & GV; \cTwoG strongest \\
+L5 & \texttt{harris\_corner\_detection} & \hmno & \hmyes & \hmyes & \hmno & GV \\
+L5 & \texttt{unsharp\_mask} & \hmno & \hmyes & \hmno & \hmno & GV; \cTwoG strongest \\
 \midrule
-L6 & \texttt{aes\_encryption} & \yes & \yes & \yes & 2/3 & GV \\
-L6 & \texttt{aes\_decryption} & 1/3 & \yes & \yes & 1/3 & GV; repair improves C1 \\
+L6 & \texttt{aes\_encryption} & \hmyes & \hmyes & \hmyes & \hmpart{2/3} & GV \\
+L6 & \texttt{aes\_decryption} & \hmpart{1/3} & \hmyes & \hmyes & \hmpart{1/3} & GV; repair improves C1 \\
 \bottomrule
 \end{tabular}
 \vspace{1mm}
@@ -548,9 +543,7 @@ The paper's claim is therefore conservative: decomposition is a powerful synthes
 \subsection{Why Benchmark Contracts Matter}
 
 LLM-aided RTL synthesis papers increasingly rely on executable benchmarks.
-If the executable contract is ambiguous, a model can fail for the wrong reason or pass the wrong task.
-The issues observed in this study include hidden testbench assumptions, stale comparators, file-output schema mismatches, display-only checkers, unsatisfiable residual checks, and missing oracle information.
-Separating original-contract and repaired-contract results improves the reliability of future comparisons on hard RTL benchmarks.
+If the executable contract is ambiguous, a model can fail for the wrong reason or pass the wrong task; separating original-contract and repaired-contract results is therefore a prerequisite for credible evaluation.
 
 \section{Limitations}
 
