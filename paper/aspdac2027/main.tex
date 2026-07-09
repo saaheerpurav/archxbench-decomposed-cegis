@@ -57,7 +57,6 @@ Golden-verified Level-5 and Level-6 solves are obtained on convolution, image-pr
 Decomposition is not universally superior: \cTwoG solves several Level-5 rows that decomposed methods do not.
 A second contribution is an executable-contract audit that separates original-benchmark solves from minimally repaired contract fixtures, exposing both benchmark defects and genuine unsolved capability boundaries.
 Code and artifacts are available.\footnote{Repository URL withheld for double-blind review.}
-% Real URL: https://github.com/saaheerpurav/archxbench-decomposed-cegis
 \end{abstract}
 
 \begin{CCSXML}
@@ -330,6 +329,7 @@ Lower levels are excluded because the \arch paper reports that current models al
 Main tables use seeds 42, 123, and 456.
 Two additional seeds (789, 1024) provide robustness evidence for \cFourTL Level-4 rows.
 These are fixed seeds chosen for reproducibility, not tuned seeds.
+\cOne uses five seeds for the two borderline Level-3 floating-point rows, \texttt{fp\_adder} and \texttt{fp\_multiplier}, to give a stricter direct-generation baseline estimate.
 The primary model is GPT-5.5 as recorded in the repository artifacts.
 
 A clean solve requires all official checks to pass (self-checking designs) or all golden outputs to match (file-output designs).
@@ -398,17 +398,18 @@ Table~\ref{tab:original-main} reports the main original-contract results.
 \cFourTL matches \cFourI on four of five rows but solves \texttt{gauss\_siedel} at only 1/3.
 For context, \cFourI decomposes \texttt{gauss\_siedel} into three submodules (reciprocal unit, iteration step, solution selector), allowing each to be solved and tested in isolation.
 The negative result on \texttt{newton\_raphson\_polynomial} is an original-checker ceiling: three of its 100 assertions are structurally unsatisfiable, capping the achievable score at 97/100.
+After removing only those three unsatisfiable residual assertions in the repaired-contract fixture, \cTwoG solves all three seeds (Table~\ref{tab:repaired}), confirming that the design itself is within model capability.
 
 \textbf{Level 4.}
 \cFourTL solves all four core Level-4 rows at 3/3 main seeds and 2/2 robustness seeds, for 5/5 total.
 The 16-point FFT and IFFT rows are the strongest hard-frontier evidence because they are self-checking original-contract solves with no benchmark repair.
 \cFourTL decomposes \texttt{fft\_16pt\_iterative} into four submodules (bit-reverse mapper, twiddle ROM, butterfly unit, output scaler) and uses trace-lifted localization to identify which module is at fault after each simulation failure.
 \cTwoG also solves the FFT/IFFT rows at 3/3; \cFourI does not.
-One explanation is that \cFourI's fixed per-module repair order is less effective than \cFourTL's targeted localization on tightly coupled pipeline designs.
+\cFourI's fixed sequential repair order can spend iterations on modules that already compose correctly while the actual fault remains in a later module; \cFourTL's swap-based localization directly identifies the culprit before repair.
 The pipeline rows (\texttt{fp\_adder\_pipeline}, \texttt{fp\_mult\_pipeline}) are solved by all conditions.
 
 \textbf{Levels 5--6.}
-Golden-verified solves are obtained on \texttt{conv1d} (16/16), \texttt{harris\_corner\_detection} (16{,}384/16{,}384), \texttt{aes\_encryption} (8/8), and \texttt{aes\_decryption} (8/8), all at 3/3 seeds under \cFourI.
+\cFourI obtains 3/3 golden-verified solves on \texttt{conv1d}, \texttt{harris\_corner\_detection}, and both AES rows.
 \cFourI decomposes AES encryption into six submodules (S-box, SubBytes, ShiftRows, MixColumns, round function, key expansion), each implemented and tested against the system testbench with other modules held at their references.
 Several Level-5 rows are solved only by \cTwoG: \texttt{conv2d} (4{,}096/4{,}096), \texttt{dct\_idct\_8pt\_pipelined} (16/16), and \texttt{unsharp\_mask} (65{,}536/65{,}536).
 These rows demonstrate that monolithic repair is the stronger strategy when the design is compact enough for whole-design feedback or when the primary difficulty is a global convention such as file format or fixed-point encoding.
@@ -445,11 +446,43 @@ L6 & \texttt{aes\_encryption} & \yes & \yes & \yes & 2/3 & GV \\
 L6 & \texttt{aes\_decryption} & 1/3 & \yes & \yes & 1/3 & GV; repair improves C1 \\
 \bottomrule
 \end{tabular}
+\vspace{1mm}
+\parbox{0.98\textwidth}{\scriptsize \texttt{newton\_raphson\_poly.} abbreviates \texttt{newton\_raphson\_polynomial}.}
 \end{table*}
 
 The results are not presented as a universal decomposition win.
 \cTwoG is a serious baseline: it matches or outperforms decomposition on 8 of 17 original-contract rows.
 The most accurate interpretation is that decomposition provides value on specific hard rows and gives a structured synthesis process, while monolithic golden-feedback repair is often sufficient and sometimes better.
+
+\begin{table}[t]
+\centering
+\caption{Second-model validation with Claude Sonnet 5 on selected hard-frontier rows. GV denotes golden-verified file-output rows.}
+\label{tab:sonnet}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcc}
+\toprule
+Design & \cTwoG & \cFourTL \\
+\midrule
+\texttt{fft\_16pt\_iterative} & \yes & \yes \\
+\texttt{ifft\_16pt\_iterative} & \yes & \yes \\
+\texttt{aes\_encryption} & \yes\ GV & \no\ GV \\
+\texttt{aes\_decryption} & \yes\ GV & \no\ GV \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Model generality.}
+To test whether the hard-frontier result is specific to \texttt{gpt-5.5}, Table~\ref{tab:sonnet} repeats the strongest original-contract rows with Claude Sonnet 5.
+The original Level-4 FFT/IFFT rows solve on all three seeds under both \cTwoG and \cFourTL, and the Level-6 AES rows solve on all three seeds under \cTwoG with golden verification.
+Sonnet 5 does not solve AES under \cFourTL because the reference decomposition fails before localized repair can begin.
+For AES encryption, Sonnet 5 produces decompositions whose reference compositions fail the original system testbench; for AES decryption, it does not produce a usable reference composition within the generation budget.
+This indicates model-dependent sensitivity in the decomposition gate, while monolithic golden-feedback repair remains robust on the same AES rows.
+
+\textbf{Case study: original Level-4 FFT.}
+\texttt{fft\_16pt\_iterative} is a self-checking original-contract row, so no benchmark repair is involved.
+\cOne fails on all three main seeds, while \cTwoG and \cFourTL solve all three.
+The row therefore isolates the central mechanism: executable feedback can turn a direct-generation failure into a verified RTL solve without changing the released checker.
 
 \section{Executable-Contract Audit}
 

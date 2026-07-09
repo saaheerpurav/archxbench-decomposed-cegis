@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/butterfly_unit.v",
+  "sub_modules": {
+    "butterfly_unit": "Combinational radix-2 DIT butterfly: computes Q1.15 fixed-point complex rotation of x[q] with twiddle (cos,sin), then adds/subtracts with x[p] to produce updated pair.",
+    "twiddle_rom": "Combinational twiddle factor lookup table for N=16 FFT/IFFT (indices 0..8), storing cos_q15/sin_q15 values, with mode selecting conjugation for IFFT.",
+    "fft_index_gen": "Combinational index generator producing butterfly operand indices (p,q) and twiddle ROM index for a given stage and pair position in the iterative FSM.",
+    "bitrev4": "Combinational 4-bit bit-reversal permutation used to reorder inputs into DIT order before the butterfly stages."
+  }
+}

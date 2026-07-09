@@ -39,6 +39,10 @@ Completed on 2026-07-09: Priority 1 and Priority 2 C2g artifact collection on se
 
 Results: `conv2d`, `dct_idct_8pt_pipelined`, `aes_encryption`, `aes_decryption`, `conv1d`, `harris_corner_detection`, and repaired-contract `conv_3d` all solved 3/3 with golden verification and saved generated Verilog.
 
+Completed on 2026-07-09: Claude Sonnet 5 second-model validation on `fft_16pt_iterative`, `ifft_16pt_iterative`, `aes_encryption`, and `aes_decryption`, seeds `42,123,456`, conditions C2g and C4tl.
+
+Results: Sonnet 5 solves L4 FFT/IFFT 3/3 under both C2g and C4tl. It solves L6 AES encryption/decryption 3/3 under C2g with golden verification. AES C4tl fails reference decomposition on all six AES cells. Artifacts are under `artifacts/raw_runs/second_model_sonnet5_frontier_nothink_20260709/`.
+
 The authoritative queue is [RUNS_LEFT.md](RUNS_LEFT.md).
 
 The consolidated paper-facing tables are in [PAPER_TABLES.md](PAPER_TABLES.md).

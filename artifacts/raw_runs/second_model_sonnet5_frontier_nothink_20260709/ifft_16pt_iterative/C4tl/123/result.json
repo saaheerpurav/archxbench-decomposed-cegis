@@ -1,0 +1,24 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 5,
+  "best_passes": 33,
+  "total_tests": 33,
+  "solved": true,
+  "decomp_modules": [
+    "butterfly_unit",
+    "twiddle_rom",
+    "bitrev_addr",
+    "stage_index_gen"
+  ],
+  "ref_passes": 33,
+  "ref_total": 33,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "design": "ifft_16pt_iterative",
+  "model": "claude-sonnet-5",
+  "seed": 123,
+  "wall_seconds": 114.3,
+  "total_input_tokens": 27213,
+  "total_output_tokens": 13726
+}

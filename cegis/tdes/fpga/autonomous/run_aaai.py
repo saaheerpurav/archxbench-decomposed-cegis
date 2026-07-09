@@ -140,6 +140,7 @@ _MODEL_PRICING = {
     "gpt-5.5":  {"input": 5.0, "output": 30.0},
     "gpt-5.4":  {"input": 2.0, "output": 8.0},
     "gpt-4o":   {"input": 2.5, "output": 10.0},
+    "claude-sonnet-5": {"input": 3.0, "output": 15.0},
     "openai.gpt-oss-120b": {"input": 2.0, "output": 8.0},
 }
 

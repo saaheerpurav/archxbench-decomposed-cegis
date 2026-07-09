@@ -1,0 +1,15 @@
+{
+  "condition": "C2g",
+  "llm_calls": 1,
+  "best_passes": 8,
+  "total_tests": 8,
+  "solved": true,
+  "golden_correct": 8,
+  "golden_total": 8,
+  "design": "aes_encryption",
+  "model": "claude-sonnet-5",
+  "seed": 456,
+  "wall_seconds": 56.6,
+  "total_input_tokens": 2500,
+  "total_output_tokens": 7237
+}

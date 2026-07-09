@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/bitrev_addr.v",
+  "sub_modules": {
+    "bitrev_addr": "Combinational 4-bit bit-reversal address computation used to reorder input samples into bit-reversed order before the iterative FFT stages.",
+    "stage_index_gen": "Combinational logic that computes the butterfly pair indices (p_idx, q_idx) and twiddle ROM index for a given stage number and butterfly counter within that stage.",
+    "twiddle_rom": "Combinational lookup table providing Q1.15 fixed-point cos/sin twiddle coefficients for indices 0..15, matching the specified twiddle factor convention.",
+    "butterfly_unit": "Combinational radix-2 DIT butterfly: multiplies the q-sample by the twiddle factor (conjugated for IFFT mode), then computes p+t and p-t sum/difference outputs."
+  }
+}

@@ -39,6 +39,17 @@ Rules:
 | L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 where present | artifact-backed for C2g rows | useful ablation context |
 | L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong; C2g solves 3/3 | artifact-backed for C2g rows | C4i does not dominate C2g globally |
 
+## Table 2b: Second-Model Validation
+
+Claude Sonnet 5 was run as a non-GPT second-model check on the strongest hard-frontier rows. Artifacts: `artifacts/raw_runs/second_model_sonnet5_frontier_nothink_20260709/`.
+
+| Design | C2g | C4tl | Interpretation |
+|---|---:|---:|---|
+| `fft_16pt_iterative` | 3/3 | 3/3 | original L4 frontier result transfers to Sonnet 5 |
+| `ifft_16pt_iterative` | 3/3 | 3/3 | original L4 frontier result transfers to Sonnet 5 |
+| `aes_encryption` | 3/3 GV | 0/3 GV | C2g transfers on L6 AES; C4tl decomposition fails |
+| `aes_decryption` | 3/3 GV | 0/3 GV | C2g transfers on L6 AES; C4tl decomposition fails |
+
 ## Table 3: Repaired Executable-Contract Evidence
 
 These rows are not original ArchXBench solves.

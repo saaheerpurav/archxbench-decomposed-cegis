@@ -187,11 +187,19 @@ class LLMClient:
     def _call_via_anthropic(self, *, model: str, max_tokens: int, system: str,
                             messages: List[Dict], **kwargs) -> _Response:
         bedrock_model = _bedrock_model_id(model) if self._use_bedrock else model
+        extra = dict(kwargs)
+        if model == "claude-sonnet-5" and "thinking" not in extra:
+            extra["thinking"] = {"type": "disabled"}
         resp = self._get_anthropic().messages.create(
             model=bedrock_model, max_tokens=max_tokens, system=system,
-            messages=messages, **kwargs,
+            messages=messages, **extra,
         )
-        text = resp.content[0].text
+        text_parts = []
+        for block in resp.content:
+            block_text = getattr(block, "text", None)
+            if block_text:
+                text_parts.append(block_text)
+        text = "\n".join(text_parts)
         usage = _Usage(
             input_tokens=getattr(resp.usage, "input_tokens", 0) or 0,
             output_tokens=getattr(resp.usage, "output_tokens", 0) or 0,

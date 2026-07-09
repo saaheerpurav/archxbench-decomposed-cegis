@@ -1,0 +1,15 @@
+{
+  "condition": "C2g",
+  "llm_calls": 8,
+  "best_passes": 33,
+  "total_tests": 33,
+  "solved": true,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "ifft_16pt_iterative",
+  "model": "claude-sonnet-5",
+  "seed": 123,
+  "wall_seconds": 373.9,
+  "total_input_tokens": 204486,
+  "total_output_tokens": 44614
+}

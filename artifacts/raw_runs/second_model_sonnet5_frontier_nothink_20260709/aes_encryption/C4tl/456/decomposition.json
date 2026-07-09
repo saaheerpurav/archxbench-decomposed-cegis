@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/aes_sbox.v",
+  "sub_modules": {
+    "aes_sbox": "Combinational AES S-box lookup table (256x8) used for SubBytes and key expansion SubWord.",
+    "aes_key_expand_round": "Computes the next 128-bit round key from the previous round key and round constant (RotWord, SubWord, Rcon XOR, and word XOR chain).",
+    "aes_mixcolumns": "Combinational GF(2^8) MixColumns transform on a single 32-bit column.",
+    "aes_round_func": "Full AES round: SubBytes + ShiftRows + (optional) MixColumns + AddRoundKey, parameterized for last round (no MixColumns)."
+  }
+}

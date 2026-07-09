@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/butterfly_unit.v",
+  "sub_modules": {
+    "butterfly_unit": "Combinational radix-2 DIT butterfly unit that applies Q1.15 rounded complex multiply (twiddle rotation) to the q operand and computes p+t, p-t sums/differences.",
+    "twiddle_rom": "Combinational lookup table returning cos_q15/sin_q15 twiddle coefficients for index 0..8 per the specified Q1.15 table.",
+    "bitrev_addr": "Combinational 4-bit bit-reversal address generator used to permute input samples into bit-reversed order before butterfly stages.",
+    "stage_index_gen": "Combinational logic computing butterfly operand indices (idx_p, idx_q) and twiddle ROM index for a given FFT stage and butterfly number within that stage."
+  }
+}

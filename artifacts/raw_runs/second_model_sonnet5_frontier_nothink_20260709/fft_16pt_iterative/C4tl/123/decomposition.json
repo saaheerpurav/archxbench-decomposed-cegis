@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/bitrev_addr.v",
+  "sub_modules": {
+    "bitrev_addr": "Combinational 4-bit bit-reversal address generator used to reorder input samples into bit-reversed order for DIT FFT.",
+    "stage_index_gen": "Combinational generator that, given the current stage and butterfly counter, computes the butterfly pair indices p,q and the twiddle ROM index for that stage.",
+    "twiddle_rom": "Combinational ROM providing Q1.15 cos/sin twiddle factor values for a given index; negates sin component for IFFT (conjugated) mode.",
+    "butterfly_unit": "Combinational radix-2 DIT butterfly unit: multiplies the q-sample by the twiddle factor and computes sum/difference with the p-sample, producing updated p and q outputs."
+  }
+}

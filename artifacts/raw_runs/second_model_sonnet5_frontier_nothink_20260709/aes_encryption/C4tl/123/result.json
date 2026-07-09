@@ -1,0 +1,25 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 2,
+  "best_passes": 0,
+  "total_tests": 8,
+  "solved": false,
+  "decomp_modules": [
+    "aes_sbox",
+    "aes_mixcolumns",
+    "aes_round",
+    "aes_key_expand_round"
+  ],
+  "ref_passes": 0,
+  "ref_total": 8,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "aes_encryption",
+  "model": "claude-sonnet-5",
+  "seed": 123,
+  "wall_seconds": 236.4,
+  "total_input_tokens": 10600,
+  "total_output_tokens": 32425
+}

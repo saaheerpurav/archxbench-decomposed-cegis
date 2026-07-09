@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/aes_sbox.v",
+  "sub_modules": {
+    "aes_sbox": "Combinational AES S-box lookup table (256x8) used for SubBytes and key expansion SubWord.",
+    "aes_key_expand_round": "Combinational single-round AES-128 key expansion: RotWord, SubWord, Rcon XOR, and word-chain XORs to produce next 128-bit round key.",
+    "aes_round_function": "Combinational AES round transform: SubBytes, ShiftRows, optional MixColumns (skipped on last round), and AddRoundKey."
+  }
+}

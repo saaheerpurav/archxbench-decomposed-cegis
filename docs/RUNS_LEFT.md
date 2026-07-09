@@ -6,13 +6,17 @@ This is the only run queue. It is derived from:
 - `artifacts/inventories/repaired_contract_run_matrix.csv`
 - `artifacts/inventories/log_metric_only_results.csv`
 
-Last audited: 2026-07-09 after C2g artifact collection for Priority 1 and Priority 2 rows.
+Last audited: 2026-07-09 after Claude Sonnet 5 second-model validation.
 
 Primary goal: ASP-DAC 2027 acceptance. Time is not a constraint. Do not sacrifice experimental cleanliness for speed, and do not run benchmark repairs just to convert failures into wins. Repairs must be minimal, principled, oracle-validated, and reported separately from original ArchXBench results.
 
 ## Required Runs
 
 No experiment runs remain in the current paper-cleanliness queue.
+
+Completed on 2026-07-09: Claude Sonnet 5 second-model validation on the strongest frontier rows.
+
+Results: `fft_16pt_iterative` and `ifft_16pt_iterative` solve 3/3 with both C2g and C4tl; `aes_encryption` and `aes_decryption` solve 3/3 with C2g; AES C4tl fails reference decomposition on 6/6 seeds. Artifacts are under `artifacts/raw_runs/second_model_sonnet5_frontier_nothink_20260709/`.
 
 The selected L3 C4tl condition-coverage batch has been completed on seeds `42,123,456`.
 
@@ -116,7 +120,7 @@ Additional paper-strengthening work that is not a run queue:
 
 No experiment run is currently queued.
 
-Remaining work before submission is paper writing and final manuscript consistency checks. The Priority 1 and Priority 2 artifact-release cleanup queue is complete.
+Remaining work before submission is paper writing and final manuscript consistency checks. The Priority 1 and Priority 2 artifact-release cleanup queue and the Sonnet 5 second-model validation are complete.
 
 ## Execution Rules
 
