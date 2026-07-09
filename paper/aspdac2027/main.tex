@@ -55,15 +55,15 @@
 }
 
 \begin{abstract}
-Large language models generate short RTL fragments but fail on benchmark-level hardware synthesis.
-\arch exposes this gap: frontier models solve lower-level tasks but produce near-zero pass rates from Level~4 onward under direct prompting.
-This paper evaluates whether verifier-grounded autonomous synthesis can cross that failure frontier.
+Large language models can generate short RTL fragments, but benchmark-level hardware synthesis requires executable correctness: simulation, protocol consistency, and golden-output agreement.
+\arch exposes this gap through a reported hard-task frontier beginning at Level~4 under direct prompting.
+This paper evaluates whether verifier-grounded autonomous synthesis can cross that frontier without confusing model failures with benchmark-contract failures.
 Four conditions are compared on \arch Levels~3--6: single-shot generation (\cOne), monolithic golden-feedback repair (\cTwoG), decomposition-guided iterative repair (\cFourI), and testbench-localized decomposition (\cFourTL).
 \cFourI solves five Level-3 numerical kernels at 3/3 seeds where both \cOne and \cTwoG fail.
 \cFourTL solves all four core Level-4 designs (including 16-point FFT/IFFT) at 5/5 seeds.
 Golden-verified Level-5 and Level-6 solves are obtained on convolution, image-processing, and AES designs.
 Decomposition is not universally superior: \cTwoG solves several Level-5 rows that decomposed methods do not.
-A second contribution is an executable-contract audit that separates original-benchmark solves from minimally repaired contract fixtures, exposing both benchmark defects and genuine unsolved capability boundaries.
+The central contribution is an executable-contract-aware synthesis methodology: original-benchmark solves, minimally repaired executable contracts, and held rows are separated before success is claimed.
 Code and artifacts are available.\footnote{Repository URL withheld for double-blind review.}
 \end{abstract}
 
@@ -73,11 +73,6 @@ Code and artifacts are available.\footnote{Repository URL withheld for double-bl
 <concept_id>10010520.10010553.10010562</concept_id>
 <concept_desc>Computer systems organization~Embedded systems</concept_desc>
 <concept_significance>500</concept_significance>
-</concept>
-<concept>
-<concept_id>10010520.10010553.10010554</concept_id>
-<concept_desc>Computer systems organization~Robotics</concept_desc>
-<concept_significance>100</concept_significance>
 </concept>
 <concept>
 <concept_id>10010520.10010575.10010755</concept_id>
@@ -106,8 +101,7 @@ Hard RTL synthesis therefore tests whether autonomous agents can handle low-leve
 
 This paper studies the problem on \arch, a benchmark suite for complex RTL synthesis~\cite{purini2025archxbench}.
 Unlike VerilogEval~\cite{liu2023verilogeval} and RTLLM~\cite{lu2023rtllm}, which target smaller designs, \arch spans arithmetic kernels, FFTs, filters, image processing, matrix multiplication, and cryptography across six difficulty levels.
-The \arch paper reports that frontier models solve lower levels but fail from Level~4 onward under zero-shot pass@5.
-This Level-4 boundary is the starting point of the present study.
+The \arch paper reports a direct-generation frontier beginning at Level~4: lower levels are broadly reachable, while hard Level-4 rows such as FFT/IFFT expose near-zero zero-shot pass@5 behavior.
 If an autonomous synthesis loop can solve rows beyond it, the evaluation question changes from ``can an LLM emit a complete design in one shot?'' to ``can a verifier-grounded agent converge to correct RTL?''
 
 The central question is: \emph{can verifier-grounded autonomous synthesis solve hard RTL benchmark tasks that direct generation does not solve, while maintaining a clear distinction between model failures and benchmark-contract failures?}
@@ -121,9 +115,9 @@ It is evidence that verifier-grounded synthesis, in both monolithic and decompos
 
 This paper makes three contributions:
 \begin{enumerate}[leftmargin=*]
-    \item It demonstrates verifier-grounded autonomous synthesis solving hard \arch rows beyond the direct-generation frontier, including robust Level-4 original-contract solves and golden-verified Level-5/Level-6 solves.
-    \item It compares four synthesis conditions under a common artifact discipline, showing where each succeeds or fails.
-    \item It introduces an executable-contract audit that separates original-contract results, repaired-contract results, and held rows.
+    \item It introduces an executable-contract-aware evaluation discipline for autonomous RTL synthesis: released contracts, minimally repaired executable contracts, and held rows are separated before positive claims are made.
+    \item It gives a verifier-grounded synthesis algorithm that instantiates direct generation, monolithic repair, decomposition-guided repair, and testbench-localized repair as controlled ablations of feedback, decomposition, reference validation, and localization.
+    \item It demonstrates hard \arch solves beyond the reported direct-generation frontier, including robust Level-4 original-contract FFT/IFFT solves and golden-verified Level-5/Level-6 solves.
 \end{enumerate}
 
 \section{Related Work}
@@ -243,6 +237,7 @@ arr/.style={-{Latex[length=1.4mm]},thick}
 Table~\ref{tab:method-compare} summarizes the operational differences among the four conditions.
 All conditions receive the same specification, module interface, and released testbench.
 The difference is how much executable feedback enters the loop and whether the design is treated as a monolith or decomposed into modules.
+Thus the four conditions are also ablations: \cOne removes feedback, \cTwoG removes decomposition, \cFourI adds decomposition without localized repair, and \cFourTL adds a strict reference gate plus localization.
 
 \begin{table}[t]
 \centering
@@ -261,6 +256,29 @@ Cond. & Decomp. & Ref.\ gate & Golden fb. & Local repair & Budget \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{table*}[t]
+\centering
+\caption{Algorithm 1: executable-contract-aware verifier-grounded RTL synthesis. The condition parameter selects \cOne, \cTwoG, \cFourI, or \cFourTL by enabling feedback, decomposition, reference gating, and localization.}
+\label{alg:synthesis}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{rp{0.88\textwidth}}
+\toprule
+ & \textbf{Input:} specification $S$, released fixture $B$, condition $c$, seed $s$, budget $T$ \\
+ & \textbf{Output:} \textsc{solved}, \textsc{unsolved}, or \textsc{held} with artifact record \\
+\midrule
+1 & Classify $B$ using Fig.~\ref{tab:contracts}. If no executable oracle can be recovered, return \textsc{held}. \\
+2 & If $c$ uses decomposition, ask the model for interfaces, top wrapper, and reference modules $R_1,\ldots,R_n$; otherwise set $n=1$ and target the whole design. \\
+3 & If $c$ uses a reference gate, simulate the composed references against $B$; retry decomposition with failure feedback, and abort if no valid reference composition is found. \\
+4 & Generate candidate RTL modules $M_1,\ldots,M_n$ from $S$, $B$, references, and seed $s$. \\
+5 & For each repair round $t \leq T$: simulate the composed candidate; compute pass/golden score; if all executable checks pass, save RTL and return \textsc{solved}. \\
+6 & Select a repair target. \cTwoG selects the whole design; \cFourI selects the next module in fixed order; \cFourTL swaps each $M_i$ with $R_i$ and selects the module with the largest system-score improvement. \\
+7 & Repair only the selected target using compile errors, failing indices, expected/actual values, swap scores, and the relevant reference implementation; then continue from Step~5. \\
+8 & Save the final artifact and return \textsc{unsolved}. \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
 \textbf{\cOne: direct generation.}
 The model receives the specification and testbench excerpt and emits RTL five independent times.
@@ -306,32 +324,46 @@ This loop repeats until the system checker passes or the budget is exhausted.
 The localization mechanism is the central algorithmic distinction.
 \cFourI repairs modules in a fixed order; \cFourTL uses system-level evidence to identify which module is most implicated.
 For tightly coupled pipelines such as the 16-point FFT, this targeted approach avoids diffuse repair of modules that may not be at fault.
+The localization step is heuristic rather than a correctness guarantee.
+It is strongest when the reference composition is valid and one module dominates the observed failure.
+It can be misled by coupled multi-module bugs, bad decompositions, or errors whose effects are masked until multiple modules are replaced together.
 
 \begin{figure}[t]
 \centering
 \resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[
-    node distance=0.34cm and 0.40cm,
-    box/.style={draw, rounded corners=1.5pt, align=center, minimum width=1.85cm, minimum height=0.62cm, font=\scriptsize},
+    node distance=0.35cm and 0.38cm,
+    stage/.style={draw, rounded corners=2pt, align=center, minimum width=1.55cm, minimum height=0.58cm, font=\scriptsize, fill=hmneutral},
+    gatebox/.style={draw, rounded corners=2pt, align=center, minimum width=1.55cm, minimum height=0.58cm, font=\scriptsize, fill=hmpartial},
+    passbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.25cm, minimum height=0.50cm, font=\scriptsize, fill=hmsolve},
+    failbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.55cm, minimum height=0.58cm, font=\scriptsize, fill=hmfail},
+    lane/.style={draw, rounded corners=3pt, dashed, inner sep=3pt},
     arrow/.style={-{Latex[length=1.5mm]}, thick}
 ]
-\node[box] (spec) {Spec +\\testbench};
-\node[box, right=of spec] (decomp) {Decompose\\interfaces};
-\node[box, right=of decomp] (gate) {Reference\\gate};
-\node[box, right=of gate] (impl) {Generate /\\repair RTL};
-\node[box, below=of impl] (sim) {Simulate +\\golden check};
-\node[box, left=of sim] (feedback) {Localize\\fault};
-\draw[arrow] (spec) -- (decomp);
+\node[stage] (spec) {Spec +\\fixture};
+\node[gatebox, right=of spec] (audit) {Contract\\audit};
+\node[stage, right=of audit] (decomp) {Decompose\\or monolith};
+\node[gatebox, right=of decomp] (gate) {Reference\\gate};
+\node[stage, below=0.58cm of gate] (impl) {Generate /\\repair RTL};
+\node[stage, left=of impl] (sim) {Simulate +\\golden check};
+\node[failbox, left=of sim] (feedback) {Localize\\fault};
+\node[passbox, right=of impl] (pass) {pass};
+\draw[arrow] (spec) -- (audit);
+\draw[arrow] (audit) -- (decomp);
 \draw[arrow] (decomp) -- (gate);
-\draw[arrow] (gate) -- (impl);
+\draw[arrow] (gate) -- node[right,font=\tiny] {valid} (impl);
 \draw[arrow] (impl) -- (sim);
-\draw[arrow] (sim) -- (feedback);
-\draw[arrow] (feedback) -- (impl);
-\draw[arrow] (sim.east) -- ++(0.55,0) node[right, font=\scriptsize] {pass};
+\draw[arrow] (sim) -- node[above,font=\tiny] {fail} (feedback);
+\draw[arrow] (feedback) -- node[below,font=\tiny] {targeted repair} (impl);
+\draw[arrow] (impl) -- (pass);
+\node[lane, fit=(spec)(audit)] (trust) {};
+\node[lane, fit=(decomp)(gate)(impl)(sim)(feedback)(pass)] (synth) {};
+\node[font=\tiny, above=0.5mm of trust] {trustworthy contract};
+\node[font=\tiny, above=0.5mm of synth] {verifier-grounded synthesis loop};
 \end{tikzpicture}
 }
-\Description{Pipeline: specification and testbench input, decomposition, reference validation, RTL generation, simulation with golden checking, fault localization, and repair.}
-\caption{\cFourTL pipeline. The reference gate validates the decomposition. On simulation failure, trace-lifted localization identifies the culprit module. Only that module is repaired.}
+\Description{Pipeline with two lanes: trustworthy contract audit followed by verifier-grounded decomposition, reference validation, RTL generation, golden checking, fault localization, and targeted repair.}
+\caption{\cFourTL pipeline. The method first establishes an executable contract, then validates a reference decomposition before entering a golden-feedback loop. On failure, swap-based localization chooses one culprit module for targeted repair.}
 \label{fig:pipeline}
 \end{figure}
 
@@ -492,6 +524,7 @@ Second, the checker is classified (self-checking, file-output with golden, displ
 Third, file-output rows are judged only by post-simulation golden comparison.
 Fourth, infrastructure repairs are applied only in copied fixtures and only when the intended oracle is recoverable from released assets.
 Fifth, unresolved rows are held rather than converted into positive results.
+The repair rule is intentionally narrow: a repaired fixture may make an existing oracle executable or repair file-format infrastructure, but it may not change the semantic task, introduce hidden target behavior, or move a row into the original-contract table.
 
 Table~\ref{tab:repaired} reports the repaired-contract evidence.
 These rows are not counted as original \arch solves.
