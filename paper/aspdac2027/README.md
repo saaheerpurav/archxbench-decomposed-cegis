@@ -17,7 +17,7 @@ ASP-DAC 2027 requires:
 The current draft uses:
 
 ```tex
-\documentclass[sigconf,review,anonymous]{acmart}
+\documentclass[sigconf,review]{acmart}
 ```
 
 ## Build
@@ -27,7 +27,7 @@ MiKTeX is installed locally on this machine.
 The current PDF build is:
 
 - `main.pdf`
-- 5 pages in ACM `sigconf` review/anonymous format
+- 6 pages in ACM `sigconf` review format
 
 The command used locally is:
 
