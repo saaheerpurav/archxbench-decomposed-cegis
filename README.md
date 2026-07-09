@@ -6,6 +6,8 @@ Working paper title:
 
 **Autonomous Synthesis of Hard RTL Designs via Iterative Repair and Modular Decomposition**
 
+Target venue: ASP-DAC 2027 (32nd Asia and South Pacific Design Automation Conference).
+
 Start with [docs/STATUS.md](docs/STATUS.md). It defines the current paper state, clean claims, secondary evidence, diagnostics, and run queue.
 
 Supporting files:
