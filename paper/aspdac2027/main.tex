@@ -1,4 +1,4 @@
-\documentclass[sigconf,review,anonymous]{acmart}
+\documentclass[sigconf,anonymous]{acmart}
 
 \setcopyright{none}
 \acmConference[ASP-DAC '27]{32nd Asia and South Pacific Design Automation Conference}{January 25--28, 2027}{Tokyo, Japan}
@@ -55,7 +55,7 @@
 }
 
 \begin{abstract}
-Large language models can generate short RTL fragments, but benchmark-level hardware synthesis requires executable correctness: simulation, protocol consistency, and golden-output agreement.
+Large language models can generate short register-transfer level (RTL) fragments, but benchmark-level hardware synthesis requires executable correctness: simulation, protocol consistency, and golden-output agreement.
 \arch exposes this gap through a reported hard-task frontier beginning at Level~4 under direct prompting.
 This paper evaluates whether verifier-grounded autonomous synthesis can cross that frontier without confusing model failures with benchmark-contract failures.
 Four conditions are compared on \arch Levels~3--6: single-shot generation (\cOne), monolithic golden-feedback repair (\cTwoG), decomposition-guided iterative repair (\cFourI), and testbench-localized decomposition (\cFourTL).
@@ -86,7 +86,7 @@ Code and artifacts are available.\footnote{Repository URL withheld for double-bl
 \ccsdesc[500]{Hardware~Electronic design automation}
 \ccsdesc[300]{Software and its engineering~Automatic programming}
 
-\keywords{RTL synthesis, Verilog generation, LLM agents, CEGIS, hardware verification, benchmark evaluation}
+\keywords{benchmark evaluation, CEGIS, hardware verification, LLM agents, RTL synthesis, Verilog generation}
 
 \maketitle
 
@@ -98,6 +98,7 @@ For hardware design, the question is harder: can an autonomous agent synthesize 
 
 RTL correctness depends on bit widths, signedness, clocking, reset protocols, pipeline latency, and streaming handshakes.
 Hard RTL synthesis therefore tests whether autonomous agents can handle low-level, state-dependent, timing-sensitive design, not just surface-level code generation.
+The severity is practical: an RTL generator that compiles but mishandles latency, signed arithmetic, or output encoding can pass superficial checks while producing unusable hardware.
 
 This paper studies the problem on \arch, a benchmark suite for complex RTL synthesis~\cite{purini2025archxbench}.
 Unlike VerilogEval~\cite{liu2023verilogeval} and RTLLM~\cite{lu2023rtllm}, which target smaller designs, \arch spans arithmetic kernels, FFTs, filters, image processing, matrix multiplication, and cryptography across six difficulty levels.
@@ -115,9 +116,9 @@ It is evidence that verifier-grounded synthesis, in both monolithic and decompos
 
 This paper makes three contributions:
 \begin{enumerate}[leftmargin=*]
-    \item It introduces an executable-contract-aware evaluation discipline for autonomous RTL synthesis: released contracts, minimally repaired executable contracts, and held rows are separated before positive claims are made.
-    \item It gives a verifier-grounded synthesis algorithm that instantiates direct generation, monolithic repair, decomposition-guided repair, and testbench-localized repair as controlled ablations of feedback, decomposition, reference validation, and localization.
-    \item It demonstrates hard \arch solves beyond the reported direct-generation frontier, including robust Level-4 original-contract FFT/IFFT solves and golden-verified Level-5/Level-6 solves.
+    \item The proposed work introduces an executable-contract-aware evaluation discipline for autonomous RTL synthesis: released contracts, minimally repaired executable contracts, and held rows are separated before positive claims are made.
+    \item The proposed work gives a verifier-grounded synthesis algorithm that instantiates direct generation, monolithic repair, decomposition-guided repair, and testbench-localized repair as controlled ablations of feedback, decomposition, reference validation, and localization.
+    \item The proposed work demonstrates hard \arch solves beyond the reported direct-generation frontier, including robust Level-4 original-contract FFT/IFFT solves and golden-verified Level-5/Level-6 solves.
 \end{enumerate}
 
 \section{Related Work}
@@ -140,8 +141,7 @@ RTL-BenchMT studies agent-assisted benchmark maintenance, including flawed-case 
 FormalRTL integrates software references and formal equivalence checking into a multi-agent RTL synthesis flow~\cite{li2026formalrtl}.
 RTL-BenchLS proposes a large formally verified RTL benchmark for reasoning and generation tasks~\cite{wang2026rtlbenchls}.
 
-This study differs in emphasis.
-It evaluates on \arch Levels~3--6, including rows at and above the reported Level-4 frontier.
+Our work evaluates on \arch Levels~3--6, including rows at and above the reported Level-4 frontier.
 It separates original benchmark contracts from repaired executable contracts.
 This distinction matters because an RTL benchmark can fail either because the generated design is wrong or because the released testbench, file format, or golden comparator is inconsistent.
 RTL-BenchMT validates that benchmark ambiguity is a first-order issue; FormalRTL and RTL-BenchLS show the value of stronger executable or formal oracles.
@@ -379,6 +379,7 @@ Native simulation completion alone is treated as diagnostic evidence, not as a s
 
 The evaluation covers \arch Levels~3--6: iterative arithmetic, FFT/IFFT, floating-point pipelines, FIR filters, image-processing kernels, matrix multiplication, and AES.
 Lower levels are excluded because the \arch paper reports that current models already solve them.
+Execution uses repository scripts with Python orchestration, Icarus Verilog (\texttt{iverilog}), and the VVP runtime (\texttt{vvp}); each candidate is compiled before simulation and self-checking or golden-output comparison.
 
 \subsection{Seeds, Model, and Metrics}
 
@@ -391,7 +392,7 @@ The primary model is GPT-5.5 as recorded in the repository artifacts.
 A clean solve requires all official checks to pass (self-checking designs) or all golden outputs to match (file-output designs).
 Solve rates are reported over seeds.
 
-All methods run as executable synthesis loops using Icarus Verilog; the method budgets are summarized in Table~\ref{tab:method-compare}.
+All methods run as executable synthesis loops; the method budgets are summarized in Table~\ref{tab:method-compare}.
 
 Table~\ref{tab:perdesign} reports per-design statistics for selected solved rows, averaged over seeds.
 These illustrate the practical cost of individual solves: the Level-4 FFT solves in roughly 5 minutes and 6 LLM calls, while harder designs such as \texttt{harris\_corner\_detection} require 10.7 calls and 9.4 minutes.
