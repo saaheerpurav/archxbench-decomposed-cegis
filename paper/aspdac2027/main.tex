@@ -55,12 +55,12 @@
 }
 
 \begin{abstract}
-Large language models can generate short register-transfer level (RTL) fragments, but benchmark-level hardware synthesis requires executable correctness: simulation, protocol consistency, and golden-output agreement.
+Large language models can generate short register-transfer level (RTL) fragments, but benchmark-level hardware synthesis requires executable correctness: simulation success, protocol consistency, and golden-output agreement.
 \arch exposes this gap through a reported hard-task frontier beginning at Level~4 under direct prompting.
 This paper evaluates whether verifier-grounded autonomous synthesis can cross that frontier without confusing model failures with benchmark-contract failures.
 Four conditions are compared on \arch Levels~3--6: single-shot generation (\cOne), monolithic golden-feedback repair (\cTwoG), decomposition-guided iterative repair (\cFourI), and testbench-localized decomposition (\cFourTL).
 \cFourI solves five Level-3 numerical kernels at 3/3 seeds where both \cOne and \cTwoG fail.
-\cFourTL solves all four core Level-4 designs (including 16-point FFT/IFFT) at 5/5 seeds.
+\cFourTL solves all four core Level-4 designs, including 16-point FFT/IFFT, at 5/5 seeds.
 Golden-verified Level-5 and Level-6 solves are obtained on convolution, image-processing, and AES designs.
 Decomposition is not universally superior: \cTwoG solves several Level-5 rows that decomposed methods do not.
 The central contribution is an executable-contract-aware synthesis methodology: original-benchmark solves, minimally repaired executable contracts, and held rows are separated before success is claimed.
@@ -333,10 +333,10 @@ It can be misled by coupled multi-module bugs, bad decompositions, or errors who
 \resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[
     node distance=0.35cm and 0.38cm,
-    stage/.style={draw, rounded corners=2pt, align=center, minimum width=1.55cm, minimum height=0.58cm, font=\scriptsize, fill=hmneutral},
-    gatebox/.style={draw, rounded corners=2pt, align=center, minimum width=1.55cm, minimum height=0.58cm, font=\scriptsize, fill=hmpartial},
+    stage/.style={draw, rounded corners=2pt, align=center, minimum width=1.65cm, minimum height=0.60cm, font=\scriptsize, fill=hmneutral},
+    gatebox/.style={draw, rounded corners=2pt, align=center, minimum width=1.65cm, minimum height=0.60cm, font=\scriptsize, fill=hmpartial},
     passbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.25cm, minimum height=0.50cm, font=\scriptsize, fill=hmsolve},
-    failbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.55cm, minimum height=0.58cm, font=\scriptsize, fill=hmfail},
+    failbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.65cm, minimum height=0.60cm, font=\scriptsize, fill=hmfail},
     lane/.style={draw, rounded corners=3pt, dashed, inner sep=3pt},
     arrow/.style={-{Latex[length=1.5mm]}, thick}
 ]
@@ -345,7 +345,7 @@ It can be misled by coupled multi-module bugs, bad decompositions, or errors who
 \node[stage, right=of audit] (decomp) {Decompose\\or monolith};
 \node[gatebox, right=of decomp] (gate) {Reference\\gate};
 \node[stage, below=0.58cm of gate] (impl) {Generate /\\repair RTL};
-\node[stage, left=of impl] (sim) {Simulate +\\golden check};
+\node[stage, left=of impl] (sim) {Simulate\\+ golden\\check};
 \node[failbox, left=of sim] (feedback) {Localize\\fault};
 \node[passbox, right=of impl] (pass) {pass};
 \draw[arrow] (spec) -- (audit);
@@ -354,10 +354,12 @@ It can be misled by coupled multi-module bugs, bad decompositions, or errors who
 \draw[arrow] (gate) -- node[right,font=\tiny] {valid} (impl);
 \draw[arrow] (impl) -- (sim);
 \draw[arrow] (sim) -- node[above,font=\tiny] {fail} (feedback);
-\draw[arrow] (feedback) -- node[below,font=\tiny] {targeted repair} (impl);
+\path (feedback.south) -- ++(0,-0.28cm) coordinate (fbdown);
+\path (impl.south) -- ++(0,-0.28cm) coordinate (impdown);
+\draw[arrow] (feedback.south) -- (fbdown) -- node[below,font=\tiny] {targeted repair} (impdown) -- (impl.south);
 \draw[arrow] (impl) -- (pass);
 \node[lane, fit=(spec)(audit)] (trust) {};
-\node[lane, fit=(decomp)(gate)(impl)(sim)(feedback)(pass)] (synth) {};
+\node[lane, fit=(decomp)(gate)(impl)(sim)(feedback)(pass)(fbdown)(impdown)] (synth) {};
 \node[font=\tiny, above=0.5mm of trust] {trustworthy contract};
 \node[font=\tiny, above=0.5mm of synth] {verifier-grounded synthesis loop};
 \end{tikzpicture}
