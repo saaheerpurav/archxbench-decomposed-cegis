@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fft16_bit_reverse.v",
+  "sub_modules": {
+    "fft16_bit_reverse": "Combinational bit-reversal mapper used while loading natural-order input samples into DIT order.",
+    "fft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient lookup table for N=16 cosine and sine values.",
+    "fft16_butterfly": "Combinational radix-2 complex butterfly with fixed-point twiddle multiplication and FFT/IFFT twiddle sign selection.",
+    "fft16_ifft_scale": "Combinational final output scaler that divides IFFT results by N=16 while leaving FFT results unscaled."
+  }
+}

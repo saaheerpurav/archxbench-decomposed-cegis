@@ -951,6 +951,12 @@ artifacts/raw_runs/c2g_artifact_collection_20260709_repaired/conv_3d/C2g/456/res
 artifacts/raw_runs/c4a_debug/dct_idct_8pt_pipelined/C4a/42/result.json,raw_runs,c4a_debug,mixed,dct_idct_8pt_pipelined,C4a,gpt-5.5,42,False,0/1,0/1,40,2989.8,True,6
 artifacts/raw_runs/c4a_debug/fft_16pt_iterative/C4a/42/result.json,raw_runs,c4a_debug,mixed,fft_16pt_iterative,C4a,gpt-5.5,42,False,30/33,0/1,40,2400.3,True,5
 artifacts/raw_runs/c4a_debug/newton_raphson_polynomial/C4a/456/result.json,raw_runs,c4a_debug,mixed,newton_raphson_polynomial,C4a,gpt-5.5,456,False,97/100,,40,2491.7,True,6
+artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/fft_16pt_iterative/C4i-randOrder/123/result.json,raw_runs,c4i_rand_order_fft_ifft_20260713,mixed,fft_16pt_iterative,C4i-randOrder,gpt-5.5,123,True,33/33,,10,747.2,True,6
+artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/fft_16pt_iterative/C4i-randOrder/42/result.json,raw_runs,c4i_rand_order_fft_ifft_20260713,mixed,fft_16pt_iterative,C4i-randOrder,gpt-5.5,42,True,33/33,,5,421.5,True,5
+artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/fft_16pt_iterative/C4i-randOrder/456/result.json,raw_runs,c4i_rand_order_fft_ifft_20260713,mixed,fft_16pt_iterative,C4i-randOrder,gpt-5.5,456,False,4/33,,29,1908.3,True,5
+artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/ifft_16pt_iterative/C4i-randOrder/123/result.json,raw_runs,c4i_rand_order_fft_ifft_20260713,mixed,ifft_16pt_iterative,C4i-randOrder,gpt-5.5,123,False,14/33,,26,1626.3,True,6
+artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/ifft_16pt_iterative/C4i-randOrder/42/result.json,raw_runs,c4i_rand_order_fft_ifft_20260713,mixed,ifft_16pt_iterative,C4i-randOrder,gpt-5.5,42,False,10/33,,29,1948.5,True,5
+artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/ifft_16pt_iterative/C4i-randOrder/456/result.json,raw_runs,c4i_rand_order_fft_ifft_20260713,mixed,ifft_16pt_iterative,C4i-randOrder,gpt-5.5,456,True,33/33,,5,354.9,True,5
 artifacts/raw_runs/c4m_debug/newton_raphson_polynomial/C4m/456/result.json,raw_runs,c4m_debug,mixed,newton_raphson_polynomial,C4m,gpt-5.5,456,False,17/100,,30,1395.0,True,6
 artifacts/raw_runs/conv3d_debug/conv_3d/C2g/42/result.json,raw_runs,conv3d_debug,mixed,conv_3d,C2g,gpt-5.5,42,False,0/0,,30,2611.0,False,0
 artifacts/raw_runs/conv3d_debug/conv_3d/C4tl/42/result.json,raw_runs,conv3d_debug,mixed,conv_3d,C4tl,gpt-5.5,42,False,0/0,,29,2609.5,True,6

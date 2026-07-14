@@ -6,7 +6,7 @@ This is the only run queue. It is derived from:
 - `artifacts/inventories/repaired_contract_run_matrix.csv`
 - `artifacts/inventories/log_metric_only_results.csv`
 
-Last audited: 2026-07-09 after Claude Sonnet 5 second-model validation.
+Last audited: 2026-07-13 after C4i randomized-module-order ablation.
 
 Primary goal: ASP-DAC 2027 acceptance. Time is not a constraint. Do not sacrifice experimental cleanliness for speed, and do not run benchmark repairs just to convert failures into wins. Repairs must be minimal, principled, oracle-validated, and reported separately from original ArchXBench results.
 
@@ -17,6 +17,10 @@ No experiment runs remain in the current paper-cleanliness queue.
 Completed on 2026-07-09: Claude Sonnet 5 second-model validation on the strongest frontier rows.
 
 Results: `fft_16pt_iterative` and `ifft_16pt_iterative` solve 3/3 with both C2g and C4tl; `aes_encryption` and `aes_decryption` solve 3/3 with C2g; AES C4tl fails reference decomposition on 6/6 seeds. Artifacts are under `artifacts/raw_runs/second_model_sonnet5_frontier_nothink_20260709/`.
+
+Completed on 2026-07-13: C4i randomized-module-order mechanism ablation on the L4 FFT/IFFT rows.
+
+Results: `fft_16pt_iterative` C4i-randOrder solves 2/3 seeds (`42,123`) and `ifft_16pt_iterative` solves 1/3 seed (`456`). All six cells have saved `result.json` and `verilog/*.v` artifacts under `artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/`. This supports the mechanistic claim that repair order matters, but C4tl remains more reliable than randomizing C4i order.
 
 The selected L3 C4tl condition-coverage batch has been completed on seeds `42,123,456`.
 
@@ -93,7 +97,7 @@ Do not run these unless a principled benchmark-contract audit changes the status
 
 ## Artifact Collection Completed
 
-Trusted score-only rows are valid experimental results. Missing generated RTL is artifact collection debt for paper/code release, not a reason to discard the score.
+Historical trusted score-only rows are valid logged results only when recorded in the inventory. The Priority 1 and Priority 2 C2g artifact-collection rows are no longer pending; they have saved generated RTL.
 
 The Priority 1 and Priority 2 C2g artifact-collection reruns were completed on 2026-07-09. Every listed cell below has both `result.json` and at least one generated Verilog file under `verilog/*.v`.
 
@@ -120,7 +124,7 @@ Additional paper-strengthening work that is not a run queue:
 
 No experiment run is currently queued.
 
-Remaining work before submission is paper writing and final manuscript consistency checks. The Priority 1 and Priority 2 artifact-release cleanup queue and the Sonnet 5 second-model validation are complete.
+Remaining work before submission is paper writing and final manuscript consistency checks. The Priority 1 and Priority 2 artifact-release cleanup queue, Sonnet 5 second-model validation, and C4i randomized-order ablation are complete.
 
 ## Execution Rules
 

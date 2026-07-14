@@ -1,0 +1,29 @@
+{
+  "condition": "C4i-randOrder",
+  "llm_calls": 29,
+  "best_passes": 4,
+  "total_tests": 33,
+  "solved": false,
+  "decomp_modules": [
+    "fft16_bit_reverse",
+    "fft16_twiddle_rom",
+    "fft16_butterfly",
+    "fft16_ifft_scale"
+  ],
+  "module_visit_order": [
+    "fft16_bit_reverse",
+    "fft16_butterfly",
+    "fft16_twiddle_rom",
+    "fft16_ifft_scale"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "random_order_seed": 456,
+  "design": "fft_16pt_iterative",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 1908.3,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/ifft16_addr_gen.v",
+  "sub_modules": {
+    "ifft16_addr_gen": "Combinational radix-2 DIT stage address and twiddle-index generator.",
+    "ifft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient lookup table for 16-point IFFT positive-exponential factors.",
+    "ifft16_complex_mult": "Combinational fixed-point complex multiplier with Q1.15 rounded coefficient scaling.",
+    "ifft16_butterfly": "Combinational radix-2 complex butterfly using the reusable complex multiplier."
+  }
+}

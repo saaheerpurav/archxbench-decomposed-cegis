@@ -22,6 +22,7 @@ import asyncio
 import json
 import logging
 import os
+import random
 import re
 import sys
 import time
@@ -118,7 +119,7 @@ _LEVEL_DIRS = {
 
 ALL_DESIGNS = _LEVEL_DESIGNS["L4"]  # backwards compat
 
-ALL_CONDITIONS = ["C1", "C2", "C2g", "C3", "C4", "C4i", "C4i-noStudy", "C4i-stateless", "C4i-rawFail", "C4i-noRef", "C4tl", "C4m", "C4a", "C5"]
+ALL_CONDITIONS = ["C1", "C2", "C2g", "C3", "C4", "C4i", "C4i-randOrder", "C4i-noStudy", "C4i-stateless", "C4i-rawFail", "C4i-noRef", "C4tl", "C4m", "C4a", "C5"]
 
 # Priority design lists for budget-constrained runs
 _PRIORITY_DESIGNS = {
@@ -1047,6 +1048,8 @@ def run_C4i(
     multi_turn: bool = True,
     diagnostic: bool = True,
     show_ref: bool = True,
+    module_order: Optional[List[int]] = None,
+    module_order_seed: Optional[int] = None,
 ) -> dict:
     """Investigative CEGIS with ablation flags.
 
@@ -1068,7 +1071,12 @@ def run_C4i(
     module_solve_rounds = {}
     build_fix = _build_fix_prompt_diagnostic if diagnostic else _build_fix_prompt_raw
 
-    for idx, sub in enumerate(decomp.sub_modules):
+    visit_order = module_order if module_order is not None else list(range(len(decomp.sub_modules)))
+    if module_order_seed is not None and module_order is None:
+        random.Random(module_order_seed).shuffle(visit_order)
+
+    for idx in visit_order:
+        sub = decomp.sub_modules[idx]
         context = _sub_context(decomp, idx)
         current_source = sub.skeleton_source
         conversation = []
@@ -1173,6 +1181,7 @@ def run_C4i(
             "condition": condition_label, "solved": False, "llm_calls": total_calls,
             "error": "final compile failed",
             "decomp_modules": decomp.module_names,
+            "module_visit_order": [decomp.sub_modules[i].name for i in visit_order],
             "module_solve_rounds": module_solve_rounds,
             "golden_correct": 0, "golden_total": 0,
             "_sources": dict(modules),
@@ -1188,6 +1197,7 @@ def run_C4i(
         "condition": condition_label, "llm_calls": total_calls,
         "best_passes": p, "total_tests": t,
         "solved": solved, "decomp_modules": decomp.module_names,
+        "module_visit_order": [decomp.sub_modules[i].name for i in visit_order],
         "module_solve_rounds": module_solve_rounds,
         "golden_correct": gc, "golden_total": gt,
         "_sources": dict(modules),
@@ -2327,6 +2337,15 @@ def run_cell(
             result = run_C4(top_name, testbench, model, client, problem_desc, design_specs, data_dir)
         elif condition == "C4i":
             result = run_C4i(top_name, testbench, model, client, problem_desc, design_specs, data_dir)
+        elif condition == "C4i-randOrder":
+            # Mechanism ablation: keep C4i prompts, gates, and budgets fixed, but
+            # randomize the sub-module repair schedule using the experiment seed.
+            # The original sub-module indices are preserved for contextual prompts.
+            result = run_C4i(
+                top_name, testbench, model, client, problem_desc, design_specs, data_dir,
+                condition_label="C4i-randOrder", module_order_seed=seed,
+            )
+            result["random_order_seed"] = seed
         elif condition == "C4i-noStudy":
             result = run_C4i(top_name, testbench, model, client, problem_desc, design_specs, data_dir,
                              condition_label="C4i-noStudy", study=False)

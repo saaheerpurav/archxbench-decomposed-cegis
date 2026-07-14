@@ -56,6 +56,17 @@ These rows use official self-checking testbenches and are clean support/conditio
 | `newton_raphson_sqrt` | L3 | C4tl | `42,123,456` | 3/3 solved, all `50/50` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
 | `newton_raphson_polynomial` | L3 | C4tl | `42,123,456` | 0/3 solved, all `17/100` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
 
+## Mechanism Ablation Rows
+
+These rows are paper-supporting diagnostics, not main method conditions. They test whether C4i's fixed module repair order explains the FFT/IFFT gap relative to C4tl.
+
+Artifacts: `artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/`
+
+| Design | Level | Method | Seeds | Result | Interpretation |
+|---|---:|---|---|---|---|
+| `fft_16pt_iterative` | L4 | C4i-randOrder | `42,123,456` | 2/3 solved; seeds `42,123` scored `33/33`, seed `456` scored `4/33` | randomized order improves fixed-order C4i but does not match C4tl |
+| `ifft_16pt_iterative` | L4 | C4i-randOrder | `42,123,456` | 1/3 solved; seed `456` scored `33/33`, seeds `42,123` scored `10/33` and `14/33` | randomized order helps but localization remains more reliable |
+
 ## Diagnostics
 
 Diagnostics are not claims. They live under `artifacts/curated/diagnostics/`.

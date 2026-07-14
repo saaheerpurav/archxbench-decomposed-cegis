@@ -19,7 +19,7 @@ CSV_PATH = OUT_DIR / "artifact_index.csv"
 JSON_PATH = OUT_DIR / "artifact_index.json"
 
 LEVELS = {"L1", "L2", "L3", "L4", "L5", "L6"}
-CONDITIONS = {"C1", "C2g", "C4i", "C4tl", "C4a", "C4m", "C4"}
+CONDITIONS = {"C1", "C2g", "C4i", "C4i-randOrder", "C4tl", "C4a", "C4m", "C4"}
 
 
 def rel(path: Path) -> str:

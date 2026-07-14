@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fft16_bit_reverse.v",
+  "sub_modules": {
+    "fft16_bit_reverse": "Combinational bit-reversal address mapper used while loading the input memory for DIT ordering.",
+    "fft16_pair_address": "Combinational stage controller helper that computes butterfly p/q addresses and twiddle index from stage, group, and butterfly counters.",
+    "fft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient ROM for N=16, using positive sine for IFFT mode and negative sine for FFT mode.",
+    "fft16_butterfly_q15": "Combinational radix-2 complex butterfly with rounded Q1.15 fixed-point twiddle multiplication.",
+    "fft16_ifft_scale": "Combinational output scaler that applies the final arithmetic divide-by-16 in IFFT mode."
+  }
+}

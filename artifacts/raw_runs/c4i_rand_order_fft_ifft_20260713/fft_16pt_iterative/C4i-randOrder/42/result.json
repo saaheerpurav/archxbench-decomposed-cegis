@@ -1,0 +1,34 @@
+{
+  "condition": "C4i-randOrder",
+  "llm_calls": 5,
+  "best_passes": 33,
+  "total_tests": 33,
+  "solved": true,
+  "decomp_modules": [
+    "fft16_address_gen",
+    "fft16_twiddle_rom",
+    "fft16_butterfly",
+    "fft16_output_scale"
+  ],
+  "module_visit_order": [
+    "fft16_butterfly",
+    "fft16_twiddle_rom",
+    "fft16_output_scale",
+    "fft16_address_gen"
+  ],
+  "module_solve_rounds": {
+    "fft16_butterfly": 1,
+    "fft16_twiddle_rom": 1,
+    "fft16_output_scale": 1,
+    "fft16_address_gen": 1
+  },
+  "golden_correct": 0,
+  "golden_total": 0,
+  "random_order_seed": 42,
+  "design": "fft_16pt_iterative",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "wall_seconds": 421.5,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

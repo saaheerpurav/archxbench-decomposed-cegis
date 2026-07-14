@@ -1,6 +1,6 @@
 # Current Status
 
-Date: 2026-07-09
+Date: 2026-07-13
 
 Working paper title:
 
@@ -43,6 +43,10 @@ Completed on 2026-07-09: Claude Sonnet 5 second-model validation on `fft_16pt_it
 
 Results: Sonnet 5 solves L4 FFT/IFFT 3/3 under both C2g and C4tl. It solves L6 AES encryption/decryption 3/3 under C2g with golden verification. AES C4tl fails reference decomposition on all six AES cells. Artifacts are under `artifacts/raw_runs/second_model_sonnet5_frontier_nothink_20260709/`.
 
+Completed on 2026-07-13: C4i randomized-module-order mechanism ablation on `fft_16pt_iterative` and `ifft_16pt_iterative`, seeds `42,123,456`, using Codex GPT-5.5.
+
+Results: `fft_16pt_iterative` solves 2/3 (`42,123`) and `ifft_16pt_iterative` solves 1/3 (`456`). This improves over fixed-order C4i on the FFT/IFFT rows but remains below C4tl's 3/3 main-seed and 5/5 robustness result. Artifacts are under `artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/`.
+
 The authoritative queue is [RUNS_LEFT.md](RUNS_LEFT.md).
 
 The consolidated paper-facing tables are in [PAPER_TABLES.md](PAPER_TABLES.md).
@@ -58,7 +62,7 @@ Benchmark repair is allowed only as a principled executable-contract audit. Do n
 - Use only repo-local artifacts under `artifacts/`.
 - A row is a paper claim only if it appears in [RESULTS.md](RESULTS.md).
 - Main paper tables use seeds `42,123,456`. Extra C4tl seeds `789,1024` are robustness/appendix evidence, not separate main-table rows.
-- Trusted score-only rows are valid experimental results. Missing generated RTL is artifact collection debt for paper/code release, not a reason to discard the score.
+- Historical trusted score-only rows are valid logged results only when recorded in the inventory. The Priority 1 and Priority 2 C2g artifact-collection rows are no longer pending; they have saved generated RTL.
 - File-output designs require strict golden verification.
 - Native simulator PASS without golden verification is diagnostic only.
 - Do not use outside folders, old local notes, or collaborator machine paths as evidence unless copied into this repo.

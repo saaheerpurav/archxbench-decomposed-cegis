@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/ifft16_bit_reverse.v",
+  "sub_modules": {
+    "ifft16_bit_reverse": "Combinational 4-bit bit-reversal mapper used to load DIT input order.",
+    "ifft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient lookup table for 16-point IFFT positive-exponent factors.",
+    "ifft16_butterfly": "Combinational fixed-point radix-2 complex butterfly with Q1.15 rounded twiddle multiplication.",
+    "ifft16_output_scale": "Combinational arithmetic right-shift output normalizer for final IFFT divide-by-16 scaling."
+  }
+}

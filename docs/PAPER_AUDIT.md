@@ -1,6 +1,6 @@
 # Paper Audit
 
-Date: 2026-07-08
+Date: 2026-07-12
 
 Working paper title:
 
@@ -43,9 +43,9 @@ These are real original-benchmark results, but they should be framed as baseline
 
 | Level | Designs | Evidence | Artifact status |
 |---|---|---|---|
-| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` | C2g solves 3/3 with golden verification | `unsharp_mask` is artifact-backed; `conv2d` and `dct_idct_8pt_pipelined` are trusted score-only rows with artifact collection pending |
-| L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 | useful for ablation context; some C2g rows are trusted score-only rows with artifact collection pending |
-| L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong baselines; C2g solves 3/3 | C2g rows are trusted score-only rows with artifact collection pending |
+| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` | C2g solves 3/3 with golden verification | artifact-backed; C2g artifact-collection reruns completed on 2026-07-09 |
+| L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 | useful for ablation context; C2g artifact-collection reruns completed on 2026-07-09 |
+| L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong baselines; C2g solves 3/3 | artifact-backed; C2g artifact-collection reruns completed on 2026-07-09 |
 | L6 | `fft_streaming_64pt` | C2g solves only seed `42`; four other seeds fail | partial diagnostic only, not a robust solve |
 
 ### Table C: Repaired-Contract Evidence
@@ -78,8 +78,8 @@ These should not appear as solve-rate wins.
 | Evidence class | Rows |
 |---|---|
 | Artifact-backed main claims | all rows in `docs/RESULTS.md` Main Claims |
-| Artifact-backed repaired positives | `multich_conv2d`, `quantized_matmul` runner-fixed, `fp_band_pass_fir`, `fp_high_pass_fir`, `newton_raphson_polynomial`; `conv_3d` C4i is artifact-backed, C2g is score-only |
-| Trusted score-only rows needing artifact collection | C2g `aes_encryption`, `aes_decryption`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, and repaired-contract C2g `conv_3d` |
+| Artifact-backed repaired positives | `conv_3d` C2g/C4i, `multich_conv2d`, `quantized_matmul` runner-fixed, `fp_band_pass_fir`, `fp_high_pass_fir`, `newton_raphson_polynomial` |
+| Completed C2g artifact-collection rows | C2g `aes_encryption`, `aes_decryption`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, and repaired-contract C2g `conv_3d`; rerun artifacts are under `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` and `artifacts/raw_runs/c2g_artifact_collection_20260709_repaired/` |
 | Log/metrics-only historical rows | L4 FIR C4i historical sweep: `band_pass_fir`, `high_pass_fir`, `low_pass_fir` |
 
 ### Seed And Condition Policy
@@ -91,7 +91,7 @@ The paper should not present one global all-design/all-condition matrix across a
 - Original ArchXBench main table: report selected L3-L6 evidence rows with the conditions that were run on seeds `42,123,456`.
 - Repaired-contract table: report repaired rows separately, using seeds `42,123,456` where full runs exist and explicitly marking pilots.
 - Held/excluded table: list `fft_streaming_64pt`, `fp_low_pass_fir`, L4 FIR, and `systolic_gemm` separately, not as missing wins.
-- Artifact-release checklist: track trusted score-only rows as artifact collection debt, not invalid results.
+- Artifact-release checklist: track any historical log/metrics-only rows separately from artifact-backed claims.
 
 ## Official L3-L6 Coverage
 
@@ -234,4 +234,4 @@ The repaired-contract track has now been run:
 
 The consolidated paper-facing table source is `docs/PAPER_TABLES.md`.
 
-Remaining work before submission is paper writing and final manuscript consistency checks. Artifact-collection reruns for trusted score-only rows are release polish only and are not queued here.
+Remaining work before submission is final manuscript consistency checks. The Priority 1 and Priority 2 C2g artifact-collection reruns are complete.

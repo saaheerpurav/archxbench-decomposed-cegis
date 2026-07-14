@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fft16_address_gen.v",
+  "sub_modules": {
+    "fft16_address_gen": "Combinational radix-2 DIT stage address and twiddle index generator.",
+    "fft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient lookup table for N=16.",
+    "fft16_butterfly": "Combinational fixed-point complex radix-2 butterfly with FFT/IFFT twiddle sign control.",
+    "fft16_output_scale": "Combinational output normalization block that divides IFFT results by 16 and leaves FFT results unscaled."
+  }
+}

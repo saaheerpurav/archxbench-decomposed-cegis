@@ -9,7 +9,8 @@ Last audited: 2026-07-09.
 - Result rows without saved Verilog: `732`.
 - The current `docs/RESULTS.md` main C4i/C4tl claim rows are artifact-backed.
 - Priority 1 and Priority 2 C2g artifact-collection rows were rerun on 2026-07-09 and now have generated RTL.
-- Some remaining historical baseline and secondary rows are score-only. Treat their logged scores as trusted experimental results; missing generated RTL is artifact collection debt for paper/code release.
+- C4i randomized-module-order ablation rows were run on 2026-07-13 and all six cells have generated RTL under `artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/`.
+- Some remaining historical baseline and secondary rows are score-only. Treat their logged scores as trusted experimental results only when recorded in the inventory. The Priority 1 and Priority 2 C2g artifact-collection rows are no longer pending; they have saved generated RTL.
 
 ## Main Claims
 

@@ -26,10 +26,16 @@
 \definecolor{hmpartial}{RGB}{255,242,204}
 \definecolor{hmfail}{RGB}{244,204,204}
 \definecolor{hmneutral}{RGB}{217,225,242}
+\definecolor{codebg}{RGB}{235,248,250}
+\definecolor{c1bar}{RGB}{91,155,213}
+\definecolor{c2bar}{RGB}{237,125,49}
+\definecolor{c4ibar}{RGB}{112,173,71}
+\definecolor{c4tlbar}{RGB}{112,48,160}
 \newcommand{\hmcell}[2]{\begingroup\setlength{\fboxsep}{1pt}\colorbox{#1}{\makebox[0.78cm][c]{\strut #2}}\endgroup}
 \newcommand{\hmyes}{\hmcell{hmsolve}{\textbf{3/3}}}
 \newcommand{\hmno}{\hmcell{hmfail}{0/3}}
 \newcommand{\hmpart}[1]{\hmcell{hmpartial}{#1}}
+\newcounter{rtlListing}
 \emergencystretch=2em
 
 \begin{document}
@@ -64,7 +70,7 @@ Four conditions are compared on \arch Levels~3--6: single-shot generation (\cOne
 Golden-verified Level-5 and Level-6 solves are obtained on convolution, image-processing, and AES designs.
 Decomposition is not universally superior: \cTwoG solves several Level-5 rows that decomposed methods do not.
 The central contribution is an executable-contract-aware synthesis methodology: original-benchmark solves, minimally repaired executable contracts, and held rows are separated before success is claimed.
-Code and artifacts are available.\footnote{Repository URL withheld for double-blind review.}
+Code, prompts, logs, generated RTL, and result JSONs are prepared for anonymous artifact release.\footnote{Repository URL withheld for double-blind review.}
 \end{abstract}
 
 \begin{CCSXML}
@@ -92,6 +98,50 @@ Code and artifacts are available.\footnote{Repository URL withheld for double-bl
 
 \section{Introduction}
 
+\begin{figure}[t]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tikzpicture}[
+    node distance=0.42cm and 0.45cm,
+    stage/.style={draw, rounded corners=2pt, align=center, minimum width=1.72cm, minimum height=0.60cm, font=\scriptsize, fill=hmneutral},
+    gatebox/.style={draw, rounded corners=2pt, align=center, minimum width=1.72cm, minimum height=0.60cm, font=\scriptsize, fill=hmpartial},
+    passbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.35cm, minimum height=0.54cm, font=\scriptsize, fill=hmsolve},
+    failbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.72cm, minimum height=0.60cm, font=\scriptsize, fill=hmfail},
+    lane/.style={draw, rounded corners=3pt, dashed, inner sep=5pt},
+    arrow/.style={-{Latex[length=1.5mm]}, thick},
+    failarrow/.style={-{Latex[length=1.5mm]}, thick, draw=red!70!black},
+    passarrow/.style={-{Latex[length=1.5mm]}, thick, draw=green!45!black}
+]
+\node[stage] (spec) {ArchXBench\\spec + fixture};
+\node[gatebox, right=of spec] (audit) {\textbf{1 Audit}\\executable oracle};
+\node[stage, below=0.74cm of spec] (decomp) {\textbf{2 Decompose}\\or monolith};
+\node[gatebox, right=of decomp] (gate) {Reference\\gate};
+\node[stage, right=of gate] (impl) {\textbf{3 Generate}\\candidate RTL};
+\node[stage, right=of impl] (sim) {Simulate +\\golden check};
+\node[passbox, right=of sim] (pass) {verified\\pass};
+\node[failbox, below=0.62cm of sim] (feedback) {\textbf{4 Localize}\\culprit module};
+\draw[arrow] (spec) -- (audit);
+\path (audit.south) -- ++(0,-0.42cm) coordinate (auditdown);
+\draw[arrow] (audit.south) -- (auditdown) -| (decomp.north);
+\draw[arrow] (decomp) -- (gate);
+\draw[arrow] (gate) -- (impl);
+\draw[arrow] (impl) -- (sim);
+\draw[passarrow] (sim) -- (pass);
+\draw[failarrow] (sim) -- node[right,font=\tiny] {fail} (feedback);
+\path (feedback.west) -- ++(-0.38cm,0) coordinate (fbleft);
+\path (impl.south) -- ++(0,-0.72cm) coordinate (impldown);
+\draw[failarrow] (feedback.west) -- (fbleft) -| (impldown) -- (impl.south);
+\node[lane, fit=(spec)(audit)] (trust) {};
+\node[lane, fit=(decomp)(gate)(impl)(sim)(feedback)(pass)(fbleft)(impldown)] (synth) {};
+\node[font=\tiny, above=0.5mm of trust] {trustworthy executable contract};
+\node[font=\tiny, below=0.5mm of synth] {reference-gated verifier loop};
+\end{tikzpicture}
+}
+\Description{Pipeline with two lanes: trustworthy contract audit followed by verifier-grounded decomposition, reference validation, RTL generation, golden checking, fault localization, and targeted repair.}
+\caption{\cFourTL pipeline: audit the executable contract, validate references, then repair only the localized culprit module.}
+\label{fig:pipeline}
+\end{figure}
+
 Autonomous code agents close executable loops: generate a candidate, run a checker, inspect failures, and repair.
 For software tasks, this loop has changed what counts as a meaningful benchmark result.
 For hardware design, the question is harder: can an autonomous agent synthesize RTL that survives simulation, protocol assumptions, and golden-output comparison?
@@ -106,7 +156,7 @@ The \arch paper reports a direct-generation frontier beginning at Level~4: lower
 If an autonomous synthesis loop can solve rows beyond it, the evaluation question changes from ``can an LLM emit a complete design in one shot?'' to ``can a verifier-grounded agent converge to correct RTL?''
 
 The central question is: \emph{can verifier-grounded autonomous synthesis solve hard RTL benchmark tasks that direct generation does not solve, while maintaining a clear distinction between model failures and benchmark-contract failures?}
-The answer is partially affirmative.
+The answer is yes, but not through a single universally dominant architecture.
 \cFourI solves five Level-3 numerical kernels at 3/3 seeds where \cOne and \cTwoG both fail.
 \cFourTL solves all four core Level-4 designs at 5/5 seeds, including the 16-point FFT and IFFT.
 Golden-verified solves extend to Level-5 convolution and image processing and to Level-6 AES encryption and decryption.
@@ -125,50 +175,34 @@ This paper makes three contributions:
 
 \subsection{LLM-Based RTL Generation}
 
-VerilogEval introduced an HDLBits-style benchmark for Verilog generation with automatic functional checking~\cite{liu2023verilogeval}.
-RTLLM proposed an open benchmark for design RTL generation with large language models~\cite{lu2023rtllm}.
-Both benchmarks made RTL generation measurable, but most tasks are small instructional circuits rather than deeply structured systems.
+VerilogEval and RTLLM made Verilog generation measurable with automatic checking~\cite{liu2023verilogeval,lu2023rtllm}.
+Subsequent systems add feedback, planning, workflow search, or evolutionary search for RTL generation and repair~\cite{thakur2024autochip,ho2024verilogcoder,tan2025autoverifix,spec2rtlagent2025,wei2025vflow,min2025revolution}.
+Recent benchmark and verification work further shows that flawed executable contracts and weak oracles can distort RTL evaluation~\cite{wang2026rtlbenchmt,li2026formalrtl,wang2026rtlbenchls}.
+Table~\ref{tab:positioning} summarizes where the present study sits.
 
-More recent work moves beyond direct prompting.
-AutoChip uses compiler and simulator feedback to improve HDL generation~\cite{thakur2024autochip}.
-VerilogCoder introduces graph-based planning and AST-based waveform tracing~\cite{ho2024verilogcoder}.
-AutoVeriFix uses simulation discrepancies to correct LLM-generated Verilog~\cite{tan2025autoverifix}.
-Spec2RTL-Agent studies LLM-agent systems for specification-to-RTL generation~\cite{spec2rtlagent2025}.
-VFlow searches over agentic workflows using Monte Carlo tree search~\cite{wei2025vflow}.
-HDLxGraph uses HDL-specific graph retrieval to support repository-level HDL tasks~\cite{zheng2025hdlxgraph}.
-Evolutionary methods (REvolution, EvolVE, COEVO) use inference-time search or co-evolutionary optimization for RTL correctness and power/performance/area~\cite{min2025revolution,hsin2026evolve,ping2026coevo}.
-RTL-BenchMT studies agent-assisted benchmark maintenance, including flawed-case revision and overfitting detection~\cite{wang2026rtlbenchmt}.
-FormalRTL integrates software references and formal equivalence checking into a multi-agent RTL synthesis flow~\cite{li2026formalrtl}.
-RTL-BenchLS proposes a large formally verified RTL benchmark for reasoning and generation tasks~\cite{wang2026rtlbenchls}.
-
-Our work evaluates on \arch Levels~3--6, including rows at and above the reported Level-4 frontier.
-It separates original benchmark contracts from repaired executable contracts.
-This distinction matters because an RTL benchmark can fail either because the generated design is wrong or because the released testbench, file format, or golden comparator is inconsistent.
-RTL-BenchMT validates that benchmark ambiguity is a first-order issue; FormalRTL and RTL-BenchLS show the value of stronger executable or formal oracles.
-The present study uses benchmark-contract audit to support a hard-\arch synthesis study rather than to propose a general benchmark-maintenance system.
-
-Table~\ref{tab:positioning} summarizes the positioning.
 \begin{table*}[t]
 \centering
-\caption{Positioning relative to recent LLM-aided RTL work. The key distinction is a hard-\arch study combining verifier-grounded synthesis with explicit original-contract versus repaired-contract accounting.}
+\caption{Positioning relative to recent LLM-aided RTL work. The key distinction is a hard-\arch study that combines verifier-grounded synthesis with explicit original-contract versus repaired-contract accounting.}
 \label{tab:positioning}
-\scriptsize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{llllp{3.5cm}}
+\footnotesize
+\setlength{\tabcolsep}{3.4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{p{2.6cm}p{3.4cm}p{3.0cm}p{5.0cm}}
 \toprule
-Work & Primary target & Feedback / search & Benchmark style & Difference from this study \\
+Line of work & Examples & Main strength & Gap addressed here \\
 \midrule
-VerilogEval / RTLLM & Generation benchmarks & Testbench eval. & HDLBits / moderate RTL & Establishes automatic evaluation; mostly easier than \arch L4--L6 \\
-AutoChip / AutoVeriFix & HDL repair & Compiler, simulator, oracle & Repair/generation tasks & Iterative correction is related; no benchmark-contract audit \\
-VerilogCoder / Spec2RTL & Autonomous agents & Planning, tracing, multi-agent & VerilogEval / RTLLM & Strong agents; not focused on \arch hard-level contracts \\
-VFlow & Workflow search & MCTS over workflows & Generation tasks & Searches workflows; does not study contract validity \\
-REvolution / EvolVE / COEVO & Evolutionary search & Population search, PPA & VerilogEval / RTLLM & Search-oriented; does not study benchmark contracts \\
-RTL-BenchMT & Benchmark maintenance & Agent-assisted revision & VerilogEval / RTLLM / CVDP & Validates contract concerns; focused on maintenance \\
-FormalRTL / RTL-BenchLS & Formal verification & Equivalence checking & Formally verified suites & Stronger oracles; not focused on \arch hard rows \\
-This work & Hard RTL synthesis & Golden repair, decomposition, audit & \arch L3--L6 & Separates original, repaired, and held rows \\
+RTL benchmarks & VerilogEval, RTLLM & Automatic functional checks & Harder \arch L3--L6 rows \\
+Agentic RTL generation & AutoChip, VerilogCoder, AutoVeriFix, Spec2RTL & Feedback, planning, tracing & Original vs repaired contract accounting \\
+Workflow/search & VFlow, REvolution & Workflow and population search & Hard-frontier executable synthesis study \\
+Benchmark/oracle validity & RTL-BenchMT, FormalRTL, RTL-BenchLS & Maintenance, formal oracles & Contract audit tied to synthesis claims \\
+This work & \cOne/\cTwoG/\cFourI/\cFourTL on \arch & Golden repair, decomposition, localization & Cross frontier while separating held rows \\
 \bottomrule
 \end{tabular}
+\renewcommand{\arraystretch}{1.0}
 \end{table*}
+
+Our work evaluates on \arch Levels~3--6, including rows at and above the reported Level-4 frontier.
+It separates original benchmark contracts from repaired executable contracts so that model failures are not confused with stale testbenches, file-format mismatches, or inconsistent golden comparators.
 
 \subsection{Verifier-Grounded Synthesis}
 
@@ -191,8 +225,7 @@ Three evaluation classes are distinguished:
     \item \textbf{Held or excluded rows:} tasks where the released contract remains too ambiguous for a credible positive result.
 \end{itemize}
 
-Figure~\ref{tab:contracts} gives the contract-classification procedure used during the audit.
-\begin{figure}[t]
+\begin{figure}[!ht]
 \centering
 \scriptsize
 \begin{tikzpicture}[
@@ -227,22 +260,22 @@ arr/.style={-{Latex[length=1.4mm]},thick}
 \end{tikzpicture}
 \caption{Executable-contract classification. Positive results are claimed only when the released or repaired fixture has an executable oracle.}
 \Description{Flowchart classifying benchmark fixtures as self-checking, file-output with golden comparison, display-only, specification-disagreeing, or missing-oracle cases.}
-\label{tab:contracts}
+\label{fig:contracts}
 \end{figure}
 
 \section{Method}
 
 \subsection{Evaluated Conditions}
 
-Table~\ref{tab:method-compare} summarizes the operational differences among the four conditions.
+The condition grid below summarizes the operational differences among the four conditions.
 All conditions receive the same specification, module interface, and released testbench.
 The difference is how much executable feedback enters the loop and whether the design is treated as a monolith or decomposed into modules.
 Thus the four conditions are also ablations: \cOne removes feedback, \cTwoG removes decomposition, \cFourI adds decomposition without localized repair, and \cFourTL adds a strict reference gate plus localization.
 
-\begin{table}[t]
+\begin{center}
 \centering
-\caption{Operational differences among synthesis conditions. ``Ref.\ gate'' indicates whether the decomposition's reference composition must pass the system testbench before synthesis proceeds. ``Local repair'' describes the granularity of repair targeting.}
-\label{tab:method-compare}
+\footnotesize\textbf{Condition grid.} Operational differences among synthesis conditions. ``Ref.\ gate'' indicates whether the decomposition's reference composition must pass the system testbench before synthesis proceeds. ``Local repair'' describes repair granularity.
+\par
 \scriptsize
 \setlength{\tabcolsep}{3.0pt}
 \begin{tabular}{lccccc}
@@ -255,71 +288,66 @@ Cond. & Decomp. & Ref.\ gate & Golden fb. & Local repair & Budget \\
 \cFourTL & yes & strict & yes & culprit only & 3+$\approx$28 rds \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{center}
 
 \begin{table*}[t]
 \centering
-\caption{Algorithm 1: executable-contract-aware verifier-grounded RTL synthesis. The condition parameter selects \cOne, \cTwoG, \cFourI, or \cFourTL by enabling feedback, decomposition, reference gating, and localization.}
+\caption{Executable-contract-aware verifier-grounded RTL synthesis. The condition parameter selects \cOne, \cTwoG, \cFourI, or \cFourTL by enabling feedback, decomposition, reference gating, and localization.}
 \label{alg:synthesis}
-\scriptsize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{rp{0.88\textwidth}}
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{p{1.35cm}p{13.6cm}}
 \toprule
- & \textbf{Input:} specification $S$, released fixture $B$, condition $c$, seed $s$, budget $T$ \\
- & \textbf{Output:} \textsc{solved}, \textsc{unsolved}, or \textsc{held} with artifact record \\
+\textbf{Input} & Specification $S$, released fixture $B$, condition $c$, seed $s$, budget $T$ \\
+\textbf{Output} & \textsc{solved}, \textsc{unsolved}, or \textsc{held}, with saved artifact record \\
 \midrule
-1 & Classify $B$ using Fig.~\ref{tab:contracts}. If no executable oracle can be recovered, return \textsc{held}. \\
-2 & If $c$ uses decomposition, ask the model for interfaces, top wrapper, and reference modules $R_1,\ldots,R_n$; otherwise set $n=1$ and target the whole design. \\
-3 & If $c$ uses a reference gate, simulate the composed references against $B$; retry decomposition with failure feedback, and abort if no valid reference composition is found. \\
-4 & Generate candidate RTL modules $M_1,\ldots,M_n$ from $S$, $B$, references, and seed $s$. \\
-5 & For each repair round $t \leq T$: simulate the composed candidate; compute pass/golden score; if all executable checks pass, save RTL and return \textsc{solved}. \\
-6 & Select a repair target. \cTwoG selects the whole design; \cFourI selects the next module in fixed order; \cFourTL swaps each $M_i$ with $R_i$ and selects the module with the largest system-score improvement. \\
-7 & Repair only the selected target using compile errors, failing indices, expected/actual values, swap scores, and the relevant reference implementation; then continue from Step~5. \\
-8 & Save the final artifact and return \textsc{unsolved}. \\
+\textbf{Audit} & Classify $B$ using Fig.~\ref{fig:contracts}. If no executable oracle can be recovered, return \textsc{held}. \\
+\textbf{Decompose} & If $c$ uses decomposition, request interfaces, top wrapper, and reference modules $R_1,\ldots,R_n$; otherwise set $n=1$ and target the whole design. \\
+\textbf{Gate} & When enabled, simulate the composed references against $B$; retry with failure feedback and abort if no valid reference composition is found. \\
+\textbf{Generate} & Produce candidate RTL modules $M_1,\ldots,M_n$ from $S$, $B$, references, and seed $s$. \\
+\textbf{Verify} & For each round $t \leq T$, simulate the composed candidate and compute pass/golden score. If all checks pass, save RTL and return \textsc{solved}. \\
+\textbf{Localize} & Select a repair target: \cTwoG selects the whole design; \cFourI selects the next module in fixed order; \cFourTL swaps each $M_i$ with $R_i$ and selects the module with the largest system-score improvement. \\
+\textbf{Repair} & Repair only the selected target using compile errors, failing indices, expected/actual values, swap scores, and the relevant reference; then repeat verification. \\
+\textbf{Exit} & Save the final artifact and return \textsc{unsolved}. \\
 \bottomrule
 \end{tabular}
+\renewcommand{\arraystretch}{1.0}
 \end{table*}
 
 \textbf{\cOne: direct generation.}
-The model receives the specification and testbench excerpt and emits RTL five independent times.
-The candidate with the highest pass count under the executable checker is retained.
-No repair feedback is used.
+The model receives the specification and testbench excerpt and emits five independent RTL candidates.
+The highest-scoring candidate is retained; no repair feedback is used.
 
 \textbf{\cTwoG: monolithic golden-feedback repair.}
-The model studies the specification, interface, and testbench, then emits a complete top module.
-Each round compiles and simulates the candidate.
-Compile errors, self-checking test failures, or golden-output mismatches (with index-level expected-versus-actual values) are appended to the conversation.
-The model returns a corrected module.
-The conversation is pruned to the first two and last sixteen messages when it exceeds twenty entries.
-The loop terminates when all checks pass or after 30 rounds.
-This is a deliberately strong baseline: it uses the same executable oracle as decomposed methods without paying module-integration risk.
+The model emits a complete top module, then iteratively repairs it using compile errors, self-check failures, and golden-output mismatches with expected-versus-actual indices.
+The loop terminates when all checks pass or after 30 rounds; long conversations are pruned to the first two and last sixteen messages.
+This is a deliberately strong baseline because it uses the same executable oracle as decomposed methods without paying module-integration risk.
 
 \textbf{\cFourI: decomposition-guided iterative repair.}
-\cFourI asks the model to decompose the task into 3--7 submodules with explicit interfaces, a top-level wrapper, and reference implementations.
-Submodules are constrained to be combinational where possible; sequential logic is concentrated in the top module.
-The reference composition (top plus all reference submodules) is simulated against the system testbench as a sanity check.
-
-After decomposition, each submodule is solved in sequence.
-The model receives the submodule specification, its position in the pipeline relative to neighbors, the reference implementation, and a testbench excerpt.
-A study prompt requires the model to explain its understanding before writing code.
-During repair, all unsolved submodules are held at their reference implementations, isolating bugs to the module under repair.
-Each submodule receives $\lfloor 28/n \rfloor$ repair rounds for $n$ submodules.
-Golden-output mismatches are fed back with specific failing indices and expected values.
+\cFourI decomposes the task into 3--7 submodules with explicit interfaces, a top-level wrapper, and reference implementations.
+After a reference-composition sanity check, submodules are solved in fixed order.
+During submodule repair, unsolved neighbors are held at their references, isolating bugs to the target module; each of $n$ submodules receives $\lfloor 28/n \rfloor$ repair rounds.
 
 \textbf{\cFourTL: testbench-localized decomposed repair.}
 \cFourTL uses the same decomposition structure as \cFourI but adds two mechanisms: a strict reference gate and trace-lifted fault localization.
 
-The reference gate requires the composed reference implementation to pass the system-level testbench before synthesis begins.
-If the reference fails, the decomposition is retried up to three times with failure feedback augmenting the specification.
-If no valid decomposition is found, the run aborts.
-This prevents ungrounded decompositions from entering the synthesis loop.
-
-After initial candidate generation for all submodules, \cFourTL runs the full composed design against the system testbench.
-On failure, trace-lifted localization identifies the culprit module: each candidate submodule is swapped with its validated reference one at a time while all other candidates remain fixed.
-The module whose swap produces the largest score improvement is selected for repair.
-Only that module is repaired using the failing simulator output, golden mismatch details, per-module swap scores, and the reference implementation.
-The model is instructed to trace the datapath for the first failing input, compute expected intermediate values, identify the root cause, and then fix.
-This loop repeats until the system checker passes or the budget is exhausted.
+The reference gate requires the composed reference implementation to pass the system-level testbench before synthesis begins; failed references are retried up to three times, otherwise the run aborts.
+After candidate generation, \cFourTL localizes a failure by swapping each candidate submodule with its validated reference while all other candidates remain fixed.
+Let $M$ denote the current composed candidate and $M^{(i\leftarrow R_i)}$ denote replacing only module $i$ with its validated reference.
+For executable score function $q(\cdot)$, \cFourTL computes
+\begingroup
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\[
+\Delta_i = q(M^{(i\leftarrow R_i)}) - q(M), \qquad
+i^\star = \arg\max_i \Delta_i .
+\]
+\endgroup
+The selected module $M_{i^\star}$ is repaired using simulator output, golden mismatches, swap scores, and the reference implementation.
+The prompt asks the model to trace the first failing datapath, compute expected intermediate values, identify the root cause, and then fix.
 
 The localization mechanism is the central algorithmic distinction.
 \cFourI repairs modules in a fixed order; \cFourTL uses system-level evidence to identify which module is most implicated.
@@ -327,47 +355,6 @@ For tightly coupled pipelines such as the 16-point FFT, this targeted approach a
 The localization step is heuristic rather than a correctness guarantee.
 It is strongest when the reference composition is valid and one module dominates the observed failure.
 It can be misled by coupled multi-module bugs, bad decompositions, or errors whose effects are masked until multiple modules are replaced together.
-
-\begin{figure}[t]
-\centering
-\resizebox{\columnwidth}{!}{%
-\begin{tikzpicture}[
-    node distance=0.35cm and 0.38cm,
-    stage/.style={draw, rounded corners=2pt, align=center, minimum width=1.65cm, minimum height=0.60cm, font=\scriptsize, fill=hmneutral},
-    gatebox/.style={draw, rounded corners=2pt, align=center, minimum width=1.65cm, minimum height=0.60cm, font=\scriptsize, fill=hmpartial},
-    passbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.25cm, minimum height=0.50cm, font=\scriptsize, fill=hmsolve},
-    failbox/.style={draw, rounded corners=2pt, align=center, minimum width=1.65cm, minimum height=0.60cm, font=\scriptsize, fill=hmfail},
-    lane/.style={draw, rounded corners=3pt, dashed, inner sep=3pt},
-    arrow/.style={-{Latex[length=1.5mm]}, thick}
-]
-\node[stage] (spec) {Spec +\\fixture};
-\node[gatebox, right=of spec] (audit) {Contract\\audit};
-\node[stage, right=of audit] (decomp) {Decompose\\or monolith};
-\node[gatebox, right=of decomp] (gate) {Reference\\gate};
-\node[stage, below=0.58cm of gate] (impl) {Generate /\\repair RTL};
-\node[stage, left=of impl] (sim) {Simulate\\+ golden\\check};
-\node[failbox, left=of sim] (feedback) {Localize\\fault};
-\node[passbox, right=of impl] (pass) {pass};
-\draw[arrow] (spec) -- (audit);
-\draw[arrow] (audit) -- (decomp);
-\draw[arrow] (decomp) -- (gate);
-\draw[arrow] (gate) -- node[right,font=\tiny] {valid} (impl);
-\draw[arrow] (impl) -- (sim);
-\draw[arrow] (sim) -- node[above,font=\tiny] {fail} (feedback);
-\path (feedback.south) -- ++(0,-0.28cm) coordinate (fbdown);
-\path (impl.south) -- ++(0,-0.28cm) coordinate (impdown);
-\draw[arrow] (feedback.south) -- (fbdown) -- node[below,font=\tiny] {targeted repair} (impdown) -- (impl.south);
-\draw[arrow] (impl) -- (pass);
-\node[lane, fit=(spec)(audit)] (trust) {};
-\node[lane, fit=(decomp)(gate)(impl)(sim)(feedback)(pass)(fbdown)(impdown)] (synth) {};
-\node[font=\tiny, above=0.5mm of trust] {trustworthy contract};
-\node[font=\tiny, above=0.5mm of synth] {verifier-grounded synthesis loop};
-\end{tikzpicture}
-}
-\Description{Pipeline with two lanes: trustworthy contract audit followed by verifier-grounded decomposition, reference validation, RTL generation, golden checking, fault localization, and targeted repair.}
-\caption{\cFourTL pipeline. The method first establishes an executable contract, then validates a reference decomposition before entering a golden-feedback loop. On failure, swap-based localization chooses one culprit module for targeted repair.}
-\label{fig:pipeline}
-\end{figure}
 
 \subsection{Artifact and Verification Discipline}
 
@@ -391,37 +378,40 @@ These are fixed seeds chosen for reproducibility, not tuned seeds.
 \cOne uses five seeds for the two borderline Level-3 floating-point rows, \texttt{fp\_adder} and \texttt{fp\_multiplier}, to give a stricter direct-generation baseline estimate.
 The primary model is GPT-5.5 as recorded in the repository artifacts.
 
-A clean solve requires all official checks to pass (self-checking designs) or all golden outputs to match (file-output designs).
-Solve rates are reported over seeds.
+For run $r$, let $p_r/t_r$ denote native self-checking passes and $g_r/h_r$ denote golden-output matches.
+The executable score is
+\[
+q(r)=
+\begin{cases}
+g_r/h_r, & h_r>0,\\
+p_r/t_r, & h_r=0 \text{ and } t_r>0,\\
+0, & \text{otherwise}.
+\end{cases}
+\]
+Run $r$ solves iff $q(r)=1$.
+For design $d$, condition $c$, and seed set $S$, full-row and partial-row indicators are
+\[
+F_{d,c}=\prod_{s\in S}\mathbf{1}[q(d,c,s)=1],
+\qquad
+P_{d,c}=\mathbf{1}\!\left[\max_{s\in S} q(d,c,s)=1\right]-F_{d,c}.
+\]
+Figure~\ref{fig:solve-rate} reports these design-row rates by level.
 
-All methods run as executable synthesis loops; the method budgets are summarized in Table~\ref{tab:method-compare}.
-
-Table~\ref{tab:perdesign} reports per-design statistics for selected solved rows, averaged over seeds.
-These illustrate the practical cost of individual solves: the Level-4 FFT solves in roughly 5 minutes and 6 LLM calls, while harder designs such as \texttt{harris\_corner\_detection} require 10.7 calls and 9.4 minutes.
-
-\begin{table}[t]
-\centering
-\caption{Per-design cost for selected solved rows (seed-averaged). Level-4 rows average over 5 seeds; all others over 3.}
-\label{tab:perdesign}
-\scriptsize
-\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{llrr}
-\toprule
-Design & Method & Avg.\ calls & Avg.\ wall \\
-\midrule
-\texttt{fp\_multiplier} (L3) & \cFourI & 5.0 & 5.2\,min \\
-\texttt{gauss\_siedel} (L3) & \cFourI & 14.3 & 11.9\,min \\
-\texttt{fft\_16pt\_iterative} (L4) & \cFourTL & 6.0 & 5.1\,min \\
-\texttt{ifft\_16pt\_iterative} (L4) & \cFourTL & 6.2 & 5.5\,min \\
-\texttt{harris\_corner} (L5) & \cFourI & 10.7 & 9.4\,min \\
-\texttt{aes\_encryption} (L6) & \cFourI & 7.3 & 7.1\,min \\
-\bottomrule
-\end{tabular}
-\end{table}
+All methods run as executable synthesis loops; the method budgets are summarized in the condition grid in Section~4.1.
+The Level-4 FFT solves in roughly 5 minutes and 6 LLM calls, while harder designs such as \texttt{harris\_corner\_detection} require 10.7 calls and 9.4 minutes on average.
+Failed decomposed runs typically consume the full repair budget: failed \cFourI/\cFourTL-style rows in the FFT/IFFT diagnostics use about 26--29 LLM calls and can take roughly 20--45 minutes on the local runner.
 
 \section{Crossing the Original-Contract Frontier}
 
 Table~\ref{tab:original-main} reports the main original-contract results.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_solve_rate.pdf}
+\Description{Stacked grouped bar chart showing original-contract row solve rates by ArchXBench level for C1, C2g, C4i, and C4tl. Colors encode synthesis condition. Solid bars show rows solved on all main seeds; hatched extensions show rows where at least one seed solves but not all main seeds solve.}
+\caption{Original-contract solve rate by level. Colors encode synthesis condition. Solid bars count rows solved on all main seeds; hatched segments count partial rows where at least one seed passes but not all main seeds pass.}
+\label{fig:solve-rate}
+\end{figure}
 
 \textbf{Level 3.}
 \cFourI provides the strongest method-value evidence: it solves five numerical kernels at 3/3 seeds where \cOne scores 0/3--0/5 and \cTwoG scores 0/3--1/5.
@@ -435,6 +425,7 @@ After removing only those three unsatisfiable residual assertions in the repaire
 The 16-point FFT and IFFT rows are the strongest hard-frontier evidence because they are self-checking original-contract solves with no benchmark repair.
 \cFourTL decomposes \texttt{fft\_16pt\_iterative} into four submodules (bit-reverse mapper, twiddle ROM, butterfly unit, output scaler) and uses trace-lifted localization to identify which module is at fault after each simulation failure.
 \cTwoG also solves the FFT/IFFT rows at 3/3; \cFourI does not.
+\cTwoG avoids the module-order problem by repairing the design monolithically; \cFourTL retains modular structure but uses swap-based localization to avoid spending repair budget on modules that already compose correctly.
 \cFourI's fixed sequential repair order can spend iterations on modules that already compose correctly while the actual fault remains in a later module; \cFourTL's swap-based localization directly identifies the culprit before repair.
 The pipeline rows (\texttt{fp\_adder\_pipeline}, \texttt{fp\_mult\_pipeline}) are solved by all conditions.
 
@@ -459,7 +450,7 @@ L3 & \texttt{fp\_multiplier} & \hmcell{hmfail}{0/5} & \hmno & \hmyes & \hmyes & 
 L3 & \texttt{gauss\_siedel} & \hmno & \hmno & \hmyes & \hmpart{1/3} & \cFourI strongest \\
 L3 & \texttt{gradient\_descent} & \hmno & \hmno & \hmyes & \hmyes & decomposition wins \\
 L3 & \texttt{newton\_raphson\_sqrt} & \hmno & \hmno & \hmyes & \hmyes & decomposition wins \\
-L3 & \texttt{newton\_raphson\_poly.} & \hmno & \hmno & \hmno & \hmno & checker ceiling at 97/100 \\
+L3 & \texttt{newton\_raphson\_polynomial} & \hmno & \hmno & \hmno & \hmno & checker ceiling at 97/100 \\
 \midrule
 L4 & \texttt{fft\_16pt\_iterative} & \hmno & \hmyes & \hmno & \hmyes & hard-row solve; 5/5 \\
 L4 & \texttt{ifft\_16pt\_iterative} & \hmno & \hmyes & \hmno & \hmyes & hard-row solve; 5/5 \\
@@ -476,8 +467,6 @@ L6 & \texttt{aes\_encryption} & \hmyes & \hmyes & \hmyes & \hmpart{2/3} & GV \\
 L6 & \texttt{aes\_decryption} & \hmpart{1/3} & \hmyes & \hmyes & \hmpart{1/3} & GV; repair improves C1 \\
 \bottomrule
 \end{tabular}
-\vspace{1mm}
-\parbox{0.98\textwidth}{\scriptsize \texttt{newton\_raphson\_poly.} abbreviates \texttt{newton\_raphson\_polynomial}.}
 \end{table*}
 
 The results are not presented as a universal decomposition win.
@@ -513,6 +502,30 @@ This indicates model-dependent sensitivity in the decomposition gate, while mono
 \texttt{fft\_16pt\_iterative} is a self-checking original-contract row, so no benchmark repair is involved.
 \cOne fails on all three main seeds, while \cTwoG and \cFourTL solve all three.
 The row therefore isolates the central mechanism: executable feedback can turn a direct-generation failure into a verified RTL solve without changing the released checker.
+In one robustness seed, \cFourTL localizes a 9/33 failure to the butterfly while the twiddle ROM, index generator, and bit-reversal modules each pass in isolation; one repair then passes all 33 checks.
+The repaired RTL explicitly implements signed Q1.15 complex rotation.
+
+\par\addvspace{0.35\baselineskip}
+\begin{center}
+\refstepcounter{rtlListing}
+\footnotesize\textbf{Listing~\thertlListing.} Generated RTL excerpt from the Level-4 FFT butterfly repair.\label{lst:rtl-snippet}
+
+\fcolorbox{black!25}{codebg}{%
+\begin{minipage}{0.94\columnwidth}
+{\scriptsize\ttfamily
+assign prod\_rr = b\_real * tw\_cos\_q15;\\
+assign prod\_is = b\_imag * tw\_sin\_q15;\\
+assign prod\_ic = b\_imag * tw\_cos\_q15;\\
+assign prod\_rs = b\_real * tw\_sin\_q15;\\
+assign rot\_real\_w = (prod\_rr - prod\_is + ROUND) \textgreater{}\textgreater{}\textgreater{} 15;\\
+assign rot\_imag\_w = (prod\_ic + prod\_rs + ROUND) \textgreater{}\textgreater{}\textgreater{} 15;\\
+assign y0\_real = a\_real + rot\_real;\quad assign y1\_real = a\_real - rot\_real;\\
+assign y0\_imag = a\_imag + rot\_imag;\quad assign y1\_imag = a\_imag - rot\_imag;
+}
+\end{minipage}
+}
+\end{center}
+\par\addvspace{0.35\baselineskip}
 
 \section{Executable-Contract Audit}
 
@@ -529,15 +542,16 @@ Fourth, infrastructure repairs are applied only in copied fixtures and only when
 Fifth, unresolved rows are held rather than converted into positive results.
 The repair rule is intentionally narrow: a repaired fixture may make an existing oracle executable or repair file-format infrastructure, but it may not change the semantic task, introduce hidden target behavior, or move a row into the original-contract table.
 
-Table~\ref{tab:repaired} reports the repaired-contract evidence.
-These rows are not counted as original \arch solves.
-
-\begin{table}[t]
-\centering
-\caption{Repaired-contract results, separated from original \arch claims. These distinguish benchmark-contract failures from model capability failures.}
+\par\addvspace{0.30\baselineskip}
+\noindent\begin{minipage}{\columnwidth}
+\refstepcounter{table}
 \label{tab:repaired}
-\scriptsize
-\setlength{\tabcolsep}{3.0pt}
+\footnotesize\textbf{Table~\thetable.} Repaired-contract results. These are separate from original \arch claims.
+\par
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4.0pt}
+\renewcommand{\arraystretch}{0.92}
 \begin{tabular}{lccc}
 \toprule
 Design & \cTwoG & \cFourI & \cFourTL \\
@@ -547,11 +561,13 @@ Design & \cTwoG & \cFourI & \cFourTL \\
 \texttt{quantized\_matmul} & 3/3 & 3/3 & 0/3 \\
 \texttt{fp\_band\_pass\_fir} & 3/3 & 0/1 & 0/1 \\
 \texttt{fp\_high\_pass\_fir} & 3/3 & 0/1 & 0/1 \\
-\texttt{newton\_raphson\_poly.} & 3/3 & 1/3 & 1/3 \\
+\texttt{newton\_raphson\_polynomial} & 3/3 & 1/3 & 1/3 \\
 \texttt{systolic\_gemm} & 0/3 & 0/3 & 0/3 \\
 \bottomrule
 \end{tabular}
-\end{table}
+\renewcommand{\arraystretch}{1.0}
+\end{minipage}
+\par\addvspace{0.55\baselineskip}
 
 The audit produces both positive and negative evidence.
 Repairing the executable contract for \texttt{multich\_conv2d} and \texttt{quantized\_matmul} makes the intended task measurable and solvable.
@@ -568,9 +584,10 @@ The L6 \texttt{fft\_streaming\_64pt} is excluded because the released input/outp
 \subsection{When Decomposition Helps and When It Does Not}
 
 Decomposition is most effective when a design factors naturally into modules and when failure localization reduces the repair burden.
-The Level-3 numerical kernels and Level-4 FFT/IFFT rows illustrate this: \cFourI and \cFourTL solve rows that both \cOne and \cTwoG fail on.
+The Level-3 numerical kernels illustrate the strongest decomposition-over-monolith wins, while the Level-4 FFT/IFFT rows show a different effect: both \cTwoG and \cFourTL cross the direct-generation frontier, but fixed-order \cFourI fails.
 \cFourI fails on the FFT/IFFT rows where \cFourTL succeeds.
 One explanation is that \cFourI's fixed per-module repair order is less effective for tightly coupled pipeline stages; \cFourTL's trace-lifted localization identifies the culprit module and avoids diffuse iteration on modules that are not at fault.
+A randomized-order \cFourI ablation improves FFT/IFFT from 0/6 to 3/6 solved seeds, but remains below \cFourTL's 6/6 main-seed success, supporting the interpretation that order matters but targeted localization is more reliable than random scheduling alone.
 
 By contrast, \cTwoG solves several Level-5 rows that neither \cFourI nor \cFourTL can solve.
 This happens when the design is compact enough for whole-design repair, when module boundaries introduce integration risk, or when the primary difficulty is a global convention such as file format or fixed-point encoding.
@@ -584,20 +601,18 @@ If the executable contract is ambiguous, a model can fail for the wrong reason o
 \section{Limitations}
 
 The evaluated methods do not establish universal dominance over monolithic repair; \cTwoG should be treated as a primary baseline.
-Some historical rows are trusted score-only rather than artifact-backed and are labeled accordingly.
+Historical score-only diagnostics are kept in the artifact inventory for audit completeness but are not used for headline claims.
 Repaired-contract evaluation depends on judgment about what constitutes an infrastructure repair rather than a semantic benchmark change; this risk is mitigated by keeping repaired fixtures separate and excluding unresolved rows.
+The synthesis conditions use fixed prompt templates; sensitivity to prompt wording was not systematically evaluated and remains a source of uncontrolled variation.
 The empirical study is concentrated on RTL synthesis; transfer to other executable synthesis domains is not established here.
 
 \section{Conclusion}
 
-This study evaluated autonomous RTL synthesis on hard \arch designs using iterative repair, modular decomposition, and strict simulator/golden feedback.
-Original-contract solves span Levels~3--6, including robust Level-4 FFT/IFFT rows and golden-verified Level-5/Level-6 designs.
-Monolithic golden-feedback repair is a strong baseline.
-Decomposition is powerful but not universally superior.
-Benchmark-contract defects can obscure both progress and failure.
+This study shows that the hard RTL frontier is not fixed by direct generation alone.
+On \arch, verifier-grounded repair crosses original-contract Level-4 FFT/IFFT rows and obtains golden-verified Level-5/Level-6 solves, while repaired-contract experiments expose additional benchmark tasks that were previously unmeasurable.
+The results also show why the comparison must be disciplined: monolithic golden-feedback repair is a strong baseline, decomposition helps selectively, and ambiguous executable contracts can turn both failures and successes into misleading evidence.
 
-Hard autonomous RTL synthesis requires structured generation, executable feedback, and trustworthy benchmark contracts together.
-Without all three, both successes and failures can be misinterpreted.
+Hard autonomous RTL synthesis therefore requires all three pieces together: structured generation, executable feedback, and trustworthy benchmark contracts.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}

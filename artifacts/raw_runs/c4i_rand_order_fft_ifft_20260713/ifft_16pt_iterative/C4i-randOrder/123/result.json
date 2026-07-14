@@ -1,0 +1,31 @@
+{
+  "condition": "C4i-randOrder",
+  "llm_calls": 26,
+  "best_passes": 14,
+  "total_tests": 33,
+  "solved": false,
+  "decomp_modules": [
+    "fft16_bit_reverse",
+    "fft16_pair_address",
+    "fft16_twiddle_rom",
+    "fft16_butterfly_q15",
+    "fft16_ifft_scale"
+  ],
+  "module_visit_order": [
+    "fft16_butterfly_q15",
+    "fft16_pair_address",
+    "fft16_ifft_scale",
+    "fft16_twiddle_rom",
+    "fft16_bit_reverse"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "random_order_seed": 123,
+  "design": "ifft_16pt_iterative",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 1626.3,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}
