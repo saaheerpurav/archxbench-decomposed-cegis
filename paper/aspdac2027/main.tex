@@ -15,6 +15,11 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,fit}
 
+\setlength{\textfloatsep}{6pt plus 1pt minus 1pt}
+\setlength{\dbltextfloatsep}{6pt plus 1pt minus 1pt}
+\setlength{\floatsep}{6pt plus 1pt minus 1pt}
+\setlength{\dblfloatsep}{6pt plus 1pt minus 1pt}
+
 \newcommand{\arch}{ArchXBench\xspace}
 \newcommand{\cOne}{C1\xspace}
 \newcommand{\cTwoG}{C2g\xspace}
@@ -26,7 +31,6 @@
 \definecolor{hmpartial}{RGB}{255,242,204}
 \definecolor{hmfail}{RGB}{244,204,204}
 \definecolor{hmneutral}{RGB}{217,225,242}
-\definecolor{codebg}{RGB}{235,248,250}
 \definecolor{c1bar}{RGB}{91,155,213}
 \definecolor{c2bar}{RGB}{237,125,49}
 \definecolor{c4ibar}{RGB}{112,173,71}
@@ -35,7 +39,6 @@
 \newcommand{\hmyes}{\hmcell{hmsolve}{\textbf{3/3}}}
 \newcommand{\hmno}{\hmcell{hmfail}{0/3}}
 \newcommand{\hmpart}[1]{\hmcell{hmpartial}{#1}}
-\newcounter{rtlListing}
 \emergencystretch=2em
 
 \begin{document}
@@ -140,6 +143,7 @@ Code, prompts, logs, generated RTL, and result JSONs are prepared for anonymous 
 \Description{Pipeline with two lanes: trustworthy contract audit followed by verifier-grounded decomposition, reference validation, RTL generation, golden checking, fault localization, and targeted repair.}
 \caption{\cFourTL pipeline: audit the executable contract, validate references, then repair only the localized culprit module.}
 \label{fig:pipeline}
+\vspace{-0.45\baselineskip}
 \end{figure}
 
 Autonomous code agents close executable loops: generate a candidate, run a checker, inspect failures, and repair.
@@ -156,7 +160,7 @@ The \arch paper reports a direct-generation frontier beginning at Level~4: lower
 If an autonomous synthesis loop can solve rows beyond it, the evaluation question changes from ``can an LLM emit a complete design in one shot?'' to ``can a verifier-grounded agent converge to correct RTL?''
 
 The central question is: \emph{can verifier-grounded autonomous synthesis solve hard RTL benchmark tasks that direct generation does not solve, while maintaining a clear distinction between model failures and benchmark-contract failures?}
-The answer is yes, but not through a single universally dominant architecture.
+The answer is partially affirmative.
 \cFourI solves five Level-3 numerical kernels at 3/3 seeds where \cOne and \cTwoG both fail.
 \cFourTL solves all four core Level-4 designs at 5/5 seeds, including the 16-point FFT and IFFT.
 Golden-verified solves extend to Level-5 convolution and image processing and to Level-6 AES encryption and decryption.
@@ -166,17 +170,21 @@ It is evidence that verifier-grounded synthesis, in both monolithic and decompos
 
 This paper makes three contributions:
 \begin{enumerate}[leftmargin=*]
-    \item The proposed work introduces an executable-contract-aware evaluation discipline for autonomous RTL synthesis: released contracts, minimally repaired executable contracts, and held rows are separated before positive claims are made.
-    \item The proposed work gives a verifier-grounded synthesis algorithm that instantiates direct generation, monolithic repair, decomposition-guided repair, and testbench-localized repair as controlled ablations of feedback, decomposition, reference validation, and localization.
-    \item The proposed work demonstrates hard \arch solves beyond the reported direct-generation frontier, including robust Level-4 original-contract FFT/IFFT solves and golden-verified Level-5/Level-6 solves.
+    \item Trace-lifted fault localization swaps each candidate submodule against a validated reference to identify the culprit before repair. This mechanism produces the strongest hard-frontier result in the paper: the original-contract 16-point FFT and IFFT solves that fixed-order decomposition (\cFourI) never reaches.
+    \item An executable-contract-aware evaluation discipline separates released contracts, minimally repaired executable contracts, and held rows before any positive claim is made, so benchmark defects are never scored as model progress.
+    \item A controlled comparison of four conditions characterizes when decomposition helps: it is decisive on Level-3 numerical kernels and localization-dependent Level-4 pipelines, while monolithic golden-feedback repair stays competitive on compact Level-5/Level-6 tasks.
 \end{enumerate}
 
 \section{Related Work}
 
 \subsection{LLM-Based RTL Generation}
 
-VerilogEval and RTLLM made Verilog generation measurable with automatic checking~\cite{liu2023verilogeval,lu2023rtllm}.
-Subsequent systems add feedback, planning, workflow search, or evolutionary search for RTL generation and repair~\cite{thakur2024autochip,ho2024verilogcoder,tan2025autoverifix,spec2rtlagent2025,wei2025vflow,min2025revolution}.
+VerilogEval introduced an HDLBits-style Verilog benchmark with automatic functional checking, while RTLLM created an open benchmark for design RTL generation with larger natural-language tasks~\cite{liu2023verilogeval,lu2023rtllm}.
+Subsequent systems move beyond direct prompting in several directions.
+AutoChip uses compiler and simulator feedback for iterative HDL generation~\cite{thakur2024autochip}.
+VerilogCoder adds graph-based planning and AST-based waveform tracing~\cite{ho2024verilogcoder}.
+AutoVeriFix corrects simulation discrepancies in LLM-generated Verilog~\cite{tan2025autoverifix}, and Spec2RTL-Agent studies agentic specification-to-RTL generation~\cite{spec2rtlagent2025}.
+VFlow searches over agentic workflows using MCTS~\cite{wei2025vflow}, HDLxGraph retrieves from HDL graph databases~\cite{zheng2025hdlxgraph}, and REvolution/COEVO use evolutionary search for RTL correctness and optimization~\cite{min2025revolution,ping2026coevo}.
 Recent benchmark and verification work further shows that flawed executable contracts and weak oracles can distort RTL evaluation~\cite{wang2026rtlbenchmt,li2026formalrtl,wang2026rtlbenchls}.
 Table~\ref{tab:positioning} summarizes where the present study sits.
 
@@ -189,13 +197,13 @@ Table~\ref{tab:positioning} summarizes where the present study sits.
 \renewcommand{\arraystretch}{1.08}
 \begin{tabular}{p{2.6cm}p{3.4cm}p{3.0cm}p{5.0cm}}
 \toprule
-Line of work & Examples & Main strength & Gap addressed here \\
+Line of work & Examples & Main strength & Difference from this study \\
 \midrule
-RTL benchmarks & VerilogEval, RTLLM & Automatic functional checks & Harder \arch L3--L6 rows \\
-Agentic RTL generation & AutoChip, VerilogCoder, AutoVeriFix, Spec2RTL & Feedback, planning, tracing & Original vs repaired contract accounting \\
-Workflow/search & VFlow, REvolution & Workflow and population search & Hard-frontier executable synthesis study \\
-Benchmark/oracle validity & RTL-BenchMT, FormalRTL, RTL-BenchLS & Maintenance, formal oracles & Contract audit tied to synthesis claims \\
-This work & \cOne/\cTwoG/\cFourI/\cFourTL on \arch & Golden repair, decomposition, localization & Cross frontier while separating held rows \\
+RTL benchmarks & VerilogEval, RTLLM & Automatic functional checks & Smaller or lower-frontier tasks; not focused on \arch hard-level contracts \\
+Agentic RTL generation & AutoChip, VerilogCoder, AutoVeriFix, Spec2RTL & Strong agents with feedback, planning, tracing & Does not separate original, repaired, and held \arch contracts \\
+Workflow/search & VFlow, REvolution, COEVO & Workflow, population, and optimization search & Search-oriented; does not study benchmark-contract validity \\
+Benchmark/oracle validity & RTL-BenchMT, FormalRTL, RTL-BenchLS & Maintenance, stronger oracles, formal checks & Validates contract concerns; not focused on \arch hard rows \\
+This work & \cOne/\cTwoG/\cFourI/\cFourTL on \arch & Golden repair, decomposition, localization & Separates original, repaired, and held rows while crossing hard-frontier tasks \\
 \bottomrule
 \end{tabular}
 \renewcommand{\arraystretch}{1.0}
@@ -272,23 +280,27 @@ All conditions receive the same specification, module interface, and released te
 The difference is how much executable feedback enters the loop and whether the design is treated as a monolith or decomposed into modules.
 Thus the four conditions are also ablations: \cOne removes feedback, \cTwoG removes decomposition, \cFourI adds decomposition without localized repair, and \cFourTL adds a strict reference gate plus localization.
 
-\begin{center}
+\par\addvspace{0.75\baselineskip}
+\noindent\begin{minipage}{\columnwidth}
+\small
+\textbf{Condition grid.}
+\par\addvspace{0.25\baselineskip}
 \centering
-\footnotesize\textbf{Condition grid.} Operational differences among synthesis conditions. ``Ref.\ gate'' indicates whether the decomposition's reference composition must pass the system testbench before synthesis proceeds. ``Local repair'' describes repair granularity.
-\par
-\scriptsize
-\setlength{\tabcolsep}{3.0pt}
-\begin{tabular}{lccccc}
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lp{1.45cm}p{4.65cm}@{}}
 \toprule
-Cond. & Decomp. & Ref.\ gate & Golden fb. & Local repair & Budget \\
+Cond. & Structure & Feedback and repair \\
 \midrule
-\cOne & no & -- & no & -- & 5 shots \\
-\cTwoG & no & -- & yes & whole design & 30 rounds \\
-\cFourI & yes & sanity & yes & per module & $\approx$28 rds \\
-\cFourTL & yes & strict & yes & culprit only & 3+$\approx$28 rds \\
+\cOne & monolith & no feedback; 5 independent shots \\
+\cTwoG & monolith & golden feedback; whole-design repair for 30 rounds \\
+\cFourI & decomp. & sanity reference gate; fixed-order module repair, $\approx$28 rounds \\
+\cFourTL & decomp. & strict reference gate; localize culprit, then repair only that module, 3+$\approx$28 rounds \\
 \bottomrule
 \end{tabular}
-\end{center}
+\renewcommand{\arraystretch}{1.0}
+\end{minipage}
+\par\addvspace{0.75\baselineskip}
 
 \begin{table*}[t]
 \centering
@@ -327,7 +339,10 @@ This is a deliberately strong baseline because it uses the same executable oracl
 \textbf{\cFourI: decomposition-guided iterative repair.}
 \cFourI decomposes the task into 3--7 submodules with explicit interfaces, a top-level wrapper, and reference implementations.
 After a reference-composition sanity check, submodules are solved in fixed order.
+Submodules are constrained to be combinational where possible, with sequential state and protocol control concentrated in the top wrapper to reduce hidden cross-module timing state.
+The model is given each submodule's position in the pipeline relative to its neighbors so that local implementations preserve the global datapath.
 During submodule repair, unsolved neighbors are held at their references, isolating bugs to the target module; each of $n$ submodules receives $\lfloor 28/n \rfloor$ repair rounds.
+Golden-output mismatches are fed back with failing indices and expected-versus-actual values, so the repair prompt is tied to executable evidence rather than free-form self-critique.
 
 \textbf{\cFourTL: testbench-localized decomposed repair.}
 \cFourTL uses the same decomposition structure as \cFourI but adds two mechanisms: a strict reference gate and trace-lifted fault localization.
@@ -349,14 +364,14 @@ i^\star = \arg\max_i \Delta_i .
 The selected module $M_{i^\star}$ is repaired using simulator output, golden mismatches, swap scores, and the reference implementation.
 The prompt asks the model to trace the first failing datapath, compute expected intermediate values, identify the root cause, and then fix.
 
-The localization mechanism is the central algorithmic distinction.
-\cFourI repairs modules in a fixed order; \cFourTL uses system-level evidence to identify which module is most implicated.
+The localization mechanism is the central algorithmic distinction: \cFourI repairs modules in a fixed order, whereas \cFourTL uses system-level evidence to identify which module is most implicated.
 For tightly coupled pipelines such as the 16-point FFT, this targeted approach avoids diffuse repair of modules that may not be at fault.
-The localization step is heuristic rather than a correctness guarantee.
-It is strongest when the reference composition is valid and one module dominates the observed failure.
-It can be misled by coupled multi-module bugs, bad decompositions, or errors whose effects are masked until multiple modules are replaced together.
+The localization step is heuristic rather than a correctness guarantee; it is strongest when the reference composition is valid and one module dominates the observed failure, and can be misled by coupled multi-module bugs, bad decompositions, or masked errors.
 
-\subsection{Artifact and Verification Discipline}
+\par\addvspace{0.45\baselineskip}
+\refstepcounter{subsection}
+\noindent\textbf{\thesubsection\quad Artifact and Verification Discipline}\par
+\addvspace{0.20\baselineskip}
 
 Each run is recorded under a repository artifact tree with a structured result file containing the design, condition, model, seed, pass counts, golden counts, LLM-call count, wall time, and generated RTL.
 File-output designs require strict golden verification: the generated output is compared element by element against the golden reference with a tolerance of $\pm 1$ on integer values.
@@ -489,6 +504,7 @@ Design & \cTwoG & \cFourTL \\
 \texttt{aes\_decryption} & \yes\ GV & \no\ GV \\
 \bottomrule
 \end{tabular}
+\vspace{-0.35\baselineskip}
 \end{table}
 
 \textbf{Model generality.}
@@ -505,28 +521,6 @@ The row therefore isolates the central mechanism: executable feedback can turn a
 In one robustness seed, \cFourTL localizes a 9/33 failure to the butterfly while the twiddle ROM, index generator, and bit-reversal modules each pass in isolation; one repair then passes all 33 checks.
 The repaired RTL explicitly implements signed Q1.15 complex rotation.
 
-\par\addvspace{0.35\baselineskip}
-\begin{center}
-\refstepcounter{rtlListing}
-\footnotesize\textbf{Listing~\thertlListing.} Generated RTL excerpt from the Level-4 FFT butterfly repair.\label{lst:rtl-snippet}
-
-\fcolorbox{black!25}{codebg}{%
-\begin{minipage}{0.94\columnwidth}
-{\scriptsize\ttfamily
-assign prod\_rr = b\_real * tw\_cos\_q15;\\
-assign prod\_is = b\_imag * tw\_sin\_q15;\\
-assign prod\_ic = b\_imag * tw\_cos\_q15;\\
-assign prod\_rs = b\_real * tw\_sin\_q15;\\
-assign rot\_real\_w = (prod\_rr - prod\_is + ROUND) \textgreater{}\textgreater{}\textgreater{} 15;\\
-assign rot\_imag\_w = (prod\_ic + prod\_rs + ROUND) \textgreater{}\textgreater{}\textgreater{} 15;\\
-assign y0\_real = a\_real + rot\_real;\quad assign y1\_real = a\_real - rot\_real;\\
-assign y0\_imag = a\_imag + rot\_imag;\quad assign y1\_imag = a\_imag - rot\_imag;
-}
-\end{minipage}
-}
-\end{center}
-\par\addvspace{0.35\baselineskip}
-
 \section{Executable-Contract Audit}
 
 Hard RTL benchmarks are useful only when their executable contracts reflect the intended task.
@@ -541,14 +535,13 @@ Third, file-output rows are judged only by post-simulation golden comparison.
 Fourth, infrastructure repairs are applied only in copied fixtures and only when the intended oracle is recoverable from released assets.
 Fifth, unresolved rows are held rather than converted into positive results.
 The repair rule is intentionally narrow: a repaired fixture may make an existing oracle executable or repair file-format infrastructure, but it may not change the semantic task, introduce hidden target behavior, or move a row into the original-contract table.
+Every repaired oracle is validated against an independent golden reference before any synthesis method runs; accepted fixtures must reach full oracle score (for example, 1000/1000 FIR samples or 97/97 repaired Newton assertions).
+Fixtures that cannot be validated this way are discarded or held.
 
-\par\addvspace{0.30\baselineskip}
-\noindent\begin{minipage}{\columnwidth}
-\refstepcounter{table}
-\label{tab:repaired}
-\footnotesize\textbf{Table~\thetable.} Repaired-contract results. These are separate from original \arch claims.
-\par
+\begin{table}[!htbp]
 \centering
+\caption{Repaired-contract results. These are separate from original \arch claims.}
+\label{tab:repaired}
 \footnotesize
 \setlength{\tabcolsep}{4.0pt}
 \renewcommand{\arraystretch}{0.92}
@@ -566,8 +559,7 @@ Design & \cTwoG & \cFourI & \cFourTL \\
 \bottomrule
 \end{tabular}
 \renewcommand{\arraystretch}{1.0}
-\end{minipage}
-\par\addvspace{0.55\baselineskip}
+\end{table}
 
 The audit produces both positive and negative evidence.
 Repairing the executable contract for \texttt{multich\_conv2d} and \texttt{quantized\_matmul} makes the intended task measurable and solvable.
@@ -612,7 +604,7 @@ This study shows that the hard RTL frontier is not fixed by direct generation al
 On \arch, verifier-grounded repair crosses original-contract Level-4 FFT/IFFT rows and obtains golden-verified Level-5/Level-6 solves, while repaired-contract experiments expose additional benchmark tasks that were previously unmeasurable.
 The results also show why the comparison must be disciplined: monolithic golden-feedback repair is a strong baseline, decomposition helps selectively, and ambiguous executable contracts can turn both failures and successes into misleading evidence.
 
-Hard autonomous RTL synthesis therefore requires all three pieces together: structured generation, executable feedback, and trustworthy benchmark contracts.
+Hard autonomous RTL synthesis requires structured generation, executable feedback, and trustworthy benchmark contracts together; without all three, both successes and failures can be misinterpreted.
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
