@@ -1,0 +1,27 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 5,
+  "best_passes": 23064,
+  "total_tests": 23064,
+  "solved": true,
+  "decomp_modules": [
+    "conv3d_window_control",
+    "conv3d_address_generator",
+    "conv3d_mac_array"
+  ],
+  "ref_passes": 23064,
+  "ref_total": 23064,
+  "golden_correct": 23064,
+  "golden_total": 23064,
+  "module_solve_rounds": {},
+  "design": "conv_3d",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 448.8,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

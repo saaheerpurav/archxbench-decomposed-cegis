@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv2d_window_valid.v",
+  "sub_modules": {
+    "conv2d_window_valid": "Combinational valid-window detector based on current raster row and column.",
+    "conv2d_mac": "Combinational matrix-vector dot-product datapath using the default 3x3 Gaussian kernel.",
+    "conv2d_saturate": "Combinational output-width limiter for the accumulated convolution result."
+  }
+}

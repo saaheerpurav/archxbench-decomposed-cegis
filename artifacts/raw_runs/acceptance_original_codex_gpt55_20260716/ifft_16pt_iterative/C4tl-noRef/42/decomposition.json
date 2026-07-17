@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fft16_addr_gen.v",
+  "sub_modules": {
+    "fft16_addr_gen": "Combinational stage controller address generator for radix-2 DIT butterfly pair indices and twiddle index.",
+    "fft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient ROM for 16-point IFFT positive-exponential factors.",
+    "fft16_butterfly": "Combinational fixed-point complex radix-2 butterfly with Q1.15 rounded twiddle multiplication.",
+    "fft16_ifft_scale": "Combinational final IFFT normalization by arithmetic right shift of four bits."
+  }
+}

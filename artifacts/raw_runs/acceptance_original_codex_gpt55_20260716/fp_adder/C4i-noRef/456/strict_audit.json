@@ -1,0 +1,13 @@
+{
+  "design": "fp_adder",
+  "condition": "C4i-noRef",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "strict_correct": 36,
+  "strict_total": 36,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "floating_point_adder",
+  "detail": "===========================================\nTest vectors: 36\n\n[PASS] 0:           Basic: 1.0 + 2.0 = 3.0\n[PASS] 1:           Basic: 1.0 + 0.5 = 1.5\n[PASS] 2:           Basic: 0.0 + 5.0 = 5.0\n[PASS] 3:        Basic: -1.5 + -2.5 = -4.0\n[PASS] 4:           Basic: 1.0 + 1.0 = 2.0\n[PASS] 5:         Basic: 0.25 + 0.25 = 0.5\n[PASS] 6:           Basic: 3.0 + 4.0 = 7.0\n[PASS] 7:         Basic: 10.0 + 5.0 = 15.0\n[PASS] 8:         Basic: -2.0 + 1.0 = -1.0\n[PASS] 9:       Special: +Inf + 1.0 = +Inf\n[PASS] 10:         Special: NaN + 1.0 = NaN\n[PASS] 11:       Special: +Inf + -Inf = NaN\n[PASS] 12:      Special: +Inf + +Inf = +Inf\n[PASS] 13:      Special: -Inf + -Inf = -Inf\n[PASS] 14:               Zero: +0 + +0 = +0\n[PASS] 15:         Zero: +0 + -0 = +0 (RNE)\n[PASS] 16:         Zero: +0 + -0 = -0 (RTN)\n[PASS] 17:            Zero: 0.0 + 3.0 = 3.0\n[PASS] 18:           Zero: -0.0 + 1.0 = 1.0\n[PASS] 19:        Cancel: 1.0 + (-1.0) = +0\n[PASS] 20:  Cancel: 1.0 + (-1.0) = -0 (RTN)\n[PASS] 21:         Cancel: 2.0 + (-2.0) = 0\n[PASS] 22:         Cancel: 0.5 + (-0.5) = 0\n[PASS] 23:       Cancel: 10.0 + (-10.0) = 0\n[PASS] 24:       Overflow: Max + Max = +Inf\n[PASS] 25:          Overflow: Large + Large\n[PASS] 26:      Overflow: Negative overflow\n[PASS] 27: erflow: Denorm + Denorm = Normal\n[PASS] 28:    Round: RTP positive increment\n[PASS] 29:    Round: RTN negative increment\n[PASS] 30:            Round: RTZ truncation\n[PASS] 31:            Round: RNE round down\n[PASS] 32:           Round: RNE tie to even\n[PASS] 33:    Edge: Min normal + Min normal\n[PASS] 34: dge: Large exp diff (absorption)\n[PASS] 35:          Edge: Near cancellation\n\n===============================================\n              TEST SUMMARY\n===============================================\nPASSED: 36\nFAILED: 0\nTOTAL:  36\nSuccess Rate: 100.0%\n\n*** ALL TESTS PASSED - PRODUCTION READY ***\n===============================================\nC:\\Users\\saahe\\AppData\\Local\\Temp\\tdes_fpga_oai94en3\\tb.v:320: $finish called at 376000 (1ps)\n"
+}

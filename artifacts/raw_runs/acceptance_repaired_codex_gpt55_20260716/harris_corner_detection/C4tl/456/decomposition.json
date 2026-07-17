@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/harris_index_to_xy.v",
+  "sub_modules": {
+    "harris_index_to_xy": "Converts row-major output index to image x/y coordinates.",
+    "harris_sobel": "Computes Sobel X and Y gradients from a 3x3 pixel stencil.",
+    "harris_grad_products": "Computes Ix squared, Iy squared, and IxIy gradient products.",
+    "harris_gaussian3x3": "Applies normalized 3x3 Gaussian smoothing with weights 1-2-1, 2-4-2, 1-2-1.",
+    "harris_response": "Computes fixed-point Harris response det(M)-k*trace(M)^2.",
+    "harris_threshold": "Compares the Harris response against the configured threshold to produce the binary corner map."
+  }
+}

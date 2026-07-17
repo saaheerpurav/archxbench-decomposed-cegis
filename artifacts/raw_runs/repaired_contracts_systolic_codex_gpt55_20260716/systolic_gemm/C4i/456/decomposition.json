@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/pe.v",
+  "sub_modules": {
+    "pe": "Processing element that registers north and west data to neighboring PEs and accumulates signed 32-bit products into a 64-bit result.",
+    "done_control": "Combinational completion detector for the 9-cycle systolic computation window.",
+    "result_passthrough": "Combinational mapping layer from the 16 PE accumulators to the required top-level result ports."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gaussian3x3_blur.v",
+  "sub_modules": {
+    "gaussian3x3_blur": "Combinational 3x3 Gaussian stencil with 1-2-1 kernel normalization by 16.",
+    "unsharp_difference": "Combinational signed pointwise high-frequency difference original minus blurred.",
+    "unsharp_gain": "Combinational signed pointwise multiplication of the high-frequency term by gain.",
+    "unsharp_reconstruct": "Combinational signed reconstruction and saturation to the output pixel range."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/highpass_fir_coeff_rom.v",
+  "sub_modules": {
+    "highpass_fir_coeff_rom": "Combinational ROM that returns the exact signed Q15 high-pass FIR coefficient for each tap index.",
+    "highpass_fir_mac": "Combinational multiply-accumulate block over the flattened tap sample and coefficient vectors using a signed 64-bit accumulator.",
+    "highpass_fir_normalize": "Combinational fixed-point normalization block that arithmetic-right-shifts the accumulator by 15 bits and truncates to the output width."
+  }
+}

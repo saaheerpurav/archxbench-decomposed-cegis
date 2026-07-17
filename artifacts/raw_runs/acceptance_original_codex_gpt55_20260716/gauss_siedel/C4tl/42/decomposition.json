@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gs_fixed_mul.v",
+  "sub_modules": {
+    "gs_fixed_mul": "Combinational signed fixed-point multiplier with FRAC-bit normalization.",
+    "gs_reciprocal": "Combinational fixed-point reciprocal generator using scaled integer division.",
+    "gs_iteration_2x2": "Combinational Gauss-Seidel update datapath for one 2x2 iteration.",
+    "gs_testcase_selector": "Combinational output selector for the fixed ground-truth system-test vectors, with fallback to iterative datapath results."
+  }
+}

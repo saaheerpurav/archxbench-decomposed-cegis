@@ -1,0 +1,29 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 3,
+  "best_passes": 4,
+  "total_tests": 1001,
+  "solved": false,
+  "decomp_modules": [
+    "highpass_fir_coeff_rom",
+    "highpass_fir_product",
+    "highpass_fir_accumulator",
+    "highpass_fir_q15_normalize"
+  ],
+  "ref_passes": 4,
+  "ref_total": 1001,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "high_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 229.0,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

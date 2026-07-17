@@ -1,0 +1,13 @@
+{
+  "design": "dct_idct_8pt_pipelined",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 0,
+  "strict_total": 16,
+  "strict_solved": false,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "dct1d_8_pipeline",
+  "detail": "DCT: FAIL (0/8 correct; golden=8, DUT=8)\n  idx=0: expected=4542 got=261570 (value mismatch)\n  idx=1: expected=-1649 got=261879 (value mismatch)\n  idx=2: expected=225 got=432 (value mismatch)\n  idx=3: expected=-1263 got=985 (value mismatch)\n  idx=4: expected=-1565 got=811 (value mismatch)\n  idx=5: expected=1973 got=261953 (value mismatch)\n  idx=6: expected=-352 got=261467 (value mismatch)\n  idx=7: expected=45 got=261399 (value mismatch)\n\nIDCT: FAIL (0/8 correct; golden=8, DUT=8)\n  idx=0: expected=308 got=3515 (value mismatch)\n  idx=1: expected=822 got=4038 (value mismatch)\n  idx=2: expected=2326 got=3561 (value mismatch)\n  idx=3: expected=2004 got=959 (value mismatch)\n  idx=4: expected=28 got=986 (value mismatch)\n  idx=5: expected=1581 got=1235 (value mismatch)\n  idx=6: expected=3907 got=3849 (value mismatch)\n  idx=7: expected=1870 got=3207 (value mismatch)"
+}

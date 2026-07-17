@@ -1,0 +1,56 @@
+{
+  "condition": "C1",
+  "llm_calls": 5,
+  "best_passes": 0,
+  "total_tests": 16,
+  "solved": false,
+  "golden_correct": 0,
+  "golden_total": 16,
+  "attempt_scores": [
+    {
+      "attempt": 1,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    },
+    {
+      "attempt": 2,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: FAIL (0/8 correct; golden=8, DUT=8)\n  idx=0: expected=4542 got=0 (value mismatch)\n  idx=1: expected=-1649 got=261879 (value mismatch)\n  idx=2: expected=225 got=432 (value mismatch)\n  idx=3: expected=-1263 got=985 (value mismatch)\n  idx=4: expected=-1565 got=811 (value mismatch)\n  idx=5: expected=1973 got=261953 (value mismatch)\n  idx=6: expected=-352 got=261467 (value mismatch)\n  idx=7: expected=45 got=261399 (value mismatch)\n\nIDCT: FAIL (0/8 correct; golden=8, DUT=8)\n  idx=0: expected=3..."
+    },
+    {
+      "attempt": 3,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    },
+    {
+      "attempt": 4,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    },
+    {
+      "attempt": 5,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    }
+  ],
+  "design": "dct_idct_8pt_pipelined",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 315.1,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

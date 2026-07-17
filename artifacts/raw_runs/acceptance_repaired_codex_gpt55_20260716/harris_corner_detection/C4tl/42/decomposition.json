@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/harris_sobel_3x3.v",
+  "sub_modules": {
+    "harris_sobel_3x3": "Combinational Sobel gradient stencil for one 3x3 pixel window.",
+    "harris_gradient_products": "Combinational computation of Ix squared, Iy squared, and IxIy gradient products.",
+    "harris_gaussian_3x3": "Combinational 3x3 Gaussian smoothing over the gradient product fields.",
+    "harris_response": "Combinational fixed-point Harris response computation using determinant, trace, and k parameter.",
+    "harris_threshold": "Combinational binary corner decision against the configured response threshold."
+  }
+}

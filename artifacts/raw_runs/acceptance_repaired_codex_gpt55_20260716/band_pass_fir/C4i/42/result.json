@@ -1,0 +1,28 @@
+{
+  "condition": "C4i",
+  "llm_calls": 28,
+  "best_passes": 2,
+  "total_tests": 1001,
+  "solved": false,
+  "decomp_modules": [
+    "bandpass_input_cast",
+    "bandpass_mac_101",
+    "bandpass_q15_normalize"
+  ],
+  "module_visit_order": [
+    "bandpass_input_cast",
+    "bandpass_mac_101",
+    "bandpass_q15_normalize"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "band_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "trial_id": 42,
+  "model_seed_controlled": false,
+  "wall_seconds": 3475.3,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/dct1d_8_coeff_rom.v",
+  "sub_modules": {
+    "dct1d_8_coeff_rom": "Combinational fixed-point cosine coefficient lookup for DCT and transposed IDCT matrices.",
+    "dct1d_8_mac8": "Combinational eight-input multiply-accumulate datapath.",
+    "dct1d_8_round_clip": "Combinational Q14 rounding and signed output saturation.",
+    "dct1d_8_matrix_core": "Combinational 8-point matrix row evaluator that composes coefficient ROM, MAC, and rounding."
+  }
+}

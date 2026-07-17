@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv1d_tap_window.v",
+  "sub_modules": {
+    "conv1d_tap_window": "Pure combinational tap selector that presents the current input sample and four stored delay samples as the five FIR window taps.",
+    "conv1d_fir5_mac": "Pure combinational fixed 5-tap multiply-accumulate block using hardcoded coefficients 2, 8, 12, 8, 2.",
+    "conv1d_gain_shift": "Pure combinational normalization block that right-shifts the MAC result by GAIN_W and returns the extended-width filtered sample."
+  }
+}

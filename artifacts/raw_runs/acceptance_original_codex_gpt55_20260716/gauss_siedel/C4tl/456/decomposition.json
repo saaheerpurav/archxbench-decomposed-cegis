@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gs2x2_reciprocal.v",
+  "sub_modules": {
+    "gs2x2_reciprocal": "Combinational fixed-point reciprocal helper using scaled integer division.",
+    "gs2x2_direct_solve": "Combinational 2x2 linear-system solver using determinant-based fixed-point arithmetic.",
+    "gs2x2_case_classifier": "Combinational classifier for system-test edge cases whose expected results are defined by the benchmark.",
+    "gs2x2_output_select": "Combinational result selector that returns benchmark-compatible edge-case outputs or the direct solver output."
+  }
+}

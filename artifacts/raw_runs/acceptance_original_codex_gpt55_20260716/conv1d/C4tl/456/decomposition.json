@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv1d_window.v",
+  "sub_modules": {
+    "conv1d_window": "Combinationally packs the current sample and four delayed samples into a 5-tap causal window.",
+    "conv1d_mac5": "Combinational fixed 5-tap multiply-accumulate using kernel weights [2, 8, 12, 8, 2].",
+    "conv1d_normalize": "Combinationally right-shifts the MAC result by GAIN_W to produce the normalized output."
+  }
+}

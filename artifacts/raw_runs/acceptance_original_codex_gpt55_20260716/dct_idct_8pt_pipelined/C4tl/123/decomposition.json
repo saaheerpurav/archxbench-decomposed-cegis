@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/dct1d_8_coeff_rom.v",
+  "sub_modules": {
+    "dct1d_8_coeff_rom": "Combinational fixed-point DCT/IDCT coefficient matrix ROM using Q14 orthonormal cosine constants.",
+    "dct1d_8_mac": "Combinational eight-input signed multiply-accumulate datapath for one matrix row dot product.",
+    "dct1d_8_round_sat": "Combinational Q14 rounding, scaling, and saturation to the configured output width."
+  }
+}

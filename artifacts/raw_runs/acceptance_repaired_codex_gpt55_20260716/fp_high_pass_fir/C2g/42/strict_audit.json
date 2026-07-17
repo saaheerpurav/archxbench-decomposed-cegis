@@ -1,0 +1,13 @@
+{
+  "design": "fp_high_pass_fir",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 1000,
+  "strict_total": 1000,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "fp_highpass_fir",
+  "detail": "golden_output: PASS all 1000 samples match exactly in length"
+}

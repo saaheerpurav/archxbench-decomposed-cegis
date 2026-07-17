@@ -1,0 +1,13 @@
+{
+  "design": "quantized_matmul",
+  "condition": "C4tl",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 64,
+  "strict_total": 64,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "qgemm",
+  "detail": "golden_output: PASS all 64 samples match exactly in length"
+}

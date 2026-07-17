@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_fir_history_pack.v",
+  "sub_modules": {
+    "fp_fir_history_pack": "Combinational next-state builder for the FIR sample history shift register.",
+    "fp_fir_coeff_rom": "Combinational ROM containing the 101 binary32 FIR coefficients.",
+    "fp_fir_mac": "Combinational binary32 FIR multiply-accumulate evaluator over the flattened sample history.",
+    "fp_float32_mul": "Combinational binary32 multiplier helper module.",
+    "fp_float32_add": "Combinational binary32 adder helper module."
+  }
+}

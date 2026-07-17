@@ -1,0 +1,30 @@
+{
+  "condition": "C4i",
+  "llm_calls": 4,
+  "best_passes": 33,
+  "total_tests": 33,
+  "solved": true,
+  "decomp_modules": [
+    "pe",
+    "done_control",
+    "result_passthrough"
+  ],
+  "module_visit_order": [
+    "pe",
+    "done_control",
+    "result_passthrough"
+  ],
+  "module_solve_rounds": {
+    "pe": 1,
+    "done_control": 1,
+    "result_passthrough": 1
+  },
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "systolic_gemm",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 116.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

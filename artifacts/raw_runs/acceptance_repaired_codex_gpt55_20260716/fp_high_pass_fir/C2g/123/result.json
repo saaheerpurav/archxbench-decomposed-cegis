@@ -1,0 +1,19 @@
+{
+  "condition": "C2g",
+  "llm_calls": 1,
+  "best_passes": 1000,
+  "total_tests": 1000,
+  "solved": true,
+  "golden_correct": 1000,
+  "golden_total": 1000,
+  "design": "fp_high_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 81.9,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

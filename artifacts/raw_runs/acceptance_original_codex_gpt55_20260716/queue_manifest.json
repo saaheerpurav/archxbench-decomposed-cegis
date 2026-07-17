@@ -1,0 +1,590 @@
+{
+  "queue": "original",
+  "model": "gpt-5.5",
+  "parallel": 3,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "resume_history": [
+    {
+      "model": "gpt-5.5",
+      "reasoning_effort": "low",
+      "codex_cli_timeout_seconds": 1800,
+      "completed_cells_preserved": [
+        {
+          "design": "aes_decryption",
+          "condition": "C1",
+          "seed": 42
+        },
+        {
+          "design": "aes_decryption",
+          "condition": "C1",
+          "seed": 456
+        },
+        {
+          "design": "aes_decryption",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "aes_decryption",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "aes_encryption",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "aes_encryption",
+          "condition": "C4tl-noRef",
+          "seed": 42
+        },
+        {
+          "design": "aes_encryption",
+          "condition": "C4tl-noRef",
+          "seed": 123
+        },
+        {
+          "design": "aes_encryption",
+          "condition": "C4tl-noRef",
+          "seed": 456
+        },
+        {
+          "design": "conv1d",
+          "condition": "C1",
+          "seed": 42
+        },
+        {
+          "design": "conv1d",
+          "condition": "C1",
+          "seed": 123
+        },
+        {
+          "design": "conv1d",
+          "condition": "C1",
+          "seed": 456
+        },
+        {
+          "design": "conv1d",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "conv1d",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "conv1d",
+          "condition": "C4tl-noRef",
+          "seed": 42
+        },
+        {
+          "design": "conv1d",
+          "condition": "C4tl-noRef",
+          "seed": 123
+        },
+        {
+          "design": "conv1d",
+          "condition": "C4tl-noRef",
+          "seed": 456
+        },
+        {
+          "design": "conv2d",
+          "condition": "C1",
+          "seed": 42
+        },
+        {
+          "design": "conv2d",
+          "condition": "C1",
+          "seed": 123
+        },
+        {
+          "design": "conv2d",
+          "condition": "C1",
+          "seed": 456
+        },
+        {
+          "design": "conv2d",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "conv2d",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "conv2d",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "conv2d",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "conv2d",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "conv2d",
+          "condition": "C4i",
+          "seed": 456
+        },
+        {
+          "design": "conv2d",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "conv2d",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "conv2d",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "dct_idct_8pt_pipelined",
+          "condition": "C1",
+          "seed": 42
+        },
+        {
+          "design": "dct_idct_8pt_pipelined",
+          "condition": "C1",
+          "seed": 123
+        },
+        {
+          "design": "dct_idct_8pt_pipelined",
+          "condition": "C1",
+          "seed": 456
+        },
+        {
+          "design": "dct_idct_8pt_pipelined",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "dct_idct_8pt_pipelined",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "dct_idct_8pt_pipelined",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "dct_idct_8pt_pipelined",
+          "condition": "C4i",
+          "seed": 456
+        }
+      ]
+    }
+  ],
+  "cells": [
+    {
+      "design": "aes_decryption",
+      "condition": "C1",
+      "seed": 42,
+      "reason": "complete corrected file-output pass@5"
+    },
+    {
+      "design": "aes_decryption",
+      "condition": "C1",
+      "seed": 456,
+      "reason": "complete corrected file-output pass@5"
+    },
+    {
+      "design": "aes_decryption",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "remaining AES C4tl cells"
+    },
+    {
+      "design": "aes_decryption",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "remaining AES C4tl cells"
+    },
+    {
+      "design": "aes_encryption",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "remaining AES C4tl cell"
+    },
+    {
+      "design": "aes_encryption",
+      "condition": "C4tl-noRef",
+      "seed": 42,
+      "reason": "file-output oracle-exposure ablation"
+    },
+    {
+      "design": "aes_encryption",
+      "condition": "C4tl-noRef",
+      "seed": 123,
+      "reason": "file-output oracle-exposure ablation"
+    },
+    {
+      "design": "aes_encryption",
+      "condition": "C4tl-noRef",
+      "seed": 456,
+      "reason": "file-output oracle-exposure ablation"
+    },
+    {
+      "design": "conv1d",
+      "condition": "C1",
+      "seed": 42,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "conv1d",
+      "condition": "C1",
+      "seed": 123,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "conv1d",
+      "condition": "C1",
+      "seed": 456,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "conv1d",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "C4tl file-output repair"
+    },
+    {
+      "design": "conv1d",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "C4tl file-output repair"
+    },
+    {
+      "design": "conv1d",
+      "condition": "C4tl-noRef",
+      "seed": 42,
+      "reason": "file-output oracle-exposure ablation"
+    },
+    {
+      "design": "conv1d",
+      "condition": "C4tl-noRef",
+      "seed": 123,
+      "reason": "file-output oracle-exposure ablation"
+    },
+    {
+      "design": "conv1d",
+      "condition": "C4tl-noRef",
+      "seed": 456,
+      "reason": "file-output oracle-exposure ablation"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C1",
+      "seed": 42,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C1",
+      "seed": 123,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C1",
+      "seed": 456,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "invalidated integer golden score"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "invalidated integer golden score"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "invalidated integer golden score"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "C4tl strict scoring/final rescore"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "C4tl strict scoring/final rescore"
+    },
+    {
+      "design": "conv2d",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "C4tl strict scoring/final rescore"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C1",
+      "seed": 42,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C1",
+      "seed": 123,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C1",
+      "seed": 456,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "invalidated DCT/IDCT score"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "invalidated DCT/IDCT score"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "invalidated DCT/IDCT score"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "C4tl strict scoring/final rescore"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "C4tl strict scoring/final rescore"
+    },
+    {
+      "design": "dct_idct_8pt_pipelined",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "C4tl strict scoring/final rescore"
+    },
+    {
+      "design": "fft_16pt_iterative",
+      "condition": "C4tl-noRef",
+      "seed": 42,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "fft_16pt_iterative",
+      "condition": "C4tl-noRef",
+      "seed": 123,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "fft_16pt_iterative",
+      "condition": "C4tl-noRef",
+      "seed": 456,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "fp_adder",
+      "condition": "C4i-noRef",
+      "seed": 42,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "fp_adder",
+      "condition": "C4i-noRef",
+      "seed": 123,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "fp_adder",
+      "condition": "C4i-noRef",
+      "seed": 456,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "gauss_siedel",
+      "condition": "C4i-noRef",
+      "seed": 42,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "gauss_siedel",
+      "condition": "C4i-noRef",
+      "seed": 123,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "gauss_siedel",
+      "condition": "C4i-noRef",
+      "seed": 456,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "gauss_siedel",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "47/50 and 49/50 near misses"
+    },
+    {
+      "design": "gauss_siedel",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "47/50 and 49/50 near misses"
+    },
+    {
+      "design": "gradient_descent",
+      "condition": "C4i-noRef",
+      "seed": 42,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "gradient_descent",
+      "condition": "C4i-noRef",
+      "seed": 123,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "gradient_descent",
+      "condition": "C4i-noRef",
+      "seed": 456,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "ifft_16pt_iterative",
+      "condition": "C4tl-noRef",
+      "seed": 42,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "ifft_16pt_iterative",
+      "condition": "C4tl-noRef",
+      "seed": 123,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "ifft_16pt_iterative",
+      "condition": "C4tl-noRef",
+      "seed": 456,
+      "reason": "oracle-exposure ablation"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C1",
+      "seed": 42,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C1",
+      "seed": 123,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C1",
+      "seed": 456,
+      "reason": "corrected file-output pass@5"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "strict golden feedback"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "C4tl strict scoring/final rescore"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "C4tl strict scoring/final rescore"
+    },
+    {
+      "design": "unsharp_mask",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "C4tl strict scoring/final rescore"
+    }
+  ]
+}

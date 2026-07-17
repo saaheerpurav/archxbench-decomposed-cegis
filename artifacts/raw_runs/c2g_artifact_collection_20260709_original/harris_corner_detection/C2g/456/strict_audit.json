@@ -1,0 +1,13 @@
+{
+  "design": "harris_corner_detection",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "strict_correct": 16346,
+  "strict_total": 16384,
+  "strict_solved": false,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "harris_corner",
+  "detail": "golden_output: FAIL (16346/16384 correct; golden=16384, DUT=16384)\n  idx=778: expected=1 got=0 (value mismatch)\n  idx=779: expected=1 got=0 (value mismatch)\n  idx=906: expected=1 got=0 (value mismatch)\n  idx=907: expected=1 got=0 (value mismatch)\n  idx=1032: expected=1 got=0 (value mismatch)\n  idx=1034: expected=1 got=0 (value mismatch)\n  idx=1035: expected=1 got=0 (value mismatch)\n  idx=1037: expected=1 got=0 (value mismatch)\n  idx=1161: expected=1 got=0 (value mismatch)\n  idx=1164: expected=1 got=0 (value mismatch)"
+}

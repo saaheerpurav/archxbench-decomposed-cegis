@@ -1,0 +1,848 @@
+{
+  "queue": "repaired",
+  "model": "gpt-5.5",
+  "parallel": 3,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "resume_history": [
+    {
+      "model": "gpt-5.5",
+      "reasoning_effort": "high",
+      "codex_cli_timeout_seconds": 1800,
+      "completed_cells_preserved": [
+        {
+          "design": "band_pass_fir",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4i",
+          "seed": 456
+        }
+      ]
+    },
+    {
+      "model": "gpt-5.5",
+      "reasoning_effort": "low",
+      "codex_cli_timeout_seconds": 1800,
+      "completed_cells_preserved": [
+        {
+          "design": "band_pass_fir",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4i",
+          "seed": 456
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "band_pass_fir",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "conv_3d",
+          "condition": "C4i",
+          "seed": 456
+        },
+        {
+          "design": "conv_3d",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "conv_3d",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "conv_3d",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C4i",
+          "seed": 456
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "fp_band_pass_fir",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C4i",
+          "seed": 456
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "fp_high_pass_fir",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C4i",
+          "seed": 456
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "fp_low_pass_fir",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C4i",
+          "seed": 456
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "harris_corner_detection",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "high_pass_fir",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "high_pass_fir",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "high_pass_fir",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "high_pass_fir",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "high_pass_fir",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "high_pass_fir",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "high_pass_fir",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "high_pass_fir",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "low_pass_fir",
+          "condition": "C2g",
+          "seed": 42
+        },
+        {
+          "design": "low_pass_fir",
+          "condition": "C2g",
+          "seed": 123
+        },
+        {
+          "design": "low_pass_fir",
+          "condition": "C2g",
+          "seed": 456
+        },
+        {
+          "design": "low_pass_fir",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "low_pass_fir",
+          "condition": "C4i",
+          "seed": 456
+        },
+        {
+          "design": "low_pass_fir",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "low_pass_fir",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "low_pass_fir",
+          "condition": "C4tl",
+          "seed": 456
+        },
+        {
+          "design": "newton_raphson_polynomial",
+          "condition": "C4i",
+          "seed": 42
+        },
+        {
+          "design": "newton_raphson_polynomial",
+          "condition": "C4i",
+          "seed": 123
+        },
+        {
+          "design": "newton_raphson_polynomial",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "newton_raphson_polynomial",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "quantized_matmul",
+          "condition": "C4tl",
+          "seed": 42
+        },
+        {
+          "design": "quantized_matmul",
+          "condition": "C4tl",
+          "seed": 123
+        },
+        {
+          "design": "quantized_matmul",
+          "condition": "C4tl",
+          "seed": 456
+        }
+      ]
+    }
+  ],
+  "cells": [
+    {
+      "design": "band_pass_fir",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "band_pass_fir",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "band_pass_fir",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "band_pass_fir",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "band_pass_fir",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "band_pass_fir",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "band_pass_fir",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "band_pass_fir",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "band_pass_fir",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "conv_3d",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "remaining repaired Conv3D C4i cell"
+    },
+    {
+      "design": "conv_3d",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "golden-only C4tl gate repair"
+    },
+    {
+      "design": "conv_3d",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "golden-only C4tl gate repair"
+    },
+    {
+      "design": "conv_3d",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "golden-only C4tl gate repair"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "fp_low_pass_fir",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "recovered 101-tap FP32 contract"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "harris_corner_detection",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "exact binary Harris repair"
+    },
+    {
+      "design": "high_pass_fir",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "high_pass_fir",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "high_pass_fir",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "high_pass_fir",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "high_pass_fir",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "high_pass_fir",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "high_pass_fir",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "high_pass_fir",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "low_pass_fir",
+      "condition": "C2g",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "low_pass_fir",
+      "condition": "C2g",
+      "seed": 123,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "low_pass_fir",
+      "condition": "C2g",
+      "seed": 456,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "low_pass_fir",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "low_pass_fir",
+      "condition": "C4i",
+      "seed": 456,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "low_pass_fir",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "low_pass_fir",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "low_pass_fir",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "corrected Q15 contract"
+    },
+    {
+      "design": "newton_raphson_polynomial",
+      "condition": "C4i",
+      "seed": 42,
+      "reason": "remaining repaired Newton cells"
+    },
+    {
+      "design": "newton_raphson_polynomial",
+      "condition": "C4i",
+      "seed": 123,
+      "reason": "remaining repaired Newton cells"
+    },
+    {
+      "design": "newton_raphson_polynomial",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "remaining repaired Newton cells"
+    },
+    {
+      "design": "newton_raphson_polynomial",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "remaining repaired Newton cells"
+    },
+    {
+      "design": "quantized_matmul",
+      "condition": "C4tl",
+      "seed": 42,
+      "reason": "golden-only C4tl gate repair"
+    },
+    {
+      "design": "quantized_matmul",
+      "condition": "C4tl",
+      "seed": 123,
+      "reason": "golden-only C4tl gate repair"
+    },
+    {
+      "design": "quantized_matmul",
+      "condition": "C4tl",
+      "seed": 456,
+      "reason": "golden-only C4tl gate repair"
+    }
+  ]
+}

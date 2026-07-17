@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fp32_to_q32_32.v",
+  "sub_modules": {
+    "fp32_to_q32_32": "Combinational IEEE-754 binary32 to signed Q32.32 fixed-point converter.",
+    "bandpass_coeff_rom": "Combinational ROM containing the exact 101 coefficient words from the specification.",
+    "q32_32_fir_mac": "Combinational 101-tap FIR multiply-accumulate over Q32.32 samples and coefficients.",
+    "q32_32_to_fp32": "Combinational signed Q32.32 fixed-point to IEEE-754 binary32 converter."
+  }
+}

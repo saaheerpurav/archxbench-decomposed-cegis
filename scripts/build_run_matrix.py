@@ -39,6 +39,61 @@ FILE_OUTPUT_DESIGNS = {
     "quantized_matmul",
 }
 
+REPAIRED_RUN_PREFIXES = (
+    "acceptance_repaired_",
+    "repaired_contracts_",
+    "repaired_fir_",
+    "repaired_fp_fir_",
+    "repaired_newton_",
+)
+
+
+def is_repaired_contract_path(parts: tuple[str, ...]) -> bool:
+    """Return whether an artifact path belongs to a repaired contract run.
+
+    Repaired runs must never contribute to the original-contract matrix.  Some
+    historical run roots predate the ``repaired_*`` naming convention and use
+    a trailing ``_repaired`` marker instead, so checking prefixes alone is not
+    sufficient.
+    """
+    return any(
+        part.startswith(REPAIRED_RUN_PREFIXES) or part.endswith("_repaired")
+        for part in parts
+    )
+
+
+def load_strict_audit(result_path: Path) -> dict | None:
+    """Load and validate an optional strict-verifier sidecar.
+
+    A strict audit is authoritative when present: in particular, an audited
+    failure must not lose canonicalization to an older unaudited claimed pass.
+    Malformed or internally inconsistent sidecars are ignored rather than
+    silently changing the matrix.
+    """
+    audit_path = result_path.with_name("strict_audit.json")
+    if not audit_path.is_file():
+        return None
+    try:
+        audit = json.loads(audit_path.read_text(encoding="utf-8", errors="replace"))
+        correct = int(audit["strict_correct"])
+        total = int(audit["strict_total"])
+        solved = audit["strict_solved"]
+        version = str(audit["verifier_version"]).strip()
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(solved, bool) or not version:
+        return None
+    if total <= 0 or correct < 0 or correct > total:
+        return None
+    if solved != (correct == total):
+        return None
+    return {
+        "strict_correct": correct,
+        "strict_total": total,
+        "strict_solved": solved,
+        "verifier_version": version,
+    }
+
 
 def official_designs() -> list[tuple[str, str]]:
     rows: list[tuple[str, str]] = []
@@ -120,6 +175,10 @@ def summarize_group(items: list[dict]) -> dict[str, str]:
     best_scores = sorted({item["score"] for item in items if item["score"]})
     golden_scores = sorted({item["golden"] for item in items if item["golden"]})
     models = sorted({item["model"] for item in items if item["model"]})
+    verification_sources = sorted({item["verification_source"] for item in items})
+    verifier_versions = sorted(
+        {item["verifier_version"] for item in items if item["verifier_version"]}
+    )
     return {
         "runs": str(len(seeds)),
         "clean_solves": str(len(clean_seeds)),
@@ -128,6 +187,8 @@ def summarize_group(items: list[dict]) -> dict[str, str]:
         "models": ",".join(models),
         "scores": ";".join(best_scores),
         "golden_scores": ";".join(golden_scores),
+        "verification_sources": ",".join(verification_sources),
+        "verifier_versions": ",".join(verifier_versions),
     }
 
 
@@ -136,7 +197,7 @@ def collect_results() -> list[dict]:
     results: list[dict] = []
     for result_path in ARTIFACTS.rglob("result.json"):
         rel_parts = result_path.relative_to(ROOT).parts
-        if any(part.startswith(("repaired_contracts_", "repaired_fir_", "repaired_fp_fir_", "repaired_newton_")) for part in rel_parts):
+        if is_repaired_contract_path(rel_parts):
             continue
         try:
             data = json.loads(result_path.read_text(encoding="utf-8", errors="replace"))
@@ -168,7 +229,16 @@ def collect_results() -> list[dict]:
             seed = numeric_parts[-1] if numeric_parts else ""
 
         model = normalized_model(data.get("model"))
-        is_strict_clean = strict_clean(design, data)
+        audit = load_strict_audit(result_path)
+        effective_data = data
+        if audit is not None:
+            effective_data = {
+                **data,
+                "golden_correct": audit["strict_correct"],
+                "golden_total": audit["strict_total"],
+                "solved": audit["strict_solved"],
+            }
+        is_strict_clean = strict_clean(design, effective_data)
         results.append(
             {
                 "level": designs[design],
@@ -177,9 +247,12 @@ def collect_results() -> list[dict]:
                 "model": model,
                 "seed": str(seed),
                 "strict_clean": is_strict_clean,
+                "strict_audited": audit is not None,
                 "infra_error": infra_error(data),
                 "score": score(data),
-                "golden": golden_score(data),
+                "golden": golden_score(effective_data),
+                "verification_source": "strict_audit" if audit else "result_json",
+                "verifier_version": audit["verifier_version"] if audit else "",
                 "artifact_path": result_path.as_posix(),
             }
         )
@@ -197,7 +270,7 @@ def collect_results() -> list[dict]:
             item["seed"],
         )
 
-        def rank(row: dict) -> tuple[int, int, int, int, str]:
+        def rank(row: dict) -> tuple[int, int, int, int, int, str]:
             golden = row["golden"]
             golden_total = 0
             if "/" in golden:
@@ -206,6 +279,7 @@ def collect_results() -> list[dict]:
                 except ValueError:
                     golden_total = 0
             return (
+                1 if row["strict_audited"] else 0,
                 1 if row["strict_clean"] else 0,
                 0 if row["infra_error"] else 1,
                 1 if golden_total > 0 else 0,
@@ -252,6 +326,8 @@ def main() -> None:
                 f"{prefix}_models",
                 f"{prefix}_scores",
                 f"{prefix}_golden_scores",
+                f"{prefix}_verification_sources",
+                f"{prefix}_verifier_versions",
             ]
         )
 

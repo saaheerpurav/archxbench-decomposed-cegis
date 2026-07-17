@@ -1,0 +1,6 @@
+{
+  "top_source_file": "verilog/pe.v",
+  "sub_modules": {
+    "pe": "Combinational processing element that forwards north/west operands and produces the signed 64-bit product used by the top-level accumulator pipeline."
+  }
+}

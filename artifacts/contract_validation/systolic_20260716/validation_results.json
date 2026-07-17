@@ -1,0 +1,10 @@
+{
+  "status": "pass",
+  "returncode": 0,
+  "selected_checker": "tb.v",
+  "selected_checker_matches": true,
+  "output_checks_passed": 32,
+  "output_checks_failed": 0,
+  "expected_output_checks": 32,
+  "summary_ok": true
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fpa_unpack.v",
+  "sub_modules": {
+    "fpa_unpack": "Extracts IEEE-754 single-precision sign, exponent, fraction, and class signals.",
+    "fpa_special_cases": "Handles NaN, infinity, and zero cases with expected exception flags and signed-zero behavior.",
+    "fpa_align_add": "Builds significands, aligns exponents with sticky-bit preservation, and performs signed magnitude add/subtract.",
+    "fpa_normalize_round": "Normalizes the intermediate magnitude, applies rounding modes, packs the final result, and generates overflow/underflow flags."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/unsharp_window3x3.v",
+  "sub_modules": {
+    "unsharp_window3x3": "Forms a zero-padded 3x3 streaming stencil window from top-level line-buffer taps.",
+    "unsharp_gaussian3x3": "Computes fixed 3x3 Gaussian blur using weights 1 2 1 / 2 4 2 / 1 2 1 with divide-by-16 normalization.",
+    "unsharp_difference": "Computes signed high-frequency detail as original pixel minus blurred pixel.",
+    "unsharp_gain": "Scales the signed high-frequency detail by the runtime gain factor.",
+    "unsharp_reconstruct": "Adds scaled detail back to the original pixel and saturates to the output pixel range."
+  }
+}

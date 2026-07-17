@@ -1,0 +1,27 @@
+{
+  "condition": "C4tl-noRef",
+  "solved": false,
+  "llm_calls": 31,
+  "error": "final compile failed",
+  "decomp_modules": [
+    "fft16_index_gen",
+    "fft16_twiddle_rom",
+    "fft16_butterfly",
+    "fft16_output_scale"
+  ],
+  "ref_passes": 33,
+  "ref_total": 33,
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "fft_16pt_iterative",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 1274.1,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

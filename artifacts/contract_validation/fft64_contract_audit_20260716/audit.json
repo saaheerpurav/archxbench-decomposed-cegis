@@ -1,0 +1,63 @@
+{
+  "design": "fft_streaming_64pt",
+  "observations": {
+    "abstract_oracle": {
+      "direct_dft_matches_released_float_golden_at_1e-12": true,
+      "direct_dft_max_component_error": 3.135269821541442e-13,
+      "golden_hex_fp32_mismatch_count": 0,
+      "sample_count": 64,
+      "stimuli_hex_fp32_mismatch_count": 0
+    },
+    "distinct_fixed_point_interpretations_that_both_fit_released_widths": [
+      {
+        "dc_output_integer": 15481,
+        "first_nonzero_input_integer": 5225,
+        "fractional_bits": 13,
+        "input_fits_signed_16": true,
+        "input_peak_integer": 12233,
+        "max_component_delta_between_dft_of_quantized_input_and_quantized_float_golden": 4.018047453697818,
+        "name": "signed_Q3.13",
+        "output_fits_signed_20": true,
+        "output_peak_integer": 231339,
+        "scale": 8192
+      },
+      {
+        "dc_output_integer": 30963,
+        "first_nonzero_input_integer": 10449,
+        "fractional_bits": 14,
+        "input_fits_signed_16": true,
+        "input_peak_integer": 24466,
+        "max_component_delta_between_dft_of_quantized_input_and_quantized_float_golden": 4.000000000212822,
+        "name": "signed_Q2.14",
+        "output_fits_signed_20": true,
+        "output_peak_integer": 462678,
+        "scale": 16384
+      }
+    ],
+    "released_rtl_interface": {
+      "binary_point_or_fp_format_specified": false,
+      "flush_cycles": "$clog2(POINTS) = 6",
+      "golden_output_schema": "object containing separate real_out and imag_out float arrays",
+      "growth_bits": 4,
+      "input_width": 16,
+      "output_width": 20,
+      "stimulus_json_schema": "object containing separate real_in and imag_in float arrays",
+      "testbench_output_schema": "array of objects with real and imag integer fields",
+      "testbench_reads": "inputs/stimuli.json",
+      "testbench_scan_format": "%d %d"
+    }
+  },
+  "safe_queue_action": "exclude; do not run or claim until an encoding and fixed-point arithmetic contract are externally specified",
+  "source": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench\\level-6\\fft_streaming_64pt",
+  "status": "HOLD_UNRESOLVED_RTL_NUMERIC_CONTRACT",
+  "summary": "The released floats define a coherent 64-point complex DFT, but the files do not uniquely map that oracle onto the released RTL ports.",
+  "unresolved_ambiguities": [
+    "No binary point or floating-point bit layout is specified for the 16-bit input and 20-bit output ports.",
+    "The FP32 mirror files are internally valid but their 32-bit words cannot be applied to the released 16-bit ports without an unspecified conversion.",
+    "At least Q3.13 and Q2.14 fit every released input and golden output but produce different integer stimuli and golden vectors.",
+    "Input rounding, twiddle precision, per-stage rounding/saturation, and output error tolerance are unspecified.",
+    "The testbench scans decimal integer pairs from a JSON object containing separate float arrays, so it does not apply the released samples as paired complex values.",
+    "The testbench and golden output use incompatible JSON schemas.",
+    "The testbench observes only six flush cycles although the specification leaves FFT pipeline latency open and allows architecture-dependent stage latency."
+  ]
+}

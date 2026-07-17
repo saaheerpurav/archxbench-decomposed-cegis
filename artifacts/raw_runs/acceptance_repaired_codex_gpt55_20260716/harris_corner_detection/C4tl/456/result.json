@@ -1,0 +1,31 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 3,
+  "best_passes": 16328,
+  "total_tests": 16384,
+  "solved": false,
+  "decomp_modules": [
+    "harris_index_to_xy",
+    "harris_sobel",
+    "harris_grad_products",
+    "harris_gaussian3x3",
+    "harris_response",
+    "harris_threshold"
+  ],
+  "ref_passes": 16328,
+  "ref_total": 16384,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "harris_corner_detection",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 379.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,28 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 5,
+  "best_passes": 1000,
+  "total_tests": 1000,
+  "solved": true,
+  "decomp_modules": [
+    "fp_bandpass_fir_mac",
+    "fp_fir_sample_bank",
+    "fp_valid_delay",
+    "fp_output_select"
+  ],
+  "ref_passes": 1000,
+  "ref_total": 1000,
+  "golden_correct": 1000,
+  "golden_total": 1000,
+  "module_solve_rounds": {},
+  "design": "fp_band_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 155.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/conv2d_coord.v",
+  "sub_modules": {
+    "conv2d_coord": "Combinational coordinate and window-valid flag generation from stream row and column counters.",
+    "conv2d_window_pack": "Combinational packing of the 3x3 stencil pixels into a flattened dot-product vector.",
+    "conv2d_coeffs": "Combinational default 3x3 Gaussian coefficient ROM flattened for the datapath.",
+    "conv2d_dot_product": "Combinational matrix-vector multiply-accumulate datapath for the stencil window.",
+    "conv2d_output_cast": "Combinational cast from accumulator width to the output pixel width."
+  }
+}

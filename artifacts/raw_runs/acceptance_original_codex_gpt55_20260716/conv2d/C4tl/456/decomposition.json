@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv2d_coord.v",
+  "sub_modules": {
+    "conv2d_coord": "Combinational row and column boundary control for line-buffer addressing and window-valid generation.",
+    "conv2d_window_pack": "Combinational flattened stencil-window forwarding block used as an independent window assembly boundary.",
+    "conv2d_mac": "Combinational matrix-vector dot product datapath with default 3x3 Gaussian coefficients.",
+    "conv2d_saturate": "Combinational output-width limiter that clamps wide unsigned accumulated values to the output pixel width."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fir_coeff_rom_101.v",
+  "sub_modules": {
+    "fir_coeff_rom_101": "Combinational ROM for the exact 101 signed Q15 band-pass FIR coefficients.",
+    "fir_tap_mult": "Combinational signed sample-by-coefficient multiplier for one FIR tap.",
+    "fir_sum_tree_101": "Combinational 101-product signed accumulator widened to 64 bits.",
+    "fir_q15_normalize": "Combinational arithmetic right shift by 15 to convert the Q15 accumulator to output scale.",
+    "fir_mac_101": "Combinational 101-tap FIR MAC that wires coefficient ROMs, tap multipliers, and the sum tree."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/pe_mac.v",
+  "sub_modules": {
+    "pe_mac": "Combinational processing-element arithmetic block that adds the signed product of north and west inputs to the current accumulator.",
+    "pe_forward": "Combinational processing-element routing block that forwards north input south and west input east.",
+    "done_logic": "Combinational completion detector that asserts done after the 9-cycle computation window."
+  }
+}

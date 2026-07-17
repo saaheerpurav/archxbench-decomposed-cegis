@@ -1,0 +1,17 @@
+{
+  "condition": "C2g",
+  "llm_calls": 6,
+  "best_passes": 1001,
+  "total_tests": 1001,
+  "solved": true,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "band_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "wall_seconds": 803.4,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

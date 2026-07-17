@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv3d_window_control.v",
+  "sub_modules": {
+    "conv3d_window_control": "Combinational valid-window detector for valid-padding 3D convolution boundaries.",
+    "conv3d_address_generator": "Combinational 3D sliding-window tap address generator over depth, row, and column dimensions.",
+    "conv3d_mac_array": "Combinational multiply-accumulate array for the flattened 3D convolution window and kernel."
+  }
+}

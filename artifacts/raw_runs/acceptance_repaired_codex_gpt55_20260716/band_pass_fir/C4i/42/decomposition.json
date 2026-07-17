@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/bandpass_input_cast.v",
+  "sub_modules": {
+    "bandpass_input_cast": "Combinational signed input interpretation for the fixed-point sample stream.",
+    "bandpass_mac_101": "Combinational 101-tap signed FIR multiply-accumulate using the required Q15 band-pass coefficients.",
+    "bandpass_q15_normalize": "Combinational Q15 normalization by arithmetic right shift and output-width truncation."
+  }
+}

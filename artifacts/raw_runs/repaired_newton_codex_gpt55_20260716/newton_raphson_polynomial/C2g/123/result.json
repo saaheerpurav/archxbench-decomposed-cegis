@@ -1,0 +1,15 @@
+{
+  "condition": "C2g",
+  "llm_calls": 6,
+  "best_passes": 97,
+  "total_tests": 97,
+  "solved": true,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "newton_raphson_polynomial",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "wall_seconds": 312.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

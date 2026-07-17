@@ -1,0 +1,6 @@
+{
+  "mode": "fp32",
+  "absolute_tolerance": 1e-06,
+  "require_exact_length": true,
+  "require_finite": true
+}

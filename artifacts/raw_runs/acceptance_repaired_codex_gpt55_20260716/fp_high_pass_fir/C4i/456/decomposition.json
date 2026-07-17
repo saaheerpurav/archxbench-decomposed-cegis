@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp_hp_coeff_rom.v",
+  "sub_modules": {
+    "fp_hp_coeff_rom": "Combinational ROM that maps FIR tap indices to the exact 101 binary32 high-pass coefficients.",
+    "fp32_mul": "Combinational IEEE-754 binary32 multiplier for tap sample and coefficient products.",
+    "fp32_add": "Combinational IEEE-754 binary32 adder used to form the FIR accumulation chain."
+  }
+}

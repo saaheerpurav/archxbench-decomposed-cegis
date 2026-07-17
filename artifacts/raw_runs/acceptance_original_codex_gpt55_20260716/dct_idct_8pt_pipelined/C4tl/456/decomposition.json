@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/dct1d_8_coeff_rom.v",
+  "sub_modules": {
+    "dct1d_8_coeff_rom": "Combinational fixed-point cosine coefficient ROM for DCT and IDCT matrices.",
+    "dct1d_8_matrix_mac": "Combinational 8-input signed matrix multiply and accumulate datapath.",
+    "dct1d_8_round_scale": "Combinational fixed-point rounding and mode-dependent output scaling.",
+    "dct1d_8_saturate": "Combinational signed saturation from accumulator width to output width."
+  }
+}

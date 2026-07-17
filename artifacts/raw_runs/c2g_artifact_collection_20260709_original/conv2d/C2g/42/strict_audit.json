@@ -1,0 +1,13 @@
+{
+  "design": "conv2d",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 2940,
+  "strict_total": 4096,
+  "strict_solved": false,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "conv2d",
+  "detail": "golden_output: FAIL (2940/4096 correct; golden=4096, DUT=4096)\n  idx=1041: expected=15 got=255 (value mismatch)\n  idx=1042: expected=47 got=765 (value mismatch)\n  idx=1043: expected=63 got=1020 (value mismatch)\n  idx=1044: expected=63 got=1020 (value mismatch)\n  idx=1045: expected=63 got=1020 (value mismatch)\n  idx=1046: expected=63 got=1020 (value mismatch)\n  idx=1047: expected=63 got=1020 (value mismatch)\n  idx=1048: expected=63 got=1020 (value mismatch)\n  idx=1049: expected=63 got=1020 (value mismatch)\n  idx=1050: expected=63 got=1020 (value mismatch)"
+}

@@ -1,0 +1,28 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 7,
+  "best_passes": 65536,
+  "total_tests": 65536,
+  "solved": true,
+  "decomp_modules": [
+    "gaussian3x3_blur",
+    "unsharp_difference",
+    "unsharp_gain",
+    "unsharp_reconstruct"
+  ],
+  "ref_passes": 65536,
+  "ref_total": 65536,
+  "golden_correct": 65536,
+  "golden_total": 65536,
+  "module_solve_rounds": {},
+  "design": "unsharp_mask",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 303.4,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

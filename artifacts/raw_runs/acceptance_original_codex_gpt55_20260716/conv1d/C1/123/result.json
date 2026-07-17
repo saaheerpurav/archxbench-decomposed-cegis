@@ -1,0 +1,50 @@
+{
+  "condition": "C1",
+  "llm_calls": 5,
+  "best_passes": 16,
+  "total_tests": 16,
+  "solved": true,
+  "golden_correct": 16,
+  "golden_total": 16,
+  "attempt_scores": [
+    {
+      "attempt": 1,
+      "compiled": true,
+      "golden_correct": 16,
+      "golden_total": 16,
+      "detail": "golden_output: PASS all 16 samples match exactly in length"
+    },
+    {
+      "attempt": 2,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 1,
+      "detail": "JSON parse error: Expecting value: line 2 column 3 (char 4)"
+    },
+    {
+      "attempt": 3,
+      "compiled": false
+    },
+    {
+      "attempt": 4,
+      "compiled": false
+    },
+    {
+      "attempt": 5,
+      "compiled": true,
+      "golden_correct": 16,
+      "golden_total": 16,
+      "detail": "golden_output: PASS all 16 samples match exactly in length"
+    }
+  ],
+  "design": "conv1d",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 102.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

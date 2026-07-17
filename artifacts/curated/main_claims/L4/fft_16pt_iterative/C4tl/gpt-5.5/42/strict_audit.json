@@ -1,0 +1,13 @@
+{
+  "design": "fft_16pt_iterative",
+  "condition": "C4tl",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 33,
+  "strict_total": 33,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "fft16_iterative",
+  "detail": "[PASS] Test 0 real: expected 35, got 34\n[PASS] Test 0 imag: expected 0, got 0\n[PASS] Test 1 real: expected -32, got -31\n[PASS] Test 1 imag: expected -60, got -59\n[PASS] Test 2 real: expected -13, got -14\n[PASS] Test 2 imag: expected -51, got -51\n[PASS] Test 3 real: expected 3, got 2\n[PASS] Test 3 imag: expected -12, got -14\n[PASS] Test 4 real: expected 5, got 4\n[PASS] Test 4 imag: expected -8, got -6\n[PASS] Test 5 real: expected 5, got 6\n[PASS] Test 5 imag: expected -5, got -4\n[PASS] Test 6 real: expected 6, got 6\n[PASS] Test 6 imag: expected -3, got -3\n[PASS] Test 7 real: expected 6, got 7\n[PASS] Test 7 imag: expected -1, got -1\n[PASS] Test 8 real: expected 6, got 6\n[PASS] Test 8 imag: expected 0, got 0\n[PASS] Test 9 real: expected 6, got 7\n[PASS] Test 9 imag: expected 1, got 1\n[PASS] Test 10 real: expected 6, got 6\n[PASS] Test 10 imag: expected 3, got 3\n[PASS] Test 11 real: expected 5, got 6\n[PASS] Test 11 imag: expected 5, got 4\n[PASS] Test 12 real: expected 5, got 4\n[PASS] Test 12 imag: expected 8, got 6\n[PASS] Test 13 real: expected 3, got 2\n[PASS] Test 13 imag: expected 12, got 14\n[PASS] Test 14 real: expected -13, got -14\n[PASS] Test 14 imag: expected 51, got 51\n[PASS] Test 15 real: expected -32, got -31\n[PASS] Test 15 imag: expected 60, got 59\n[PASS] All 32/32 tests passed\nC:\\Users\\saahe\\AppData\\Local\\Temp\\tdes_fpga_9f4mad5u\\tb.v:179: $finish called at 355000 (1ps)\n"
+}

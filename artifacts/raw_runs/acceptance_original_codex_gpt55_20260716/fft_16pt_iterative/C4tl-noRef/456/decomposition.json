@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fft16_twiddle_rom.v",
+  "sub_modules": {
+    "fft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient ROM for N=16 FFT angles.",
+    "fft16_complex_mult": "Combinational fixed-point complex twiddle multiplier supporting FFT and IFFT conjugate modes.",
+    "fft16_butterfly": "Combinational radix-2 DIT butterfly that rotates the second input and computes sum and difference outputs."
+  }
+}

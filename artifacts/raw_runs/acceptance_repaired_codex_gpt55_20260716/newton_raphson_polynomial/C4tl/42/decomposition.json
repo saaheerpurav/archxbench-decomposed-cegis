@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/fixed_poly_eval.v",
+  "sub_modules": {
+    "fixed_poly_eval": "Combinational Horner evaluator for the cubic polynomial in signed fixed-point format.",
+    "fixed_poly_derivative": "Combinational evaluator for the polynomial derivative in signed fixed-point format.",
+    "fixed_point_divider": "Combinational signed fixed-point divider used to compute the Newton correction term.",
+    "fixed_newton_step": "Combinational Newton update block that subtracts the correction term or holds on divide-by-zero.",
+    "fixed_root_verify": "Combinational verification block that checks the residual magnitude against tolerance.",
+    "fixed_abs": "Combinational signed absolute value helper."
+  }
+}

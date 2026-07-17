@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fir_input_cast.v",
+  "sub_modules": {
+    "fir_input_cast": "Combinational signed interpretation of the input sample bus.",
+    "fir_coeff_rom": "Combinational ROM for the exact 101 signed Q15 band-pass FIR coefficients.",
+    "fir_tap_multiply": "Combinational signed sample-by-coefficient multiplier for one FIR tap.",
+    "fir_accumulator_101": "Combinational 64-bit signed accumulator for all 101 tap products.",
+    "fir_q15_normalize": "Combinational arithmetic right shift by 15 to convert the Q15 accumulator result to output scale."
+  }
+}

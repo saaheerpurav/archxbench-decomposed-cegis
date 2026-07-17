@@ -1,0 +1,13 @@
+{
+  "design": "harris_corner_detection",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "strict_correct": 16384,
+  "strict_total": 16384,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "harris_corner",
+  "detail": "golden_output: PASS all 16384 samples match exactly in length"
+}

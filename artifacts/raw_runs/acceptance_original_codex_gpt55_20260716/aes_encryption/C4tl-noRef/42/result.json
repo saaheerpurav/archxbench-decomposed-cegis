@@ -1,0 +1,27 @@
+{
+  "condition": "C4tl-noRef",
+  "solved": false,
+  "llm_calls": 29,
+  "error": "final compile failed",
+  "decomp_modules": [
+    "aes128_initial_add",
+    "aes128_sbox",
+    "aes128_round",
+    "aes128_final_round"
+  ],
+  "ref_passes": 8,
+  "ref_total": 8,
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "aes_encryption",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "trial_id": 42,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 971.5,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

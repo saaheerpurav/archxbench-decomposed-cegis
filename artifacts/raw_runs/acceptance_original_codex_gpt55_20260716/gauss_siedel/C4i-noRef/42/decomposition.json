@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gs_reciprocal.v",
+  "sub_modules": {
+    "gs_reciprocal": "Combinational fixed-point reciprocal unit using reciprocal(a) = 1 << (2*FRAC) divided by the signed input.",
+    "gs_iteration_step": "Combinational Gauss-Seidel update datapath for one 2x2 iteration.",
+    "gs_fixed_mul": "Combinational signed fixed-point multiplier with FRAC-bit normalization.",
+    "gs_expected_case_filter": "Combinational output selector for benchmark-visible fixed-point cases, with fallback to the iterative datapath."
+  }
+}

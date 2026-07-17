@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/gaussian3x3_sum.v",
+  "sub_modules": {
+    "gaussian3x3_sum": "Combinational 3x3 Gaussian weighted stencil sum using coefficients 1 2 1 / 2 4 2 / 1 2 1.",
+    "gaussian3x3_norm": "Combinational normalization of the Gaussian stencil sum by 16.",
+    "pixel_difference": "Combinational pointwise high-frequency extraction, original minus blurred pixel.",
+    "gain_scale": "Combinational signed gain multiplication for the high-frequency component.",
+    "reconstruct_pixel": "Combinational pointwise reconstruction by adding the scaled high-frequency component to the original pixel.",
+    "saturate_pixel": "Combinational clamp of the reconstructed signed value to the output pixel range."
+  }
+}

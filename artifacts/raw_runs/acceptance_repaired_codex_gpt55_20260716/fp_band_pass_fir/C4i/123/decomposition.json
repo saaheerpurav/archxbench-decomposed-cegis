@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp_bpf_coeff_rom.v",
+  "sub_modules": {
+    "fp_bpf_coeff_rom": "Combinational coefficient ROM that emits the exact binary32 FIR coefficient vector.",
+    "fp_bpf_mac_comb": "Combinational binary32 sequential multiply-accumulate FIR datapath over the sample window and coefficient vector.",
+    "fp_bpf_valid_gate": "Combinational valid propagation helper used by the top-level sequential control."
+  }
+}

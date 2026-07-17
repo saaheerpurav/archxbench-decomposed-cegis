@@ -1,0 +1,25 @@
+`timescale 1ns/1ps
+
+module conv1d_tap_window #(
+    parameter DATA_W = 8
+) (
+    input  [DATA_W-1:0] data_in,
+    input  [DATA_W-1:0] delay0,
+    input  [DATA_W-1:0] delay1,
+    input  [DATA_W-1:0] delay2,
+    input  [DATA_W-1:0] delay3,
+    input  [DATA_W-1:0] delay4,
+    output [DATA_W-1:0] tap0,
+    output [DATA_W-1:0] tap1,
+    output [DATA_W-1:0] tap2,
+    output [DATA_W-1:0] tap3,
+    output [DATA_W-1:0] tap4
+);
+
+    assign tap0 = data_in;
+    assign tap1 = delay0;
+    assign tap2 = delay1;
+    assign tap3 = delay2;
+    assign tap4 = delay3;
+
+endmodule

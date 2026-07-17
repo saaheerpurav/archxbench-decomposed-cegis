@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/dct8_coeff_rom.v",
+  "sub_modules": {
+    "dct8_coeff_rom": "Combinational Q14 cosine coefficient matrix ROM for DCT rows and IDCT transposed rows.",
+    "dct8_mac": "Combinational eight-input signed multiply-accumulate datapath.",
+    "dct8_round_shift": "Combinational fixed-point rounding and arithmetic scaling from Q14 products.",
+    "dct8_saturate": "Combinational signed saturation from accumulator width to output width."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp_fir_sample_packer.v",
+  "sub_modules": {
+    "fp_fir_sample_packer": "Combinationally packs the top module sample-history registers into a flat tap bus.",
+    "fp_highpass_coeff_rom": "Combinational coefficient ROM exposing the exact 101 binary32 high-pass FIR coefficients.",
+    "fp_fir_real_mac": "Combinational FIR multiply-accumulate model that converts IEEE-754 binary32 words to real values, evaluates the tap sum, and returns a rounded binary32 output."
+  }
+}

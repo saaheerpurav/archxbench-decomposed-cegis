@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/aes128_sbox.v",
+  "sub_modules": {
+    "aes128_sbox": "Combinational AES S-box lookup for one byte.",
+    "aes128_subbytes": "Applies the AES S-box independently to all 16 state bytes.",
+    "aes128_shiftrows": "Performs AES encryption ShiftRows byte permutation.",
+    "aes128_mixcolumns": "Performs AES encryption MixColumns over four state columns in GF(2^8).",
+    "aes128_key_expand_round": "Computes one AES-128 round key from the previous round key and Rcon.",
+    "aes128_round": "Combinational AES encryption round with optional final-round MixColumns bypass."
+  }
+}

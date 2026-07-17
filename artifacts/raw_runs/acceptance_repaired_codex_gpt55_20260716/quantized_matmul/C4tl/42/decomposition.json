@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/qgemm_quantize_matrix.v",
+  "sub_modules": {
+    "qgemm_quantize_matrix": "Combinational FP32 matrix unpack and internal signed two's-complement quantization using Q15 scale and zero-point.",
+    "qgemm_int_matrix_multiply": "Combinational signed integer GEMM over centered quantized values with INT32 accumulators.",
+    "qgemm_dequantize_matrix": "Combinational dequantization of INT32 accumulators back to packed IEEE-754 FP32 bit patterns using combined Q15 scales."
+  }
+}

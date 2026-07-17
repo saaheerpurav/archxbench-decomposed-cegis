@@ -28,7 +28,7 @@ CORRECTED IMPLEMENTATION PARAMETERS (benchmark repair):
 - TAP_CNT = 101 (spec default was wrong; golden uses 101-tap filter)
 - Filter design: scipy.signal.firwin(101, 1000, fs=50000)
 - Tolerance: testbench uses ±1 LSB (consistent with scripts/compare_outputs.py)
-- Coefficient quantization: scale by 32768, round to integer, accumulate in 64-bit, right-shift by 20
+- Coefficient quantization: scale by 32768, round to integer, accumulate in signed 64-bit, arithmetic right-shift by 15
 - 101 quantized coefficients (scale=32768, symmetric — h[i] == h[100-i]):
   COPY THESE EXACTLY — wrong values cause 1000/1000 failures:
   h[0..100] = [0, -2, -5, -7, -10, -14, -18, -23, -29, -35, -41, -49, -56, -63, -70,
@@ -69,4 +69,5 @@ Repaired benchmark contract:
 - Use `tb_selfcheck.v` as the only executable testbench for this fixture.
 - The top module remains `lowpass_fir`.
 - The stale file-output testbench from the original directory is intentionally removed.
+- Coefficients are signed Q15 integers scaled by 32768; normalize the signed accumulator with an arithmetic right-shift by 15.
 - Correctness is the embedded official 1000-sample golden sequence with +/-1 LSB tolerance.

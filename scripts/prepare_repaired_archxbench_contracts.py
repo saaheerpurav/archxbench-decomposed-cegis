@@ -369,6 +369,133 @@ endmodule
 """
 
 
+HARRIS_CORNER_TB = r"""`timescale 1ns/1ps
+
+module tb_harris_corner;
+  parameter PIXEL_W    = 8;
+  parameter IMG_WIDTH  = 128;
+  parameter IMG_HEIGHT = 128;
+  parameter GRAD_W     = 16;
+  parameter RESP_W     = 32;
+  parameter K_W        = 8;
+  localparam N         = IMG_WIDTH * IMG_HEIGHT;
+  localparam MAX_DRAIN = N * 2;
+  localparam EXTRA_CHECK_CYCLES = 32;
+
+  reg clk = 0;
+  reg rst;
+  always #5 clk = ~clk;
+
+  reg  [PIXEL_W-1:0] pixel_in;
+  reg                valid_in;
+  reg  [RESP_W-1:0]  threshold;
+  reg  [K_W-1:0]     k_param;
+  wire               is_corner;
+  wire               valid_out;
+
+  harris_corner #(
+    .IMG_WIDTH(IMG_WIDTH), .IMG_HEIGHT(IMG_HEIGHT),
+    .PIXEL_W(PIXEL_W), .GRAD_W(GRAD_W),
+    .RESP_W(RESP_W), .K_W(K_W)
+  ) dut (
+    .clk(clk), .rst(rst),
+    .pixel_in(pixel_in), .valid_in(valid_in),
+    .threshold(threshold), .k_param(k_param),
+    .is_corner(is_corner), .valid_out(valid_out)
+  );
+
+  integer infile, outfile, code;
+  integer loaded_count, drive_idx, out_count, drain_cycles;
+  integer ignored_char;
+  reg [PIXEL_W-1:0] img [0:N-1];
+  reg capture_enabled;
+
+  // Capture independently of the input driver so outputs produced during both
+  // the input stream and the pipeline drain are retained.  Commas depend on
+  // the actual output count, making the JSON valid for any DUT latency.
+  always @(posedge clk) begin
+    if (capture_enabled && !rst && valid_out) begin
+      if (out_count > 0)
+        $fwrite(outfile, ",\n");
+      $fwrite(outfile, "  %0d", is_corner);
+      out_count = out_count + 1;
+    end
+  end
+
+  initial begin
+    rst = 1;
+    valid_in = 0;
+    pixel_in = 0;
+    threshold = 32'd1000;
+    k_param = 8'd5;
+    capture_enabled = 0;
+    out_count = 0;
+
+    infile = $fopen("inputs/stimuli.json", "r");
+    if (infile == 0) begin
+      $display("[FAIL] cannot open inputs/stimuli.json");
+      $finish;
+    end
+    loaded_count = 0;
+    while (!$feof(infile) && loaded_count < N) begin
+      code = $fscanf(infile, "%d", img[loaded_count]);
+      if (code == 1)
+        loaded_count = loaded_count + 1;
+      else
+        ignored_char = $fgetc(infile);
+    end
+    $fclose(infile);
+    if (loaded_count != N) begin
+      $display("[FAIL] loaded %0d/%0d input pixels", loaded_count, N);
+      $finish;
+    end
+
+    outfile = $fopen("outputs/dut_output.json", "w");
+    if (outfile == 0) begin
+      $display("[FAIL] cannot open outputs/dut_output.json");
+      $finish;
+    end
+    $fwrite(outfile, "[\n");
+
+    repeat (2) @(negedge clk);
+    rst = 0;
+    capture_enabled = 1;
+
+    // Drive on the falling edge so the DUT sees stable inputs at the next
+    // rising edge and the output monitor has race-free sampling semantics.
+    for (drive_idx = 0; drive_idx < N; drive_idx = drive_idx + 1) begin
+      @(negedge clk);
+      valid_in = 1;
+      pixel_in = img[drive_idx];
+    end
+    @(negedge clk);
+    valid_in = 0;
+    pixel_in = 0;
+
+    // A correct implementation may have bounded finite pipeline latency.
+    // Wait for N outputs, then retain a bounded tail to expose nearby extras.
+    drain_cycles = 0;
+    while (out_count < N && drain_cycles < MAX_DRAIN) begin
+      @(posedge clk);
+      drain_cycles = drain_cycles + 1;
+    end
+    repeat (EXTRA_CHECK_CYCLES) @(posedge clk);
+    @(negedge clk);
+    capture_enabled = 0;
+
+    $fwrite(outfile, "\n]\n");
+    $fclose(outfile);
+
+    if (out_count == N)
+      $display("[PASS] harris_corner wrote exactly %0d outputs", out_count);
+    else
+      $display("[FAIL] harris_corner wrote %0d outputs; expected exactly %0d", out_count, N);
+    $finish;
+  end
+endmodule
+"""
+
+
 def _copy_design(level: str, design: str) -> Path:
     src = SOURCE_ROOT / level / design
     dst = REPAIRED_ROOT / level / design
@@ -490,7 +617,10 @@ def _repair_multich_conv2d() -> None:
 
 def _repair_systolic_gemm() -> None:
     dst = _copy_design("level-5", "systolic_gemm")
-    (dst / "testbench.v").write_text(SYSTOLIC_GEMM_TB, encoding="utf-8")
+    # The benchmark loader prefers tb.v over testbench*.v. Replace tb.v so
+    # repaired-contract runs cannot silently select the original display-only
+    # checker copied into the fixture.
+    (dst / "tb.v").write_text(SYSTOLIC_GEMM_TB, encoding="utf-8")
     note = (
         "# Repaired contract notes\n\n"
         "- Original testbench printed expected and actual matrices but never emitted machine-readable `[PASS]` or `[FAIL]` checks.\n"
@@ -512,17 +642,55 @@ def _repair_systolic_gemm() -> None:
     )
 
 
+def _repair_harris_corner() -> None:
+    dst = _copy_design("level-5", "harris_corner_detection")
+    (dst / "tb_harris_corner.v").write_text(HARRIS_CORNER_TB, encoding="utf-8")
+    note = (
+        "# Repaired contract notes\n\n"
+        "- The original testbench overrides the public 128x128 design parameters with 256x256, but the shipped stimulus and golden files each contain exactly 16384 samples.\n"
+        "- This fixture uses the documented 128x128 dimensions and requires exactly 16384 output samples.\n"
+        "- Outputs are captured throughout input streaming and a bounded pipeline-drain interval; JSON commas depend on the actual output count.\n"
+        "- Native PASS requires exactly 16384 `valid_out` assertions. Golden scoring additionally compares all 16384 binary outputs in order with exact 0/1 equality.\n"
+        "- The original source benchmark is unchanged.\n"
+    )
+    (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
+    _append_contract_note(
+        dst / "design-specs.txt",
+        [
+            "Repaired benchmark contract:",
+            "- `IMG_WIDTH=128` and `IMG_HEIGHT=128`, matching the public signature and both released 16384-sample JSON files.",
+            "- Every `valid_out` assertion is captured during input streaming and pipeline drain.",
+            "- The DUT must emit exactly 16384 binary outputs; missing and extra outputs fail the contract.",
+            "- Output order is the 128x128 image in the same row-major stream order as the released golden JSON.",
+            "- Golden comparison is exact binary equality. The released +/-1 numeric tolerance is unsound for one-bit outputs because it accepts every 0/1 mismatch.",
+        ],
+    )
+
+
 def _repair_l4_fir(design: str, stale_tb: str, module_name: str) -> None:
     dst = _copy_design("level-4", design)
     stale_path = dst / stale_tb
     if stale_path.exists():
         stale_path.unlink()
+    spec_path = dst / "design-specs.txt"
+    spec_text = spec_path.read_text(encoding="utf-8", errors="ignore")
+    stale_shift = "accumulate in 64-bit, right-shift by 20"
+    if stale_shift not in spec_text:
+        raise RuntimeError(f"expected stale Q-format text not found in {spec_path}")
+    spec_path.write_text(
+        spec_text.replace(
+            stale_shift,
+            "accumulate in signed 64-bit, arithmetic right-shift by 15",
+        ),
+        encoding="utf-8",
+    )
     note = (
         "# Repaired contract notes\n\n"
         "- The original file-output FIR testbench uses stale interface parameters and JSON output plumbing.\n"
         "- The benchmark directory already contains `tb_selfcheck.v`, an embedded-golden self-checking contract generated from the shipped stimuli and golden outputs.\n"
         "- This repaired fixture removes the stale file-output testbench and makes `tb_selfcheck.v` the only executable contract.\n"
-        "- The design spec explicitly lists the required coefficient set and parameters.\n"
+        "- The design spec explicitly lists the required coefficient set, parameters, and Q15 normalization (`accumulator >>> 15`).\n"
+        "- Independent causal convolution reproduces all 1000 released golden samples exactly with `>>>15`; the stale `>>>20` text reproduces only a small minority.\n"
         "- The original source benchmark is unchanged.\n"
     )
     (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
@@ -533,6 +701,7 @@ def _repair_l4_fir(design: str, stale_tb: str, module_name: str) -> None:
             "- Use `tb_selfcheck.v` as the only executable testbench for this fixture.",
             f"- The top module remains `{module_name}`.",
             "- The stale file-output testbench from the original directory is intentionally removed.",
+            "- Coefficients are signed Q15 integers scaled by 32768; normalize the signed accumulator with an arithmetic right-shift by 15.",
             "- Correctness is the embedded official 1000-sample golden sequence with +/-1 LSB tolerance.",
         ],
     )
@@ -622,25 +791,51 @@ def _repair_fp_fir_with_public_coeffs(design: str, tb_name: str, module_name: st
     )
 
 
-def _repair_fp_low_pass_fir_hold() -> None:
-    dst = _copy_design("level-6", "fp_low_pass_fir")
-    note = (
-        "# Repaired contract notes\n\n"
-        "- This design is copied into the repaired root for audit completeness, but it is intentionally not marked runnable yet.\n"
-        "- The original testbench references `inputs/stimuli_fp.json` and `outputs/lowpass_out_fp.json`, while the shipped files are `inputs/stimuli.json` and `outputs/golden_output.json`.\n"
-        "- Unlike the band/high-pass FP FIRs, the coefficient list is not present in the testbench.\n"
-        "- Do not run or claim this row until the coefficient oracle is recovered from an upstream source or independently validated.\n"
-        "- The original source benchmark is unchanged.\n"
+def _repair_recovered_fp_fir_contracts(*, update_existing_manifest: bool = False) -> None:
+    """Merge only the three independently recovered FP FIR fixtures.
+
+    Recovery is implemented and validated in a separate root so this targeted
+    operation cannot regenerate or clobber unrelated repaired benchmarks.
+    """
+    import prepare_recovered_fp_fir_contracts as recovered
+
+    recovered.main()
+    design_names = (
+        "fp_band_pass_fir",
+        "fp_high_pass_fir",
+        "fp_low_pass_fir",
     )
-    (dst / "REPAIRED_CONTRACT.md").write_text(note, encoding="utf-8")
-    _append_contract_note(
-        dst / "design-specs.txt",
-        [
-            "Repaired benchmark contract status:",
-            "- Hold unresolved. The shipped file names are inconsistent and the coefficient oracle is not explicit.",
-            "- This fixture documents the issue but does not provide a trustworthy repaired executable contract yet.",
-        ],
-    )
+    for design in design_names:
+        source = recovered.RECOVERED_ROOT / "level-6" / design
+        destination = REPAIRED_ROOT / "level-6" / design
+        if destination.exists():
+            shutil.rmtree(destination)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(source, destination)
+
+    if update_existing_manifest:
+        manifest_path = REPAIRED_ROOT / "manifest.json"
+        if manifest_path.exists():
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            replacement = {
+                "level": "level-6",
+                "repairs": [
+                    "recover the official 101-tap scipy.signal.firwin oracle from upstream history",
+                    "publish exact binary32 coefficient words",
+                    "repair released input/output filenames and top-module name",
+                    "require exactly one ordered output per accepted input",
+                    "compare finite binary32 values with absolute tolerance 1e-6",
+                    "reject missing and extra outputs",
+                ],
+            }
+            for row in manifest.get("designs", []):
+                if row.get("design") in design_names:
+                    row.update(replacement)
+            manifest_path.write_text(
+                json.dumps(manifest, indent=2) + "\n",
+                encoding="utf-8",
+            )
+    print("Merged recovered FP FIR contracts into the live repaired root")
 
 
 def _repair_newton_raphson_polynomial() -> None:
@@ -721,12 +916,11 @@ def main() -> None:
     _repair_conv_3d()
     _repair_multich_conv2d()
     _repair_systolic_gemm()
+    _repair_harris_corner()
     _repair_l4_fir("band_pass_fir", "tb_band_pass_fir.v", "bandpass_fir")
     _repair_l4_fir("high_pass_fir", "tb_high_pass_fir.v", "highpass_fir")
     _repair_l4_fir("low_pass_fir", "tb_low_pass_fir.v", "lowpass_fir")
-    _repair_fp_fir_with_public_coeffs("fp_band_pass_fir", "tb_fp_band_pass_fir.v", "fp_bandpass_fir")
-    _repair_fp_fir_with_public_coeffs("fp_high_pass_fir", "tb_fp_high_pass_fir.v", "fp_highpass_fir")
-    _repair_fp_low_pass_fir_hold()
+    _repair_recovered_fp_fir_contracts()
     _repair_newton_raphson_polynomial()
     _repair_fft_streaming_hold()
     manifest = {
@@ -772,11 +966,22 @@ def main() -> None:
                 ],
             },
             {
+                "level": "level-5",
+                "design": "harris_corner_detection",
+                "repairs": [
+                    "use documented 128x128 dimensions matching released data",
+                    "capture outputs during both streaming and pipeline drain",
+                    "require exactly 16384 ordered outputs",
+                    "write JSON commas from actual valid-output count",
+                ],
+            },
+            {
                 "level": "level-4",
                 "design": "band_pass_fir",
                 "repairs": [
                     "remove stale file-output testbench",
                     "use embedded-golden self-checking testbench",
+                    "correct coefficient normalization to signed Q15 arithmetic shift by 15",
                     "preserve explicit repaired coefficient spec",
                 ],
             },
@@ -786,6 +991,7 @@ def main() -> None:
                 "repairs": [
                     "remove stale file-output testbench",
                     "use embedded-golden self-checking testbench",
+                    "correct coefficient normalization to signed Q15 arithmetic shift by 15",
                     "preserve explicit repaired coefficient spec",
                 ],
             },
@@ -795,6 +1001,7 @@ def main() -> None:
                 "repairs": [
                     "remove stale file-output testbench",
                     "use embedded-golden self-checking testbench",
+                    "correct coefficient normalization to signed Q15 arithmetic shift by 15",
                     "preserve explicit repaired coefficient spec",
                 ],
             },
@@ -802,27 +1009,30 @@ def main() -> None:
                 "level": "level-6",
                 "design": "fp_band_pass_fir",
                 "repairs": [
-                    "remove hidden DUT coefficient-memory writes",
-                    "require hard-coded public coefficient list",
-                    "compare 32-bit hex outputs as IEEE-754 floats",
+                    "recover official 101-tap 800--3000 Hz scipy firwin oracle from upstream history",
+                    "publish exact binary32 coefficient words",
+                    "repair file I/O and output drain",
+                    "enforce finite FP32 absolute tolerance 1e-6 and exact length",
                 ],
             },
             {
                 "level": "level-6",
                 "design": "fp_high_pass_fir",
                 "repairs": [
-                    "remove hidden DUT coefficient-memory writes",
-                    "require hard-coded public coefficient list",
-                    "compare 32-bit hex outputs as IEEE-754 floats",
+                    "recover official 101-tap 5000 Hz high-pass scipy firwin oracle from upstream history",
+                    "publish exact binary32 coefficient words",
+                    "repair file I/O and output drain",
+                    "enforce finite FP32 absolute tolerance 1e-6 and exact length",
                 ],
             },
             {
                 "level": "level-6",
                 "design": "fp_low_pass_fir",
                 "repairs": [
-                    "document unresolved filename mismatch",
-                    "document missing coefficient oracle",
-                    "hold out from repaired-contract runs",
+                    "recover official 101-tap 1000 Hz low-pass scipy firwin oracle from upstream history",
+                    "publish exact binary32 coefficient words",
+                    "repair file I/O, top-module name, and output drain",
+                    "enforce finite FP32 absolute tolerance 1e-6 and exact length",
                 ],
             },
             {
@@ -853,4 +1063,16 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--only-recovered-fp-firs",
+        action="store_true",
+        help="merge only the three recovered FP FIR fixtures into the existing repaired root",
+    )
+    args = parser.parse_args()
+    if args.only_recovered_fp_firs:
+        _repair_recovered_fp_fir_contracts(update_existing_manifest=True)
+    else:
+        main()

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/pe_cell.v",
+  "sub_modules": {
+    "pe_cell": "Combinational processing element cell that forwards north and west inputs and computes the next accumulated multiply-add result.",
+    "pe": "Standalone sequential processing element matching the requested PE interface.",
+    "mac64": "Combinational signed 32-bit multiply and 64-bit accumulate helper.",
+    "forward_pair": "Combinational forwarding helper for north-to-south and west-to-east systolic data movement."
+  }
+}

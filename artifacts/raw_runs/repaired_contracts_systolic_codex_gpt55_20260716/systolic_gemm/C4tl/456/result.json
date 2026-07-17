@@ -1,0 +1,21 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 2,
+  "best_passes": 33,
+  "total_tests": 33,
+  "solved": true,
+  "decomp_modules": [
+    "pe"
+  ],
+  "ref_passes": 33,
+  "ref_total": 33,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "design": "systolic_gemm",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "wall_seconds": 78.9,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

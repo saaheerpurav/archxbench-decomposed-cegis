@@ -1,0 +1,29 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 2,
+  "best_passes": 3,
+  "total_tests": 1001,
+  "solved": false,
+  "decomp_modules": [
+    "fir_coeff_rom",
+    "fir_pair_sum",
+    "fir_symmetric_mac",
+    "fir_output_scale"
+  ],
+  "ref_passes": 3,
+  "ref_total": 1001,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "low_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "trial_id": 42,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 341.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

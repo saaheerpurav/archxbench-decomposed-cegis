@@ -1,0 +1,56 @@
+{
+  "source_root": "cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "recovered_root": "artifacts\\benchmark_contracts\\archxbench_recovered_fp_low",
+  "status": "recovered_and_independently_validated",
+  "comparison": {
+    "mode": "fp32",
+    "absolute_tolerance": 1e-06,
+    "require_exact_length": true,
+    "require_finite": true
+  },
+  "designs": [
+    {
+      "level": "level-6",
+      "design": "fp_low_pass_fir",
+      "tap_count": 101,
+      "validation": {
+        "sample_count": 1000,
+        "tap_count": 101,
+        "transient_identification_samples": 101,
+        "holdout_samples": 899,
+        "fp32_sequential_max_abs_error": 2.980232238769531e-07,
+        "fp32_sequential_holdout_max_abs_error": 2.980232238769531e-07
+      }
+    },
+    {
+      "level": "level-6",
+      "design": "fp_band_pass_fir",
+      "tap_count": 101,
+      "validation": {
+        "sample_count": 1000,
+        "tap_count": 101,
+        "transient_identification_samples": 101,
+        "holdout_samples": 899,
+        "fp32_sequential_max_abs_error": 2.980232238769531e-07,
+        "fp32_sequential_holdout_max_abs_error": 2.980232238769531e-07,
+        "upstream_float64_max_abs_error": 4.440892098500626e-16,
+        "maximum_golden_magnitude": 0.6655815839767456
+      }
+    },
+    {
+      "level": "level-6",
+      "design": "fp_high_pass_fir",
+      "tap_count": 101,
+      "validation": {
+        "sample_count": 1000,
+        "tap_count": 101,
+        "transient_identification_samples": 101,
+        "holdout_samples": 899,
+        "fp32_sequential_max_abs_error": 1.1920928955078125e-07,
+        "fp32_sequential_holdout_max_abs_error": 1.1920928955078125e-07,
+        "upstream_float64_max_abs_error": 4.996003610813204e-16,
+        "maximum_golden_magnitude": 0.29412516951560974
+      }
+    }
+  ]
+}

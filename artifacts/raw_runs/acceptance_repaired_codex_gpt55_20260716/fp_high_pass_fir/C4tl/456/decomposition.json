@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fp_hpf_coeff_rom.v",
+  "sub_modules": {
+    "fp_hpf_coeff_rom": "Combinational coefficient bank that emits the 101 exact binary32 high-pass FIR coefficients as a packed vector.",
+    "fp_hpf_fir_dot": "Combinational FIR dot product over the packed sample history and coefficient vector, producing one binary32 output word.",
+    "fp_hpf_fp_mul": "Standalone combinational binary32 multiply reference primitive for decomposition and independent verification.",
+    "fp_hpf_fp_add": "Standalone combinational binary32 add reference primitive for decomposition and independent verification."
+  }
+}

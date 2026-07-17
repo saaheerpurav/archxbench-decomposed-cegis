@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/ifft16_bitrev_index.v",
+  "sub_modules": {
+    "ifft16_bitrev_index": "Combinational bit-reversal mapper used while loading input samples for radix-2 DIT ordering.",
+    "ifft16_stage_addr": "Combinational stage controller datapath helper that maps stage and butterfly count to operand addresses and twiddle index.",
+    "ifft16_twiddle_rom": "Combinational Q1.15 twiddle coefficient ROM for N=16 using the required cosine and sine table.",
+    "ifft16_butterfly": "Combinational fixed-point radix-2 complex butterfly with Q1.15 rounded twiddle multiplication and FFT/IFFT sign selection.",
+    "ifft16_output_scale": "Combinational final output scaler that divides IFFT results by N=16 using arithmetic right shift."
+  }
+}

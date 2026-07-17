@@ -1,0 +1,13 @@
+{
+  "design": "dct_idct_8pt_pipelined",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 16,
+  "strict_total": 16,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "dct1d_8_pipeline",
+  "detail": "DCT: PASS all 8 samples match exactly in length\n\nIDCT: PASS all 8 samples match exactly in length"
+}

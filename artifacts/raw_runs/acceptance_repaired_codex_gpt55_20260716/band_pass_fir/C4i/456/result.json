@@ -1,0 +1,32 @@
+{
+  "condition": "C4i",
+  "llm_calls": 26,
+  "best_passes": 4,
+  "total_tests": 1001,
+  "solved": false,
+  "decomp_modules": [
+    "bpf_sample_window",
+    "bpf_coeff_rom",
+    "bpf_tap_product",
+    "bpf_accumulator",
+    "bpf_q15_normalizer"
+  ],
+  "module_visit_order": [
+    "bpf_sample_window",
+    "bpf_coeff_rom",
+    "bpf_tap_product",
+    "bpf_accumulator",
+    "bpf_q15_normalizer"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "band_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "wall_seconds": 3235.6,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,56 @@
+{
+  "condition": "C1",
+  "llm_calls": 5,
+  "best_passes": 2677,
+  "total_tests": 4096,
+  "solved": false,
+  "golden_correct": 2677,
+  "golden_total": 4096,
+  "attempt_scores": [
+    {
+      "attempt": 1,
+      "compiled": true,
+      "golden_correct": 2644,
+      "golden_total": 4096,
+      "detail": "golden_output: FAIL (2644/4096 correct; golden=4096, DUT=3963)\n  idx=910: expected=0 got=255 (value mismatch)\n  idx=911: expected=0 got=765 (value mismatch)\n  idx=912: expected=0 got=1020 (value mismatch)\n  idx=913: expected=0 got=1020 (value mismatch)\n  idx=914: expected=0 got=1020 (value mismatch)\n  idx=915: expected=0 got=1020 (value mismatch)\n  idx=916: expected=0 got=1020 (value mismatch)\n  idx=917: expected=0 got=1020 (value mismatch)\n  idx=918: expected=0 got=1020 (value mismatch)\n  id..."
+    },
+    {
+      "attempt": 2,
+      "compiled": true,
+      "golden_correct": 2104,
+      "golden_total": 4096,
+      "detail": "golden_output: FAIL (2104/4096 correct; golden=4096, DUT=3842)\n  idx=883: expected=0 got=255 (value mismatch)\n  idx=884: expected=0 got=765 (value mismatch)\n  idx=885: expected=0 got=1020 (value mismatch)\n  idx=886: expected=0 got=1020 (value mismatch)\n  idx=887: expected=0 got=1020 (value mismatch)\n  idx=888: expected=0 got=1020 (value mismatch)\n  idx=889: expected=0 got=1020 (value mismatch)\n  idx=890: expected=0 got=1020 (value mismatch)\n  idx=891: expected=0 got=1020 (value mismatch)\n  id..."
+    },
+    {
+      "attempt": 3,
+      "compiled": true,
+      "golden_correct": 2677,
+      "golden_total": 4096,
+      "detail": "golden_output: FAIL (2677/4096 correct; golden=4096, DUT=3964)\n  idx=911: expected=0 got=255 (value mismatch)\n  idx=912: expected=0 got=765 (value mismatch)\n  idx=913: expected=0 got=1020 (value mismatch)\n  idx=914: expected=0 got=1020 (value mismatch)\n  idx=915: expected=0 got=1020 (value mismatch)\n  idx=916: expected=0 got=1020 (value mismatch)\n  idx=917: expected=0 got=1020 (value mismatch)\n  idx=918: expected=0 got=1020 (value mismatch)\n  idx=919: expected=0 got=1020 (value mismatch)\n  id..."
+    },
+    {
+      "attempt": 4,
+      "compiled": true,
+      "golden_correct": 1999,
+      "golden_total": 4096,
+      "detail": "golden_output: FAIL (1999/4096 correct; golden=4096, DUT=3967)\n  idx=961: expected=0 got=255 (value mismatch)\n  idx=962: expected=0 got=765 (value mismatch)\n  idx=963: expected=0 got=1020 (value mismatch)\n  idx=964: expected=0 got=1020 (value mismatch)\n  idx=965: expected=0 got=1020 (value mismatch)\n  idx=966: expected=0 got=1020 (value mismatch)\n  idx=967: expected=0 got=1020 (value mismatch)\n  idx=968: expected=0 got=1020 (value mismatch)\n  idx=969: expected=0 got=1020 (value mismatch)\n  id..."
+    },
+    {
+      "attempt": 5,
+      "compiled": true,
+      "golden_correct": 2104,
+      "golden_total": 4096,
+      "detail": "golden_output: FAIL (2104/4096 correct; golden=4096, DUT=3842)\n  idx=883: expected=0 got=255 (value mismatch)\n  idx=884: expected=0 got=765 (value mismatch)\n  idx=885: expected=0 got=1020 (value mismatch)\n  idx=886: expected=0 got=1020 (value mismatch)\n  idx=887: expected=0 got=1020 (value mismatch)\n  idx=888: expected=0 got=1020 (value mismatch)\n  idx=889: expected=0 got=1020 (value mismatch)\n  idx=890: expected=0 got=1020 (value mismatch)\n  idx=891: expected=0 got=1020 (value mismatch)\n  id..."
+    }
+  ],
+  "design": "conv2d",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 183.0,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

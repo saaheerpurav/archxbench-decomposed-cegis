@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp_fir_coeff_rom.v",
+  "sub_modules": {
+    "fp_fir_coeff_rom": "Combinational ROM that maps a tap index to the corresponding IEEE-754 binary32 FIR coefficient word.",
+    "fp32_mul": "Combinational IEEE-754 binary32 multiplier for finite input values used by each FIR tap.",
+    "fp32_add": "Combinational IEEE-754 binary32 adder for finite input values used to accumulate tap products."
+  }
+}

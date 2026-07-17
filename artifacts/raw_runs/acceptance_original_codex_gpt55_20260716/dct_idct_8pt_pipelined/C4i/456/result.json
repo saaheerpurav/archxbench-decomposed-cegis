@@ -1,0 +1,32 @@
+{
+  "condition": "C4i",
+  "llm_calls": 29,
+  "best_passes": 0,
+  "total_tests": 16,
+  "solved": false,
+  "decomp_modules": [
+    "dct8_coeff_rom",
+    "dct8_mac",
+    "dct8_round_shift",
+    "dct8_saturate"
+  ],
+  "module_visit_order": [
+    "dct8_coeff_rom",
+    "dct8_mac",
+    "dct8_round_shift",
+    "dct8_saturate"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 16,
+  "design": "dct_idct_8pt_pipelined",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 736.6,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

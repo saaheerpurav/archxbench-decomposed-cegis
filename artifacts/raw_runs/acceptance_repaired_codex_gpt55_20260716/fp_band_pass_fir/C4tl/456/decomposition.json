@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fir_shift_next.v",
+  "sub_modules": {
+    "fir_shift_next": "Combinational next-state generator for the FIR sample history shift register.",
+    "fp_fir_coeff_rom_101": "Combinational ROM containing the exact 101 binary32 FIR coefficient words.",
+    "fp32_math_pkg": "Reference placeholder module for shared binary32 math packaging in the decomposition.",
+    "fp_fir_mac_101": "Combinational 101-tap floating-point FIR multiply-accumulate and binary32 result conversion."
+  }
+}

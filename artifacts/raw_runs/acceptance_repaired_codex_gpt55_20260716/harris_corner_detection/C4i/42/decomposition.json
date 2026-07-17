@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/sobel3x3.v",
+  "sub_modules": {
+    "sobel3x3": "Combinational 3x3 Sobel gradient calculator for Ix and Iy.",
+    "gradient_products": "Combinational gradient product calculator for Ix squared, Iy squared, and IxIy.",
+    "gaussian3x3": "Combinational 3x3 Gaussian weighted sum using 1-2-1 separable weights without normalization.",
+    "harris_response": "Combinational fixed-point Harris response calculator using determinant, trace squared, and configurable k.",
+    "threshold_compare": "Combinational signed response threshold decision logic."
+  }
+}

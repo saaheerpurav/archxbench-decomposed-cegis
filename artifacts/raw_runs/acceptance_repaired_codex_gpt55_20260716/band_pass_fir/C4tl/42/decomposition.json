@@ -1,0 +1,7 @@
+{
+  "top_source_file": "verilog/bandpass_fir_mac.v",
+  "sub_modules": {
+    "bandpass_fir_mac": "Combinational 101-tap signed FIR multiply-accumulate block using the required hard-coded Q15 band-pass coefficients.",
+    "bandpass_fir_q15_norm": "Combinational fixed-point normalization block that converts the 64-bit accumulator to output width with arithmetic right shift by 15."
+  }
+}

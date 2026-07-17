@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp_fir_coeff_rom.v",
+  "sub_modules": {
+    "fp_fir_coeff_rom": "Combinational coefficient ROM for the 101 binary32 FIR taps.",
+    "fp_mul_comb": "Combinational IEEE-754 binary32 multiplier model with rounded binary32 output.",
+    "fp_add_comb": "Combinational IEEE-754 binary32 adder model with rounded binary32 output."
+  }
+}

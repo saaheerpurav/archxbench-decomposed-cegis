@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gradient_derivative.v",
+  "sub_modules": {
+    "gradient_derivative": "Combinational fixed-point derivative calculator for f'(x) = 2*a*x + b using widened signed arithmetic.",
+    "gradient_step": "Combinational fixed-point learning-rate multiplier that computes alpha times the derivative with Q-format rescaling.",
+    "gradient_update": "Combinational update subtractor that computes the next widened x value from the current x and scaled step.",
+    "fixed_truncate": "Combinational narrowing block that returns the low N bits of the widened fixed-point update."
+  }
+}

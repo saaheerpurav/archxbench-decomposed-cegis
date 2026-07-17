@@ -1,0 +1,13 @@
+{
+  "design": "multich_conv2d",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 30752,
+  "strict_total": 30752,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "multich_conv2d",
+  "detail": "golden_output: PASS all 30752 samples match exactly in length"
+}

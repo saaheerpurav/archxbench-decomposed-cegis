@@ -1,0 +1,37 @@
+{
+  "condition": "C4i",
+  "llm_calls": 5,
+  "best_passes": 1000,
+  "total_tests": 1000,
+  "solved": true,
+  "decomp_modules": [
+    "fp32_to_q32_32",
+    "bandpass_coeff_rom",
+    "q32_32_fir_mac",
+    "q32_32_to_fp32"
+  ],
+  "module_visit_order": [
+    "fp32_to_q32_32",
+    "bandpass_coeff_rom",
+    "q32_32_fir_mac",
+    "q32_32_to_fp32"
+  ],
+  "module_solve_rounds": {
+    "fp32_to_q32_32": 1,
+    "bandpass_coeff_rom": 1,
+    "q32_32_fir_mac": 1,
+    "q32_32_to_fp32": 1
+  },
+  "golden_correct": 1000,
+  "golden_total": 1000,
+  "design": "fp_band_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 377.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

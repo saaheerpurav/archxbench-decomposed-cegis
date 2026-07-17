@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/conv3d_index_decode.v",
+  "sub_modules": {
+    "conv3d_index_decode": "Combinational decoder from linear stream position to depth, row, and column coordinates.",
+    "conv3d_window_valid": "Combinational valid-window detector for valid 3D convolution positions.",
+    "conv3d_window_addresses": "Combinational 3D stencil address generator for the K1 by K2 by K3 window ending at the current voxel.",
+    "conv3d_mac_tree": "Combinational multiply-accumulate block for the flattened 3D window and flattened kernel.",
+    "conv3d_done_logic": "Combinational end-of-volume done flag aligned to the final valid convolution window."
+  }
+}

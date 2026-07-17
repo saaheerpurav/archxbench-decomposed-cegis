@@ -1,0 +1,8 @@
+design,condition,model,runs,clean_solves,seeds_run,clean_seeds,scores,golden_scores,verification_sources,verifier_versions
+aes_encryption,C4tl-noRef,gpt-5.5,3,1,"42,123,456",123,8/8,0/0;8/8,"result_json,strict_audit",strict-v2
+conv1d,C4tl-noRef,gpt-5.5,3,1,"42,123,456",42,0/1;16/16,0/0;16/16,"result_json,strict_audit",strict-v2
+fft_16pt_iterative,C4tl-noRef,gpt-5.5,3,0,"42,123,456",,,0/0,result_json,
+fp_adder,C4i-noRef,gpt-5.5,3,3,"42,123,456","42,123,456",36/36,36/36,strict_audit,strict-v2
+gauss_siedel,C4i-noRef,gpt-5.5,3,3,"42,123,456","42,123,456",50/50,50/50,strict_audit,strict-v2
+gradient_descent,C4i-noRef,gpt-5.5,3,3,"42,123,456","42,123,456",50/50,50/50,strict_audit,strict-v2
+ifft_16pt_iterative,C4tl-noRef,gpt-5.5,3,0,"42,123,456",,,0/0,result_json,

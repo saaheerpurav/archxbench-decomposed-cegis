@@ -16,6 +16,52 @@ ROOT = Path(__file__).resolve().parents[1]
 ARTIFACTS = ROOT / "artifacts"
 OUT = ARTIFACTS / "inventories" / "repaired_contract_run_matrix.csv"
 CONDITIONS = ["C2g", "C4i", "C4tl"]
+REPAIRED_RUN_PREFIXES = (
+    "acceptance_repaired_",
+    "repaired_contracts_",
+    "repaired_fir_",
+    "repaired_fp_fir_",
+    "repaired_newton_",
+)
+
+
+def repaired_contract_run_name(parts: tuple[str, ...]) -> str | None:
+    """Return the repaired-contract run root encoded in an artifact path."""
+    return next(
+        (
+            part
+            for part in parts
+            if part.startswith(REPAIRED_RUN_PREFIXES) or part.endswith("_repaired")
+        ),
+        None,
+    )
+
+
+def load_strict_audit(result_path: Path) -> dict | None:
+    """Load a valid adjacent strict-verifier sidecar, if one exists."""
+    audit_path = result_path.with_name("strict_audit.json")
+    if not audit_path.is_file():
+        return None
+    try:
+        audit = json.loads(audit_path.read_text(encoding="utf-8", errors="replace"))
+        correct = int(audit["strict_correct"])
+        total = int(audit["strict_total"])
+        solved = audit["strict_solved"]
+        version = str(audit["verifier_version"]).strip()
+    except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(solved, bool) or not version:
+        return None
+    if total <= 0 or correct < 0 or correct > total:
+        return None
+    if solved != (correct == total):
+        return None
+    return {
+        "strict_correct": correct,
+        "strict_total": total,
+        "strict_solved": solved,
+        "verifier_version": version,
+    }
 
 
 def score(data: dict) -> str:
@@ -64,6 +110,11 @@ def summarize(items: list[dict]) -> dict[str, str]:
     clean = sorted({item["seed"] for item in items if item["strict_clean"]}, key=seed_sort_key)
     scores = sorted({item["score"] for item in items if item["score"]})
     golden = sorted({item["golden"] for item in items if item["golden"]})
+    models = sorted({item["model"] for item in items if item["model"]})
+    verification_sources = sorted({item["verification_source"] for item in items})
+    verifier_versions = sorted(
+        {item["verifier_version"] for item in items if item["verifier_version"]}
+    )
     return {
         "runs": str(len(seeds)),
         "clean_solves": str(len(clean)),
@@ -71,6 +122,9 @@ def summarize(items: list[dict]) -> dict[str, str]:
         "clean_seeds": ",".join(clean),
         "scores": ";".join(scores),
         "golden_scores": ";".join(golden),
+        "models": ",".join(models),
+        "verification_sources": ",".join(verification_sources),
+        "verifier_versions": ",".join(verifier_versions),
         "llm_calls": ";".join(str(item["llm_calls"]) for item in items if item["llm_calls"] != ""),
         "wall_seconds": ";".join(str(item["wall_seconds"]) for item in items if item["wall_seconds"] != ""),
     }
@@ -80,13 +134,8 @@ def collect() -> list[dict]:
     rows: list[dict] = []
     for result_path in ARTIFACTS.rglob("result.json"):
         rel_parts = result_path.relative_to(ROOT).parts
-        run_names = [
-            part
-            for part in rel_parts
-            if part.startswith(("repaired_contracts_", "repaired_fir_", "repaired_fp_fir_", "repaired_newton_"))
-            or part.endswith("_repaired")
-        ]
-        if not run_names:
+        run_name = repaired_contract_run_name(rel_parts)
+        if run_name is None:
             continue
         try:
             data = json.loads(result_path.read_text(encoding="utf-8", errors="replace"))
@@ -97,20 +146,63 @@ def collect() -> list[dict]:
         if condition not in CONDITIONS:
             continue
         seed = str(data.get("seed") or "")
+        audit = load_strict_audit(result_path)
+        effective_data = data
+        if audit is not None:
+            effective_data = {
+                **data,
+                "golden_correct": audit["strict_correct"],
+                "golden_total": audit["strict_total"],
+                "solved": audit["strict_solved"],
+            }
         rows.append(
             {
-                "contract_run": run_names[0],
+                "contract_run": run_name,
                 "design": str(data.get("design") or ""),
                 "condition": condition,
                 "seed": seed,
-                "strict_clean": strict_clean(data),
+                "model": str(data.get("model") or ""),
+                "strict_clean": strict_clean(effective_data),
+                "strict_audited": audit is not None,
                 "score": score(data),
-                "golden": golden_score(data),
+                "golden": golden_score(effective_data),
+                "verification_source": "strict_audit" if audit else "result_json",
+                "verifier_version": audit["verifier_version"] if audit else "",
                 "llm_calls": data.get("llm_calls", ""),
                 "wall_seconds": data.get("wall_seconds", ""),
+                "artifact_path": result_path.as_posix(),
             }
         )
-    return rows
+
+    # Prefer a strict replay over stale stored claims for repeated attempts of
+    # the same cell. An audited failure is more authoritative than an
+    # unaudited pass.
+    canonical: dict[tuple[str, str, str, str, str], dict] = {}
+    for row in rows:
+        key = (
+            row["contract_run"],
+            row["design"],
+            row["condition"],
+            row["model"],
+            row["seed"],
+        )
+        rank = (
+            1 if row["strict_audited"] else 0,
+            1 if row["strict_clean"] else 0,
+            row["artifact_path"],
+        )
+        old = canonical.get(key)
+        if old is None:
+            canonical[key] = row
+            continue
+        old_rank = (
+            1 if old["strict_audited"] else 0,
+            1 if old["strict_clean"] else 0,
+            old["artifact_path"],
+        )
+        if rank > old_rank:
+            canonical[key] = row
+    return list(canonical.values())
 
 
 def main() -> None:
@@ -147,6 +239,9 @@ def main() -> None:
                 f"{prefix}_clean_seeds",
                 f"{prefix}_scores",
                 f"{prefix}_golden_scores",
+                f"{prefix}_models",
+                f"{prefix}_verification_sources",
+                f"{prefix}_verifier_versions",
                 f"{prefix}_llm_calls",
                 f"{prefix}_wall_seconds",
             ]

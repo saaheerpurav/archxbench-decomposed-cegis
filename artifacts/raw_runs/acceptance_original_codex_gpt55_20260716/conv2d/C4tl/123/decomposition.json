@@ -1,0 +1,7 @@
+{
+  "top_source_file": "verilog/conv2d_valid_region.v",
+  "sub_modules": {
+    "conv2d_valid_region": "Combinational valid-window detector based on raster row and column counters.",
+    "conv2d_mac": "Combinational matrix-vector dot-product datapath for the stencil window using the default 3x3 Gaussian coefficients."
+  }
+}

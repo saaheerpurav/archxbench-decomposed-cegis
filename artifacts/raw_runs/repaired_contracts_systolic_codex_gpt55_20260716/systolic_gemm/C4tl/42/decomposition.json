@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/pe.v",
+  "sub_modules": {
+    "pe": "Combinational processing element that forwards north and west operands and produces the signed 32x32 multiply product.",
+    "input_boundary_buffer": "Combinational boundary adapter for the four west matrix-A inputs and four north matrix-B inputs.",
+    "cycle_done_logic": "Combinational next-state logic for the top-level cycle counter and done flag."
+  }
+}

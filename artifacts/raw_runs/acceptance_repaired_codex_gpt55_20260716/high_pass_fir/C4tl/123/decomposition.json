@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/highpass_fir_coeff_rom.v",
+  "sub_modules": {
+    "highpass_fir_coeff_rom": "Combinational ROM for the fixed 101 signed Q15 high-pass FIR coefficients.",
+    "highpass_fir_product": "Combinational signed sample-by-coefficient multiplier for one FIR tap.",
+    "highpass_fir_accumulator": "Combinational wide signed accumulator that sums all tap products into a 64-bit result.",
+    "highpass_fir_q15_normalize": "Combinational arithmetic Q15 normalization stage using signed right shift by 15."
+  }
+}

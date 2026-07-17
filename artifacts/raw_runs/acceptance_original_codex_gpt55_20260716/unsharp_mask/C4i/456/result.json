@@ -1,0 +1,34 @@
+{
+  "condition": "C4i",
+  "llm_calls": 26,
+  "best_passes": 61995,
+  "total_tests": 65536,
+  "solved": false,
+  "decomp_modules": [
+    "unsharp_window3x3",
+    "unsharp_gaussian3x3",
+    "unsharp_difference",
+    "unsharp_gain",
+    "unsharp_reconstruct"
+  ],
+  "module_visit_order": [
+    "unsharp_window3x3",
+    "unsharp_gaussian3x3",
+    "unsharp_difference",
+    "unsharp_gain",
+    "unsharp_reconstruct"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 61995,
+  "golden_total": 65536,
+  "design": "unsharp_mask",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 861.3,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

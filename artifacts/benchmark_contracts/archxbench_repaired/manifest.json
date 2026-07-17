@@ -41,11 +41,22 @@
       ]
     },
     {
+      "level": "level-5",
+      "design": "harris_corner_detection",
+      "repairs": [
+        "use documented 128x128 dimensions matching released data",
+        "capture outputs during both streaming and pipeline drain",
+        "require exactly 16384 ordered outputs",
+        "write JSON commas from actual valid-output count"
+      ]
+    },
+    {
       "level": "level-4",
       "design": "band_pass_fir",
       "repairs": [
         "remove stale file-output testbench",
         "use embedded-golden self-checking testbench",
+        "correct coefficient normalization to signed Q15 arithmetic shift by 15",
         "preserve explicit repaired coefficient spec"
       ]
     },
@@ -55,6 +66,7 @@
       "repairs": [
         "remove stale file-output testbench",
         "use embedded-golden self-checking testbench",
+        "correct coefficient normalization to signed Q15 arithmetic shift by 15",
         "preserve explicit repaired coefficient spec"
       ]
     },
@@ -64,6 +76,7 @@
       "repairs": [
         "remove stale file-output testbench",
         "use embedded-golden self-checking testbench",
+        "correct coefficient normalization to signed Q15 arithmetic shift by 15",
         "preserve explicit repaired coefficient spec"
       ]
     },
@@ -71,27 +84,36 @@
       "level": "level-6",
       "design": "fp_band_pass_fir",
       "repairs": [
-        "remove hidden DUT coefficient-memory writes",
-        "require hard-coded public coefficient list",
-        "compare 32-bit hex outputs as IEEE-754 floats"
+        "recover the official 101-tap scipy.signal.firwin oracle from upstream history",
+        "publish exact binary32 coefficient words",
+        "repair released input/output filenames and top-module name",
+        "require exactly one ordered output per accepted input",
+        "compare finite binary32 values with absolute tolerance 1e-6",
+        "reject missing and extra outputs"
       ]
     },
     {
       "level": "level-6",
       "design": "fp_high_pass_fir",
       "repairs": [
-        "remove hidden DUT coefficient-memory writes",
-        "require hard-coded public coefficient list",
-        "compare 32-bit hex outputs as IEEE-754 floats"
+        "recover the official 101-tap scipy.signal.firwin oracle from upstream history",
+        "publish exact binary32 coefficient words",
+        "repair released input/output filenames and top-module name",
+        "require exactly one ordered output per accepted input",
+        "compare finite binary32 values with absolute tolerance 1e-6",
+        "reject missing and extra outputs"
       ]
     },
     {
       "level": "level-6",
       "design": "fp_low_pass_fir",
       "repairs": [
-        "document unresolved filename mismatch",
-        "document missing coefficient oracle",
-        "hold out from repaired-contract runs"
+        "recover the official 101-tap scipy.signal.firwin oracle from upstream history",
+        "publish exact binary32 coefficient words",
+        "repair released input/output filenames and top-module name",
+        "require exactly one ordered output per accepted input",
+        "compare finite binary32 values with absolute tolerance 1e-6",
+        "reject missing and extra outputs"
       ]
     },
     {

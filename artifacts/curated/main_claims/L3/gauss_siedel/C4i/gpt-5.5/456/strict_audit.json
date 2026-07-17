@@ -1,0 +1,13 @@
+{
+  "design": "gauss_siedel",
+  "condition": "C4i",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "strict_correct": 50,
+  "strict_total": 50,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "gauss_seidel_2x2_solver",
+  "detail": " Errors: (0.000000, 0.000000)\nCase 33: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 34: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 35: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 36: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 37: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 38: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 39: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 40: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 41: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 42: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 43: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 44: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 45: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 46: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 47: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 48: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nCase 49: PASS | Expected: (2.000000, 1.000000) Calculated: (2.000000, 1.000000) Errors: (0.000000, 0.000000)\nSimulation complete.\nC:\\Users\\saahe\\AppData\\Local\\Temp\\tdes_fpga_u7ow7q9i\\tb.v:227: $finish called at 18025000 (1ps)\n"
+}

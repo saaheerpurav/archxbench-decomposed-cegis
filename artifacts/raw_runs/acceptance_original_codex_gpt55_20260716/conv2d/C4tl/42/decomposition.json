@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/conv2d_coord.v",
+  "sub_modules": {
+    "conv2d_coord": "Combinational column wrap and end-of-line detector for raster stream addressing.",
+    "conv2d_coeffs": "Combinational default coefficient ROM, using the 3x3 Gaussian kernel for the required benchmark and identity fallback for other odd sizes.",
+    "conv2d_dot_product": "Combinational matrix-vector multiply-accumulate over the flattened convolution window.",
+    "conv2d_saturate": "Combinational output width selection from the widened accumulator.",
+    "conv2d_window_pack": "Combinational window pass-through module used as an independent pack/interconnect boundary."
+  }
+}

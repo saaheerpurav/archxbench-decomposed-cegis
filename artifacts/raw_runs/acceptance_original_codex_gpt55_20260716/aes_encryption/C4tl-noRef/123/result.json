@@ -1,0 +1,30 @@
+{
+  "condition": "C4tl-noRef",
+  "llm_calls": 9,
+  "best_passes": 8,
+  "total_tests": 8,
+  "solved": true,
+  "decomp_modules": [
+    "aes128_sbox",
+    "aes128_subbytes",
+    "aes128_shiftrows",
+    "aes128_mixcolumns",
+    "aes128_key_expand_round",
+    "aes128_round"
+  ],
+  "ref_passes": 8,
+  "ref_total": 8,
+  "golden_correct": 8,
+  "golden_total": 8,
+  "module_solve_rounds": {},
+  "design": "aes_encryption",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 557.2,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

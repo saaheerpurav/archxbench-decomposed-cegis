@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_fir_sample_select.v",
+  "sub_modules": {
+    "fp_fir_sample_select": "Combinational selector that forms the current FIR window from the incoming sample and shifted history.",
+    "fp_highpass_coeff_rom": "Combinational coefficient ROM for the 101 binary32 high-pass FIR tap words.",
+    "fp_mul_comb": "Combinational binary32 multiply wrapper.",
+    "fp_add_comb": "Combinational binary32 add wrapper used by the FIR reduction chain.",
+    "fp_real_math": "Shared combinational floating-point arithmetic implementation for simulation-compatible binary32 add and multiply."
+  }
+}

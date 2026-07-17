@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/gd_poly_derivative.v",
+  "sub_modules": {
+    "gd_poly_derivative": "Combinational fixed-point derivative calculator for f'(x) = 2*a*x + b using widened signed intermediates.",
+    "gd_learning_step": "Combinational fixed-point learning-step calculator for alpha * gradient with Q-format rescaling.",
+    "gd_x_update": "Combinational update block that computes the next signed fixed-point x value from current x minus the scaled step."
+  }
+}

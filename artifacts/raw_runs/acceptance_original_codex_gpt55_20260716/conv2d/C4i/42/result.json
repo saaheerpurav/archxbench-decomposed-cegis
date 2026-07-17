@@ -1,0 +1,34 @@
+{
+  "condition": "C4i",
+  "llm_calls": 26,
+  "best_passes": 4094,
+  "total_tests": 4096,
+  "solved": false,
+  "decomp_modules": [
+    "conv2d_coord",
+    "conv2d_window_pack",
+    "conv2d_coeffs",
+    "conv2d_dot_product",
+    "conv2d_output_cast"
+  ],
+  "module_visit_order": [
+    "conv2d_coord",
+    "conv2d_window_pack",
+    "conv2d_coeffs",
+    "conv2d_dot_product",
+    "conv2d_output_cast"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 4094,
+  "golden_total": 4096,
+  "design": "conv2d",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "trial_id": 42,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 518.0,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

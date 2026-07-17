@@ -1,0 +1,54 @@
+{
+  "status": "pass",
+  "dimensions": [
+    128,
+    128
+  ],
+  "stimulus_count": 16384,
+  "golden_count": 16384,
+  "golden_ones": 38,
+  "selected_checker_matches": true,
+  "comparison": "exact binary equality and exact length",
+  "modes": {
+    "normal": {
+      "mode": "normal",
+      "returncode": 0,
+      "dut_count": 16384,
+      "golden_count": 16384,
+      "exact_matches": 16384,
+      "exact_full_match": true,
+      "native_pass": true,
+      "native_fail": false
+    },
+    "short": {
+      "mode": "short",
+      "returncode": 0,
+      "dut_count": 16383,
+      "golden_count": 16384,
+      "exact_matches": 16383,
+      "exact_full_match": false,
+      "native_pass": false,
+      "native_fail": true
+    },
+    "extra": {
+      "mode": "extra",
+      "returncode": 0,
+      "dut_count": 16385,
+      "golden_count": 16384,
+      "exact_matches": 16384,
+      "exact_full_match": false,
+      "native_pass": false,
+      "native_fail": true
+    },
+    "inverted": {
+      "mode": "inverted",
+      "returncode": 0,
+      "dut_count": 16384,
+      "golden_count": 16384,
+      "exact_matches": 0,
+      "exact_full_match": false,
+      "native_pass": true,
+      "native_fail": false
+    }
+  }
+}

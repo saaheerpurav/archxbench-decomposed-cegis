@@ -1,0 +1,13 @@
+{
+  "design": "gradient_descent",
+  "condition": "C4i",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "strict_correct": 50,
+  "strict_total": 50,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "gradient_descent_poly",
+  "detail": "38\n  Error = 0.003562 --> PASS\n------------------------------------------------------\nTest case 42: \n  Inputs: x=3.281250, alpha=1.164062, a=0.835938, b=-0.500000\n  Expected x_next = 2.013861\n  Calculated x_next = 2.019531\n  Error = 0.005670 --> PASS\n------------------------------------------------------\nTest case 43: \n  Inputs: x=3.359375, alpha=1.167969, a=0.832031, b=0.500000\n  Expected x_next = 1.747001\n  Calculated x_next = 1.750000\n  Error = 0.002999 --> PASS\n------------------------------------------------------\nTest case 44: \n  Inputs: x=3.437500, alpha=1.171875, a=0.828125, b=-0.500000\n  Expected x_next = 2.007341\n  Calculated x_next = 2.007812\n  Error = 0.000471 --> PASS\n------------------------------------------------------\nTest case 45: \n  Inputs: x=3.515625, alpha=1.175781, a=0.824219, b=0.500000\n  Expected x_next = 1.714613\n  Calculated x_next = 1.718750\n  Error = 0.004137 --> PASS\n------------------------------------------------------\nTest case 46: \n  Inputs: x=3.593750, alpha=1.179688, a=0.820312, b=-0.500000\n  Expected x_next = 1.991902\n  Calculated x_next = 1.996094\n  Error = 0.004192 --> PASS\n------------------------------------------------------\nTest case 47: \n  Inputs: x=3.671875, alpha=1.183594, a=0.816406, b=0.500000\n  Expected x_next = 1.673333\n  Calculated x_next = 1.671875\n  Error = 0.001458 --> PASS\n------------------------------------------------------\nTest case 48: \n  Inputs: x=3.750000, alpha=1.187500, a=0.812500, b=-0.500000\n  Expected x_next = 1.968119\n  Calculated x_next = 1.972656\n  Error = 0.004538 --> PASS\n------------------------------------------------------\nTest case 49: \n  Inputs: x=3.828125, alpha=1.191406, a=0.808594, b=0.500000\n  Expected x_next = 1.623844\n  Calculated x_next = 1.621094\n  Error = 0.002750 --> PASS\n------------------------------------------------------\nTesting completed.\nC:\\Users\\saahe\\AppData\\Local\\Temp\\tdes_fpga_ci290xxp\\tb.v:211: $stop called at 7515000 (1ps)\n** VVP Stop(0) **\n** Flushing output streams.\n"
+}

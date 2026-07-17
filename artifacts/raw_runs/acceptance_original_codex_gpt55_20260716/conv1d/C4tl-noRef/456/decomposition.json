@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv1d_tap_packer.v",
+  "sub_modules": {
+    "conv1d_tap_packer": "Packs the current sample and four delayed samples into a fixed 5-tap window bus.",
+    "conv1d_weighted_products": "Applies the hardcoded FIR coefficients [2, 8, 12, 8, 2] to the packed tap samples.",
+    "conv1d_mac5": "Combinationally sums the five weighted products using the required MAC width.",
+    "conv1d_normalize": "Right-shifts the MAC result by GAIN_W to produce the extended-width filtered output."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/fp_lpf_coeff_rom.v",
+  "sub_modules": {
+    "fp_lpf_coeff_rom": "Combinational coefficient ROM for the 101 binary32 low-pass FIR taps.",
+    "fp_lpf_tap_mult": "Combinational tap multiplier wrapper for one sample and one coefficient.",
+    "fp_lpf_accum_add": "Combinational binary32 accumulator adder wrapper used in the FIR sum chain.",
+    "fp32_mul_comb": "Combinational IEEE-754 binary32 finite-value multiplier.",
+    "fp32_add_comb": "Combinational IEEE-754 binary32 finite-value adder."
+  }
+}

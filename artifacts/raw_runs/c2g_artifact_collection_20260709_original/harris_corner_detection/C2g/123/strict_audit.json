@@ -1,0 +1,13 @@
+{
+  "design": "harris_corner_detection",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "strict_correct": 16177,
+  "strict_total": 16384,
+  "strict_solved": false,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "harris_corner",
+  "detail": "golden_output: FAIL (16177/16384 correct; golden=16384, DUT=16417)\n  idx=778: expected=1 got=0 (value mismatch)\n  idx=779: expected=1 got=0 (value mismatch)\n  idx=906: expected=1 got=0 (value mismatch)\n  idx=907: expected=1 got=0 (value mismatch)\n  idx=914: expected=0 got=1 (value mismatch)\n  idx=915: expected=0 got=1 (value mismatch)\n  idx=1032: expected=1 got=0 (value mismatch)\n  idx=1034: expected=1 got=0 (value mismatch)\n  idx=1035: expected=1 got=0 (value mismatch)\n  idx=1037: expected=1 got=0 (value mismatch)\n  unexpected 33 extra DUT entries"
+}

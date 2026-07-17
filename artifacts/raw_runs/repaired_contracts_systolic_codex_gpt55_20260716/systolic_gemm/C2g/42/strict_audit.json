@@ -1,0 +1,13 @@
+{
+  "design": "systolic_gemm",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 33,
+  "strict_total": 33,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "systolic_matrix_mult",
+  "detail": "[PASS] A2_r0c0 expected=90 got=90\n[PASS] A2_r0c1 expected=100 got=100\n[PASS] A2_r0c2 expected=110 got=110\n[PASS] A2_r0c3 expected=120 got=120\n[PASS] A2_r1c0 expected=202 got=202\n[PASS] A2_r1c1 expected=228 got=228\n[PASS] A2_r1c2 expected=254 got=254\n[PASS] A2_r1c3 expected=280 got=280\n[PASS] A2_r2c0 expected=314 got=314\n[PASS] A2_r2c1 expected=356 got=356\n[PASS] A2_r2c2 expected=398 got=398\n[PASS] A2_r2c3 expected=440 got=440\n[PASS] A2_r3c0 expected=426 got=426\n[PASS] A2_r3c1 expected=484 got=484\n[PASS] A2_r3c2 expected=542 got=542\n[PASS] A2_r3c3 expected=600 got=600\n[PASS] AI_r0c0 expected=0 got=0\n[PASS] AI_r0c1 expected=1 got=1\n[PASS] AI_r0c2 expected=2 got=2\n[PASS] AI_r0c3 expected=3 got=3\n[PASS] AI_r1c0 expected=4 got=4\n[PASS] AI_r1c1 expected=5 got=5\n[PASS] AI_r1c2 expected=6 got=6\n[PASS] AI_r1c3 expected=7 got=7\n[PASS] AI_r2c0 expected=8 got=8\n[PASS] AI_r2c1 expected=9 got=9\n[PASS] AI_r2c2 expected=10 got=10\n[PASS] AI_r2c3 expected=11 got=11\n[PASS] AI_r3c0 expected=12 got=12\n[PASS] AI_r3c1 expected=13 got=13\n[PASS] AI_r3c2 expected=14 got=14\n[PASS] AI_r3c3 expected=15 got=15\nTEST SUMMARY: 32 PASS, 0 FAILED\nC:\\Users\\saahe\\AppData\\Local\\Temp\\tdes_fpga_wo4qqnw3\\tb.v:140: $finish called at 425000 (1ps)\n"
+}

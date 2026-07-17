@@ -1,0 +1,13 @@
+{
+  "design": "newton_raphson_polynomial",
+  "condition": "C4i",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 97,
+  "strict_total": 97,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "newton_raphson_poly_fixedpoint",
+  "detail": "0.031250)\nf(calculated_root) = 0.002128\nPolynomial Verification: PASS (|f(x)| = 0.002128 <= epsilon = 0.031250)\n\n------------------------------------------------------------\nTest case #46            \nCoefficients: a0=2.000000, a1=0.000000, a2=1.000000, a3=2.000000\nInitial guess: 5.600000\nExpected root: -1.197429 (fixed: -307)\nCalculated root: -1.195312 (fixed: -306)\nRoot error: 0.002117\nRoot Comparison: PASS (error = 0.002117 <= epsilon = 0.031250)\nf(calculated_root) = 0.013114\nPolynomial Verification: PASS (|f(x)| = 0.013114 <= epsilon = 0.031250)\n\n------------------------------------------------------------\nTest case #47            \nCoefficients: a0=3.000000, a1=1.000000, a2=2.000000, a3=-2.000000\nInitial guess: 5.700000\nExpected root: 1.764878 (fixed: 452)\nCalculated root: 1.765625 (fixed: 452)\nRoot error: 0.000747\nRoot Comparison: PASS (error = 0.000747 <= epsilon = 0.031250)\nf(calculated_root) = -0.007942\nPolynomial Verification: PASS (|f(x)| = 0.007942 <= epsilon = 0.031250)\n\n------------------------------------------------------------\nTest case #48            \nCoefficients: a0=4.000000, a1=2.000000, a2=-2.000000, a3=-1.000000\nInitial guess: 5.800000\nExpected root: 1.414214 (fixed: 362)\nCalculated root: 1.414062 (fixed: 362)\nRoot error: 0.000151\nRoot Comparison: PASS (error = 0.000151 <= epsilon = 0.031250)\nf(calculated_root) = 0.001459\nPolynomial Verification: PASS (|f(x)| = 0.001459 <= epsilon = 0.031250)\n\n------------------------------------------------------------\nTest case #49            \nCoefficients: a0=5.000000, a1=-2.000000, a2=-1.000000, a3=0.000000\nInitial guess: 5.900000\nExpected root: 1.449490 (fixed: 371)\nCalculated root: 1.449219 (fixed: 371)\nRoot error: 0.000271\nRoot Comparison: PASS (error = 0.000271 <= epsilon = 0.031250)\nf(calculated_root) = 0.001328\nPolynomial Verification: PASS (|f(x)| = 0.001328 <= epsilon = 0.031250)\n\nAll test cases completed.\nC:\\Users\\saahe\\AppData\\Local\\Temp\\tdes_fpga_l55af0y5\\tb.v:200: $finish called at 9640000 (1ps)\n"
+}

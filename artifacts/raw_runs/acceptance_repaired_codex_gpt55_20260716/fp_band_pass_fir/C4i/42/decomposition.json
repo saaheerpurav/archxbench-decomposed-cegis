@@ -1,0 +1,7 @@
+{
+  "top_source_file": "verilog/fp_bpf_coeff_rom.v",
+  "sub_modules": {
+    "fp_bpf_coeff_rom": "Combinational coefficient ROM that packs the fixed 101 binary32 FIR coefficients into a coefficient bus.",
+    "fp_bpf_mac": "Combinational floating-point FIR multiply-accumulate block that converts binary32 samples and coefficients to real values, evaluates the tap sum, and returns a binary32 result."
+  }
+}

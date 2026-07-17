@@ -1,0 +1,30 @@
+{
+  "condition": "C4i",
+  "llm_calls": 28,
+  "best_passes": 0,
+  "total_tests": 0,
+  "solved": false,
+  "decomp_modules": [
+    "fp_hp_coeff_rom",
+    "fp32_mul",
+    "fp32_add"
+  ],
+  "module_visit_order": [
+    "fp_hp_coeff_rom",
+    "fp32_mul",
+    "fp32_add"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "fp_high_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 3397.4,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

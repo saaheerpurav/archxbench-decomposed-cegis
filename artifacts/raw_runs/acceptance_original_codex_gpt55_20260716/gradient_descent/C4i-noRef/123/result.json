@@ -1,0 +1,34 @@
+{
+  "condition": "C4i-noRef",
+  "llm_calls": 6,
+  "best_passes": 50,
+  "total_tests": 50,
+  "solved": true,
+  "decomp_modules": [
+    "gd_poly_derivative",
+    "gd_learning_step",
+    "gd_x_update"
+  ],
+  "module_visit_order": [
+    "gd_poly_derivative",
+    "gd_learning_step",
+    "gd_x_update"
+  ],
+  "module_solve_rounds": {
+    "gd_poly_derivative": 1,
+    "gd_learning_step": 2,
+    "gd_x_update": 2
+  },
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "gradient_descent",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 161.8,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

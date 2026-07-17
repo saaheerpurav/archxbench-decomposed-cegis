@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/hp_fir_mac_comb.v",
+  "sub_modules": {
+    "hp_fir_mac_comb": "Combinational floating-point FIR multiply-accumulate over the packed sample history and fixed 101-tap high-pass coefficients.",
+    "hp_valid_delay": "Combinational valid extraction helper for a top-managed valid pipeline.",
+    "hp_sample_packer": "Combinational pass-through packing boundary for sample history words.",
+    "hp_coeff_rom": "Combinational ROM containing the exact binary32 high-pass FIR coefficient words."
+  }
+}

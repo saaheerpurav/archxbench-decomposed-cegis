@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gd_quadratic_gradient.v",
+  "sub_modules": {
+    "gd_quadratic_gradient": "Combinational fixed-point derivative calculator for f'(x)=2*a*x+b with Q-format rescaling.",
+    "gd_scaled_step": "Combinational fixed-point multiplier for alpha times gradient with Q-format rescaling.",
+    "gd_update_x": "Combinational gradient descent state update computing x-step.",
+    "gd_signed_multiplier": "Reusable combinational signed multiplier producing a double-width product."
+  }
+}

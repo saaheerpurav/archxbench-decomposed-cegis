@@ -1,0 +1,40 @@
+{
+  "condition": "C4i-noRef",
+  "llm_calls": 14,
+  "best_passes": 36,
+  "total_tests": 36,
+  "solved": true,
+  "decomp_modules": [
+    "fp_unpack",
+    "fp_special_cases",
+    "fp_align",
+    "fp_addsub",
+    "fp_normalize_round"
+  ],
+  "module_visit_order": [
+    "fp_unpack",
+    "fp_special_cases",
+    "fp_align",
+    "fp_addsub",
+    "fp_normalize_round"
+  ],
+  "module_solve_rounds": {
+    "fp_unpack": 3,
+    "fp_special_cases": 2,
+    "fp_align": 3,
+    "fp_addsub": 2,
+    "fp_normalize_round": 3
+  },
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "fp_adder",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 640.4,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

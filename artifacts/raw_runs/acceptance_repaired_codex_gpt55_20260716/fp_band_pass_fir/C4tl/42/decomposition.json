@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fp_fir_mac_comb.v",
+  "sub_modules": {
+    "fp_fir_mac_comb": "Combinational FIR multiply-accumulate over the current sample and zero-extended history using the 101 fixed band-pass coefficients.",
+    "fp32_mul_comb": "Combinational binary32-style floating-point multiplier for simulation-oriented FIR arithmetic.",
+    "fp32_add_comb": "Combinational binary32-style floating-point adder for simulation-oriented accumulation.",
+    "fp_coeff_rom_comb": "Combinational coefficient ROM interface for the fixed band-pass tap words."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv1d_tap_shift.v",
+  "sub_modules": {
+    "conv1d_tap_shift": "Pure combinational next-state logic for the four stored causal delay taps.",
+    "conv1d_mac5": "Pure combinational fixed 5-tap FIR multiply-accumulate using weights 2, 8, 12, 8, 2.",
+    "conv1d_gain_shift": "Pure combinational normalization stage that right-shifts the MAC result by GAIN_W and returns the extended output sample."
+  }
+}

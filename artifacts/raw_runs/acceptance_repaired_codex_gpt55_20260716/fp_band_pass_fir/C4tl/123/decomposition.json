@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fp_bandpass_fir_mac.v",
+  "sub_modules": {
+    "fp_bandpass_fir_mac": "Combinational binary32 FIR dot-product using the fixed 101-tap band-pass coefficient set.",
+    "fp_fir_sample_bank": "Combinational sample-history packing helper for the FIR sample bank.",
+    "fp_valid_delay": "Combinational valid forwarding stage for the chosen zero-extra-latency implementation.",
+    "fp_output_select": "Combinational output data gating for invalid cycles."
+  }
+}

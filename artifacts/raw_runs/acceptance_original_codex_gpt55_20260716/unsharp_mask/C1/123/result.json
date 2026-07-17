@@ -1,0 +1,56 @@
+{
+  "condition": "C1",
+  "llm_calls": 5,
+  "best_passes": 39257,
+  "total_tests": 65536,
+  "solved": false,
+  "golden_correct": 39257,
+  "golden_total": 65536,
+  "attempt_scores": [
+    {
+      "attempt": 1,
+      "compiled": true,
+      "golden_correct": 39047,
+      "golden_total": 65536,
+      "detail": "golden_output: FAIL (39047/65536 correct; golden=65536, DUT=65021)\n  idx=0: expected=192 got=0 (value mismatch)\n  idx=1: expected=184 got=64 (value mismatch)\n  idx=2: expected=168 got=64 (value mismatch)\n  idx=3: expected=160 got=64 (value mismatch)\n  idx=4: expected=160 got=64 (value mismatch)\n  idx=5: expected=160 got=64 (value mismatch)\n  idx=6: expected=160 got=64 (value mismatch)\n  idx=7: expected=160 got=64 (value mismatch)\n  idx=8: expected=160 got=64 (value mismatch)\n  idx=9: expected..."
+    },
+    {
+      "attempt": 2,
+      "compiled": true,
+      "golden_correct": 39257,
+      "golden_total": 65536,
+      "detail": "golden_output: FAIL (39257/65536 correct; golden=65536, DUT=65019)\n  idx=0: expected=192 got=64 (value mismatch)\n  idx=1: expected=184 got=64 (value mismatch)\n  idx=2: expected=168 got=64 (value mismatch)\n  idx=3: expected=160 got=64 (value mismatch)\n  idx=4: expected=160 got=64 (value mismatch)\n  idx=5: expected=160 got=64 (value mismatch)\n  idx=6: expected=160 got=64 (value mismatch)\n  idx=7: expected=160 got=64 (value mismatch)\n  idx=8: expected=160 got=64 (value mismatch)\n  idx=9: expecte..."
+    },
+    {
+      "attempt": 3,
+      "compiled": true,
+      "golden_correct": 39248,
+      "golden_total": 65536,
+      "detail": "golden_output: FAIL (39248/65536 correct; golden=65536, DUT=65021)\n  idx=0: expected=192 got=64 (value mismatch)\n  idx=1: expected=184 got=64 (value mismatch)\n  idx=2: expected=168 got=64 (value mismatch)\n  idx=3: expected=160 got=64 (value mismatch)\n  idx=4: expected=160 got=64 (value mismatch)\n  idx=5: expected=160 got=64 (value mismatch)\n  idx=6: expected=160 got=64 (value mismatch)\n  idx=7: expected=160 got=64 (value mismatch)\n  idx=8: expected=160 got=64 (value mismatch)\n  idx=9: expecte..."
+    },
+    {
+      "attempt": 4,
+      "compiled": true,
+      "golden_correct": 38051,
+      "golden_total": 65536,
+      "detail": "golden_output: FAIL (38051/65536 correct; golden=65536, DUT=65019)\n  idx=0: expected=192 got=67 (value mismatch)\n  idx=1: expected=184 got=66 (value mismatch)\n  idx=2: expected=168 got=66 (value mismatch)\n  idx=3: expected=160 got=66 (value mismatch)\n  idx=4: expected=160 got=66 (value mismatch)\n  idx=5: expected=160 got=66 (value mismatch)\n  idx=6: expected=160 got=66 (value mismatch)\n  idx=7: expected=160 got=66 (value mismatch)\n  idx=8: expected=160 got=66 (value mismatch)\n  idx=9: expecte..."
+    },
+    {
+      "attempt": 5,
+      "compiled": true,
+      "golden_correct": 37852,
+      "golden_total": 65536,
+      "detail": "golden_output: FAIL (37852/65536 correct; golden=65536, DUT=65020)\n  idx=0: expected=192 got=0 (value mismatch)\n  idx=1: expected=184 got=67 (value mismatch)\n  idx=2: expected=168 got=66 (value mismatch)\n  idx=3: expected=160 got=66 (value mismatch)\n  idx=4: expected=160 got=66 (value mismatch)\n  idx=5: expected=160 got=66 (value mismatch)\n  idx=6: expected=160 got=66 (value mismatch)\n  idx=7: expected=160 got=66 (value mismatch)\n  idx=8: expected=160 got=66 (value mismatch)\n  idx=9: expected..."
+    }
+  ],
+  "design": "unsharp_mask",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 407.7,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

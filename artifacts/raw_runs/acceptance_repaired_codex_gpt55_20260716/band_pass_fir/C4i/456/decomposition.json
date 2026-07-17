@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/bpf_sample_window.v",
+  "sub_modules": {
+    "bpf_sample_window": "Combinationally forms the causal FIR tap window from the current sample and registered history.",
+    "bpf_coeff_rom": "Combinational ROM containing the exact 101 signed Q15 band-pass FIR coefficients.",
+    "bpf_tap_product": "Combinational signed multiplier for one sample and one coefficient.",
+    "bpf_accumulator": "Combinational signed 64-bit accumulator for all tap products.",
+    "bpf_q15_normalizer": "Combinational arithmetic Q15 normalization and output-width truncation."
+  }
+}

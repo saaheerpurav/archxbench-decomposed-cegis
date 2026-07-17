@@ -1,0 +1,13 @@
+{
+  "design": "low_pass_fir",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "strict_correct": 1001,
+  "strict_total": 1001,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "top_module": "lowpass_fir",
+  "detail": "st 956: expected 8826, got 8826\n[PASS] Test 957: expected 10215, got 10215\n[PASS] Test 958: expected 11567, got 11567\n[PASS] Test 959: expected 12876, got 12876\n[PASS] Test 960: expected 14139, got 14139\n[PASS] Test 961: expected 15348, got 15348\n[PASS] Test 962: expected 16495, got 16495\n[PASS] Test 963: expected 17576, got 17576\n[PASS] Test 964: expected 18589, got 18589\n[PASS] Test 965: expected 19529, got 19529\n[PASS] Test 966: expected 20391, got 20391\n[PASS] Test 967: expected 21168, got 21168\n[PASS] Test 968: expected 21857, got 21857\n[PASS] Test 969: expected 22458, got 22458\n[PASS] Test 970: expected 22971, got 22971\n[PASS] Test 971: expected 23389, got 23389\n[PASS] Test 972: expected 23711, got 23711\n[PASS] Test 973: expected 23936, got 23936\n[PASS] Test 974: expected 24067, got 24067\n[PASS] Test 975: expected 24104, got 24104\n[PASS] Test 976: expected 24045, got 24045\n[PASS] Test 977: expected 23891, got 23891\n[PASS] Test 978: expected 23642, got 23642\n[PASS] Test 979: expected 23304, got 23304\n[PASS] Test 980: expected 22877, got 22877\n[PASS] Test 981: expected 22364, got 22364\n[PASS] Test 982: expected 21762, got 21762\n[PASS] Test 983: expected 21077, got 21077\n[PASS] Test 984: expected 20312, got 20312\n[PASS] Test 985: expected 19471, got 19471\n[PASS] Test 986: expected 18556, got 18556\n[PASS] Test 987: expected 17565, got 17565\n[PASS] Test 988: expected 16505, got 16505\n[PASS] Test 989: expected 15381, got 15381\n[PASS] Test 990: expected 14196, got 14196\n[PASS] Test 991: expected 12954, got 12954\n[PASS] Test 992: expected 11657, got 11657\n[PASS] Test 993: expected 10310, got 10310\n[PASS] Test 994: expected 8920, got 8920\n[PASS] Test 995: expected 7495, got 7495\n[PASS] Test 996: expected 6037, got 6037\n[PASS] Test 997: expected 4551, got 4551\n[PASS] Test 998: expected 3043, got 3043\n[PASS] Test 999: expected 1524, got 1524\n[PASS] All 1000/1000 tests passed\nC:\\Users\\saahe\\AppData\\Local\\Temp\\tdes_fpga_jout4o7f\\tb.v:2108: $finish called at 11135000 (1ps)\n"
+}

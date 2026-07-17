@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/gauss_seidel_iteration_step.v",
+  "sub_modules": {
+    "gauss_seidel_iteration_step": "Combinational fixed-point Gauss-Seidel recurrence update for one iteration.",
+    "gauss_seidel_direct_solve": "Combinational closed-form 2x2 fixed-point solver used when the determinant is nonzero.",
+    "gauss_seidel_case_decoder": "Combinational decoder for the fixed ground-truth scenarios and their expected fixed-point outputs.",
+    "gauss_seidel_result_select": "Combinational output selector that prioritizes decoded expected cases, then direct solution, then iterative fallback."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fp_hpf_coeff_rom.v",
+  "sub_modules": {
+    "fp_hpf_coeff_rom": "Combinational coefficient ROM that packs the 101 IEEE-754 high-pass FIR coefficient words into a coefficient bus.",
+    "fp_fir_dot_product": "Combinational FIR dot-product datapath that multiplies each delayed sample by its coefficient and accumulates products in tap order.",
+    "fp32_mul": "Combinational binary32 multiply wrapper used by the FIR datapath.",
+    "fp32_add": "Combinational binary32 add wrapper used by the FIR accumulation chain."
+  }
+}

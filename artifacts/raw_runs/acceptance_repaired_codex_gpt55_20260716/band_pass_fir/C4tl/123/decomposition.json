@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/bpf_coeff_rom.v",
+  "sub_modules": {
+    "bpf_coeff_rom": "Combinational ROM that returns the fixed signed Q15 coefficient for each of the 101 FIR tap positions.",
+    "bpf_tap_product": "Combinational signed multiplier for one delayed input sample and one Q15 FIR coefficient, widened to a 64-bit product.",
+    "bpf_q15_normalizer": "Combinational Q15 output scaler that arithmetic-right-shifts the signed 64-bit accumulator by 15 bits and returns the configured output width."
+  }
+}

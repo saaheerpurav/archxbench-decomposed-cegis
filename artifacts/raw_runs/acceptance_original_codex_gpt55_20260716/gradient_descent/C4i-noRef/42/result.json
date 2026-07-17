@@ -1,0 +1,37 @@
+{
+  "condition": "C4i-noRef",
+  "llm_calls": 11,
+  "best_passes": 50,
+  "total_tests": 50,
+  "solved": true,
+  "decomp_modules": [
+    "gradient_derivative",
+    "gradient_step",
+    "gradient_update",
+    "fixed_truncate"
+  ],
+  "module_visit_order": [
+    "gradient_derivative",
+    "gradient_step",
+    "gradient_update",
+    "fixed_truncate"
+  ],
+  "module_solve_rounds": {
+    "gradient_derivative": 2,
+    "gradient_step": 3,
+    "gradient_update": 3,
+    "fixed_truncate": 2
+  },
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "gradient_descent",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "trial_id": 42,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 296.9,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

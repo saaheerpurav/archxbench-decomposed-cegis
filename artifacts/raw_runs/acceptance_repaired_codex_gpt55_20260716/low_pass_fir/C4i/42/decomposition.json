@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/lowpass_fir_coeff_rom.v",
+  "sub_modules": {
+    "lowpass_fir_coeff_rom": "Combinational ROM for the exact 101-tap symmetric Q15 coefficient half-set.",
+    "lowpass_fir_pair_sum": "Combinational symmetric sample pair adder.",
+    "lowpass_fir_mac": "Combinational symmetric FIR multiply-accumulate using 64-bit signed accumulation.",
+    "lowpass_fir_output_scale": "Combinational Q15 normalization by arithmetic right shift of the accumulator."
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "condition": "C4tl",
+  "llm_calls": 5,
+  "best_passes": 16,
+  "total_tests": 16,
+  "solved": true,
+  "decomp_modules": [
+    "conv1d_tap_window",
+    "conv1d_fir5_mac",
+    "conv1d_gain_shift"
+  ],
+  "ref_passes": 16,
+  "ref_total": 16,
+  "golden_correct": 16,
+  "golden_total": 16,
+  "module_solve_rounds": {},
+  "design": "conv1d",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "trial_id": 123,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 139.2,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

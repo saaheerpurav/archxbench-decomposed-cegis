@@ -1,0 +1,7 @@
+{
+  "top_source_file": "verilog/conv3d_coord_decode.v",
+  "sub_modules": {
+    "conv3d_coord_decode": "Combinational stream index decoder that computes depth, row, column coordinates and valid-window eligibility.",
+    "conv3d_mac": "Combinational multiply-accumulate unit for the flattened 3D convolution window and flattened kernel coefficients."
+  }
+}

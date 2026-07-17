@@ -1,0 +1,33 @@
+{
+  "condition": "C4i",
+  "llm_calls": 5,
+  "best_passes": 33,
+  "total_tests": 33,
+  "solved": true,
+  "decomp_modules": [
+    "pe_cell",
+    "pe",
+    "mac64",
+    "forward_pair"
+  ],
+  "module_visit_order": [
+    "pe_cell",
+    "pe",
+    "mac64",
+    "forward_pair"
+  ],
+  "module_solve_rounds": {
+    "pe_cell": 1,
+    "pe": 1,
+    "mac64": 1,
+    "forward_pair": 1
+  },
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "systolic_gemm",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "wall_seconds": 135.8,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

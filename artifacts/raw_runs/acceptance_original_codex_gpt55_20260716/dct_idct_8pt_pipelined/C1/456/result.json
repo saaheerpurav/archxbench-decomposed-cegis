@@ -1,0 +1,56 @@
+{
+  "condition": "C1",
+  "llm_calls": 5,
+  "best_passes": 0,
+  "total_tests": 16,
+  "solved": false,
+  "golden_correct": 0,
+  "golden_total": 16,
+  "attempt_scores": [
+    {
+      "attempt": 1,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    },
+    {
+      "attempt": 2,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    },
+    {
+      "attempt": 3,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    },
+    {
+      "attempt": 4,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    },
+    {
+      "attempt": 5,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 16,
+      "detail": "DCT: DUT output file not written (8 expected samples)\n\nIDCT: DUT output file not written (8 expected samples)"
+    }
+  ],
+  "design": "dct_idct_8pt_pipelined",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 309.1,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

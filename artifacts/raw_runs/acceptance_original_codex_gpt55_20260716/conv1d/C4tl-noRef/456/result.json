@@ -1,0 +1,29 @@
+{
+  "condition": "C4tl-noRef",
+  "llm_calls": 3,
+  "best_passes": 0,
+  "total_tests": 1,
+  "solved": false,
+  "decomp_modules": [
+    "conv1d_tap_packer",
+    "conv1d_weighted_products",
+    "conv1d_mac5",
+    "conv1d_normalize"
+  ],
+  "ref_passes": 0,
+  "ref_total": 1,
+  "golden_correct": 0,
+  "golden_total": 0,
+  "module_solve_rounds": {},
+  "error": "reference decomposition failed original system testbench",
+  "design": "conv1d",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 158.1,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

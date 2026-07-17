@@ -1,0 +1,32 @@
+{
+  "condition": "C4i",
+  "llm_calls": 29,
+  "best_passes": 3,
+  "total_tests": 1001,
+  "solved": false,
+  "decomp_modules": [
+    "fir_coeff_rom_101",
+    "fir_tap_pair_adder",
+    "fir_symmetric_mac",
+    "fir_q15_normalizer"
+  ],
+  "module_visit_order": [
+    "fir_coeff_rom_101",
+    "fir_tap_pair_adder",
+    "fir_symmetric_mac",
+    "fir_q15_normalizer"
+  ],
+  "module_solve_rounds": {},
+  "golden_correct": 0,
+  "golden_total": 0,
+  "design": "low_pass_fir",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 1136.1,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fir_pair_sum.v",
+  "sub_modules": {
+    "fir_pair_sum": "Combinational symmetric sample pair adder for mirrored FIR taps.",
+    "fir_product": "Combinational signed multiplier with one hard-coded Q15 FIR coefficient parameter.",
+    "fir_accumulator": "Combinational signed 64-bit accumulator for all 51 symmetric FIR products.",
+    "fir_q15_quantizer": "Combinational arithmetic Q15 normalization stage using signed right shift by 15."
+  }
+}

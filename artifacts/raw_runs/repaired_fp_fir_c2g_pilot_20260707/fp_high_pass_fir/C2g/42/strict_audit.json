@@ -1,0 +1,13 @@
+{
+  "design": "fp_high_pass_fir",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 42,
+  "strict_correct": 2,
+  "strict_total": 1000,
+  "strict_solved": false,
+  "verifier_version": "tight-fp32-exact-length-v1",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\artifacts\\benchmark_contracts\\archxbench_repaired",
+  "absolute_tolerance": 1e-06,
+  "detail": "golden_output: FAIL (2/1000 correct; golden=1000, DUT=1000)\n  idx=2: expected='0x39150080' got='00000000' (value mismatch)\n  idx=3: expected='0x39d305af' got='a0be856f' (value mismatch)\n  idx=4: expected='0x3a259a40' got='ba23415b' (value mismatch)\n  idx=5: expected='0x3a423aee' got='bb07668f' (value mismatch)\n  idx=6: expected='0x3a4c1da1' got='bb8456ce' (value mismatch)\n  idx=7: expected='0x3a538c05' got='bbb6b480' (value mismatch)\n  idx=8: expected='0x3a4a6254' got='bbbacc27' (value mismatch)\n  idx=9: expected='0x3a159e36' got='bb35e468' (value mismatch)\n  idx=10: expected='0x39760c4b' got='3b8a0ef8' (value mismatch)\n  idx=11: expected='0xb7f970ea' got='3c670806' (value mismatch)"
+}

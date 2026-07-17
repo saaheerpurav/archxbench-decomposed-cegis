@@ -34,6 +34,7 @@ except Exception:
     pass
 
 from cegis.tdes.fpga.autonomous.client import LLMClient
+from cegis.tdes.fpga.autonomous.golden_compare import compare_output_files
 from cegis.tdes.fpga.autonomous.decomposer import (
     Decomposition,
     decompose,
@@ -119,7 +120,7 @@ _LEVEL_DIRS = {
 
 ALL_DESIGNS = _LEVEL_DESIGNS["L4"]  # backwards compat
 
-ALL_CONDITIONS = ["C1", "C2", "C2g", "C3", "C4", "C4i", "C4i-randOrder", "C4i-noStudy", "C4i-stateless", "C4i-rawFail", "C4i-noRef", "C4tl", "C4m", "C4a", "C5"]
+ALL_CONDITIONS = ["C1", "C2", "C2g", "C3", "C4", "C4i", "C4i-randOrder", "C4i-noStudy", "C4i-stateless", "C4i-rawFail", "C4i-noRef", "C4tl", "C4tl-noRef", "C4m", "C4a", "C5"]
 
 # Priority design lists for budget-constrained runs
 _PRIORITY_DESIGNS = {
@@ -223,139 +224,21 @@ def _has_icarus_sensitivity_warning(sim_stderr: str) -> bool:
 
 
 def _run_golden_comparison(data_dir: str, sim_workdir: str) -> Tuple[int, int, str]:
-    """Run post-sim golden comparison for L5/L6 designs.
+    """Run the strict, schema-aware golden verifier."""
+    return compare_output_files(data_dir, sim_workdir)
 
-    Compares outputs/dut_output.json against outputs/golden_output.json.
-    The DCT/IDCT benchmark is a special case with separate DCT and IDCT
-    reference files.
-    Returns (passes, total, detail_string).
-    """
-    import json as _json
 
-    def _load(path: str):
-        with open(path, encoding="utf-8") as fh:
-            return _json.load(fh)
-
-    def _flatten(value):
-        if isinstance(value, dict):
-            value = list(value.values())
-        if isinstance(value, list) and value and isinstance(value[0], list):
-            value = [x for row in value for x in row]
-        return value
-
-    def _parse_hex_word(value):
-        if isinstance(value, int):
-            return value & 0xFFFFFFFF
-        if isinstance(value, str):
-            text = value.strip().strip('"').lower()
-            if text.startswith("0x"):
-                text = text[2:]
-            if re.fullmatch(r"[0-9a-f]{1,8}", text):
-                return int(text, 16) & 0xFFFFFFFF
-        return None
-
-    def _hex_word_to_float(value: int) -> float:
-        import struct as _struct
-        return _struct.unpack("!f", _struct.pack("!I", value & 0xFFFFFFFF))[0]
-
-    def _compare(golden, dut, label: str) -> Tuple[int, int, str]:
-        golden = _flatten(golden)
-        dut = _flatten(dut)
-
-        if not golden:
-            return 0, 1, f"{label}: golden output is empty"
-        if not dut:
-            return 0, len(golden), f"{label}: DUT produced no output"
-
-        n_compare = min(len(golden), len(dut))
-        n_total = len(golden)
-
-        mismatches = []
-        for i in range(n_compare):
-            golden_hex = _parse_hex_word(golden[i])
-            dut_hex = _parse_hex_word(dut[i])
-            if golden_hex is not None and dut_hex is not None:
-                if abs(_hex_word_to_float(golden_hex) - _hex_word_to_float(dut_hex)) > 1:
-                    mismatches.append((i, golden[i], dut[i]))
-                continue
+def _remove_stale_dut_outputs(workdir: str) -> None:
+    """Never let a copied output from the fixture satisfy a new simulation."""
+    output_dir = os.path.join(workdir, "outputs")
+    if not os.path.isdir(output_dir):
+        return
+    for filename in os.listdir(output_dir):
+        if filename.lower().startswith("dut") and filename.lower().endswith(".json"):
             try:
-                if abs(float(golden[i]) - float(dut[i])) > 1:
-                    mismatches.append((i, golden[i], dut[i]))
-            except (TypeError, ValueError):
-                if golden[i] != dut[i]:
-                    mismatches.append((i, golden[i], dut[i]))
-
-        missing = n_total - len(dut) if len(dut) < n_total else 0
-        passes = n_total - len(mismatches) - missing
-        if not mismatches and missing == 0:
-            return passes, n_total, f"{label}: PASS All {n_total} samples match"
-
-        first5 = [f"  idx={i}: expected={r} got={d}" for i, r, d in mismatches[:5]]
-        last5 = [f"  idx={i}: expected={r} got={d}" for i, r, d in mismatches[-5:]] if len(mismatches) > 5 else []
-        errs = []
-        for i, r, d in mismatches[:100]:
-            try:
-                errs.append(abs(float(r) - float(d)))
-            except (TypeError, ValueError):
+                os.remove(os.path.join(output_dir, filename))
+            except FileNotFoundError:
                 pass
-        err_info = ""
-        if errs:
-            err_info = f"\nError magnitudes: min={min(errs):.2f} max={max(errs):.2f} avg={sum(errs)/len(errs):.2f}"
-        if len(golden) != len(dut):
-            err_info += f"\nLength mismatch: golden has {len(golden)} entries, DUT has {len(dut)}"
-        detail = (f"{label}: FAIL {len(mismatches)+missing}/{n_total} mismatches ({passes}/{n_total} correct){err_info}\n"
-                  f"First mismatches:\n" + "\n".join(first5))
-        if last5 and last5 != first5:
-            detail += f"\nLast mismatches:\n" + "\n".join(last5)
-        if missing:
-            detail += f"\nMissing {missing} DUT entries at the end"
-        return passes, n_total, detail
-
-    dct_golden = os.path.join(data_dir, "outputs", "golden_dct.json")
-    idct_golden = os.path.join(data_dir, "outputs", "golden_idct.json")
-    dct_dut = os.path.join(sim_workdir, "outputs", "dut_dct.json")
-    idct_dut = os.path.join(sim_workdir, "outputs", "dut_idct.json")
-    if os.path.exists(dct_golden) or os.path.exists(idct_golden):
-        pairs = [
-            ("DCT", dct_golden, dct_dut),
-            ("IDCT", idct_golden, idct_dut),
-        ]
-        total_passes = 0
-        total_tests = 0
-        details = []
-        for label, golden_path, dut_path in pairs:
-            if not os.path.exists(golden_path):
-                details.append(f"{label}: golden output file not found")
-                total_tests += 1
-                continue
-            if not os.path.exists(dut_path):
-                details.append(f"{label}: DUT output file not written")
-                total_tests += 1
-                continue
-            try:
-                p, t, detail = _compare(_load(golden_path), _load(dut_path), label)
-            except Exception as e:
-                p, t, detail = 0, 1, f"{label}: JSON parse error: {e}"
-            total_passes += p
-            total_tests += t
-            details.append(detail)
-        return total_passes, total_tests, "\n\n".join(details)
-
-    dut_path = os.path.join(sim_workdir, "outputs", "dut_output.json")
-    golden_path = os.path.join(data_dir, "outputs", "golden_output.json")
-
-    if not os.path.exists(dut_path):
-        return 0, 1, "DUT output file not written"
-    if not os.path.exists(golden_path):
-        return 0, 1, "Golden output file not found"
-
-    try:
-        dut = _load(dut_path)
-        golden = _load(golden_path)
-    except Exception as e:
-        return 0, 1, f"JSON parse error: {e}"
-
-    return _compare(golden, dut, "golden_output")
 
 
 def _golden_verify_final(modules: dict, testbench: str, data_dir: Optional[str],
@@ -379,6 +262,7 @@ def _golden_verify_final(modules: dict, testbench: str, data_dir: Optional[str],
             if os.path.isdir(src_path):
                 _shutil.copytree(src_path, os.path.join(gtmp, sub_d))
         os.makedirs(os.path.join(gtmp, "outputs"), exist_ok=True)
+        _remove_stale_dut_outputs(gtmp)
         for f in os.listdir(data_dir):
             if f.endswith(".mem"):
                 _shutil.copy2(os.path.join(data_dir, f), os.path.join(gtmp, f))
@@ -391,11 +275,15 @@ def _golden_verify_final(modules: dict, testbench: str, data_dir: Optional[str],
         srcs = [os.path.join(gtmp, fn) for fn in os.listdir(gtmp) if fn.endswith(".v")]
         iverilog = find_tool(["iverilog"]) or "iverilog"
         vvp = find_tool(["vvp"]) or "vvp"
-        _, _, _, c_timeout = _run([iverilog, "-g2012", "-o", os.path.join(gtmp, "sim.vvp")] + srcs, gtmp, 120)
+        cr, _, _, c_timeout = _run([iverilog, "-g2012", "-o", os.path.join(gtmp, "sim.vvp")] + srcs, gtmp, 120)
         if c_timeout:
             return p, t, solved, 0, 0
-        _, _, _, r_timeout = _run([vvp, os.path.join(gtmp, "sim.vvp")], gtmp, 120)
+        if cr != 0:
+            return p, t, solved, 0, 0
+        rr, _, _, r_timeout = _run([vvp, os.path.join(gtmp, "sim.vvp")], gtmp, 120)
         if r_timeout:
+            return p, t, solved, 0, 0
+        if rr != 0:
             return p, t, solved, 0, 0
         gp, gt, _ = _run_golden_comparison(data_dir, gtmp)
         if gt > 0:
@@ -416,6 +304,7 @@ def _simulate_golden(modules: dict, testbench: str, data_dir: str,
             if os.path.isdir(src_path):
                 _shutil.copytree(src_path, os.path.join(gtmp, sub_d))
         os.makedirs(os.path.join(gtmp, "outputs"), exist_ok=True)
+        _remove_stale_dut_outputs(gtmp)
         for f in os.listdir(data_dir):
             if f.endswith(".mem"):
                 _shutil.copy2(os.path.join(data_dir, f), os.path.join(gtmp, f))
@@ -432,9 +321,11 @@ def _simulate_golden(modules: dict, testbench: str, data_dir: str,
             return 0, 0, "compile timeout"
         if cr != 0:
             return 0, 0, f"compile error: {cerr[:300]}"
-        _, _, _, r_timeout = _run([vvp, os.path.join(gtmp, "sim.vvp")], gtmp, timeout)
+        rr, _, rerr, r_timeout = _run([vvp, os.path.join(gtmp, "sim.vvp")], gtmp, timeout)
         if r_timeout:
             return 0, 0, "simulation timeout"
+        if rr != 0:
+            return 0, 0, f"simulation error: {rerr[:300]}"
         return _run_golden_comparison(data_dir, gtmp)
 
 
@@ -516,7 +407,9 @@ def run_C1(
         f"Write the complete Verilog module."
     )
     best_passes, best_total = 0, 0
+    best_golden_passes, best_golden_total = 0, 0
     best_source = ""
+    attempt_scores = []
     for attempt in range(5):
         try:
             resp = client.messages.create(
@@ -529,21 +422,53 @@ def run_C1(
                 continue
             sim = simulate({top_name: source}, testbench, timeout=60, data_dir=data_dir)
             if not sim.compiled:
+                attempt_scores.append({"attempt": attempt + 1, "compiled": False})
                 continue
             p, t = _count_tb_passes(sim.stdout)
-            if p > best_passes:
+            if data_dir:
+                gp, gt, detail = _simulate_golden(
+                    {top_name: source}, testbench, data_dir,
+                )
+                attempt_scores.append({
+                    "attempt": attempt + 1,
+                    "compiled": True,
+                    "golden_correct": gp,
+                    "golden_total": gt,
+                    "detail": _shorten(detail, 500),
+                })
+                if gt > 0 and (
+                    best_golden_total == 0
+                    or gp * best_golden_total > best_golden_passes * gt
+                ):
+                    best_golden_passes, best_golden_total = gp, gt
+                    best_source = source
+            elif p > best_passes or (not best_source and t > 0):
                 best_passes, best_total = p, t
                 best_source = source
+                attempt_scores.append({
+                    "attempt": attempt + 1, "compiled": True,
+                    "passes": p, "total": t,
+                })
         except Exception as e:
             logger.warning("C1 attempt %d: %s", attempt, e)
+            attempt_scores.append({
+                "attempt": attempt + 1, "compiled": False,
+                "error": _shorten(str(e), 300),
+            })
 
-    solved = best_total > 0 and best_passes == best_total
-    best_passes, best_total, solved, gc, gt = _golden_verify_final(
-        {top_name: best_source}, testbench, data_dir, best_passes, best_total, solved)
+    if data_dir:
+        best_passes, best_total = best_golden_passes, best_golden_total
+        gc, gt = best_golden_passes, best_golden_total
+        solved = gt > 0 and gc == gt
+    else:
+        solved = best_total > 0 and best_passes == best_total
+        gc, gt = 0, 0
     return {
         "condition": "C1", "llm_calls": 5,
         "best_passes": best_passes, "total_tests": best_total,
         "solved": solved, "golden_correct": gc, "golden_total": gt,
+        "attempt_scores": attempt_scores,
+        "_sources": {top_name: best_source} if best_source else None,
     }
 
 
@@ -746,6 +671,10 @@ def run_C2g(
         # Non-golden path (L3/L4 or no data_dir)
         if p == t and t > 0 and not data_dir:
             best_tb_p, best_tb_t = p, t
+            # Preserve the exact candidate that achieved the perfect score.
+            # Without this assignment, self-checking C2g runs recorded the
+            # winning score but saved the preceding best candidate as RTL.
+            best_source = current_source
             break
         if p > best_tb_p:
             best_tb_p, best_tb_t = p, t
@@ -856,9 +785,32 @@ def run_C4(
         problem_desc, design_specs, testbench,
         model=model, client=client, top_module_name=top_name,
     )
-    ref_ok, _ = validate_against_testbench(decomp, testbench)
-
     total_calls = 1  # decomposition
+    reference_modules = {**decomp.reference_modules, top_name: decomp.top_source}
+    reference_sim = simulate(reference_modules, testbench, timeout=60, data_dir=data_dir)
+    ref_passes, ref_total = 0, 0
+    if reference_sim.compiled:
+        ref_passes, ref_total = _count_tb_passes(reference_sim.stdout)
+    if data_dir and reference_sim.compiled:
+        ref_passes, ref_total, _ = _simulate_golden(
+            reference_modules, testbench, data_dir,
+        )
+    ref_ok = ref_total > 0 and ref_passes == ref_total
+    if not ref_ok:
+        return {
+            "condition": condition_label,
+            "llm_calls": total_calls,
+            "best_passes": ref_passes,
+            "total_tests": ref_total,
+            "solved": False,
+            "golden_correct": ref_passes if data_dir else 0,
+            "golden_total": ref_total if data_dir else 0,
+            "decomp_modules": decomp.module_names,
+            "ref_passes": ref_passes,
+            "ref_total": ref_total,
+            "error": "reference decomposition failed strict system verification",
+        }
+
     modules = {top_name: decomp.top_source}
     rounds_per_module = max(1, 28 // len(decomp.sub_modules))
 
@@ -1102,9 +1054,9 @@ def run_C4i(
                     current_source = source
             except Exception as e:
                 logger.warning("C4i %s study: %s", sub.name, e)
-                current_source = sub.reference_source
+                current_source = sub.skeleton_source
         else:
-            current_source = sub.reference_source
+            current_source = sub.skeleton_source
 
         best_passes, best_total = 0, 0
         for rnd in range(rounds_per_module - (1 if study else 0)):
@@ -1227,10 +1179,11 @@ def _golden_score_modules(test_modules: Dict[str, str], testbench: str,
     if not sim.compiled:
         return 0, 0
     p, t = _count_tb_passes(sim.stdout)
-    # For L5/L6 where TB always says PASS, use golden comparison
-    if data_dir and t > 0 and p == t:
-        gp, gt, _ = _golden_verify_final(test_modules, testbench, data_dir, p, t, True)[:3]
-        if isinstance(gp, int) and isinstance(gt, int) and gt > 0:
+    # File-output contracts are authoritative even when the testbench emits no
+    # native PASS/FAIL tokens.
+    if data_dir:
+        gp, gt, _ = _simulate_golden(test_modules, testbench, data_dir)
+        if gt > 0:
             return gp, gt
     return p, t
 
@@ -1261,10 +1214,14 @@ def _localize_fault(
     baseline_modules[top_name] = decomp.top_source
     baseline_p, baseline_t = _golden_score_modules(baseline_modules, testbench, data_dir)
 
-    # Improvement = score_with_ref_swap - baseline
+    # Improvement = normalized score_with_ref_swap - normalized baseline.
+    # Denominators should normally match, but a malformed candidate must not
+    # distort localization merely by emitting fewer samples.
     improvements = {}
     for name, (p, t) in scores.items():
-        improvements[name] = p - baseline_p
+        score = (p / t) if t > 0 else -1.0
+        baseline_score = (baseline_p / baseline_t) if baseline_t > 0 else -1.0
+        improvements[name] = score - baseline_score
 
     if not improvements:
         return None, scores
@@ -1281,6 +1238,9 @@ def run_C4tl(
     top_name: str, testbench: str, model: str,
     client: "LLMClient", problem_desc: str, design_specs: str,
     data_dir: Optional[str] = None,
+    *,
+    condition_label: str = "C4tl",
+    show_ref: bool = True,
 ) -> dict:
     """Trace-Lifted CEGIS: decompose, validate reference, localize faults, repair.
 
@@ -1336,13 +1296,12 @@ def run_C4tl(
 
         ref_ok = ref_total > 0 and ref_passes == ref_total
         golden_ref_detail = ""
-        if ref_ok and data_dir:
+        if ref_sim.compiled and data_dir:
             gp, gt, golden_ref_detail = _simulate_golden(
                 ref_modules, testbench, data_dir, timeout=60,
             )
-            if gt > 0:
-                ref_passes, ref_total = gp, gt
-                ref_ok = gp == gt
+            ref_passes, ref_total = gp, gt
+            ref_ok = gt > 0 and gp == gt
 
         if ref_ok:
             logger.info(
@@ -1391,7 +1350,7 @@ def run_C4tl(
             }
             decomp_modules = decomp.module_names
         return {
-            "condition": "C4tl", "llm_calls": total_calls,
+            "condition": condition_label, "llm_calls": total_calls,
             "best_passes": ref_passes, "total_tests": ref_total,
             "solved": False, "decomp_modules": decomp_modules,
             "ref_passes": ref_passes, "ref_total": ref_total,
@@ -1408,7 +1367,8 @@ def run_C4tl(
     for idx, sub in enumerate(decomp.sub_modules):
         context = _sub_context(decomp, idx)
         study_prompt = _build_study_prompt(
-            sub, context, design_specs, testbench, sub.reference_source,
+            sub, context, design_specs, testbench,
+            sub.reference_source if show_ref else "(not provided)",
         )
         try:
             total_calls += 1
@@ -1418,10 +1378,10 @@ def run_C4tl(
                 messages=[{"role": "user", "content": study_prompt}],
             )
             source = _extract_verilog(resp.content[0].text)
-            modules[sub.name] = source if source else sub.reference_source
+            modules[sub.name] = source if source else sub.skeleton_source
         except Exception as e:
             logger.warning("C4tl %s initial: %s", sub.name, e)
-            modules[sub.name] = sub.reference_source
+            modules[sub.name] = sub.skeleton_source
 
     # Step 3-5: Test → localize → repair loop (with golden comparison for L5/L6)
     max_rounds = 28 - len(decomp.sub_modules)
@@ -1506,6 +1466,12 @@ def run_C4tl(
             for n, (sp, st) in sorted(scores.items())
         )
 
+        reference_feedback = (
+            f"### Reference Implementation (oracle)\n\n"
+            f"```verilog\n{culprit_sub.reference_source}\n```\n\n"
+            if show_ref else
+            "### Reference Implementation\n\nNot exposed in this ablation.\n\n"
+        )
         repair_prompt = (
             f"## Fault Localization Result\n\n"
             f"The system testbench passed {p}/{t} tests. Trace-lifted analysis "
@@ -1517,8 +1483,7 @@ def run_C4tl(
             f"{icarus_warning}\n"
             f"### Current Implementation of `{culprit}`\n\n"
             f"```verilog\n{modules[culprit]}\n```\n\n"
-            f"### Reference Implementation (oracle)\n\n"
-            f"```verilog\n{culprit_sub.reference_source}\n```\n\n"
+            f"{reference_feedback}"
             f"### Design Specification\n\n{design_specs}\n\n"
             f"## Task — Reason, then Fix\n\n"
             f"You MUST follow this structure:\n\n"
@@ -1561,7 +1526,7 @@ def run_C4tl(
     sim = simulate(final_modules, testbench, timeout=60, data_dir=data_dir)
     if not sim.compiled:
         return {
-            "condition": "C4tl", "solved": False, "llm_calls": total_calls,
+            "condition": condition_label, "solved": False, "llm_calls": total_calls,
             "error": "final compile failed",
             "decomp_modules": decomp.module_names,
             "ref_passes": ref_passes, "ref_total": ref_total,
@@ -1571,15 +1536,20 @@ def run_C4tl(
         }
 
     p, t = _count_tb_passes(sim.stdout)
-    # For L5/L6 with golden comparison, use golden results as truth
-    if golden_total_count > 0:
-        solved = golden_correct == golden_total_count
+    # Rescore the exact final sources that will be saved.  Never reuse a score
+    # from a prior repair-loop iteration.
+    if data_dir:
+        golden_correct, golden_total_count, _ = _simulate_golden(
+            final_modules, testbench, data_dir,
+        )
+        solved = golden_total_count > 0 and golden_correct == golden_total_count
         best_passes = golden_correct
         best_total = golden_total_count
     else:
         solved = t > 0 and p == t
+        best_passes, best_total = p, t
     return {
-        "condition": "C4tl", "llm_calls": total_calls,
+        "condition": condition_label, "llm_calls": total_calls,
         "best_passes": best_passes, "total_tests": best_total,
         "solved": solved, "decomp_modules": decomp.module_names,
         "ref_passes": ref_passes, "ref_total": ref_total,
@@ -2360,6 +2330,11 @@ def run_cell(
                              condition_label="C4i-noRef", show_ref=False)
         elif condition == "C4tl":
             result = run_C4tl(top_name, testbench, model, client, problem_desc, design_specs, data_dir)
+        elif condition == "C4tl-noRef":
+            result = run_C4tl(
+                top_name, testbench, model, client, problem_desc, design_specs, data_dir,
+                condition_label="C4tl-noRef", show_ref=False,
+            )
         elif condition == "C4m":
             result = run_C4m(top_name, testbench, model, client, problem_desc, design_specs, data_dir)
         elif condition == "C4a":
@@ -2375,6 +2350,12 @@ def run_cell(
     result["design"] = design
     result["model"] = model
     result["seed"] = seed
+    result["trial_id"] = seed
+    result["model_seed_controlled"] = False
+    result["reasoning_effort"] = os.environ.get("CODEX_REASONING_EFFORT", "low")
+    result["codex_cli_timeout_seconds"] = int(
+        os.environ.get("CODEX_CLI_TIMEOUT", "900")
+    )
     result["wall_seconds"] = round(time.time() - t0, 1)
     result["total_input_tokens"] = client.total_input_tokens
     result["total_output_tokens"] = client.total_output_tokens

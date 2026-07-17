@@ -1,0 +1,13 @@
+{
+  "design": "conv1d",
+  "condition": "C2g",
+  "model": "gpt-5.5",
+  "seed": 123,
+  "strict_correct": 16,
+  "strict_total": 16,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "conv1d",
+  "detail": "golden_output: PASS all 16 samples match exactly in length"
+}

@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/fp_fir_history_update.v",
+  "sub_modules": {
+    "fp_fir_history_update": "Combinational sample history shifter with implicit zero-filled reset state held by the top module.",
+    "fp_fir_coeff_rom": "Combinational ROM for the exact 101 binary32 FIR coefficients.",
+    "fp_fir_mac": "Combinational binary32 FIR multiply-accumulate model using the coefficient set and current sample window.",
+    "fp_fir_output_select": "Combinational output value selector for valid input cycles."
+  }
+}

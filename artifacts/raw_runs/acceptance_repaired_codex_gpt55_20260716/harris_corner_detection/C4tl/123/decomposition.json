@@ -1,0 +1,10 @@
+{
+  "top_source_file": "verilog/harris_sobel3x3.v",
+  "sub_modules": {
+    "harris_sobel3x3": "Combinational Sobel 3x3 gradient operator producing signed X and Y gradients.",
+    "harris_gradient_products": "Combinational gradient product stage producing Ix squared, Iy squared, and IxIy.",
+    "harris_gaussian_passthrough": "Combinational smoothing placeholder preserving product values while maintaining an independent stencil-stage boundary.",
+    "harris_response": "Combinational fixed-point Harris response calculation using determinant, trace squared, and configurable k.",
+    "harris_threshold": "Combinational binary corner decision comparing signed response against threshold."
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "comparison": "exact binary equality and exact length",
+  "parallelism": 3,
+  "passes": 0,
+  "total": 6,
+  "results": [
+    {
+      "condition": "C2g",
+      "seed": 42,
+      "status": "fail",
+      "returncode": 0,
+      "dut_count": 16384,
+      "golden_count": 16384,
+      "exact_matches": 16223,
+      "mismatches": 161
+    },
+    {
+      "condition": "C2g",
+      "seed": 123,
+      "status": "fail",
+      "returncode": 0,
+      "dut_count": 16417,
+      "golden_count": 16384,
+      "exact_matches": 16210,
+      "mismatches": 207
+    },
+    {
+      "condition": "C2g",
+      "seed": 456,
+      "status": "fail",
+      "returncode": 0,
+      "dut_count": 16384,
+      "golden_count": 16384,
+      "exact_matches": 16346,
+      "mismatches": 38
+    },
+    {
+      "condition": "C4i",
+      "seed": 42,
+      "status": "fail",
+      "returncode": 0,
+      "dut_count": 16384,
+      "golden_count": 16384,
+      "exact_matches": 15484,
+      "mismatches": 900
+    },
+    {
+      "condition": "C4i",
+      "seed": 123,
+      "status": "fail",
+      "returncode": 0,
+      "dut_count": 16384,
+      "golden_count": 16384,
+      "exact_matches": 15446,
+      "mismatches": 938
+    },
+    {
+      "condition": "C4i",
+      "seed": 456,
+      "status": "fail",
+      "returncode": 0,
+      "dut_count": 16384,
+      "golden_count": 16384,
+      "exact_matches": 16264,
+      "mismatches": 120
+    }
+  ]
+}

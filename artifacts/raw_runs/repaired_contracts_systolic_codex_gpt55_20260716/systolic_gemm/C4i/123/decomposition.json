@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/pe.v",
+  "sub_modules": {
+    "pe": "Combinational processing element that forwards north and west data and produces the signed 64-bit product for accumulation in the top module.",
+    "done_logic": "Combinational completion decoder that asserts done after the 9-cycle systolic computation window.",
+    "result_bus_map": "Combinational mapper from the 4x4 accumulator grid to the flat result0 through result15 output interface."
+  }
+}

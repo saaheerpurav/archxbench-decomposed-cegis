@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/fp_fir_coeff_bank.v",
+  "sub_modules": {
+    "fp_fir_coeff_bank": "Combinational coefficient ROM that packs the configured FIR tap coefficients onto a wide bus.",
+    "fp_fir_dot_product": "Combinational FIR dot product over the current sample window and coefficient bus using binary32 decode and accumulation.",
+    "fp_real_to_binary32": "Combinational converter from simulation real-valued FIR result back to IEEE-754 binary32 word format."
+  }
+}

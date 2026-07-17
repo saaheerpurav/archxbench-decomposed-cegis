@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/conv2d_default_coeffs.v",
+  "sub_modules": {
+    "conv2d_default_coeffs": "Combinational coefficient generator for the default 3x3 Gaussian kernel, with identity fallback for other odd kernel sizes.",
+    "conv2d_window_builder": "Combinational zero-padded stencil window assembler from the streaming pixel history.",
+    "conv2d_dot_product": "Combinational matrix-vector multiply-accumulate datapath for the flattened convolution window and coefficients.",
+    "conv2d_output_cast": "Combinational output-width cast from accumulator precision to the module output width."
+  }
+}

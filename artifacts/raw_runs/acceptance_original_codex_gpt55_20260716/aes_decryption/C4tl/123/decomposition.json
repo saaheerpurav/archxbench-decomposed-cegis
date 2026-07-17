@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/aes128_key_expand.v",
+  "sub_modules": {
+    "aes128_key_expand": "Combinational AES-128 forward key expansion producing all eleven 128-bit round keys for reverse-order decryption use.",
+    "aes128_decrypt_core": "Combinational AES-128 decrypt datapath wiring initial AddRoundKey, nine inverse rounds, and final inverse round.",
+    "aes128_inv_round": "Combinational inverse AES round implementing InvShiftRows, InvSubBytes, AddRoundKey, and optional InvMixColumns bypass for the final round.",
+    "aes128_inv_shiftrows": "Combinational AES inverse row rotation over the 128-bit state.",
+    "aes128_inv_mixcolumns": "Combinational AES inverse column mixing over GF(2^8).",
+    "aes128_inv_subbytes": "Combinational byte-wise AES inverse S-box substitution."
+  }
+}

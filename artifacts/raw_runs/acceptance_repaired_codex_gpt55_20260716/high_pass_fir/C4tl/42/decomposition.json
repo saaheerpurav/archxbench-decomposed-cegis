@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/highpass_fir_input_cast.v",
+  "sub_modules": {
+    "highpass_fir_input_cast": "Combinational signed interpretation of the DATA_W input sample.",
+    "highpass_fir_tap_update": "Combinational next-state generator for the FIR delay line with implicit zero-extension from reset.",
+    "highpass_fir_mac": "Combinational 101-tap signed FIR multiply-accumulate using the required hard-coded Q15 high-pass coefficients.",
+    "highpass_fir_q15_shift": "Combinational arithmetic Q15 normalization from the 64-bit accumulator to the output width."
+  }
+}

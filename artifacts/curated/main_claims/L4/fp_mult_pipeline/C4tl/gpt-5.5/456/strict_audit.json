@@ -1,0 +1,13 @@
+{
+  "design": "fp_mult_pipeline",
+  "condition": "C4tl",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "strict_correct": 31,
+  "strict_total": 31,
+  "strict_solved": true,
+  "verifier_version": "strict-v2",
+  "benchmark_root": "C:\\Users\\saahe\\Desktop\\Programming\\Stuff\\College\\Research\\archxbench-decomposed-cegis\\cegis\\tdes\\fpga\\benchmarks\\archxbench",
+  "top_module": "fp_mult_pipeline",
+  "detail": "=== FP Multiplier Test ===\n[PASS] Test 1\n[PASS] Test 2\n[PASS] Test 3\n[PASS] Test 4\n[PASS] Test 5\n[PASS] Test 6\n[PASS] Test 7\n[PASS] Test 8\n[PASS] Test 9\n[PASS] Test 10\n[PASS] Test 11\n[PASS] Test 12\n[PASS] Test 13\n[PASS] Test 14\n[PASS] Test 15\n[PASS] Test 16\n[PASS] Test 17\n[PASS] Test 18\n[PASS] Test 19\n[PASS] Test 20\n[PASS] Test 21\n[PASS] Test 22\n[PASS] Test 23\n[PASS] Test 24\n[PASS] Test 25\n[PASS] Test 26\n[PASS] Test 27\n[PASS] Test 28\n[PASS] Test 29\n[PASS] Test 30\n=== Results ===\nTests: 30, Passed: 30, Failed: 0\nPass Rate: 100.0%\nSUCCESS: 100% PASS!\nC:\\Users\\saahe\\AppData\\Local\\Temp\\tdes_fpga_brudmlcf\\tb.v:103: $finish called at 2095000 (1ps)\n"
+}

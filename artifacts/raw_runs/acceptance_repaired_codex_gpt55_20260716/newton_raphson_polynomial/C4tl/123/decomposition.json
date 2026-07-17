@@ -1,0 +1,11 @@
+{
+  "top_source_file": "verilog/nr_poly_eval_fixed.v",
+  "sub_modules": {
+    "nr_poly_eval_fixed": "Combinational fixed-point cubic polynomial evaluator using Horner form.",
+    "nr_derivative_eval_fixed": "Combinational fixed-point derivative evaluator for a1 + 2*a2*x + 3*a3*x^2.",
+    "nr_fixed_divide": "Combinational signed fixed-point divider that computes p(x)/p'(x) with extended scaling and zero-denominator protection.",
+    "nr_update_step": "Combinational Newton update block that produces x_next = x - step and holds x when the derivative is zero.",
+    "nr_output_convert": "Combinational converter from internal high-precision fixed-point format to the external WIDTH/FRAC format with truncation toward zero.",
+    "nr_root_verify": "Combinational residual tolerance checker for the final polynomial value."
+  }
+}

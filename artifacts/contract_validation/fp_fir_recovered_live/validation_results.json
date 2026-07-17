@@ -1,0 +1,139 @@
+{
+  "status": "pass",
+  "comparator_version": "strict-v2",
+  "absolute_tolerance": 1e-06,
+  "results": [
+    {
+      "design": "fp_low_pass_fir",
+      "status": "pass",
+      "semantic_check": {
+        "max_abs_error": 2.980232238769531e-07,
+        "holdout_start": 101,
+        "holdout_count": 899,
+        "holdout_max_abs_error": 2.980232238769531e-07
+      },
+      "oracle_output_count": 1000,
+      "sim_stdout_tail": "[PASS] Wrote exactly 1000 ordered outputs\ntb_fp_lowpass_fir.v:109: $finish called at 15356000 (1ps)\n",
+      "controls": {
+        "positive_oracle": {
+          "passes": 1000,
+          "total": 1000,
+          "accepted": true,
+          "detail": "golden_output: PASS all 1000 samples match exactly in length"
+        },
+        "all_zero": {
+          "passes": 20,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (20/1000 correct; golden=1000, DUT=1000)\n  idx=2: expected='0xb7fd235a' got='0x00000000' (value mismatch)\n  idx=3: expected='0xb8cbb451' got='0x00000000' (value mismatch)\n  idx=4: expected='0xb949d68f' got='0x00000000' (value mismatch)\n  idx=5: expected='0xb9a9509a' got='0x00000000' (value mismatch)\n  idx=6: expected='0xba086138' got='0x00000000' (value mismatch)\n  idx=7: expected='0xba5633bd' got='0x00000000' (value mismatch)\n  idx=8: expected='0xbaa02dec' got='0x00000000' (value mismatch)\n  idx=9: expected='0xbae26ce6' got='0x00000000' (value mismatch)\n  idx=10: expected='0xbb194a2d' got='0x00000000' (value mismatch)\n  idx=11: expected='0xbb4a2a94' got='0x00000000' (value mismatch)"
+        },
+        "short": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=999)\n  missing 1 DUT entries"
+        },
+        "extra": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=1001)\n  unexpected 1 extra DUT entries"
+        },
+        "nan": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=1000)\n  idx=0: expected='0x0' got='0x7fc00000' (non-finite FP32 sample: '0x7fc00000')"
+        }
+      }
+    },
+    {
+      "design": "fp_band_pass_fir",
+      "status": "pass",
+      "semantic_check": {
+        "max_abs_error": 2.980232238769531e-07,
+        "holdout_start": 101,
+        "holdout_count": 899,
+        "holdout_max_abs_error": 2.980232238769531e-07
+      },
+      "oracle_output_count": 1000,
+      "sim_stdout_tail": "[PASS] Wrote exactly 1000 ordered outputs\ntb_fp_band_pass_fir.v:109: $finish called at 15356000 (1ps)\n",
+      "controls": {
+        "positive_oracle": {
+          "passes": 1000,
+          "total": 1000,
+          "accepted": true,
+          "detail": "golden_output: PASS all 1000 samples match exactly in length"
+        },
+        "all_zero": {
+          "passes": 19,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (19/1000 correct; golden=1000, DUT=1000)\n  idx=1: expected='0x39690495' got='0x00000000' (value mismatch)\n  idx=2: expected='0x39d01b75' got='0x00000000' (value mismatch)\n  idx=3: expected='0x39cfe535' got='0x00000000' (value mismatch)\n  idx=4: expected='0x39c60115' got='0x00000000' (value mismatch)\n  idx=5: expected='0x3a0d5ada' got='0x00000000' (value mismatch)\n  idx=6: expected='0x3a5b76a0' got='0x00000000' (value mismatch)\n  idx=7: expected='0x3a8a5e13' got='0x00000000' (value mismatch)\n  idx=8: expected='0x3a954883' got='0x00000000' (value mismatch)\n  idx=9: expected='0x3aadaba2' got='0x00000000' (value mismatch)\n  idx=10: expected='0x3af7d05d' got='0x00000000' (value mismatch)"
+        },
+        "short": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=999)\n  missing 1 DUT entries"
+        },
+        "extra": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=1001)\n  unexpected 1 extra DUT entries"
+        },
+        "nan": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=1000)\n  idx=0: expected='0x0' got='0x7fc00000' (non-finite FP32 sample: '0x7fc00000')"
+        }
+      }
+    },
+    {
+      "design": "fp_high_pass_fir",
+      "status": "pass",
+      "semantic_check": {
+        "max_abs_error": 1.1920928955078125e-07,
+        "holdout_start": 101,
+        "holdout_count": 899,
+        "holdout_max_abs_error": 1.1920928955078125e-07
+      },
+      "oracle_output_count": 1000,
+      "sim_stdout_tail": "[PASS] Wrote exactly 1000 ordered outputs\ntb_fp_high_pass_fir.v:109: $finish called at 15356000 (1ps)\n",
+      "controls": {
+        "positive_oracle": {
+          "passes": 1000,
+          "total": 1000,
+          "accepted": true,
+          "detail": "golden_output: PASS all 1000 samples match exactly in length"
+        },
+        "all_zero": {
+          "passes": 20,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (20/1000 correct; golden=1000, DUT=1000)\n  idx=2: expected='0x39150080' got='0x00000000' (value mismatch)\n  idx=3: expected='0x39d305af' got='0x00000000' (value mismatch)\n  idx=4: expected='0x3a259a40' got='0x00000000' (value mismatch)\n  idx=5: expected='0x3a423aee' got='0x00000000' (value mismatch)\n  idx=6: expected='0x3a4c1da1' got='0x00000000' (value mismatch)\n  idx=7: expected='0x3a538c05' got='0x00000000' (value mismatch)\n  idx=8: expected='0x3a4a6254' got='0x00000000' (value mismatch)\n  idx=9: expected='0x3a159e36' got='0x00000000' (value mismatch)\n  idx=10: expected='0x39760c4b' got='0x00000000' (value mismatch)\n  idx=11: expected='0xb7f970ea' got='0x00000000' (value mismatch)"
+        },
+        "short": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=999)\n  missing 1 DUT entries"
+        },
+        "extra": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=1001)\n  unexpected 1 extra DUT entries"
+        },
+        "nan": {
+          "passes": 999,
+          "total": 1000,
+          "accepted": false,
+          "detail": "golden_output: FAIL (999/1000 correct; golden=1000, DUT=1000)\n  idx=0: expected='0x0' got='0x7fc00000' (non-finite FP32 sample: '0x7fc00000')"
+        }
+      }
+    }
+  ]
+}

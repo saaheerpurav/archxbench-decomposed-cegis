@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/conv1d_tap_window.v",
+  "sub_modules": {
+    "conv1d_tap_window": "Combinational tap selector that forms the causal FIR window from the current input sample and four stored prior samples.",
+    "conv1d_mac5": "Combinational fixed 5-tap multiply-accumulate using hardcoded weights [2, 8, 12, 8, 2].",
+    "conv1d_normalize": "Combinational normalizer that right-shifts the MAC result by GAIN_W to produce the filtered output width."
+  }
+}

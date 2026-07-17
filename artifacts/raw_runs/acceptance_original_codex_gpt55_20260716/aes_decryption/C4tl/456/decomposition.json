@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/aes128_key_expand.v",
+  "sub_modules": {
+    "aes128_key_expand": "Combinational AES-128 key expansion producing all eleven round keys in reverse packed order for decryption use.",
+    "aes128_add_round_key": "Combinational 128-bit AddRoundKey XOR stage.",
+    "aes128_inv_round": "Combinational AES inverse middle round implementing InvShiftRows, InvSubBytes, AddRoundKey, and InvMixColumns.",
+    "aes128_inv_final_round": "Combinational AES inverse final round implementing InvShiftRows, InvSubBytes, and AddRoundKey without InvMixColumns."
+  }
+}

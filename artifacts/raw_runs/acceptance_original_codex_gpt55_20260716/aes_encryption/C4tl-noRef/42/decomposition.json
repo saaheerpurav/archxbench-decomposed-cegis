@@ -1,0 +1,9 @@
+{
+  "top_source_file": "verilog/aes128_initial_add.v",
+  "sub_modules": {
+    "aes128_initial_add": "Combinational initial AddRoundKey stage for plaintext and cipher key.",
+    "aes128_sbox": "Combinational AES forward S-box lookup used by data rounds and key expansion.",
+    "aes128_round": "Combinational AES encryption round with SubBytes, ShiftRows, MixColumns, AddRoundKey, and one inline key expansion step.",
+    "aes128_final_round": "Combinational AES final encryption round with SubBytes, ShiftRows, AddRoundKey, and final inline key expansion step."
+  }
+}

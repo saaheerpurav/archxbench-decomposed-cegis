@@ -1,0 +1,56 @@
+{
+  "condition": "C1",
+  "llm_calls": 5,
+  "best_passes": 8,
+  "total_tests": 8,
+  "solved": true,
+  "golden_correct": 8,
+  "golden_total": 8,
+  "attempt_scores": [
+    {
+      "attempt": 1,
+      "compiled": true,
+      "golden_correct": 8,
+      "golden_total": 8,
+      "detail": "golden_output: PASS all 8 samples match exactly in length"
+    },
+    {
+      "attempt": 2,
+      "compiled": true,
+      "golden_correct": 8,
+      "golden_total": 8,
+      "detail": "golden_output: PASS all 8 samples match exactly in length"
+    },
+    {
+      "attempt": 3,
+      "compiled": true,
+      "golden_correct": 8,
+      "golden_total": 8,
+      "detail": "golden_output: PASS all 8 samples match exactly in length"
+    },
+    {
+      "attempt": 4,
+      "compiled": true,
+      "golden_correct": 8,
+      "golden_total": 8,
+      "detail": "golden_output: PASS all 8 samples match exactly in length"
+    },
+    {
+      "attempt": 5,
+      "compiled": true,
+      "golden_correct": 0,
+      "golden_total": 8,
+      "detail": "golden_output: FAIL (0/8 correct; golden=8, DUT=8)\n  idx=0: expected='7563174384d48ff16e64f83b64a6bb19' got='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' (value mismatch)\n  idx=1: expected='9cf80fd1265557ddfc272c83410a9bf3' got='87612e8c0a86aba1b562c076b5ec00ae' (value mismatch)\n  idx=2: expected='51f4d291c861fbee713fef78a4609469' got='3948f15ac2424bb897d24237392d0543' (value mismatch)\n  idx=3: expected='7007674caf97e691ea7d26161ce09de2' got='6ce51d29ce91aad24de3d45a68d36988' (value mismatch)\n  idx=4: e..."
+    }
+  ],
+  "design": "aes_decryption",
+  "model": "gpt-5.5",
+  "seed": 456,
+  "trial_id": 456,
+  "model_seed_controlled": false,
+  "reasoning_effort": "low",
+  "codex_cli_timeout_seconds": 1800,
+  "wall_seconds": 983.5,
+  "total_input_tokens": 0,
+  "total_output_tokens": 0
+}

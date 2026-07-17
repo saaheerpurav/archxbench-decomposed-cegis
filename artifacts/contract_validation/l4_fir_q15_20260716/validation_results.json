@@ -1,0 +1,42 @@
+{
+  "status": "pass",
+  "normalization": "signed causal FIR accumulator arithmetic-shifted by 15 (Q15)",
+  "results": [
+    {
+      "design": "band_pass_fir",
+      "status": "pass",
+      "stimulus_count": 1000,
+      "golden_count": 1000,
+      "coefficient_count": 101,
+      "q15_exact_matches": 1000,
+      "q20_within_one_lsb": 19,
+      "spec_is_q15": true,
+      "selfcheck_exists": true,
+      "stale_file_output_testbenches": []
+    },
+    {
+      "design": "high_pass_fir",
+      "status": "pass",
+      "stimulus_count": 1000,
+      "golden_count": 1000,
+      "coefficient_count": 101,
+      "q15_exact_matches": 1000,
+      "q20_within_one_lsb": 23,
+      "spec_is_q15": true,
+      "selfcheck_exists": true,
+      "stale_file_output_testbenches": []
+    },
+    {
+      "design": "low_pass_fir",
+      "status": "pass",
+      "stimulus_count": 1000,
+      "golden_count": 1000,
+      "coefficient_count": 101,
+      "q15_exact_matches": 1000,
+      "q20_within_one_lsb": 21,
+      "spec_is_q15": true,
+      "selfcheck_exists": true,
+      "stale_file_output_testbenches": []
+    }
+  ]
+}

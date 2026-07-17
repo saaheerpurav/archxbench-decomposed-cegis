@@ -1,0 +1,8 @@
+{
+  "top_source_file": "verilog/aes_sbox_byte.v",
+  "sub_modules": {
+    "aes_sbox_byte": "Combinational AES S-box lookup for one byte.",
+    "aes_key_expand_round": "Combinational AES-128 key schedule step producing the next round key.",
+    "aes_round_comb": "Combinational AES encryption round implementing SubBytes, ShiftRows, optional MixColumns, and AddRoundKey."
+  }
+}
