@@ -1,6 +1,6 @@
 # File-Output Golden Audit
 
-Date: 2026-07-05
+Last synchronized: 2026-07-17
 
 This audit checks which ArchXBench designs write JSON outputs and therefore require post-simulation golden comparison.
 
@@ -34,8 +34,11 @@ The runner now does this correctly:
 
 - `_golden_verify_final` runs for file-output designs even when native PASS/FAIL count is zero.
 - C2g and C4i/C4tl repaired-contract qgemm and multich-conv2d runs use this fixed behavior.
-- `quantized_matmul` repaired-contract runner-fixed rows are therefore valid: C2g 3/3 and C4i 3/3 golden verified.
+- `quantized_matmul` repaired-contract runner-fixed rows are therefore valid:
+  C2g, C4i, and C4tl each 3/3 golden verified in the final evidence set.
 - `multich_conv2d` repaired-contract rows are therefore valid: C2g 3/3, C4i 3/3, and C4tl 3/3 golden verified.
+- `conv_3d` repaired-contract rows are valid: C2g, C4i, and C4tl each 3/3
+  golden verified in the final evidence set.
 
 ## Paper Rule
 

@@ -1,6 +1,10 @@
 # Executable Contract Repair
 
-Date: 2026-07-05
+Last synchronized: 2026-07-17
+
+Detailed chronology below preserves early pilots where useful. The final
+paper-facing outcomes are the nine-row repaired table in `RESULTS.md`; later
+acceptance-repaired runs supersede the early pilot totals.
 
 This is the current stronger-method direction. It is separate from the original ArchXBench claim tables.
 
@@ -107,8 +111,10 @@ Runner-fix repaired-contract run:
 - Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 - C2g, seeds `42,123,456`: 3/3 clean solves, all `64/64` golden.
 - C4i, seeds `42,123,456`: 3/3 clean solves, all `64/64` golden.
-- C4tl, seeds `42,123,456`: 0/3 clean solves; reference decomposition failed before repair.
-- Interpretation: once the executable contract and runner are correct, `quantized_matmul` is solvable by C2g and C4i. This is not a C4tl win.
+- The initial C4tl attempt was 0/3 because reference decomposition failed before
+  repair. The later acceptance-repaired run solves C4tl 3/3.
+- Final result: C2g/C4i/C4tl each solve 3/3. This is a repaired-contract result,
+  not an original ArchXBench solve or an exclusive C4 win.
 
 ## `conv_3d`
 
@@ -136,9 +142,10 @@ Repaired-contract run:
 - Artifacts: `artifacts/raw_runs/repaired_contracts_20260705/`
 - Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 - C2g, seeds `42,123,456`: 3/3 clean solves, all `23064/23064` golden.
-- C4i, seeds `42,123,456`: 2/3 clean solves, seeds `42,123`; seed `456` failed decomposition compile validation.
-- C4tl, seeds `42,123,456`: 0/3 clean solves.
-- Interpretation: repairing the executable contract unlocks `conv_3d`, but the win is not specific to C4tl. C2g is strongest on this repaired contract.
+- The early run produced C4i 2/3 and C4tl 0/3. The later
+  `acceptance_repaired_codex_gpt55_20260716` run supplies the missing C4i trial
+  and C4tl 3/3.
+- Final result: C2g/C4i/C4tl each solve 3/3. The win is not method-exclusive.
 
 ## `systolic_gemm`
 
@@ -157,16 +164,20 @@ Repair:
 
 Sanity check:
 
-- A hardcoded oracle DUT compiles/runs and reports `32/32` exact checks.
+- `scripts/validate_repaired_systolic_contract.py` confirms that the loader selects repaired `tb.v`.
+- A hardcoded oracle DUT compiles/runs and passes all 32 exact output checks.
+- Validation artifacts: `artifacts/contract_validation/systolic_20260716/`.
 
 Repaired-contract run:
 
-- Artifacts: `artifacts/raw_runs/repaired_contracts_20260705/`
+- The earlier `repaired_contracts_20260705` systolic rows are superseded: the repair generator wrote `testbench.v`, while the loader selected the unchanged display-only `tb.v`.
+- Corrected artifacts: `artifacts/raw_runs/repaired_contracts_systolic_codex_gpt55_20260716/`
 - Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
-- C2g, seeds `42,123,456`: 0/3 clean solves, all `0/0` after 30 calls.
-- C4i, seeds `42,123,456`: 0/3 clean solves; all failed final compile.
-- C4tl, seeds `42,123,456`: 0/3 clean solves; reference decompositions failed the repaired system checker.
-- Interpretation: the display-only checker was repaired, but none of the current methods solved the repaired `systolic_gemm` contract.
+- C2g, seeds `42,123,456`: 3/3 clean solves.
+- C4i, seeds `42,123,456`: 3/3 clean solves.
+- C4tl, seeds `42,123,456`: 3/3 clean solves.
+- Every saved RTL artifact independently replays at `33/33` runner tokens: 32 assertion PASS lines plus one PASS token in the summary line.
+- Interpretation: once the intended checker is executable and actually selected, all three methods solve the repaired `systolic_gemm` contract. This does not convert the original display-only rows into original-contract solves.
 
 ## FIR Family
 
@@ -193,16 +204,16 @@ Validation:
 - Artifacts: `artifacts/contract_validation/fp_fir_20260707/`
 - Oracle validation: `fp_band_pass_fir` 1000/1000 and `fp_high_pass_fir` 1000/1000 through the repaired executable testbenches.
 
-Repaired-contract pilot:
+Corrected Level-4 Q1.15 FIR result:
 
-- Artifacts: `artifacts/raw_runs/repaired_fir_l4_c2g_pilot_20260706/`
-- Artifacts: `artifacts/raw_runs/repaired_fir_l4_c4i_pilot_20260706/`
-- Artifacts: `artifacts/raw_runs/repaired_fir_l4_c4tl_pilot_20260706/`
+- Final artifacts include
+  `artifacts/raw_runs/acceptance_repaired_codex_gpt55_20260716/`.
 - Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
-- C2g, seed `42`: `band_pass_fir` 1/1001, `high_pass_fir` 4/1001, `low_pass_fir` 3/1001.
-- C4i, seed `42`: `band_pass_fir` 5/1001, `high_pass_fir` 4/1001, `low_pass_fir` 5/1001.
-- C4tl, seed `42`: `band_pass_fir` 2/1001, `high_pass_fir` 0/1001, `low_pass_fir` 3/1001.
-- Interpretation: repaired L4 FIR contracts are still not solved by current methods. FIR remains a benchmark-audit/negative-result track, not a new positive solve.
+- C2g: `band_pass_fir` 3/3, `high_pass_fir` 2/3, `low_pass_fir` 2/3.
+- C4i and C4tl: 0/3 on all three designs.
+- Interpretation: the corrected fixtures unlock monolithic solves but add no
+  full-row decomposed result. They remain separate from the nine-row repaired
+  table and from original-contract results.
 
 Repaired L6 FP FIR run:
 
@@ -211,9 +222,14 @@ Repaired L6 FP FIR run:
 - Artifacts: `artifacts/raw_runs/repaired_fp_fir_c4_pilot_20260707/`
 - Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
 - C2g, seeds `42,123,456`: `fp_band_pass_fir` 3/3 solved, all `1000/1000`; `fp_high_pass_fir` 3/3 solved, all `1000/1000`.
-- C4i, seed `42`: `fp_band_pass_fir` 804/1000; `fp_high_pass_fir` 969/1000.
-- C4tl, seed `42`: `fp_band_pass_fir` 0/1000; `fp_high_pass_fir` 969/1000.
-- Interpretation: repaired L6 FP FIR is solvable by C2g after contract repair, but current decomposed C4i/C4tl variants do not solve it.
+- Final acceptance-repaired results on trials `42,123,456` are:
+  `fp_band_pass_fir` C2g 3/3, C4i 1/3, C4tl 2/3;
+  `fp_high_pass_fir` 3/3, 1/3, 1/3; and
+  `fp_low_pass_fir` 3/3, 1/3, 2/3.
+- The low-pass repaired oracle was recovered from official upstream history and
+  independently validated; the released row remains held.
+- Interpretation: C2g fully solves all three repaired rows; decomposed methods
+  add partial, not full-row, coverage.
 
 ## `newton_raphson_polynomial`
 
@@ -241,12 +257,25 @@ Validation:
 
 Repaired-contract run:
 
-- Artifacts: `artifacts/raw_runs/repaired_newton_20260707/`
+- Corrected C2g artifacts: `artifacts/raw_runs/repaired_newton_codex_gpt55_20260716/`
+- C4i/C4tl artifacts include
+  `artifacts/raw_runs/acceptance_repaired_codex_gpt55_20260716/`.
 - Matrix: `artifacts/inventories/repaired_contract_run_matrix.csv`
-- C2g, seeds `42,123,456`: 3/3 solved, all `97/97`.
-- C4i, seeds `42,123,456`: 1/3 solved; seed `456` scores `97/97`, other seeds score `87/97` and `89/97`.
-- C4tl, seeds `42,123,456`: 1/3 solved; seed `456` scores `97/97`, other seeds score `16/97` and `17/97`.
+- C2g, seeds `42,123,456`: 3/3 solved, all `97/97`; every saved winner independently replays at `97/97`.
+- C4i, trials `42,123,456`: 2/3 solved.
+- C4tl, trials `42,123,456`: 2/3 solved.
 - Interpretation: the repaired contract makes the intended task executable, but C2g is strongest. This is not a C4i/C4tl method win.
+
+## `harris_corner_detection`
+
+The released testbench instantiates a 256x256 image although the released public
+interface and files contain 128x128 samples, and its plus-or-minus-one comparator
+accepts every binary 0/1 mismatch. The copied acceptance-repaired fixture restores
+the released dimensions, exact output cardinality, and exact comparison.
+
+Final trials `42,123,456`: C2g 3/3, C4i 0/3, C4tl 0/3. Harris is therefore a
+repaired-contract, monolithic-only result; legacy folders labelled `original` or
+`main_claims` do not change that classification.
 
 ## `fft_streaming_64pt`
 

@@ -1,90 +1,91 @@
 # Paper Tables
 
-Date: 2026-07-09
+Last synchronized: 2026-07-17.
 
-Working paper title:
+This is the compact source for the ASP-DAC paper's result tables and Figure 3.
+Use `RESULTS.md` for evidence details.
 
-**Autonomous Synthesis of Hard RTL Designs via Iterative Repair and Modular Decomposition**
+## Reporting Rules
 
-This file is the paper-facing table source. It uses only existing repo-local evidence. It does not request or imply any reruns.
+- C1 is direct pass@5 within each independent trial.
+- Trial IDs `42,123,456` are stochastic replications, not controlled model seeds.
+- Original, repaired, and held/excluded contracts remain separate.
+- File-output solves require strict golden verification.
+- Extra C4tl Level-4 trials `789,1024` are robustness evidence.
 
-Rules:
+## Original-Contract Heatmap
 
-- Original ArchXBench rows and repaired-contract rows must be reported separately.
-- Main seeds are `42,123,456`.
-- Extra C4tl L4 seeds `789,1024` are robustness/appendix evidence.
-- Trusted score-only rows are valid result evidence when labeled, but are not artifact-backed.
-- Held/excluded rows are not failures to run; they are benchmark-contract decisions.
+| Level | Design | C1 | C2g | C4i | C4tl |
+|---|---|---:|---:|---:|---:|
+| L3 | `fp_adder` | 0/5 | 1/5 | 3/3 | 3/3 |
+| L3 | `fp_multiplier` | 0/5 | 0/3 | 3/3 | 3/3 |
+| L3 | `gauss_siedel` | 0/3 | 0/3 | 3/3 | 1/3 |
+| L3 | `gradient_descent` | 0/3 | 0/3 | 3/3 | 3/3 |
+| L3 | `newton_raphson_sqrt` | 0/3 | 0/3 | 3/3 | 3/3 |
+| L3 | `newton_raphson_polynomial` | 0/3 | 0/3 | 0/3 | 0/3 |
+| L4 | `fft_16pt_iterative` | 0/3 | 3/3 | 0/3 | 3/3 |
+| L4 | `ifft_16pt_iterative` | 0/3 | 3/3 | 0/3 | 3/3 |
+| L4 | `fp_adder_pipeline` | 3/3 | 3/3 | 3/3 | 3/3 |
+| L4 | `fp_mult_pipeline` | 3/3 | 3/3 | 3/3 | 3/3 |
+| L5 | `conv1d` | 3/3 | 3/3 | 3/3 | 3/3 |
+| L5 | `conv2d` | 0/3 | 3/3 | 0/3 | 0/3 |
+| L5 | `dct_idct_8pt_pipelined` | 0/3 | 3/3 | 0/3 | 0/3 |
+| L5 | `unsharp_mask` | 0/3 | 3/3 | 0/3 | 1/3 |
+| L6 | `aes_encryption` | 3/3 | 3/3 | 3/3 | 3/3 |
+| L6 | `aes_decryption` | 3/3 | 3/3 | 3/3 | 3/3 |
 
-## Table 1: Main Original ArchXBench Evidence
+Coverage shown/released: L3 6/6, L4 4/7, L5 4/6, L6 2/9.
 
-| Level | Design(s) | Main result | Evidence class | Interpretation |
-|---|---|---|---|---|
-| L3 | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt` | C4i solves 3/3 on all five | artifact-backed | strongest method-value evidence over C1/C2g |
-| L3 | `fp_adder`, `fp_multiplier`, `gradient_descent`, `newton_raphson_sqrt` | C4tl solves 3/3 | artifact-backed | C4tl support evidence |
-| L3 | `gauss_siedel` | C4tl solves 1/3 | artifact-backed | C4i is stronger on this row |
-| L4 | `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline` | C4tl solves 3/3 main seeds; 5/5 including robustness seeds | artifact-backed | strongest hard-level coverage evidence |
-| L5 | `conv1d`, `harris_corner_detection` | C4i solves 3/3 with golden verification | artifact-backed | clean L5 golden evidence |
-| L6 | `aes_encryption`, `aes_decryption` | C4i solves 3/3 with golden verification | artifact-backed | clean L6 golden evidence |
+## Figure 3
 
-## Table 2: Baseline Context
+Panel (a), 16 evaluated original-contract rows:
 
-| Level | Design(s) | Baseline result | Evidence class | Interpretation |
-|---|---|---|---|---|
-| L3 | `fp_adder` | C2g solves 1/5; C1 solves 0/5 | artifact-backed/logged matrix | C4i/C4tl improve over direct prompting |
-| L3 | `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt` | C1/C2g solve 0/3 or 0/5 | artifact-backed/logged matrix | C4i gives the cleanest L3 method-value evidence |
-| L4 | `fft_16pt_iterative`, `ifft_16pt_iterative` | C2g solves 3/3; C1/C4i solve 0/3 | artifact-backed/logged matrix | C2g is a strong baseline on some hard rows |
-| L4 | `fp_adder_pipeline`, `fp_mult_pipeline` | C1/C2g/C4i/C4tl all solve 3/3 main seeds | artifact-backed/logged matrix | not exclusive method wins |
-| L5 | `conv2d`, `dct_idct_8pt_pipelined`, `unsharp_mask` | C2g solves 3/3 with golden verification | artifact-backed | C2g is strongest on these rows |
-| L5 | `conv1d`, `harris_corner_detection` | C1/C2g also solve 3/3 where present | artifact-backed for C2g rows | useful ablation context |
-| L6 | `aes_encryption`, `aes_decryption` | C1/C2g are strong; C2g solves 3/3 | artifact-backed for C2g rows | C4i does not dominate C2g globally |
+| Condition | Full | Partial | Unsolved |
+|---|---:|---:|---:|
+| C1 | 5 | 0 | 11 |
+| C2g | 10 | 1 | 5 |
+| C4i | 10 | 0 | 6 |
+| C4tl | 11 | 2 | 3 |
 
-## Table 2b: Second-Model Validation
+Panel (b), nine independently validated repaired-contract rows:
 
-Claude Sonnet 5 was run as a non-GPT second-model check on the strongest hard-frontier rows. Artifacts: `artifacts/raw_runs/second_model_sonnet5_frontier_nothink_20260709/`.
+| Condition | Full | Partial | Unsolved |
+|---|---:|---:|---:|
+| C2g | 9 | 0 | 0 |
+| C4i | 4 | 4 | 1 |
+| C4tl | 4 | 4 | 1 |
 
-| Design | C2g | C4tl | Interpretation |
-|---|---:|---:|---|
-| `fft_16pt_iterative` | 3/3 | 3/3 | original L4 frontier result transfers to Sonnet 5 |
-| `ifft_16pt_iterative` | 3/3 | 3/3 | original L4 frontier result transfers to Sonnet 5 |
-| `aes_encryption` | 3/3 GV | 0/3 GV | C2g transfers on L6 AES; C4tl decomposition fails |
-| `aes_decryption` | 3/3 GV | 0/3 GV | C2g transfers on L6 AES; C4tl decomposition fails |
+The panels use separate absolute-count axes and contract populations. C1 is
+omitted from the repaired panel because it was not evaluated there.
 
-## Table 3: Repaired Executable-Contract Evidence
+## Repaired-Contract Table
 
-These rows are not original ArchXBench solves.
+| Design | C2g | C4i | C4tl |
+|---|---:|---:|---:|
+| `conv_3d` | 3/3 | 3/3 | 3/3 |
+| `multich_conv2d` | 3/3 | 3/3 | 3/3 |
+| `quantized_matmul` | 3/3 | 3/3 | 3/3 |
+| `harris_corner_detection` | 3/3 | 0/3 | 0/3 |
+| `fp_band_pass_fir` | 3/3 | 1/3 | 2/3 |
+| `fp_high_pass_fir` | 3/3 | 1/3 | 1/3 |
+| `fp_low_pass_fir` | 3/3 | 1/3 | 2/3 |
+| `newton_raphson_polynomial` | 3/3 | 2/3 | 2/3 |
+| `systolic_gemm` | 3/3 | 3/3 | 3/3 |
 
-| Design | Repaired-contract result | Evidence class | Interpretation |
-|---|---|---|---|
-| `conv_3d` | C2g 3/3, C4i 2/3, C4tl 0/3 | artifact-backed for C2g and solved C4i rows | benchmark-contract repair unlocks intended task |
-| `multich_conv2d` | C2g/C4i/C4tl all 3/3 | artifact-backed | clean repaired-contract validation |
-| `quantized_matmul` runner-fixed | C2g 3/3, C4i 3/3, C4tl 0/3 | artifact-backed | file-format/runner contract mattered |
-| `fp_band_pass_fir` | C2g 3/3; C4i/C4tl seed-42 pilots fail | artifact-backed | repaired-contract C2g win |
-| `fp_high_pass_fir` | C2g 3/3; C4i/C4tl seed-42 pilots fail/near-miss | artifact-backed | repaired-contract C2g win |
-| `newton_raphson_polynomial` | C2g 3/3, C4i 1/3, C4tl 1/3 on `97/97` repaired checker | artifact-backed | original checker has three unsatisfiable residual checks |
-| `systolic_gemm` | C2g/C4i/C4tl all 0/3 after checker repair | artifact-backed | genuine capability boundary |
-| L4 FIR family | C2g/C4i/C4tl seed-42 pilots all fail | artifact-backed | negative benchmark-audit evidence |
+## Second-Model Table
 
-## Table 4: Held Or Excluded Rows
+| Design | Sonnet 5 C2g | Sonnet 5 C4tl |
+|---|---:|---:|
+| `fft_16pt_iterative` | 3/3 | 3/3 |
+| `ifft_16pt_iterative` | 3/3 | 3/3 |
+| `aes_encryption` | 3/3 GV | 0/3 GV |
+| `aes_decryption` | 3/3 GV | 0/3 GV |
 
-| Design/group | Status | Paper wording |
-|---|---|---|
-| L4 `band_pass_fir`, `high_pass_fir`, `low_pass_fir` | exclude from positive tables | inconsistent evaluation contracts where specification and executable testbench disagree on filter coefficients/source-of-truth behavior |
-| L6 `fp_low_pass_fir` | hold | released files do not expose an explicit coefficient/cutoff oracle |
-| L6 `fft_streaming_64pt` | exclude | unresolved input/output contract ambiguities, including mismatched output schema and input numeric encoding |
-| L5 `systolic_gemm` | negative repaired-contract row | after converting display-only expected matrices into executable checks, all methods remain 0/3 |
+## Paper Interpretation
 
-## Table 5: Full L3-L6 Accounting
-
-| Category | Designs |
-|---|---|
-| Clean original-contract positive rows | `fp_adder`, `fp_multiplier`, `gauss_siedel`, `gradient_descent`, `newton_raphson_sqrt`, `fft_16pt_iterative`, `ifft_16pt_iterative`, `fp_adder_pipeline`, `fp_mult_pipeline`, `conv1d`, `conv2d`, `dct_idct_8pt_pipelined`, `harris_corner_detection`, `unsharp_mask`, `aes_encryption`, `aes_decryption` |
-| Original-contract partial/negative diagnostics | `newton_raphson_polynomial`, `fft_streaming_64pt` |
-| Repaired-contract rows | `conv_3d`, `multich_conv2d`, `quantized_matmul`, `fp_band_pass_fir`, `fp_high_pass_fir`, `newton_raphson_polynomial`, `systolic_gemm`, L4 FIR family |
-| Held/excluded | L4 FIR family from positive tables, `fp_low_pass_fir`, `fft_streaming_64pt` |
-
-## Final Pre-Paper Status
-
-No experiment run is currently queued.
-
-Remaining work before submission is paper writing and final manuscript consistency checks. The Priority 1 and Priority 2 C2g artifact-collection reruns were completed on 2026-07-09.
+- Strongest clean frontier evidence: original FFT/IFFT under C2g and C4tl.
+- Strongest decomposition-over-monolith evidence: matched GPT-5.5 L3 trials.
+- C2g is a primary baseline and fully solves every row in the repaired table.
+- C4tl's Level-4 5/5 evidence is robustness, not an exclusive main-trial win
+  over C2g.
+- Harris appears only in the repaired table.

@@ -1,5 +1,7 @@
 # Benchmark Caveats
 
+Last synchronized: 2026-07-17
+
 ## Golden Verification
 
 For file-output designs, native simulator completion is not enough. A row counts as solved only if `golden_correct == golden_total` and `golden_total > 0`.
@@ -18,18 +20,25 @@ Some designs have official self-checking testbenches and do not use external gol
 
 FIR-family rows are diagnostics/repaired-contract evidence only.
 
-We exclude L4 FIR designs from primary and repaired-contract positive tables due to inconsistent evaluation contracts where specification and executable testbench disagree on filter coefficients/source-of-truth behavior. L4 FIR has repaired-contract fixtures and a completed negative pilot.
+We exclude released L4 FIR designs from the original-contract table because the
+specification and executable coefficients disagree. Corrected Q1.15 copied
+fixtures are reported separately.
 
-L6 `fp_band_pass_fir` and `fp_high_pass_fir` have validated repaired contracts and C2g solves, while `fp_low_pass_fir` remains a benchmark-contract hold because the released files do not expose an explicit coefficient/cutoff oracle.
+The repaired L6 FP FIR table contains all three designs. C2g solves all three 3/3;
+C4i scores 1/3 on each; C4tl scores 2/3, 1/3, and 2/3. The low-pass oracle comes
+from official upstream history and does not convert the released row into an
+original-contract result.
 
 Current repaired-contract status:
 
 - L4 FIR repaired fixtures now live under `artifacts/benchmark_contracts/archxbench_repaired/level-4/`.
 - Those fixtures remove stale file-output testbenches and keep only embedded-golden `tb_selfcheck.v`.
-- Single-seed repaired-contract pilots were run for C2g, C4i, and C4tl on `band_pass_fir`, `high_pass_fir`, and `low_pass_fir`.
-- Result: all nine L4 FIR pilot cells failed, with best scores only 0-5/1001. Do not claim L4 FIR as solved.
+- Final corrected-fixture result: C2g solves band/high/low at 3/3, 2/3, and
+  2/3; C4i and C4tl are 0/3 on all three. Do not claim these as released
+  original-contract solves.
 - L6 `fp_band_pass_fir` and `fp_high_pass_fir` have repaired fixtures that remove hidden `dut.coeffs` writes and repair file-output JSON comma handling. Oracle validation passes `1000/1000`, and C2g solves both repaired contracts 3/3.
-- L6 `fp_low_pass_fir` remains held out because the coefficient oracle is still not explicit.
+- L6 `fp_low_pass_fir` remains held under the released contract; only the
+  separately labelled upstream-oracle repaired row is reported.
 
 See `docs/EXECUTABLE_CONTRACT_REPAIR.md` and `artifacts/inventories/repaired_contract_run_matrix.csv`.
 
@@ -63,13 +72,21 @@ Contract audit finding: the released benchmark contains unresolved input/output 
 
 Therefore the effective ceiling is `97/100`, not `100/100`, unless the benchmark contract is repaired. A repo-local C4a debug artifact reaches `97/100`; do not spend more method runs chasing `100/100` on the original checker.
 
-A repaired contract now exists under `artifacts/benchmark_contracts/archxbench_repaired/level-3/newton_raphson_polynomial/`. It skips only the three impossible polynomial residual checks while preserving all 50 root-comparison checks and the remaining 47 residual checks. Oracle validation passes `97/97` with 3 explicit skipped residual checks. Repaired-contract runs are separate from original ArchXBench results: C2g solves 3/3, C4i solves 1/3, and C4tl solves 1/3.
+A repaired contract now exists under `artifacts/benchmark_contracts/archxbench_repaired/level-3/newton_raphson_polynomial/`. It skips only the three impossible polynomial residual checks while preserving all 50 root-comparison checks and the remaining 47 residual checks. Oracle validation passes `97/97` with 3 explicit skipped residual checks. Repaired-contract runs are separate from original ArchXBench results: C2g solves 3/3, C4i solves 2/3, and C4tl solves 2/3.
+
+## Harris Corner Detection
+
+The released testbench's image dimensions and permissive binary comparator do
+not define a credible exact oracle. The acceptance-repaired fixture restores the
+released 128x128 cardinality and exact comparison. Final repaired results are
+C2g 3/3, C4i 0/3, and C4tl 0/3. Harris must not appear in the original-contract
+table even when a legacy artifact path contains `original` or `main_claims`.
 
 ## DCT And Systolic GEMM
 
 `dct_idct_8pt_pipelined` is solved by C2g in the current repo-local evidence. C4i/C4tl rows are diagnostics unless promoted in `docs/RESULTS.md`.
 
-`systolic_gemm` has pass-score rows without reliable golden evidence in the original benchmark because the checker only prints expected values. After converting the display-only checker into executable checks using expected matrices already present in the testbench, C2g/C4i/C4tl all fail 3/3. Treat this as a genuine capability boundary for current methods, not as a solved row.
+`systolic_gemm` has pass-score rows without reliable evidence in the original benchmark because the checker only prints expected values. The repaired fixture converts the two displayed expected matrices into 32 exact executable checks. After correcting the repaired testbench filename so the runner selects it, an oracle passes all 32 assertions and Codex CLI GPT-5.5 C2g/C4i/C4tl each solve 3/3. These are repaired-contract results only; the original-contract rows remain diagnostics.
 
 ## Unsharp Mask
 

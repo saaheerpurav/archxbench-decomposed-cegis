@@ -1,5 +1,9 @@
 # Autonomous Synthesis of Hard RTL Designs via Iterative Repair and Modular Decomposition
 
+> Historical prose draft only. Its numerical tables are not synchronized with
+> the current paper. Use `paper/aspdac2027/main.tex`, `docs/RESULTS.md`, and
+> `docs/PAPER_TABLES.md` for all current claims and numbers.
+
 Anonymous Authors
 
 ## Abstract
@@ -173,10 +177,10 @@ Table 3 reports the repaired-contract track. These rows should not be counted as
 | `fp_band_pass_fir` | C2g 3/3; C4i/C4tl seed-42 pilots fail | repaired-contract C2g win |
 | `fp_high_pass_fir` | C2g 3/3; C4i/C4tl seed-42 pilots fail/near-miss | repaired-contract C2g win |
 | `newton_raphson_polynomial` | C2g 3/3, C4i 1/3, C4tl 1/3 on `97/97` repaired checker | original checker has three unsatisfiable residual checks |
-| `systolic_gemm` | C2g/C4i/C4tl all 0/3 after checker repair | genuine capability boundary |
+| `systolic_gemm` | C2g/C4i/C4tl all 3/3 after checker repair | repaired executable contract is measurable and solvable |
 | L4 FIR family | C2g/C4i/C4tl seed-42 pilots all fail | negative benchmark-audit evidence |
 
-These results show both sides of benchmark repair. For `multich_conv2d` and `quantized_matmul`, contract repair converts ambiguous or broken evaluation into meaningful solvable tasks. For `systolic_gemm`, repairing the display-only checker does not produce a win: all methods still fail. This is important because it shows that the audit is not merely a mechanism for turning failures into successes.
+These results show both sides of benchmark repair. For `multich_conv2d`, `quantized_matmul`, and `systolic_gemm`, contract repair converts ambiguous or broken evaluation into meaningful solvable tasks. The repaired L4 FIR pilots remain unsolved under every tested method, showing that the audit is not merely a mechanism for turning failures into successes.
 
 ### Held and Excluded Rows
 
@@ -187,7 +191,6 @@ Some rows remain excluded or held because a principled repair would require unre
 | L4 `band_pass_fir`, `high_pass_fir`, `low_pass_fir` | exclude from positive tables | inconsistent evaluation contracts where specification and executable testbench disagree on filter coefficients/source-of-truth behavior |
 | L6 `fp_low_pass_fir` | hold | released files do not expose an explicit coefficient/cutoff oracle |
 | L6 `fft_streaming_64pt` | exclude | unresolved input/output contract ambiguities, including mismatched output schema and input numeric encoding |
-| L5 `systolic_gemm` | negative repaired-contract row | after converting display-only expected matrices into executable checks, all methods remain 0/3 |
 
 ## 8. Discussion
 

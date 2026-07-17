@@ -1,142 +1,77 @@
 # Runs Left
 
-This is the only run queue. It is derived from:
+Last synchronized: 2026-07-17
 
-- `artifacts/inventories/run_matrix_l3_l6.csv`
-- `artifacts/inventories/repaired_contract_run_matrix.csv`
-- `artifacts/inventories/log_metric_only_results.csv`
+No run is active. No additional benchmark row, no-reference condition, or artifact
+recollection rerun is queued.
 
-Last audited: 2026-07-13 after C4i randomized-module-order ablation.
+## Deferred Before Final Experimental Freeze
 
-Primary goal: ASP-DAC 2027 acceptance. Time is not a constraint. Do not sacrifice experimental cleanliness for speed, and do not run benchmark repairs just to convert failures into wins. Repairs must be minimal, principled, oracle-validated, and reported separately from original ArchXBench results.
+### C4tl localization-protocol consistency
 
-## Required Runs
+The paper's central L4 artifacts and the current runner do not yet implement the
+same candidate-scoring composition:
 
-No experiment runs remain in the current paper-cleanliness queue.
+- cited central L4 artifacts: evaluate the candidate module with the other
+  modules isolated by reference implementations;
+- current runner: replace one reference module with its candidate inside the
+  all-candidate composition.
 
-Completed on 2026-07-09: Claude Sonnet 5 second-model validation on the strongest frontier rows.
+The user has explicitly deferred this work. When resumed, run a six-cell pilot on
+`fft_16pt_iterative` and `ifft_16pt_iterative`, trials `42,123,456`, using Codex
+CLI GPT-5.5 with low reasoning and three concurrent cells. Save `result.json`, all
+generated Verilog, transcripts, configuration, and replay-verification output.
 
-Results: `fft_16pt_iterative` and `ifft_16pt_iterative` solve 3/3 with both C2g and C4tl; `aes_encryption` and `aes_decryption` solve 3/3 with C2g; AES C4tl fails reference decomposition on 6/6 seeds. Artifacts are under `artifacts/raw_runs/second_model_sonnet5_frontier_nothink_20260709/`.
+Decision after the pilot:
 
-Completed on 2026-07-13: C4i randomized-module-order mechanism ablation on the L4 FFT/IFFT rows.
+- If the standardized implementation reproduces 3/3 on both rows, complete the
+  two robustness trials (`789,1024`) and any remaining L4 cells needed so the
+  released method and cited artifacts use one protocol.
+- If it does not reproduce the result, keep the existing artifacts intact,
+  investigate the protocol difference, and revise the method claim rather than
+  combining incomparable runs.
 
-Results: `fft_16pt_iterative` C4i-randOrder solves 2/3 seeds (`42,123`) and `ifft_16pt_iterative` solves 1/3 seed (`456`). All six cells have saved `result.json` and `verilog/*.v` artifacts under `artifacts/raw_runs/c4i_rand_order_fft_ifft_20260713/`. This supports the mechanistic claim that repair order matters, but C4tl remains more reliable than randomizing C4i order.
+This check is about method/evidence consistency, not collecting missing artifacts.
 
-The selected L3 C4tl condition-coverage batch has been completed on seeds `42,123,456`.
+## Completed Evidence
 
-Completed from this queue:
+- Original-contract matrix: 16 reported designs across L3--L6, synchronized in
+  `RESULTS.md` and `PAPER_TABLES.md`.
+- C4tl L3 coverage: complete on trials `42,123,456`.
+- C4tl L4 robustness: complete in the existing artifact set on trials
+  `42,123,456,789,1024` for FFT, IFFT, and both FP pipelines.
+- Repaired-contract matrix: nine designs complete on trials `42,123,456`.
+- Corrected L4 Q1.15 FIR experiment: three designs complete and reported
+  separately.
+- Sonnet selected-frontier validation: complete.
+- C4i randomized-order FFT/IFFT ablation: complete.
+- Previously score-only C2g rows selected for the paper now have saved artifacts.
 
-| Level | Design | Method | Seeds | Result | Artifact root |
-|---|---|---|---|---|---|
-| L3 | `fp_adder` | C4tl | `42,123,456` | 3/3 solved, all `36/36` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
-| L3 | `fp_multiplier` | C4tl | `42,123,456` | 3/3 solved, all `10/10` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
-| L3 | `gauss_siedel` | C4tl | `42,123,456` | 1/3 solved; seed `123` scored `50/50`, seed `42` scored `47/50`, seed `456` scored `49/50` | `artifacts/raw_runs/l3_c4tl_batch1_20260708/` |
-| L3 | `gradient_descent` | C4tl | `42,123,456` | 3/3 solved, all `50/50` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
-| L3 | `newton_raphson_sqrt` | C4tl | `42,123,456` | 3/3 solved, all `50/50` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
-| L3 | `newton_raphson_polynomial` | C4tl | `42,123,456` | 0/3 solved, all `17/100` | `artifacts/raw_runs/l3_c4tl_batch2_20260708/` |
+Completed results are not rerun merely to recreate artifacts or normalize folder
+names.
 
-## Complete Original-Contract Rows
+## Held Or Excluded
 
-These have enough evidence for the current paper framing.
+- no-reference condition: excluded from the paper and run queue;
+- `fft_streaming_64pt`: excluded because the released executable contract remains
+  ambiguous;
+- `fp_low_pass_fir`: held because the released files do not expose an explicit
+  coefficient/cutoff oracle;
+- additional opportunistic baselines or C4 variants: not queued because they do
+  not currently strengthen the acceptance story enough to justify more surface
+  area.
 
-| Level | Design | Clean methods |
-|---|---|---|
-| L3 | `fp_adder` | `C4i` 3/3 |
-| L3 | `fp_multiplier` | `C4i` 3/3 |
-| L3 | `gauss_siedel` | `C4i` 3/3 |
-| L3 | `gradient_descent` | `C4i` 3/3 |
-| L3 | `newton_raphson_sqrt` | `C4i` 3/3 |
-| L4 | `fft_16pt_iterative` | `C2g` 3/3, `C4tl` 3/3 main seeds; C4tl 5/5 with robustness seeds |
-| L4 | `fp_adder_pipeline` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3, `C4tl` 3/3 main seeds; C4tl 5/5 with robustness seeds |
-| L4 | `fp_mult_pipeline` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3, `C4tl` 3/3 main seeds; C4tl 5/5 with robustness seeds |
-| L4 | `ifft_16pt_iterative` | `C2g` 3/3, `C4tl` 3/3 main seeds; C4tl 5/5 with robustness seeds |
-| L5 | `conv1d` | `C1` 3/3, `C2g` 3/3 artifact-backed, `C4i` 3/3 |
-| L5 | `conv2d` | `C2g` 3/3 artifact-backed |
-| L5 | `dct_idct_8pt_pipelined` | `C2g` 3/3 artifact-backed |
-| L5 | `harris_corner_detection` | `C2g` 3/3 artifact-backed, `C4i` 3/3 |
-| L5 | `unsharp_mask` | `C2g` 3/3 artifact-backed on seeds `42,123,456` |
-| L6 | `aes_decryption` | `C2g` 3/3, `C4i` 3/3 |
-| L6 | `aes_encryption` | `C1` 3/3, `C2g` 3/3, `C4i` 3/3 |
+## Execution Rules When Work Resumes
 
-Additional L3 C4tl support rows now run:
-
-| Level | Design | C4tl result |
-|---|---|---|
-| L3 | `fp_adder` | 3/3 solved |
-| L3 | `fp_multiplier` | 3/3 solved |
-| L3 | `gauss_siedel` | 1/3 solved; near misses on two seeds |
-| L3 | `gradient_descent` | 3/3 solved |
-| L3 | `newton_raphson_sqrt` | 3/3 solved |
-| L3 | `newton_raphson_polynomial` | 0/3 solved |
-
-## Repaired-Contract Rows
-
-These rows are complete for the current paper, but they must stay separate from original ArchXBench results.
-
-| Design | Repaired-contract result |
-|---|---|
-| `conv_3d` | C2g 3/3 solved artifact-backed in the 2026-07-09 collection run; C4i 2/3 solved; C4tl 0/3 solved |
-| `multich_conv2d` | C2g 3/3 solved; C4i 3/3 solved; C4tl 3/3 solved |
-| `quantized_matmul` runner-fixed | C2g 3/3 solved; C4i 3/3 solved; C4tl 0/3 solved |
-| `fp_band_pass_fir` | oracle-validated repaired contract; C2g 3/3 solved; C4i/C4tl seed-42 pilots fail |
-| `fp_high_pass_fir` | oracle-validated repaired contract; C2g 3/3 solved; C4i/C4tl seed-42 pilots fail/near-miss |
-| `newton_raphson_polynomial` | oracle-validated repaired checker; C2g 3/3 solved; C4i 1/3 solved; C4tl 1/3 solved |
-| `systolic_gemm` | repaired display-only checker; C2g/C4i/C4tl all 0/3 |
-| L4 FIR family | repaired single-seed pilots all fail |
-
-## Excluded Or Held
-
-Do not run these unless a principled benchmark-contract audit changes the status.
-
-| Level | Design/group | Status |
-|---|---|---|
-| L4 | `band_pass_fir`, `high_pass_fir`, `low_pass_fir` | exclude from primary and repaired-contract positive tables due to inconsistent evaluation contracts where specification and executable testbench disagree on filter coefficients/source-of-truth behavior; repaired pilots are negative |
-| L5 | `systolic_gemm` | genuine capability boundary after checker repair; all current methods remain 0/3 |
-| L6 | `fp_low_pass_fir` | hold because the released files do not expose an explicit coefficient/cutoff oracle |
-| L6 | `fft_streaming_64pt` | exclude from result tables because the released benchmark contains unresolved input/output contract ambiguities, including mismatched output schema and input numeric encoding |
-
-## Artifact Collection Completed
-
-Historical trusted score-only rows are valid logged results only when recorded in the inventory. The Priority 1 and Priority 2 C2g artifact-collection rows are no longer pending; they have saved generated RTL.
-
-The Priority 1 and Priority 2 C2g artifact-collection reruns were completed on 2026-07-09. Every listed cell below has both `result.json` and at least one generated Verilog file under `verilog/*.v`.
-
-| Priority | Design | Condition | Seeds | Result | Artifact root |
-|---|---|---|---|---|---|
-| 1 | `conv2d` | C2g | `42,123,456` | 3/3 solved, all `4096/4096` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
-| 1 | `dct_idct_8pt_pipelined` | C2g | `42,123,456` | 3/3 solved, all `16/16` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
-| 1 | `aes_encryption` | C2g | `42,123,456` | 3/3 solved, all `8/8` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
-| 1 | `aes_decryption` | C2g | `42,123,456` | 3/3 solved, all `8/8` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
-| 2 | `conv1d` | C2g | `42,123,456` | 3/3 solved, all `16/16` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
-| 2 | `harris_corner_detection` | C2g | `42,123,456` | 3/3 solved, all `16384/16384` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_original/` |
-| 2 | repaired `conv_3d` | C2g | `42,123,456` | 3/3 solved, all `23064/23064` golden | `artifacts/raw_runs/c2g_artifact_collection_20260709_repaired/` |
-
-These were artifact-collection reruns, not new scientific experiments. The reruns matched the trusted scores and added generated RTL artifacts.
-
-Additional paper-strengthening work that is not a run queue:
-
-- Add a compact hard-frontier headline table if page space allows.
-- Add one real decomposition example from a solved L4 row, preferably `fft_16pt_iterative` or `ifft_16pt_iterative`.
-- Add one failure-anatomy example, currently `systolic_gemm`, to show benchmark repair does not manufacture wins.
-- If feasible, run an open prior method such as REvolution/VFlow/AutoVeriFix-style code on a small ArchXBench L4-L6 subset. This would be a new baseline study, not artifact collection.
-
-## What Is Left
-
-No experiment run is currently queued.
-
-Remaining work before submission is paper writing and final manuscript consistency checks. The Priority 1 and Priority 2 artifact-release cleanup queue, Sonnet 5 second-model validation, and C4i randomized-order ablation are complete.
-
-## Execution Rules
-
-- Use `artifacts/inventories/run_matrix_l3_l6.csv` as the source of truth for repo-local `result.json` cells before and after every batch.
-- Use `artifacts/inventories/repaired_contract_run_matrix.csv` only for repaired-contract rows. Do not merge repaired-contract rows into the original ArchXBench matrix.
-- Use `artifacts/inventories/log_metric_only_results.csv` only for historical log/metrics-only rows that lack saved RTL/result artifacts.
-- Use `--parallel 2` for overnight paper-quality runs.
-- For repaired-contract runs, set `ARCHXBENCH_ROOT` explicitly and record that root in the run note.
-- After every batch:
-  - run `python scripts\build_artifact_index.py`
-  - run `python scripts\build_run_matrix.py`
-  - run `python scripts\build_repaired_contract_matrix.py` if repaired-contract runs changed
-  - run `python scripts\audit_file_output_contracts.py` if benchmark contracts or testbenches changed
-  - update this file
-  - do not push unless explicitly requested
+- Use Codex CLI GPT-5.5 with low reasoning; do not use Claude for the deferred
+  Codex protocol run.
+- Run three cells concurrently.
+- Keep trials `42,123,456` as the main set; use `789,1024` only for documented
+  robustness checks.
+- Treat trial numbers as run identifiers, not controlled model random seeds.
+- Save artifacts synchronously and replay every winning RTL artifact.
+- Keep original-contract, repaired-contract, and corrected-contract inventories
+  separate.
+- After a batch, rebuild the artifact index and relevant run matrices before
+  changing any paper number.
+- Do not push unless the user explicitly requests it.
